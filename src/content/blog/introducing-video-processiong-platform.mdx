@@ -1,0 +1,122 @@
+// src/content/blog/introducing-video-processing-platform.mdx
+---
+title: "Introducing My Multi-Tenant Video Processing Platform: The Vision and Architecture"
+date: "2025-05-14"
+excerpt: "Embarking on my journey to build a multi-tenant video processing platform using AI assistance. Learn about the vision, architecture, and development philosophy."
+coverImage: "/images/blog/platform-intro.jpg"
+series: "Building AI with AI"
+---
+
+# Introducing My Multi-Tenant Video Processing Platform: The Vision and Architecture
+
+Welcome to the first entry in my "Building AI with AI" series, where I'll document the process of creating a multi-tenant video processing platform with the assistance of AI tools.
+
+## The Problem I'm Solving
+
+Organizations today are creating more video content than ever before - training materials, webinars, customer interviews, internal communications, and more. Within these videos lies valuable information, but extracting insights from hours of footage remains challenging:
+
+- Manual transcription and analysis is time-consuming and expensive
+- Generic AI solutions lack domain-specific knowledge for specialized use cases
+- Building custom solutions requires significant ML expertise and infrastructure
+
+My video processing platform aims to solve these challenges by providing a scalable, multi-tenant system that allows organizations to:
+
+1. Automatically process and transcribe videos
+2. Train custom models on their specific video content
+3. Extract insights and enable powerful search functionality
+4. Scale resources based on their needs
+
+## The Meta Approach: Building AI with AI
+
+What makes this project particularly interesting is the meta-concept at its core: using AI to build an AI system. Rather than assembling a traditional development team, I'm partnering with several AI assistants:
+
+- **Claude (Anthropic)**: My architect and systems designer
+- **ChatGPT (OpenAI)**: My primary coding partner
+- **Grok (xAI)**: My creative consultant for unconventional approaches
+- **Cursor**: My AI-powered code editor
+
+Together, these tools form a comprehensive development environment that represents what I believe is the future of software creation. Throughout this series, I'll be transparent about which parts were created with AI assistance and share my unfiltered thoughts in the "Human Reflections" sections.
+
+## The Technology Stack
+
+After consulting with my AI architects, I've settled on a technology stack that balances performance, scalability, and development efficiency:
+
+```
+Infrastructure: EC2, Docker, S3, PostgreSQL
+Backend: Python, Flask, FFmpeg, Whisper API
+Machine Learning: HuggingFace Transformers, PyTorch
+Frontend: React for the admin console
+```
+
+## Architecture Overview
+
+The system employs a multi-tenant architecture with Docker containers providing isolation between tenants. Here's a high-level overview of the components:
+
+### Client Layer
+- Admin Console (React)
+- API Clients
+- Mobile App (future)
+
+### API Layer
+- Flask API with JWT Authentication
+- Endpoints for Tenant, User, Video, Model, and Payment management
+
+### Processing Layer
+- Tenant Container Manager for resource allocation
+- Video Processing Pipeline (download, audio extraction, transcription)
+- Model Training Pipeline
+
+### Data Layer
+- PostgreSQL for metadata
+- S3 for video, audio, transcription, and model storage
+
+### External Integrations
+- Whisper API for transcription
+- Stripe for payments
+
+## Core Processing Workflows
+
+The platform has two main processing workflows:
+
+**Video Processing Flow:**
+1. User uploads video through admin console
+2. System dispatches processing job to tenant container
+3. Container extracts audio using FFmpeg
+4. Audio sent to Whisper API for transcription
+5. Results stored in S3 and database
+
+**Model Training Flow:**
+1. User initiates model training via admin console
+2. System queues training job based on tenant tier
+3. Tenant container creates Q&A dataset from transcriptions
+4. System fine-tunes base model (e.g., google/flan-t5-base)
+5. Trained model stored in tenant-specific S3 location
+
+## Development Philosophy
+
+I'm committed to "building in public" through this blog series. This approach offers several benefits:
+
+- **Transparency**: Sharing the actual development process, including challenges
+- **Community Input**: Gathering feedback from readers as I build
+- **Learning Resource**: Creating a case study in AI-assisted development
+- **Exploration**: Testing the boundaries of what's possible with AI tools
+
+<HumanReflection>
+When I first conceived this project, I wondered if it was too meta or self-referential: using AI to build AI systems, then documenting the process. But the more I thought about it, the more I realized that this recursion represents something profound about where software development is heading.
+
+Working with AI assistants has already changed my approach. I'm thinking more about system architecture and user experience than getting caught in implementation details. The AI tools handle many of the coding tasks that would typically consume most of my time, allowing me to focus on the bigger picture.
+
+What's been most surprising is how the conversation with AI tools shapes my thinking. By explaining my ideas to Claude or ChatGPT, I'm forced to clarify my own understanding. It's like having a smart, patient collaborator who asks good questions and offers alternatives I might not have considered.
+
+Of course, there are limitations. The AI tools sometimes misunderstand my requirements or suggest approaches that won't work in practice. The human element—my experience, domain knowledge, and critical thinking—remains essential. This isn't about replacing developers but augmenting them with powerful tools that handle the routine aspects of coding.
+
+As I continue this project, I'm curious to see how far this partnership can go. Can AI tools help build a production-ready, scalable system? What parts will still require significant human intervention? I'll be addressing these questions honestly throughout this series.
+</HumanReflection>
+
+## What's Next
+
+In my next post, I'll dive into the infrastructure setup process, showing how I used Docker for tenant isolation and how Claude helped me design a secure multi-tenant system. I'll share actual prompts, responses, and code snippets to give you an inside look at the development process.
+
+I invite you to follow along on this journey. Whether you're skeptical about AI's capabilities or enthusiastic about its potential, I hope this series provides valuable insights into the present and future of AI-assisted development.
+
+Have you experimented with AI tools in your development workflow? What aspects of this project are you most curious about? Let me know in the comments below!
