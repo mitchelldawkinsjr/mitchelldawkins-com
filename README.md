@@ -1,6 +1,6 @@
 # Mitchell Dawkins Personal Website
 
-This repository contains the code for [mitchelldawkins.com](https://mitchelldawkins.com), my personal website and blog where I document my journey of building software with AI assistance.
+This repository contains the code for [mitchelldawkins.com](https://mitchelldawkins.com), my personal website and blog where I document my journey of building software with AI.
 
 ## Project Overview
 
