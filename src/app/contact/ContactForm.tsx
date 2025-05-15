@@ -3,11 +3,7 @@
 import { useState } from 'react';
 
 export default function ContactForm() {
-  const GOOGLE_FORM_ACTION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdoyTYwKyyV6KtpWbQAPhgtaE6l_oQdN6XlUiYCwFUNhQet2Q/formResponse';
-  const NAME_ENTRY_ID = 'entry.1189695522';
-  const EMAIL_ENTRY_ID = 'entry.1032889871'; 
-  const SUBJECT_ENTRY_ID = 'entry.521612573';
-  const MESSAGE_ENTRY_ID = 'entry.366264524';
+  const GOOGLE_FORM_ACTION_URL = 'https://script.google.com/macros/s/AKfycbxPy3NIVylh-RsgImrNqRgVMgBLl8S97ROAjket4RJIzswazAeO09yvlsv-tP30pAEHfw/exec';
 
   const [formData, setFormData] = useState({
     name: '',
@@ -23,72 +19,36 @@ export default function ContactForm() {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-  
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus(null);
     
     try {
-      // Create a hidden iframe to handle the form submission
-      const iframe = document.createElement('iframe');
-      iframe.name = 'hidden-iframe';
-      iframe.style.display = 'none';
-      document.body.appendChild(iframe);
-      
-      // Create a form element to submit to Google Forms
-      const form = document.createElement('form');
-      form.method = 'POST';
-      form.action = GOOGLE_FORM_ACTION_URL;
-      form.target = 'hidden-iframe';
-      
-      // Create and append hidden input fields
-      const nameField = document.createElement('input');
-      nameField.type = 'hidden';
-      nameField.name = NAME_ENTRY_ID;
-      nameField.value = formData.name;
-      form.appendChild(nameField);
-      
-      const emailField = document.createElement('input');
-      emailField.type = 'hidden';
-      emailField.name = EMAIL_ENTRY_ID;
-      emailField.value = formData.email;
-      form.appendChild(emailField);
-      
-      const subjectField = document.createElement('input');
-      subjectField.type = 'hidden';
-      subjectField.name = SUBJECT_ENTRY_ID;
-      subjectField.value = formData.subject;
-      form.appendChild(subjectField);
-      
-      const messageField = document.createElement('input');
-      messageField.type = 'hidden';
-      messageField.name = MESSAGE_ENTRY_ID;
-      messageField.value = formData.message;
-      form.appendChild(messageField);
-      
-      // Append the form to the document, submit it, and remove it
-      document.body.appendChild(form);
-      form.submit();
-      
-      // Set a timeout to allow the form to submit before cleaning up
-      setTimeout(() => {
-        document.body.removeChild(form);
-        document.body.removeChild(iframe);
-        
-        // Reset form and set success status
-        setSubmitStatus('success');
-        setFormData({
-          name: '',
-          email: '',
-          subject: '',
-          message: '',
-        });
-        setIsSubmitting(false);
-      }, 1000);
-      
+      // Send the form data as JSON
+      const response = await fetch(GOOGLE_FORM_ACTION_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Required for cross-origin requests to Google Apps Script
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      // With no-cors mode, we can't read the response
+      // We'll assume success if no error was thrown
+      setSubmitStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+      });
     } catch (error) {
       console.error('Error submitting form:', error);
       setSubmitStatus('error');
+    } finally {
       setIsSubmitting(false);
     }
   };
