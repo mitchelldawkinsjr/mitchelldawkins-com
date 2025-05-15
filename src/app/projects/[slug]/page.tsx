@@ -1,12 +1,15 @@
-import { getProjectBySlug, getAllProjects } from '@/lib/projects';
+import { getProjectBySlug, getAllProjects } from '@/lib/project';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import ProjectTechBadge from '@/components/ProjectTechBadge';
+import { Metadata } from 'next';
 
 // Generate metadata for each project page
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ params }: { 
+  params: { slug: string } 
+}): Promise<Metadata> {
   const project = getProjectBySlug(params.slug);
   
   if (!project) {
@@ -31,7 +34,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function ProjectPage({ params }) {
+export default function ProjectPage({ params }: { 
+  params: { slug: string } 
+}) {
   const project = getProjectBySlug(params.slug);
   
   if (!project) {

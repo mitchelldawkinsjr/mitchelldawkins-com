@@ -10,7 +10,7 @@ const projects = [
     tags: ['HTML','CSS','JavaScript','CodeMirror','Chrome Extension API'],
   },
   {
-    title: 'NBA Player Prop Predictor',
+    title: 'NBA Player Prop Prediction Engine',
     description: 'A data-driven tool that forecasts player stats like points, rebounds, and assists using historical performance and recent trends—designed to give bettors and fantasy players an edge.',
     image: '/images/projects/nba-player-prop-predict/header.jpg',
     link: '/projects/nba-player-prop-predictor',

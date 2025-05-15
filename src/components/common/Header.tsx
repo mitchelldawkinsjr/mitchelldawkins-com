@@ -67,7 +67,7 @@ export default function Header() {
           className="text-xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           onClick={closeMobileMenu}
         >
-          <Logo className="h-8 w-auto" />
+          <Logo className="h-10 w-auto" />
         </Link>
         
         {/* Desktop Navigation */}

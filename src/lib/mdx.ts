@@ -41,11 +41,11 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
       options: {
         mdxOptions: {
           rehypePlugins: [
-            rehypeHighlight,
-            rehypeSlug,
-            [rehypeAutolinkHeadings, { behavior: 'wrap' }],
+            rehypeHighlight as any,
+            rehypeSlug as any,
+            [rehypeAutolinkHeadings as any, { behavior: 'wrap' }],
           ],
-          remarkPlugins: [remarkGfm],
+          remarkPlugins: [remarkGfm as any],
         },
       },
     });

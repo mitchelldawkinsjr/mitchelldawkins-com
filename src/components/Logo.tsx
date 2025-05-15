@@ -8,7 +8,7 @@ interface LogoProps {
   className?: string;
 }
 
-export default function Logo({ className = 'h-8 w-auto' }: LogoProps) {
+export default function Logo({ className = 'h-10 w-auto' }: LogoProps) {
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
   
