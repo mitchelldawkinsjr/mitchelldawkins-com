@@ -40,9 +40,9 @@ export default function Logo({ className = 'h-10 w-auto' }: LogoProps) {
   // Return the appropriate logo based on the current theme
   return (
     <>
-      {theme === 'dark' ? (
+      {theme === 'light' ? (
         <Image 
-          src="/images/logo/logo-stamp-w-name-white.png" // Path to your light logo (for dark mode)
+          src="/images/logo/logo-stamp-w-name.png" // Path to your light logo (for dark mode)
           alt="Logo"
           width={200}
           height={150}
@@ -51,7 +51,7 @@ export default function Logo({ className = 'h-10 w-auto' }: LogoProps) {
         />
       ) : (
         <Image 
-          src="/images/logo/logo-stamp-w-name.png" // Path to your dark logo (for light mode) 
+          src="/images/logo/logo-stamp-w-name-white.png" // Path to your dark logo (for light mode) 
           alt="Logo"
           width={200}
           height={150}
