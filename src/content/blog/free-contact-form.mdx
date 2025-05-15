@@ -1,0 +1,115 @@
+---
+title: "How I Set Up a Free Contact Form Using Google Sheets and Apps Script"
+date: "2025-05-01"
+excerpt: "A breakdown of how I used Google Apps Script, fetch, and IFTTT to create a cost-free, fully functional contact form."
+coverImage: "/images/blog/free-form.png"
+series: "Low to No Cost Solutions"
+---
+
+Setting up a contact form on your website doesn't have to cost anything. For my personal site, I built a fully working contact form using **Google Sheets**, **Google Apps Script**, **IFTTT**, and a little **JavaScript fetch** magic—all for free.
+
+## The Problem I'm Solving
+
+Most contact form solutions either:
+
+- Cost money with monthly subscriptions
+- Require backend hosting and maintenance
+- Limit submissions on free tiers
+- Don't provide easy notification systems
+
+I needed something that was completely free, reliable, and required minimal setup.
+
+## The Technology Stack
+
+```
+Backend: Google Sheets, Google Apps Script
+Frontend: JavaScript/React
+Automation: IFTTT
+Email: Gmail filtering/labeling
+```
+
+## Step 1: Connect the Form to Google Sheets
+
+First, I created a new Google Spreadsheet that would serve as the data store for form submissions.
+
+Then, I added a **Google Apps Script** directly to that spreadsheet via Extensions > Apps Script. Here's the full script:
+
+```js
+function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var data = JSON.parse(e.postData.contents);
+  
+  sheet.appendRow([
+    new Date(),
+    data.name,
+    data.email,
+    data.subject,
+    data.message
+  ]);
+  
+  return ContentService
+    .createTextOutput(JSON.stringify({ status: 'success' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+```
+
+### What This Does
+
+- When the script receives a POST request, it parses the incoming JSON
+- It writes a new row to the active sheet with the timestamp, name, email, subject, and message
+- It returns a JSON response to confirm the submission was successful
+
+Once you publish this Apps Script as a web app (deployed with "Anyone" access), you'll get a unique URL that can accept POST requests.
+
+## Step 2: Send Form Data with fetch
+
+From my React contact form, I used fetch() to POST the data to that Apps Script endpoint. You can see the implementation here:
+
+```js
+await fetch("https://your-app-script-url", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    name,
+    email,
+    subject,
+    message
+  })
+});
+```
+
+[View full implementation on Github](https://github.com/mitchelldawkinsjr/mitchelldawkins-com/blob/main/src/app/contact/ContactForm.tsx#L23-L54)
+
+This triggers the script and sends the data straight to my spreadsheet.
+
+## Step 3: Set Up Notifications with IFTTT
+
+While having the form data in a spreadsheet is helpful, I also wanted instant notification. I created an **IFTTT applet** to get an email every time a new row is added to the spreadsheet.
+
+[View applet on IFTTT](https://ift.tt/X3uh6w1)
+
+It works by watching for new rows in the sheet and sending an email to a special alias I've set up.
+
+## Bonus: Custom Gmail Label + Alias
+
+To keep contact form emails organized, I use a Gmail alias: [mitchell.dawkinsjr+hello-mitchelldawkins-com@gmail.com](mailto:mitchell.dawkinsjr+hello-mitchelldawkins-com@gmail.com)
+
+I also created a custom **label with a unique color** in Gmail that catches any emails going to this address. This makes them easy to spot and separate from other email traffic.
+
+<HumanReflection>
+This contact form solution has been working flawlessly for months now. What surprised me most was how reliable Google's infrastructure is for this purpose. I initially thought I might need to move to a "real" form solution as my website traffic increased, but that hasn't been necessary.
+
+The only limitation I've found is that there's about a 5-second delay between form submission and the data appearing in my spreadsheet. For a contact form, this isn't an issue at all, but it might be if you needed real-time processing.
+
+One unexpected benefit: having all form submissions in a spreadsheet makes it incredibly easy to analyze patterns over time or export the data for use elsewhere. I've been able to spot which topics visitors most frequently contact me about and use that to guide my content creation.
+</HumanReflection>
+
+## What's Next
+
+Want to know more about using Gmail aliases like this for automation and inbox filtering? I'll be breaking that down in an upcoming post in this series. I'm also working on adding spam detection to automatically flag suspicious submissions.
+
+This setup gave me a reliable, scalable contact form without any third-party form service or backend hosting costs. Just Google tools, a little code, and automation glue.
+
+Have you implemented a similar no-code solution for your website? What challenges did you face? Let me know in the comments below!
