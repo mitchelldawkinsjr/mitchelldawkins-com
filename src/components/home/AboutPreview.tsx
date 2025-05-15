@@ -23,15 +23,15 @@ export default function AboutPreview() {
             </h2>
             
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-              I'm an AI engineer passionate about exploring the meta-concept of using AI to build AI systems. 
+              I&apos;m a Senior Softweare Engineer and an endeavoring AI engineer passionate about exploring the meta-concept of using AI to build AI systems. 
               With experience in machine learning, software development, and cloud architecture, 
-              I'm constantly exploring the boundaries of what&apos;s possible with today&apos;s AI tools.
+              I&apos;m constantly exploring the boundaries of what&apos;s possible with today&apos;s AI tools.
             </p>
             
             <div className="flex flex-wrap gap-4 mb-8">
               <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 rounded-lg">
                 <h3 className="font-medium text-gray-900 dark:text-white">Machine Learning</h3>
-                <p className="text-gray-600 dark:text-gray-300">PyTorch, TensorFlow, Hugging Face</p>
+                <p className="text-gray-600 dark:text-gray-300">Hugging Face</p>
               </div>
               
               <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 rounded-lg">

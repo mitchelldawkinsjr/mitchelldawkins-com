@@ -1,0 +1,320 @@
+---
+title: "WebBasics Offline IDE"
+description: "A lightweight offline web development environment for teaching front-end technologies"
+date: "2025-05-14"
+status: "Completed"
+featured: true
+priority: 2
+slug: "webbasics-ide"
+headerImage: "/images/projects/webbasics-ide/header.jpg"
+tech:
+  - HTML
+  - CSS
+  - JavaScript
+  - CodeMirror
+  - Chrome Extension API
+tags:
+  - Web Development
+  - Teaching Tool
+  - Chrome Extension
+  - Offline Support
+  - Educational Technology
+  - Front-End Development
+audience:
+  - Coding Instructors
+  - Students
+  - Web Developers
+  - Coding Bootcamps
+  - Self-Learners
+links:
+  - title: "GitHub Repository"
+    url: "https://github.com/mitchelldawkinsjr/WebBasics-ide"
+---
+
+## Introduction Section
+
+CodeMentor IDE is a lightweight, fully offline web development environment designed specifically for teaching front-end technologies in challenging environments. Born from my experience teaching coding in detention centers and other resource-limited settings, this tool addresses the critical need for accessible programming education regardless of technical constraints. Built as a Chrome extension with locally-bundled CodeMirror libraries, it provides a distraction-free coding experience with syntax highlighting, real-time preview, and complete offline functionality.
+
+**Status: Completed** - This project has been fully implemented and is ready for use in educational environments, including those with severe resource limitations. It continues to receive updates based on instructor feedback from diverse teaching contexts.
+
+## Problem & Solution
+
+### The Problem
+
+This project was born from my direct experience teaching web development in severely resource-constrained environments, including detention centers. These challenging teaching situations revealed critical limitations in existing tools:
+
+- **Restricted or non-existent internet** - Most detention facilities and similar environments prohibit or severely limit internet access for security reasons
+- **Limited software installation privileges** - Many institutional computers restrict software installation, making standard IDEs unusable
+- **Highly variable technical infrastructure** - Computing resources can be outdated, inconsistent, or subject to strict security policies
+- **Need for distraction minimization** - Students in these environments benefit from focused tools without excessive features that can overwhelm beginners
+- **Intermittent access to learning resources** - Students often have limited and scheduled computer time, requiring tools that work instantly without setup
+
+Beyond these specialized environments, similar challenges exist in many educational settings:
+
+- **Internet dependency** - Most online coding platforms require constant internet access
+- **Distraction-filled interfaces** - Many coding environments include unnecessary features that can overwhelm beginners
+- **Installation complexity** - Full-featured IDEs often have complex setup requirements
+- **Limited accessibility** - Many classrooms and training environments have restricted internet access
+- **Inconsistent experience** - Web-based platforms can behave differently across devices
+
+### The Solution
+
+CodeMentor IDE addresses these challenges through a focused approach:
+
+1. **Fully offline functionality** - Bundles the complete CodeMirror library for syntax highlighting without internet
+2. **Chrome extension deployment** - Simple installation with no complex setup requirements
+3. **Distraction-free interface** - Clean, minimal UI focused on learning core web technologies
+4. **Separate editing tabs** - Dedicated areas for HTML, CSS, and JavaScript to reinforce separation of concerns
+5. **Real-time preview** - Immediate rendering to help students visualize their code's output
+6. **Consistent experience** - Works identically across all devices with Chrome browser support
+7. **Portable learning** - Students can work on their projects anywhere, even without internet
+
+## Technical Implementation
+
+CodeMentor IDE is built with a focus on simplicity and reliability:
+
+### Extension Architecture
+
+The project uses a straightforward Chrome extension structure:
+
+- **manifest.json** - Defines extension properties and permissions
+- **popup.html/js** - Simple launcher interface to open the editor
+- **index.html** - Main editor interface with tabs and preview
+- **Bundled CodeMirror** - Complete library included for offline functionality
+
+```javascript
+// Initializing the CodeMirror editors with syntax highlighting
+let editors = {
+    html: CodeMirror.fromTextArea(document.getElementById("html-code"), {
+        mode: "htmlmixed",
+        theme: "default",
+        lineNumbers: true
+    }),
+    css: CodeMirror.fromTextArea(document.getElementById("css-code"), {
+        mode: "css",
+        theme: "default",
+        lineNumbers: true
+    }),
+    js: CodeMirror.fromTextArea(document.getElementById("js-code"), {
+        mode: "javascript",
+        theme: "default",
+        lineNumbers: true
+    })
+};
+```
+
+### Tab-Based Interface
+
+The editor implements a clean tab system to help students understand the separation between HTML, CSS, and JavaScript:
+
+```javascript
+function switchTab(tab) {
+    Object.keys(editors).forEach(key => {
+        editors[key].getWrapperElement().style.display = (key === tab) ? "block" : "none";
+    });
+}
+```
+
+### Live Preview Functionality
+
+A key educational feature is the real-time preview that renders the combined code:
+
+```javascript
+function runCode() {
+    let html = editors.html.getValue();
+    let css = `<style>${editors.css.getValue()}</style>`;
+    let js = `<script>${editors.js.getValue()}<\/script>`;
+    document.getElementById("preview").srcdoc = html + css + js;
+}
+```
+
+## Key Features
+
+### Fully Offline Functionality
+
+The extension bundles all necessary CodeMirror libraries locally, ensuring complete functionality without internet access:
+
+- Core CodeMirror library
+- Syntax highlighting modules for HTML, CSS, and JavaScript
+- Theme files for consistent styling
+- No external CDN dependencies
+
+### Tab-Based Editing Experience
+
+The interface separates code into dedicated tabs:
+
+- **HTML Tab** - For structure and content
+- **CSS Tab** - For styling and design
+- **JavaScript Tab** - For behavior and interactivity
+
+This separation reinforces proper web development practices and helps beginners understand the distinct roles of each technology.
+
+### Live Preview Panel
+
+The integrated preview panel renders the combined code in real-time:
+
+- Preview updates on demand with the "Run" button
+- Full implementation for proper rendering when js in use page opens in new tab
+- Realistic view of how code would appear in a browser
+
+### Chrome Extension Integration
+
+Packaged as a Chrome extension for maximum accessibility:
+
+- Simple one-click installation
+- Works across operating systems
+- No additional software requirements
+- Updates through the Chrome Web Store
+
+### Clean, Distraction-Free Interface
+
+The UI is intentionally minimal to keep students focused:
+
+- No unnecessary toolbars or options
+- Clear, readable syntax highlighting
+- Basic controls focused on learning
+- Consistent experience across devices
+
+## Development Process
+
+The development of CodeMentor IDE followed a focused approach driven by real-world teaching challenges:
+
+1. **Problem identification** - Encountered serious limitations when teaching web development in detention centers
+2. **Requirements gathering** - Documented specific constraints (no internet, limited installation privileges, security restrictions)
+3. **Solution research** - Evaluated Chrome extensions as a viable approach for restricted environments
+4. **Architecture planning** - Designed for complete offline use with bundled dependencies
+5. **Interface design** - Created a clean, tab-based layout for separated concerns with minimal distractions
+6. **CodeMirror integration** - Implemented syntax highlighting for three languages without external dependencies
+7. **Preview functionality** - Built the live rendering capability essential for visual feedback
+8. **Chrome extension packaging** - Configured for browser integration with minimal permissions
+9. **Field testing** - Tested in actual detention center classrooms and other challenging environments
+10. **Iterative improvement** - Refined based on direct observation of student interactions
+
+The project maintained strict adherence to principles of simplicity, offline functionality, and educational effectiveness, focusing only on features that directly support learning in constrained environments.
+
+## Educational Applications
+
+CodeMentor IDE was specifically designed for various educational contexts, with special attention to challenging teaching environments:
+
+### Detention Center Education
+
+The tool has been successfully deployed in juvenile detention facilities:
+
+- **Works within security constraints** - Functions without internet access
+- **Requires minimal privileges** - Works on locked-down institutional computers
+- **Provides immediate startup** - Maximizes limited computer time allotments
+- **Reduces learning curve** - Simple interface for students with varied educational backgrounds
+- **Enables portable skills** - Teaches fundamentals that transfer to any web development environment
+
+### Under-resourced Schools
+
+Effective for educational environments with limited technical infrastructure:
+
+- **Functions in schools without reliable internet** - No dependency on connectivity
+- **Works on older hardware** - Lightweight enough for aging computer labs
+- **Requires no budget** - Free alternative to paid development environments
+- **Operates across varied equipment** - Consistent experience regardless of computer differences
+- **No administrative privileges needed** - Functions without IT support for installation
+
+### Traditional Classroom Settings
+
+Instructors can use the tool for guided classroom activities:
+
+- **Live coding demonstrations** - Show concepts without internet distractions
+- **Step-by-step building exercises** - Guided practice with immediate feedback
+- **Consistent student experience** - Same tool for everyone regardless of device
+- **No dependency on classroom internet** - Reliable for planned lessons
+- **Focus on fundamentals** - Clean interface emphasizes core concepts
+
+### Self-Paced Learning
+
+Students can use the extension for independent study:
+
+- **Practice in any environment** - Works in libraries, homes without internet, or during transport
+- **Experiment with code concepts** - Try ideas without setup overhead
+- **Consistent learning experience** - Same tool at home as in class
+- **Learn during limited access periods** - Make use of short computer time allocations
+- **Focus on coding not connectivity** - No troubleshooting internet issues
+
+### Coding Workshops
+
+Ideal for workshop environments with varied technical constraints:
+
+- **Quick setup for participants** - Install once at beginning of session
+- **Consistent experience for all attendees** - Works the same for everyone
+- **Focus on learning rather than tool configuration** - No troubleshooting time
+- **Works in locations with poor connectivity** - Community centers, rural areas
+- **Minimal prerequisites** - Only requires Chrome browser
+
+### Assessment and Evaluation
+
+Provides a controlled environment for skills assessment in institutional settings:
+
+- **Standardized testing environment** - Same platform for all students
+- **Offline functionality prevents unauthorized online help** - Increases assessment integrity
+- **Clear separation of code components for evaluation** - Easy to grade specific skills
+- **Consistent platform for fair comparison** - Equal conditions for all students
+- **Compatible with supervised settings** - Works within institutional constraints
+
+## User Experience
+
+The extension prioritizes simplicity and usability, especially for environments with limited resources and student computer access time:
+
+1. **Installation** - One-click addition to Chrome from the Web Store (or offline installation package for closed environments)
+2. **Launch** - Simple popup with a single "Open Editor" button for immediate access
+3. **Interface** - Clean, tabbed layout with syntax highlighting but minimal distractions
+4. **Workflow** - Write code in appropriate tabs, click "Run" to see results immediately
+5. **Iterations** - Switch tabs to modify different aspects, run again to see changes
+6. **Completeness** - Everything needed is contained within the tool itself
+
+This streamlined experience keeps the focus on learning web development concepts rather than managing complex tools or troubleshooting connectivity issues, critical for environments where computer time may be strictly limited and technical support nonexistent.
+
+## Future Enhancements
+
+While maintaining its core simplicity and focus on resource-constrained environments, several enhancements are planned:
+
+- **Offline installation package** - Complete package for environments with no Chrome Web Store access
+- **Local storage integration** - Save and load projects directly in the extension
+- **Export functionality** - Download completed projects as zip files
+- **Print support** - Generate printable code documentation for environments with limited screen time
+- **Simplified deployment guide** - Instructions for institutional IT administrators
+- **Template library** - Starter templates for common web components
+- **Light/dark themes** - Additional visual options for different preferences
+- **Basic linting** - Optional code quality suggestions for learning best practices
+- **Keyboard shortcuts** - Efficiency improvements for advanced users
+
+All future features will be evaluated against the core philosophy of maintaining a clean, distraction-free learning environment that functions in the most challenging educational settings.
+
+## Getting Started
+
+Using WebBasics IDE is straightforward, even in restricted environments:
+
+### Installation
+
+Standard installation:
+1. Visit the Chrome Web Store
+2. Click "Add to Chrome"
+3. Confirm the installation
+
+For restricted environments (detention centers, secure facilities):
+1. Download the offline installation package
+2. Transfer via approved media (if allowed)
+3. Follow institutional IT protocols for installation
+4. Use the pre-approval documentation included in the package
+
+For development or customization:
+1. Clone the repository
+2. Open `chrome://extensions/`
+3. Enable Developer Mode
+4. Click "Load unpacked" and select the project folder
+
+### Usage
+
+1. Click the CodeMentor IDE icon in Chrome
+2. Press "Open Editor" in the popup
+3. Write HTML in the HTML tab
+4. Add CSS in the CSS tab
+5. Write JavaScript in the JS tab
+6. Click "Run" to see your creation in the preview panel
+
+The tool is designed to be intuitive enough for beginners while supporting the teaching of proper web development practices in any environment.

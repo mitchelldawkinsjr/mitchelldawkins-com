@@ -14,9 +14,15 @@ export default function ThemeToggle() {
   }, []);
 
   // Handle theme toggle with animation
-  const toggleTheme = () => {
+  const toggleTheme = (newTheme: string) => {
+    // Dispatch a custom event that other components can listen for
+    const themeChangeEvent = new CustomEvent('themeChanged', { 
+      detail: { theme: newTheme } 
+    });
+    window.dispatchEvent(themeChangeEvent);
+
     setIsTransitioning(true);
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    setTheme(newTheme);
     
     // Reset transition state after animation completes
     setTimeout(() => {
@@ -35,7 +41,7 @@ export default function ThemeToggle() {
 
   return (
     <button
-      onClick={toggleTheme}
+    onClick={() => toggleTheme(theme === 'dark' ? 'light' : 'dark')}
       className={`w-10 h-10 rounded-md flex items-center justify-center transition-colors ${
         theme === 'dark' 
           ? 'bg-gray-700 hover:bg-gray-600' 

@@ -28,7 +28,7 @@ export default function AboutPage() {
               Mitchell Dawkins
             </h1>
             <h2 className="text-xl text-blue-600 dark:text-blue-400 mb-6">
-              AI Engineer & Developer
+              Senior Software Engineer & Endeavoring AI Engineer
             </h2>
             <p className="text-lg text-gray-700 dark:text-gray-300">
               I specialize in building intelligent systems that leverage the latest in AI technology.
@@ -45,13 +45,13 @@ export default function AboutPage() {
           </h2>
           <div className="prose dark:prose-invert prose-lg max-w-none">
             <p>
-              I&apos;m an endeavoring AI engineer and software developer with over 10 years of experience in the world of software develpoment. 
-              I have a passion for exploring how AI can be used to enhance and accelerate the development process. My current focus is building a 
+              I&apos;m a Senior Softweare Engineer and an endeavoring AI engineer passionate about exploringing how AI 
+              can be used to enhance and accelerate the development process. My current focus is building a 
               multi-tenant video processing platform that allows organizations to extract value from their video content through automated
               transcription and custom model training.
             </p>
             <p>
-              With a background in backend & frontend development, I bring a unique perspective to
+              With over 10 years of experience in backend & frontend development, I bring a unique perspective to
               building AI-powered systems. I believe we&apos;re at a fascinating inflection point where AI can be
               used to build better AI systems, creating a recursive improvement cycle that will dramatically
               change how we develop software.

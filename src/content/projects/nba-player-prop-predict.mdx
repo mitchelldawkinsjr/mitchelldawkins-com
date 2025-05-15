@@ -1,0 +1,141 @@
+---
+
+title: "NBA Player Prop Prediction Engine"
+description: "A predictive analytics engine for forecasting NBA player performance stats using historical data, opponent strength, and game context."
+date: "2025-05-14"
+status: "Completed"
+featured: true
+priority: 1
+slug: "nba-player-prop-predictor"
+headerImage: "/images/projects/nba-player-prop-predict/header.jpg"
+tech:
+ - Python
+ - Pandas
+ - Scikit-learn
+ - StatsModels
+ - Jupyter
+ - NBA API
+ - Matplotlib
+ - Seaborn
+tags:
+ - Sports Analytics
+ - Predictive Modeling
+ - NBA
+ - Data Science
+ - Sports Betting
+ - Machine Learning
+audience:
+ - Sports Bettors
+ - Data Scientists
+ - Fantasy Basketball Enthusiasts
+ - Stat Analysts
+ - Python Developers
+
+links:
+
+---
+
+## Introduction Section
+
+The NBA Player Prop Prediction Engine is a data-driven system designed to forecast the statistical output of NBA players—focusing on points, rebounds, and assists—using machine learning and regression modeling. Built with sports bettors and fantasy basketball players in mind, the tool aims to give users a competitive edge by surfacing high-confidence prop lines derived from historic trends.
+
+**Status: Completed** — Core model architecture is built and successfully tested during the 24-25 NBA season. Work is underway to improve prediction reliability by integrating additional data features.
+
+## Problem & Solution
+
+### The Problem
+
+In the fast-paced world of NBA player props, many bettors rely on surface-level stats or gut instinct. However, these bets often ignore deeper variables that can influence performance, such as:
+
+* **Opponent’s defensive rating**
+* **Home vs. away splits**
+* **Back-to-back fatigue factors**
+* **Minutes played trends**
+* **Season-over-season player evolution**
+* **Pace of play and team dynamics**
+
+This leads to:
+
+* **Missed opportunities** to exploit statistical edges
+* **Overbetting on name value instead of performance data**
+* **Underperformance in live betting scenarios without predictive context**
+
+### The Solution
+
+This model processes a variety of inputs to deliver more confident and contextual predictions:
+
+1. **Game-by-game player stat tracking**
+2. **Opponent team defensive metrics by stat category (points allowed, rebounding rank, assists allowed)**
+3. **Rolling average computations** (3-game, 5-game, 10-game trends)
+4. **Custom feature engineering** (e.g., efficiency ratios, usage rate projections)
+5. **Regression & classification models** to output expected ranges and over/under likelihood
+
+The goal is to turn raw stat history into actionable insights tailored for betting and fantasy decisions.
+
+## Technical Implementation
+
+The system architecture is organized as follows:
+
+* **Data Ingestion Layer**
+
+  * Pulls data via NBA API
+  * Parses historical player logs
+  * Merges with opponent defense stats from Basketball Reference (in development)
+
+* **Feature Engineering**
+
+  * Calculates moving averages
+  * Encodes location, opponent rank tiers, and game pacing (in development)
+  * Normalizes player minutes
+
+* **Modeling Layer**
+
+  * Uses linear regression to predict expected stats (PTS/REB/AST/STL/BLK)
+  * Outputs confidence intervals
+
+* **Visualization & Insights**
+
+  * Uses Matplotlib and Seaborn to generate trendlines
+  * Surface top prop plays via a dashboard view
+
+## Key Features
+
+### Player Stat Forecasting
+
+* Points, Rebounds, and Assists projections
+* Incorporates recent form, and historical variance
+
+### Rolling Average Insights
+
+* 3-, 5-, and 10-game trend comparisons
+* Lets users spot hot streaks or regression candidates
+
+### Opponent Defense Adjustments
+
+* Defensive rating integration adjusts expectations based on matchup quality (in development)
+* Assigns bonus/malus to player output based on specific team tendencies
+
+## Educational Applications
+
+This project serves not only as a betting and fantasy edge tool, but also as a learning sandbox for:
+
+* **Aspiring data scientists** looking to practice sports analytics
+* **Python developers** building portfolio projects
+* **Educators** teaching real-world modeling using familiar NBA data
+
+It has been used to:
+
+* Teach statistical modeling
+* Illustrate time-series and regression techniques
+* Explore feature importance in sports prediction tasks
+
+## Future Enhancements
+
+Planned upgrades include:
+
+* Taking defensive matchup into account
+* Browser-accessible dashboard for non-technical users
+* API endpoint for querying model outputs programmatically
+* Incorporation of Vegas line scraping for real-time comparisons
+* UI layer to build a prop sheet generator for upcoming NBA slates
+* Advanced metrics (PER, usage, true shooting %, etc.) to boost predictive power

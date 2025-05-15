@@ -11,7 +11,7 @@ export default function Hero() {
               Building AI with AI
             </h1>
             <p className="text-xl text-gray-700 dark:text-gray-300 mb-8">
-              I&apos;m Mitchell, an Software engineer exploring the meta-concept of using AI tools to build AI systems. 
+              I&apos;m Mitch, a Senior Software engineer exploring the meta-concept of using AI tools to build AI systems. 
               Follow my journey as I document the process of creating a multi-tenant video processing platform.
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
@@ -27,7 +27,7 @@ export default function Hero() {
           <div className="md:w-1/2 mt-10 md:mt-0">
             <div className="relative h-64 md:h-96 w-full rounded-xl overflow-hidden shadow-xl">
               <Image
-                src="/images/profile.jpg"
+                src="/images/family.jpg"
                 alt="Mitchell Dawkins"
                 fill
                 style={{ objectFit: 'cover' }}

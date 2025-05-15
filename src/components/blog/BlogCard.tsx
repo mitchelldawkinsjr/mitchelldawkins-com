@@ -12,6 +12,11 @@ type BlogCardProps = {
 };
 
 export default function BlogCard({ slug, title, excerpt, date, coverImage, series }: BlogCardProps) {
+
+  if (!date || isNaN(new Date(date).getTime())) {
+    return <div>Invalid date</div>; // Handle the invalid date case
+  }
+
   const formattedDate = formatDistanceToNow(new Date(date), { addSuffix: true });
   
   return (

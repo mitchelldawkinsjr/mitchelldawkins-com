@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
+import Logo from '@/components/Logo';
 
 // Navigation links for the site
 const navigationLinks = [
@@ -66,7 +67,7 @@ export default function Header() {
           className="text-xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           onClick={closeMobileMenu}
         >
-          Mitchell Dawkins
+          <Logo className="h-8 w-auto" />
         </Link>
         
         {/* Desktop Navigation */}

@@ -1,0 +1,300 @@
+---
+title: "Video Processing Platform"
+description: "Multi-tenant AI system for processing video content, extracting insights, and training custom models"
+date: "2025-05-14"
+status: "In Development"
+featured: true
+priority: 1
+slug: "video-processing-platform"
+headerImage: "/images/projects/video-processing-platform/header.svg"
+tech:
+  - Python
+  - Flask
+  - Docker
+  - AWS (EC2, S3)
+  - PostgreSQL
+  - React
+  - FFmpeg
+  - Whisper API
+  - Hugging Face Transformers
+  - RAG
+tags:
+  - Machine Learning
+  - Multi-Tenant Architecture
+  - AI
+  - Video Processing
+  - Enterprise Software
+  - Content Creators
+  - RAG
+  - Fine-tuning
+audience:
+  - Enterprise Organizations
+  - Content Creators
+  - Public Speakers
+  - Educators
+  - Researchers
+links:
+  - title: "Development Blog"
+    url: "/blog/building-ai-with-ai"
+  - title: "Contact for Beta Access"
+    url: "/contact"
+---
+
+## Introduction Section
+
+The Video Processing Platform is a scalable, multi-tenant system currently under active development. This innovative solution is designed to help both organizations and individuals extract maximum value from their video content. Built with enterprise-grade security and isolation, the platform enables businesses, content creators, public speakers, educators, and other professionals to process videos, generate transcriptions, train custom AI models, and extract actionable insights - all within a secure environment that scales with their needs.
+
+**Status: Under Development** - This project is currently in MVP phase with core functionality being implemented and tested. Expected beta release in Q3 2025.
+
+## Problem & Solution
+
+### The Problem
+
+A diverse range of users - from large organizations to individual content creators - accumulate vast libraries of video content. This includes corporate training materials, webinars, YouTube videos, podcast recordings, lectures, keynote speeches, and internal communications. However, this valuable content often remains underutilized due to:
+
+- **Difficult searchability** - Finding specific information within videos is time-consuming
+- **Manual transcription costs** - Professional transcription services are expensive and slow
+- **Limited insights extraction** - Valuable data points remain buried within hours of footage
+- **Generic AI solutions** - Off-the-shelf tools lack the domain-specific knowledge needed for specialized content
+- **Technical barriers** - Most individuals and smaller organizations lack the ML expertise to build custom solutions
+
+### The Solution
+
+The Video Processing Platform addresses these challenges through a comprehensive approach:
+
+1. **Automated processing pipeline** - Videos are automatically processed using FFmpeg for audio extraction and Whisper API for high-quality transcription
+2. **Hybrid AI approach** - Combines RAG (Retrieval-Augmented Generation) for immediate insights with fine-tuned custom models for deeper domain expertise
+3. **Custom model training** - Users can train domain-specific models on their unique video content without ML expertise
+4. **Multi-tenant architecture** - Enterprise-grade security with tenant isolation through Docker containers
+5. **Scalable infrastructure** - Resources allocated according to subscription tier with seamless scaling
+6. **Insights engine** - AI-powered analytics extract valuable data points and enable advanced search capabilities
+7. **Accessibility** - Designed for use by technical and non-technical users alike, from enterprise teams to individual content creators
+
+## Architecture
+
+The platform utilizes a sophisticated multi-layered architecture:
+
+- **Client Layer** - Admin console built with React for user management and platform interaction
+- **API Layer** - Flask-based API with JWT authentication and comprehensive endpoints
+- **Processing Layer** - Tenant Container Manager for isolation with dedicated video processing and model training pipelines
+- **Data Layer** - PostgreSQL database for metadata and S3 storage for videos, audio, transcriptions, and models
+- **Integrations** - Whisper API for transcription and Stripe for payment processing
+
+<figure>
+  <img src="/images/projects/video-processing-platform/architecture-diagram.svg" alt="Architecture diagram showing the multi-tenant design" />
+  <figcaption>Multi-tenant architecture with container isolation</figcaption>
+</figure>
+
+## Key Features
+
+### Secure Multi-Tenancy
+
+Each tenant (whether an organization or individual creator) receives their own isolated Docker container with dedicated resources based on their subscription tier, ensuring complete data separation and security.
+
+### Video Processing Pipeline
+
+The platform automatically handles the entire process:
+- Video upload to S3
+- Audio extraction using FFmpeg
+- Transcription via Whisper API
+- Metadata storage in PostgreSQL
+- Results accessible through secure API endpoints
+
+### Hybrid AI Approach
+
+The platform leverages two complementary approaches to maximize value:
+- **RAG (Retrieval-Augmented Generation)** - Provides immediate search capabilities and insights by combining vector embeddings of transcribed content with generative AI
+- **Fine-tuned Models** - Creates custom domain-specific models trained on the user's content for deeper understanding and specialized use cases
+
+### Model Training Capabilities
+
+Users can train custom models on their video content without ML expertise:
+- User-friendly interface for training configuration
+- Training jobs queued with priority based on subscription tier
+- QA datasets created from transcriptions
+- Fine-tuning of base models using Hugging Face Transformers
+- Version control for model iterations
+- Inference endpoints for integration with other systems
+
+### Admin Console
+
+The React-based admin interface provides:
+- Tenant management
+- User provisioning and permission control
+- Video upload and processing monitoring
+- Model training status and results
+- Usage tracking and subscription management
+- Analytics dashboard with content insights
+
+## Technical Implementation
+
+The platform leverages several key technologies:
+
+### Infrastructure & Isolation
+
+Docker containers provide tenant isolation with resource allocation controlled by the TenantContainerManager, ensuring security and performance based on subscription tier.
+
+```python
+class TenantContainerManager:
+    def __init__(self, config):
+        self.docker_client = docker.from_env()
+        self.config = config
+        
+    def create_tenant_container(self, tenant_id, tier="basic"):
+        # Resource allocation based on tier
+        resources = self.get_resources_for_tier(tier)
+        
+        # Create isolated container for tenant
+        container = self.docker_client.containers.run(
+            "video-processor-base:latest",
+            name=f"tenant-{tenant_id}",
+            detach=True,
+            environment={
+                "TENANT_ID": tenant_id,
+                "API_KEY": self.generate_api_key(tenant_id)
+            },
+            mem_limit=resources["memory"],
+            cpu_count=resources["cpu"],
+            volumes={
+                f"/data/tenants/{tenant_id}": {
+                    "bind": "/data", 
+                    "mode": "rw"
+                }
+            },
+            network="tenant-network"
+        )
+        
+        return container.id
+```
+
+### Video Processing
+
+The platform uses a combination of FFmpeg for video/audio manipulation and the Whisper API for transcription:
+
+```python
+class VideoProcessor:
+    def process_video(self, video_id, tenant_id):
+        # Download video from S3
+        video_path = self.download_from_s3(video_id, tenant_id)
+        
+        # Extract audio using FFmpeg
+        audio_path = self.extract_audio(video_path)
+        
+        # Transcribe audio using Whisper API
+        transcription = self.transcribe_audio(audio_path)
+        
+        # Store results
+        self.store_transcription(video_id, transcription)
+        self.update_video_status(video_id, "processed")
+        
+        return transcription
+```
+
+### Model Training
+
+The platform includes a sophisticated model training pipeline using Hugging Face Transformers, alongside a RAG implementation for immediate insights:
+
+```python
+class VideoModelTrainer:
+    def train_model(self, model_id, tenant_id):
+        # Prepare training data from transcriptions
+        training_data = self.prepare_training_data(tenant_id)
+        
+        # Fine-tune base model
+        model = AutoModelForQuestionAnswering.from_pretrained("google/flan-t5-base")
+        trainer = Trainer(
+            model=model,
+            args=TrainingArguments(
+                output_dir=f"/data/models/{model_id}",
+                per_device_train_batch_size=8,
+                num_train_epochs=3
+            ),
+            train_dataset=training_data
+        )
+        
+        # Start training
+        trainer.train()
+        
+        # Save and upload model
+        self.save_model(model, model_id, tenant_id)
+        self.update_model_status(model_id, "trained")
+
+class RAGProcessor:
+    def __init__(self, embeddings_model="sentence-transformers/all-mpnet-base-v2"):
+        self.embeddings = HuggingFaceEmbeddings(model_name=embeddings_model)
+        self.vector_store = None
+        
+    def create_knowledge_base(self, transcriptions, tenant_id):
+        # Process transcriptions into chunks
+        text_chunks = self.process_transcriptions(transcriptions)
+        
+        # Create vector store from chunks
+        self.vector_store = FAISS.from_texts(
+            texts=text_chunks,
+            embedding=self.embeddings
+        )
+        
+        # Save vector store for tenant
+        self.save_vector_store(tenant_id)
+        
+    def query(self, question, tenant_id, top_k=3):
+        # Load tenant's vector store
+        self.load_vector_store(tenant_id)
+        
+        # Retrieve relevant documents
+        docs = self.vector_store.similarity_search(question, k=top_k)
+        
+        # Generate answer using retrieved context
+        llm = ChatOpenAI(model_name="gpt-3.5-turbo")
+        qa_chain = RetrievalQA.from_chain_type(
+            llm=llm,
+            retriever=self.vector_store.as_retriever()
+        )
+        
+        return qa_chain.run(question)
+```
+
+## Development Process
+
+This platform is currently under active development using a modern, AI-assisted approach:
+
+1. **Architecture design** - Collaboration with AI to create a scalable, secure multi-tenant architecture
+2. **Infrastructure setup** - Docker and AWS configuration for tenant isolation and resource management
+3. **Pipeline implementation** - Development of the video processing and hybrid AI system
+4. **Security implementation** - JWT authentication and tenant data isolation
+5. **Frontend development** - Creation of the React-based admin console (in progress)
+6. **Testing and monitoring** - Comprehensive testing and performance monitoring (upcoming)
+
+The MVP is targeting mid-2025 for initial beta access with core functionality, with continual feature expansion planned throughout the year.
+
+## Target Users
+
+The platform is designed to serve a diverse range of users:
+
+- **Enterprise Organizations** - For processing internal training, webinars, and meetings
+- **Content Creators** - YouTubers, podcasters, and video creators looking to extract more value from their content
+- **Public Speakers** - For analyzing and indexing keynote presentations and speeches
+- **Educators** - Professors and teachers creating searchable repositories from lecture content
+- **Researchers** - For extracting insights from interview footage and research presentations
+
+Each user type benefits from both the immediate insights provided by RAG and the deeper domain expertise developed through fine-tuned models.
+
+## Future Roadmap
+
+The platform continues to evolve with planned enhancements:
+
+- **Mobile application** for on-the-go video uploads and monitoring
+- **Advanced analytics dashboard** with deeper insights into video content
+- **Integration API** for connecting with third-party systems
+- **Expanded model capabilities** including sentiment analysis and entity extraction
+- **Kubernetes migration** for improved scaling and management
+- **Collaborative features** for teams to work together on content analysis
+- **Custom chatbots** trained on users' video content
+
+## Conclusion
+
+The Video Processing Platform represents a significant advancement in helping organizations and individuals extract value from their video content. By combining secure multi-tenancy with powerful AI capabilities – both RAG for immediate insights and fine-tuned models for domain expertise – it provides a comprehensive solution for processing, analyzing, and leveraging video assets at scale.
+
+Currently in active development, this platform aims to democratize access to sophisticated AI capabilities for video content, making these tools accessible to everyone from enterprise teams to independent content creators.
+
+*This project is still under development. If you're interested in early access or would like to be a beta tester when available, please [contact me](mailto:hello@mitchelldawkins.com) for more information.*

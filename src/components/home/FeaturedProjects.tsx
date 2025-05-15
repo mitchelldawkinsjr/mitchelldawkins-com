@@ -3,13 +3,26 @@ import Link from 'next/link';
 
 const projects = [
   {
+    title: 'WebBasics IDE',
+    description: 'A lightweight offline web development environment for teaching front-end technologies. Features HTML/CSS/JS editing with syntax highlighting, real-time preview, and offline support as a Chrome extension.',
+    image: '/images/projects/webbasics-ide/header.jpg',
+    link: '/projects/webbasics-ide',
+    tags: ['HTML','CSS','JavaScript','CodeMirror','Chrome Extension API'],
+  },
+  {
+    title: 'NBA Player Prop Predictor',
+    description: 'A data-driven tool that forecasts player stats like points, rebounds, and assists using historical performance and recent trends—designed to give bettors and fantasy players an edge.',
+    image: '/images/projects/nba-player-prop-predict/header.jpg',
+    link: '/projects/nba-player-prop-predictor',
+    tags: ['Python','Pandas','Scikit-learn','Chrome Extension API'],
+  },
+  {
     title: 'Video Processing Platform',
     description: 'A multi-tenant platform for processing, transcribing, and analyzing video content using AI.',
-    image: '/images/projects/video-platform.jpg',
-    link: '/blog/introducing-video-processing-platform',
+    image: '/images/projects/video-processing-platform/header.svg',
+    link: '/projects/video-processing-platform',
     tags: ['Next.js', 'Python', 'Docker', 'ML'],
   },
-  // Add more projects as needed
 ];
 
 export default function FeaturedProjects() {
