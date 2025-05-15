@@ -47,21 +47,21 @@ export default function ProjectPage({ params }: {
     <div className="container mx-auto px-4 py-12 max-w-4xl">
       {/* Project header */}
       <div className="mb-10">
-        <Link href="/projects" className="text-blue-600 hover:underline mb-4 inline-block">
+        <Link href="/projects" className="text-blue-600 dark:text-blue-400 hover:underline mb-4 inline-block">
           ← Back to Projects
         </Link>
         
-        <h1 className="text-4xl font-bold mt-4 mb-2">{project.title}</h1>
+        <h1 className="text-4xl font-bold mt-4 mb-2 text-gray-900 dark:text-white">{project.title}</h1>
         
         {project.status && (
           <div className="mb-4">
-            <span className="px-3 py-1 bg-yellow-100 text-yellow-800 text-sm rounded-full">
+            <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-sm rounded-full">
               {project.status}
             </span>
           </div>
         )}
         
-        <p className="text-xl text-gray-600 mb-6">{project.description}</p>
+        <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">{project.description}</p>
         
         {/* Tech stack badges */}
         <div className="flex flex-wrap gap-2 mb-6">
@@ -79,7 +79,7 @@ export default function ProjectPage({ params }: {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 transition"
+                className="px-4 py-2 bg-gray-800 dark:bg-gray-700 text-white rounded hover:bg-gray-700 dark:hover:bg-gray-600 transition"
               >
                 {link.title}
               </a>
@@ -103,15 +103,15 @@ export default function ProjectPage({ params }: {
       </div>
       
       {/* Project content */}
-      <article className="prose prose-lg max-w-none">
+      <article className="prose prose-lg dark:prose-invert max-w-none">
         <MDXRemote source={project.content} />
       </article>
       
       {/* Target audience section */}
       {project.audience && project.audience.length > 0 && (
         <div className="mt-16">
-          <h2 className="text-2xl font-bold mb-4">Who This Is For</h2>
-          <ul className="list-disc pl-6 space-y-2">
+          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Who This Is For</h2>
+          <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
             {project.audience.map((audience) => (
               <li key={audience}>{audience}</li>
             ))}
@@ -120,8 +120,8 @@ export default function ProjectPage({ params }: {
       )}
       
       {/* Footer navigation */}
-      <div className="mt-16 pt-8 border-t border-gray-200">
-        <Link href="/projects" className="text-blue-600 hover:underline">
+      <div className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <Link href="/projects" className="text-blue-600 dark:text-blue-400 hover:underline">
           ← Back to Projects
         </Link>
       </div>
