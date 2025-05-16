@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 import '@/styles/globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -67,6 +68,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#ffffff" />
       </head>
       <body className={`${inter.className} min-h-screen flex flex-col`}>
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <GoogleAnalytics GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+        )}
         <ThemeProvider 
           attribute="class" 
           defaultTheme="light" 
