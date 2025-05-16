@@ -33,7 +33,7 @@ export default function AboutPage() {
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
               I specialize in building intelligent systems that leverage the latest in AI technology.
               Currently exploring the meta-concept of using AI tools to build AI systems, documenting
-              the process through my &quot;Building AI with AI&quot; blog series.This is a test add for KCJDC FOX class.
+              the process through my &quot;Building AI with AI&quot; blog series.
             </p>
             <a
               href="/documents/Mitchell-Dawkins-II-Resume-2025.pdf"
