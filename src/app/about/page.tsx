@@ -66,7 +66,7 @@ export default function AboutPage() {
           </h2>
           <div className="prose dark:prose-invert prose-lg max-w-none">
             <p>
-              I&apos;m a Senior Softweare Engineer and an endeavoring AI engineer passionate about exploringing how AI 
+              I&apos;m a Senior Software Engineer and an endeavoring AI engineer passionate about exploringing how AI 
               can be used to enhance and accelerate the development process. My current focus is building a 
               multi-tenant video processing platform that allows organizations to extract value from their video content through automated
               transcription and custom model training.
