@@ -16,7 +16,7 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ||
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'Mitchell Dawkins II | Senior Software Engineer',
+    default: 'Mitchell Dawkins II | Software Engineer',
     template: '%s | Mitchell Dawkins II',
   },
   description: 'Personal website and blog of Mitchell Dawkins, featuring the "Building AI with AI" series.',
@@ -43,13 +43,13 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://mitchelldawkins.com',
-    title: 'Mitchell Dawkins II | Senior Software Engineer',
+    title: 'Mitchell Dawkins II | Software Engineer',
     description: 'Personal website and blog of Mitchell Dawkins, featuring the "Building AI with AI" series.',
     siteName: 'Mitchell Dawkins',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mitchell Dawkins II | Senior Software Engineer',
+    title: 'Mitchell Dawkins II | Software Engineer',
     description: 'Personal website and blog of Mitchell Dawkins, featuring the "Building AI with AI" series.',
     creator: '@yourtwitterhandle',
   },

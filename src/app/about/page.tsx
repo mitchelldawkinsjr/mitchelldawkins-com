@@ -28,13 +28,8 @@ export default function AboutPage() {
               Mitchell Dawkins
             </h1>
             <h2 className="text-xl text-blue-600 dark:text-blue-400 mb-6">
-              Senior Software Engineer & Endeavoring AI Engineer
+              Software Engineer
             </h2>
-            <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-              I specialize in building intelligent systems that leverage the latest in AI technology.
-              Currently exploring the meta-concept of using AI tools to build AI systems, documenting
-              the process through my &quot;Building AI with AI&quot; blog series.
-            </p>
             <a
               href="/documents/Mitchell-Dawkins-II-Resume-2025.pdf"
               download
@@ -66,16 +61,15 @@ export default function AboutPage() {
           </h2>
           <div className="prose dark:prose-invert prose-lg max-w-none">
             <p>
-              I&apos;m a Senior Softweare Engineer and an endeavoring AI engineer passionate about exploringing how AI 
-              can be used to enhance and accelerate the development process. My current focus is building a 
+              I&apos;m a Software Engineer and passionate about building software, problem solving and leaving lasting impact. My current development focus is building a 
               multi-tenant video processing platform that allows organizations to extract value from their video content through automated
               transcription and custom model training.
             </p>
             <p>
               With over 10 years of experience in backend & frontend development, I bring a unique perspective to
-              building AI-powered systems. I believe we&apos;re at a fascinating inflection point where AI can be
-              used to build better AI systems, creating a recursive improvement cycle that will dramatically
-              change how we develop software.
+              building sofware systems. I believe we&apos;re at a fascinating inflection point where AI can be
+              used in tandem with experince and a good grasp of fundamentals to build better software, creating 
+              improvements that will dramatically change how we develop software.
             </p>
             <p>
               When I&apos;m not coding or experimenting with AI tools, you&apos;ll find me coaching football, playing video games,
@@ -184,12 +178,20 @@ export default function AboutPage() {
         </h2>
 
         <div className="space-y-8">
+            {/* DFF */}
+            <div className="border-l-4 border-blue-600 pl-4 py-1">
+            <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Vice President</h3>
+                <div className="text-gray-600 dark:text-gray-300">May 2023 - Present</div>
+            </div>
+            <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Dawkins Family Foundation Inc.</div>
+            </div>
 
             {/* Dropbox */}
             <div className="border-l-4 border-blue-600 pl-4 py-1">
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white">Full Stack Engineer</h3>
-                <div className="text-gray-600 dark:text-gray-300">May 2021 - Nov 2024</div>
+                <div className="text-gray-600 dark:text-gray-300">May 2021 - April 2025</div>
             </div>
             <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Dropbox Inc.</div>
             <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
@@ -332,7 +334,7 @@ export default function AboutPage() {
           
           <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-xl">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Building AI with AI
+              Code & Impact
             </h3>
             
             <p className="text-gray-700 dark:text-gray-300 mb-4">
