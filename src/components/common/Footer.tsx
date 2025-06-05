@@ -10,7 +10,7 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Mitchell Dawkins II</h3>
             <p className="text-gray-600 dark:text-gray-300">
-              Software Engineer specializing in building intelligent systems with AI.
+              Software Engineer focused on delivering impactful, problem-solving solutions.
             </p>
           </div>
           

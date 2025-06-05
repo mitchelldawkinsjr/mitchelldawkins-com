@@ -61,8 +61,7 @@ export default function AboutPage() {
           </h2>
           <div className="prose dark:prose-invert prose-lg max-w-none">
             <p>
-              I&apos;m a Software Engineer and passionate about building software, problem solving and leaving lasting impact. My current development focus is building a 
-              multi-tenant video processing platform that allows organizations to extract value from their video content through automated
+              I&apos;m a Software Engineer and passionate about building software, problem solving and making an impact. My current development focus is building a multi-tenant video processing platform that allows organizations to extract value from their video content through automated
               transcription and custom model training.
             </p>
             <p>
