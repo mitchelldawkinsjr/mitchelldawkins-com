@@ -6,6 +6,7 @@ import { getPostBySlug, getAllPosts } from '@/lib/mdx';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import HumanReflection from '@/components/blog/HumanReflection';
 import SeriesNavigation from '@/components/blog/SeriesNavigation';
+import LiveSiteButton from '@/components/blog/LiveSiteButton';
 
 // Define the type for the params
 type Props = {
@@ -74,6 +75,7 @@ export async function generateMetadata(
 // Custom components for MDX
 const components = {
   HumanReflection,
+  LiveSiteButton,
   // Add other custom components here
 };
 
