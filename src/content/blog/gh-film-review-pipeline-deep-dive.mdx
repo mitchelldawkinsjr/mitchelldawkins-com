@@ -1,0 +1,206 @@
+---
+title: "Building a Comprehensive Film Review Pipeline: From CSV to Professional Reports"
+date: "2025-10-29"
+excerpt: "A deep dive into building a complete data pipeline and static site generator for football player evaluations using Python, pandas, and automated reporting."
+coverImage: "/images/blog/gh-film-review-pipeline.png"
+series: "Building AI with AI"
+---
+
+A comprehensive data pipeline and static site generator for weekly and season-long player evaluations from CSV film logs. This project transforms raw game film data into professional-grade reports, dashboards, and analytics for football coaching staff.
+
+## The Problem I'm Solving
+
+Most football coaching staff face significant challenges when analyzing player performance:
+
+- **Manual data entry** from game film is time-consuming and error-prone
+- **Inconsistent scoring** across different evaluators and games
+- **Limited analytics** beyond basic statistics
+- **No standardized reporting** format for player development tracking
+- **Difficulty comparing players** across different positions and roles
+
+I needed a solution that would automate the entire process from data collection to report generation.
+
+## The Technology Stack
+
+```
+Backend: Python, Pandas, ReportLab, Pillow, OpenPyXL
+Frontend: HTML, CSS, JavaScript
+Deployment: GitHub Pages, GitHub Actions
+Analytics: Google Analytics 4
+Data Storage: CSV files, Static HTML
+```
+
+## Architecture Overview
+
+The pipeline processes weekly CSV files containing player performance data through several stages:
+
+```python
+CSV Input → Data Preparation → Film Grading → Report Generation → Static Site
+```
+
+### Data Flow
+
+1. **CSV Preparation** - Raw game film data is cleaned and standardized
+2. **Film Grading** - Automated scoring based on custom rubrics
+3. **Report Generation** - Individual player PDFs and summary reports
+4. **Dashboard Creation** - Interactive HTML dashboards for analysis
+5. **Static Site Generation** - Complete website with all outputs
+
+## Custom Scoring System
+
+The pipeline implements a sophisticated scoring rubric that goes beyond basic statistics:
+
+### Positive Plays
+- **Touchdown**: +15 points
+- **Relentless Effort**: +5 points  
+- **Elite Route**: +7 points
+- **Good Route**: +2 points
+- **Catch/Rush yardage**: +0.5 per yard
+- **Broken Tackles**: +1.0 per tackle
+- **Good Block**: +2 points
+- **Pancake Block**: +10 points
+- **First Down**: +5 points
+- **Spectacular Catch**: +10 points
+
+### Negative Plays
+- **Missed Assignment**: -10 points
+- **Dropped Pass**: -15 points
+- **Bad Route**: -2 points
+- **Loaf**: -2 points
+- **Not Full Speed**: -3 points
+- **Whiffed Block**: -1 point
+
+## Advanced Metrics Calculation
+
+The system automatically calculates sophisticated metrics that provide deeper insights:
+
+```python
+# Key metrics automatically calculated
+Catch Rate = catches / (catches + drops)
+Drop Rate = drops / (catches + drops)
+Yards per Target = (rec_yards + rush_yards) / targets
+TDs per 30 = (touchdowns / snaps) * 30
+Targets per 30 = (targets / snaps) * 30
+Key Plays per 30 = (key_plays / snaps) * 30
+```
+
+## Implementation Highlights
+
+### Automated Report Generation
+
+The system generates multiple output formats:
+
+1. **Individual Player Reports** - Detailed text analysis for each player
+2. **Weekly Summary PDFs** - Coaching staff overview with key insights
+3. **Group Film PDFs** - Aggregated play-by-play details
+4. **HTML Dashboards** - Interactive player comparisons
+5. **Snapshot Tables** - Quick weekly overviews
+
+### Batch Processing Workflow
+
+```bash
+# Process entire season with one command
+for d in out/Wk*; do
+  wk="${d##*/Wk}"
+  prep=$(ls "$d"/Wk*_*_prepared.csv 2>/dev/null | head -n1 || true)
+  details=$(ls "$d"/results_*.csv 2>/dev/null | grep -v summary | head -n1 || true)
+  
+  [ -f "$prep" ] && [ -f "$details" ] || continue
+  
+  # Grade and generate reports
+  ./venv/bin/python film_grade.py "$prep" --out_dir "$d" --out "$(basename "$details")"
+  
+  # Create PDFs and dashboards
+  ./venv/bin/python tools/make_pdfs.py \
+    --reports_dir "$d/reports" \
+    --out_dir "$d/pdfs" \
+    --summary_csv "${details%.csv}_summary.csv" \
+    --details_csv "$details" \
+    --title "Week $wk Summary"
+done
+```
+
+### CI/CD Integration
+
+The project uses GitHub Actions for automated deployment:
+
+```yaml
+name: Deploy to GitHub Pages
+on:
+  push:
+    branches: [ main ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      - name: Build site
+        run: |
+          # Run build scripts
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+```
+
+## Technical Challenges Solved
+
+### Data Normalization
+Creating fair comparisons between players with different snap counts and roles required sophisticated normalization algorithms that account for playing time and position-specific metrics.
+
+### Report Generation
+Generating professional-quality PDFs with dynamic content, charts, and formatting while maintaining performance across large datasets.
+
+### Mobile Optimization
+Ensuring all HTML outputs work seamlessly across devices with responsive design and touch-friendly interfaces.
+
+### Batch Processing
+Handling large datasets efficiently while maintaining data integrity and providing progress feedback during long-running operations.
+
+## Analytics & Tracking
+
+The system includes comprehensive analytics:
+
+- **Google Analytics 4** integration for usage tracking
+- **PDF download tracking** to monitor report usage
+- **Navigation click tracking** for dashboard interactions
+- **Custom event tracking** for coaching staff engagement
+
+## Project Impact
+
+This pipeline has transformed how the coaching staff analyzes player performance:
+
+- **Time Savings**: Reduced manual film analysis from hours to minutes
+- **Consistency**: Standardized scoring across all players and games
+- **Insights**: Data-driven player development decisions
+- **Scalability**: Handles entire seasons with minimal effort
+
+## Lessons Learned
+
+Building this pipeline taught me valuable lessons about:
+
+- **Data Pipeline Design**: The importance of modular, testable components
+- **User Experience**: Making complex data accessible to non-technical users
+- **Performance Optimization**: Balancing feature richness with processing speed
+- **Documentation**: Clear instructions are crucial for adoption
+
+## What's Next
+
+This project demonstrates how thoughtful automation can transform manual processes into efficient, scalable systems that provide real value to end users. The pipeline continues to evolve with new features and improvements based on user feedback and changing requirements.
+
+<HumanReflection>
+This film review pipeline represents one of my most comprehensive data engineering projects. What started as a simple script to help with wide reciever evaluations evolved into a full-featured system that the coaching staff could now use weekly. After watching the flim and taking notes for years I realized there I coudl developer a better way to grade player performace and share that information with them quickly and permanantly. 
+
+The most rewarding aspect was seeing how the automated reports changed the coaching staff's workflow. Instead of spending hours manually calculating statistics and creating reports, they can now focus on the actual analysis and player development. No longer trying to remember what play number to show in the flim session or trying to find that play where 22 yard catch was made, or "that one pay where I broke 2 tackles". With these reports it's all documented, all the data is readily available and easy to digest and use. 
+
+The GitHub Actions integration was particularly satisfying, as it eliminated the manual deployment process entirely.
+
+What surprised me most was how the system continues to evolved beyond its original scope. What began as a simple grading tool became a comprehensive analytics platform that provides insights the coaching staff never had before.
+
+More about this project [here](/projects/gh-film-review-pipeline)
+</HumanReflection>

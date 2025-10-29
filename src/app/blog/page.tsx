@@ -58,25 +58,14 @@ export default async function BlogPage() {
         Thoughts, insights and project updates about AI development
       </p>
       
-      {/* Featured series */}
-      {seriesNames.length > 0 && seriesNames.map(seriesName => (
-        <section key={seriesName} className="mb-16">
-          <div className="flex justify-between items-baseline mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-              {seriesName} Series
-            </h2>
-            {groupedBySeries[seriesName].length > 3 && (
-              <Link 
-                href={`/blog/series/${encodeURIComponent(seriesName.toLowerCase())}`}
-                className="text-blue-600 dark:text-blue-400 hover:underline"
-              >
-                View all
-              </Link>
-            )}
-          </div>
-          
+      {/* All posts */}
+      {posts.length > 0 ? (
+        <div className="mb-16">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            All Posts
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {groupedBySeries[seriesName].slice(0, 3).map((post) => (
+            {posts.map((post) => (
               <BlogCard
                 key={post.slug}
                 slug={post.slug}
@@ -88,30 +77,53 @@ export default async function BlogPage() {
               />
             ))}
           </div>
-        </section>
-      ))}
-      
-      {/* All posts */}
-      {posts.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post) => (
-            <BlogCard
-              key={post.slug}
-              slug={post.slug}
-              title={post.title}
-              excerpt={post.excerpt}
-              date={post.date}
-              coverImage={post.coverImage}
-              series={post.series}
-            />
-          ))}
         </div>
       ) : (
-        <div className="text-center py-16 bg-gray-50 dark:bg-gray-800 rounded-xl">
+        <div className="text-center py-16 bg-gray-50 dark:bg-gray-800 rounded-xl mb-16">
           <h3 className="text-xl font-medium text-gray-700 dark:text-gray-300 mb-4">No posts yet</h3>
           <p className="text-gray-600 dark:text-gray-400 max-w-md mx-auto">
             I&apos;m currently working on some exciting content. Check back soon for updates on my &quot;Building AI with AI&quot; journey!
           </p>
+        </div>
+      )}
+      
+      {/* Featured series */}
+      {seriesNames.length > 0 && (
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            Series & Categories
+          </h2>
+          {seriesNames.map(seriesName => (
+            <section key={seriesName} className="mb-12">
+              <div className="flex justify-between items-baseline mb-6">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  {seriesName} Series
+                </h3>
+                {groupedBySeries[seriesName].length > 3 && (
+                  <Link 
+                    href={`/blog/series/${encodeURIComponent(seriesName.toLowerCase())}`}
+                    className="text-blue-600 dark:text-blue-400 hover:underline"
+                  >
+                    View all
+                  </Link>
+                )}
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {groupedBySeries[seriesName].slice(0, 3).map((post) => (
+                  <BlogCard
+                    key={post.slug}
+                    slug={post.slug}
+                    title={post.title}
+                    excerpt={post.excerpt}
+                    date={post.date}
+                    coverImage={post.coverImage}
+                    series={post.series}
+                  />
+                ))}
+              </div>
+            </section>
+          ))}
         </div>
       )}
     </div>

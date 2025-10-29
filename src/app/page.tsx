@@ -14,7 +14,7 @@ export default async function HomePage() {
       <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-            Featured Projects
+            Latest Projects
           </h2>
           <FeaturedProjects />
         </div>

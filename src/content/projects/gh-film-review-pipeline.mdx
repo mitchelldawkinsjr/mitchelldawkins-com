@@ -1,0 +1,215 @@
+---
+title: "GH Film Review Pipeline"
+description: "A comprehensive data pipeline and static site generator for weekly and season-long football player evaluations from CSV film logs."
+date: "2025-10-29"
+status: "Completed"
+featured: true
+priority: 2
+slug: "gh-film-review-pipeline"
+headerImage: "/images/projects/gh-flim-revew-dashboard/header.png"
+tech:
+  - Python
+  - Pandas
+  - ReportLab
+  - HTML
+  - CSS
+  - GitHub Actions
+  - Google Analytics
+  - FFmpeg
+  - Pillow
+  - OpenPyXL
+tags:
+  - Data Pipeline
+  - Sports Analytics
+  - Football
+  - Automation
+  - Report Generation
+  - Static Site Generator
+audience:
+  - Football Coaches
+  - Sports Analysts
+  - Data Engineers
+  - Python Developers
+  - Athletic Directors
+links:
+  - title: "GitHub Repository"
+    url: "https://github.com/mitchelldawkinsjr/GH-Flim-Review"
+  - title: "Live Demo"
+    url: "https://mitchelldawkinsjr.github.io/GH-Flim-Review/"
+  - title: "Technical Deep Dive"
+    url: "/blog/gh-film-review-pipeline-deep-dive"
+---
+
+## Introduction Section
+
+The GH Film Review Pipeline is a comprehensive data processing system designed to transform raw football game film data into professional-grade reports, dashboards, and analytics. Built for coaching staff and sports analysts, this pipeline automates the entire process from CSV data ingestion to report generation, providing consistent, data-driven player evaluations.
+
+**Status: Completed** — The pipeline is fully functional and has been successfully used for multiple seasons of player evaluation. The system processes weekly game data and generates comprehensive reports automatically.
+
+## Problem & Solution
+
+### The Problem
+
+Football coaching staff face significant challenges when analyzing player performance:
+
+- **Manual data entry** from game film is time-consuming and error-prone
+- **Inconsistent scoring** across different evaluators and games  
+- **Limited analytics** beyond basic statistics
+- **No standardized reporting** format for player development tracking
+- **Difficulty comparing players** across different positions and roles
+- **Time-intensive report generation** that takes hours of manual work
+
+### The Solution
+
+This pipeline addresses these challenges through comprehensive automation:
+
+1. **Automated data processing** - CSV files are cleaned, standardized, and validated automatically
+2. **Custom scoring system** - Sophisticated rubrics for consistent player evaluation
+3. **Advanced metrics calculation** - Beyond basic stats with normalized performance indicators
+4. **Professional report generation** - Individual player PDFs, weekly summaries, and group reports
+5. **Interactive dashboards** - HTML-based player comparisons and analytics
+6. **Season-long tracking** - Comprehensive player development over time
+7. **Automated deployment** - GitHub Actions for seamless updates
+
+## Technical Implementation
+
+The system architecture follows a modular pipeline approach:
+
+- **Data Ingestion Layer**
+  - CSV file processing and validation
+  - Data cleaning and standardization
+  - Error handling and logging
+
+- **Processing Layer**
+  - Custom scoring algorithms
+  - Advanced metrics calculation
+  - Data normalization and comparison
+
+- **Output Generation**
+  - PDF report creation with ReportLab
+  - HTML dashboard generation
+  - Static site compilation
+
+- **Deployment Layer**
+  - GitHub Actions CI/CD
+  - Automated GitHub Pages deployment
+  - Google Analytics integration
+
+## Key Features
+
+### Automated Scoring System
+
+The pipeline implements a sophisticated scoring rubric that evaluates players on multiple dimensions:
+
+**Positive Plays:**
+- Touchdown: +15 points
+- Relentless Effort: +5 points
+- Elite Route: +7 points
+- Good Route: +2 points
+- Catch/Rush yardage: +0.5 per yard
+- Broken Tackles: +1.0 per tackle
+- Good Block: +2 points
+- Pancake Block: +10 points
+- First Down: +5 points
+- Spectacular Catch: +10 points
+
+**Negative Plays:**
+- Missed Assignment: -10 points
+- Dropped Pass: -15 points
+- Bad Route: -2 points
+- Loaf: -2 points
+- Not Full Speed: -3 points
+- Whiffed Block: -1 point
+
+### Advanced Analytics
+
+The system calculates sophisticated metrics that provide deeper insights:
+
+- **Catch Rate** = catches / (catches + drops)
+- **Drop Rate** = drops / (catches + drops)
+- **Yards per Target** = (rec_yards + rush_yards) / targets
+- **TDs per 30** = (touchdowns / snaps) * 30
+- **Targets per 30** = (targets / snaps) * 30
+- **Key Plays per 30** = (key_plays / snaps) * 30
+
+### Professional Report Generation
+
+The pipeline generates multiple output formats:
+
+- **Individual Player Reports** - Detailed text analysis for each player
+- **Weekly Summary PDFs** - Coaching staff overview with key insights
+- **Group Film PDFs** - Aggregated play-by-play details
+- **HTML Dashboards** - Interactive player comparisons
+- **Snapshot Tables** - Quick weekly overviews
+- **Season Dashboards** - Long-term player development tracking
+
+### Batch Processing
+
+The system can process entire seasons with a single command:
+
+```bash
+# Process all weeks automatically
+for d in out/Wk*; do
+  # Grade and generate reports for each week
+  ./venv/bin/python film_grade.py "$prep" --out_dir "$d"
+  # Create PDFs and dashboards
+  ./venv/bin/python tools/make_pdfs.py --reports_dir "$d/reports"
+done
+```
+
+## Educational Applications
+
+This project serves as an excellent learning resource for:
+
+- **Data Engineers** looking to build comprehensive data pipelines
+- **Python Developers** interested in sports analytics and automation
+- **Sports Analysts** wanting to understand data processing workflows
+- **Coaches and Athletic Directors** seeking to modernize their evaluation processes
+
+The codebase demonstrates:
+- Data processing and validation techniques
+- Report generation and PDF creation
+- Static site generation and deployment
+- CI/CD pipeline implementation
+- Analytics and metrics calculation
+
+## Future Enhancements
+
+Planned improvements include:
+
+- **Machine Learning Integration** for predictive analytics and player development forecasting
+- **Video Integration** linking reports to specific game footage timestamps
+- **Mobile Application** for real-time sideline data entry during games
+- **Advanced Visualization** with interactive charts and graphs
+- **API Development** for integration with other sports management systems
+- **Real-time Processing** for live game analysis
+
+## Development Process
+
+This project was built using a systematic approach:
+
+1. **Requirements Analysis** - Understanding coaching staff needs and current processes
+2. **Data Modeling** - Designing efficient data structures for player evaluation
+3. **Pipeline Development** - Building modular components for data processing
+4. **Report Generation** - Creating professional-quality output formats
+5. **Testing and Validation** - Ensuring accuracy and reliability
+6. **Deployment and Automation** - Setting up CI/CD for seamless updates
+7. **User Training and Documentation** - Enabling adoption by coaching staff
+
+## Target Users
+
+The platform is designed to serve:
+
+- **Football Coaching Staff** - For comprehensive player evaluation and development tracking
+- **Sports Analysts** - For data-driven insights and performance analysis
+- **Athletic Directors** - For program-wide performance monitoring
+- **Data Engineers** - As a reference implementation for sports data pipelines
+- **Python Developers** - For learning data processing and automation techniques
+
+## Conclusion
+
+The GH Film Review Pipeline represents a significant advancement in sports analytics automation. By combining sophisticated data processing with professional report generation, it provides coaching staff with the tools they need to make data-driven decisions about player development.
+
+The system's modular architecture and comprehensive feature set make it both powerful and maintainable, while its automated deployment ensures reliable operation throughout the season. This project demonstrates how thoughtful automation can transform manual processes into efficient, scalable systems that provide real value to end users.
+
+*This project is actively maintained and continues to evolve based on user feedback and changing requirements. The complete source code is available on GitHub for educational and reference purposes.*
