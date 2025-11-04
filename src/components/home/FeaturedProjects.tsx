@@ -5,7 +5,7 @@ const projects = [
   {
     title: 'GH Film Review Pipeline',
     description: 'A comprehensive data pipeline and static site generator for weekly and season-long football player evaluations from CSV film logs.',
-    image: '/images/projects/gh-flim-revew-dashboard/header.png',
+    image: '/images/projects/gh-flim-revew-dashboard/header-1.png',
     link: '/projects/gh-film-review-pipeline',
     tags: ['Python','Pandas','ReportLab','HTML','CSS','GitHub Actions','Google Analytics'],
   },
