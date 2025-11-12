@@ -1,0 +1,337 @@
+---
+title: "NBA Stat Spot"
+description: "Advanced NBA analytics platform with AI-powered prop bet predictions, machine learning models, real-time ESPN data integration, and comprehensive betting analysis tools."
+date: "2025-01-28"
+status: "Completed"
+featured: true
+priority: 1
+slug: "nba-stat-spot"
+headerImage: "/images/projects/nba-stat-spot/header.png"
+tech:
+  - FastAPI
+  - React
+  - TypeScript
+  - Python
+  - SQLAlchemy
+  - PostgreSQL
+  - Redis
+  - Docker
+  - TanStack Query
+  - Recharts
+  - Tailwind CSS
+  - Pandas
+  - NumPy
+  - Celery
+  - ESPN API
+  - NBA API
+tags:
+  - Sports Analytics
+  - NBA
+  - Predictive Modeling
+  - Prop Betting
+  - Data Science
+  - Machine Learning
+  - Full-Stack Development
+  - Real-time Analytics
+audience:
+  - Sports Bettors
+  - Data Scientists
+  - NBA Fans
+  - Basketball Analysts
+  - Fantasy Sports Players
+  - Quantitative Analysts
+links:
+  - title: "GitHub Repository"
+    url: "https://github.com/mitchelldawkinsjr/NBA-Stat-Spot"
+---
+
+## Introduction Section
+
+NBA Stat Spot is an advanced analytics platform designed to provide AI-powered NBA player prop bet predictions with transparent rationale and comprehensive real-time data integration. Built with FastAPI and React, this sophisticated full-stack application combines machine learning models, ESPN data integration, and advanced statistical analysis to deliver actionable betting insights and performance predictions.
+
+**Status: Completed** — The application is fully functional with comprehensive analytics capabilities, real-time ESPN data integration, and a modern responsive interface. The system has been optimized for production deployment with Docker containerization.
+
+## Problem & Solution
+
+### The Problem
+
+NBA prop betting presents several challenges for bettors:
+
+- **Information Overload** - Too much data from multiple sources without clear synthesis
+- **Manual Analysis Required** - Sports bettors spend hours manually calculating expected values and identifying opportunities
+- **Lack of Real-time Context** - Missing critical information like injury status, recent form, and game situation
+- **Inconsistent Data Sources** - Fragmented data across multiple platforms with varying quality and reliability
+- **No Transparent Rationale** - Most tools don't explain why a bet is suggested
+- **Limited Integration** - Separate tools for stats, injuries, and betting lines
+
+### The Solution
+
+NBA Stat Spot addresses these challenges through a comprehensive analytics ecosystem:
+
+1. **AI-Powered Prop Suggestions** - Advanced statistical models with transparent rationale for each recommendation
+2. **Real-time ESPN Integration** - Live injury data, standings, news, and game context without API keys
+3. **Machine Learning Predictions** - Confidence scoring and line prediction using ML models
+4. **Over/Under Analysis** - Live game total predictions with pace adjustments
+5. **Parlay Builder** - Multi-leg parlay construction with confidence calculations
+6. **Bet Tracking** - Track your bets and analyze performance over time
+7. **Modern Web Interface** - Responsive React frontend with interactive visualizations
+
+## Technical Implementation
+
+The platform utilizes a sophisticated full-stack architecture:
+
+- **Backend Layer (FastAPI)**
+  - RESTful API with comprehensive endpoints
+  - Advanced analytics engine with multiple prediction models
+  - Real-time ESPN data integration (no API keys required)
+  - SQLAlchemy ORM with PostgreSQL support
+  - Redis caching for performance optimization
+  - Celery task queue for background processing
+  - Structured logging with structlog
+
+- **Frontend Layer (React + TypeScript)**
+  - Modern reactive framework with TypeScript
+  - TanStack Query for efficient data fetching
+  - Interactive charts and visualizations with Recharts
+  - Responsive design with Tailwind CSS
+  - React Router for navigation
+  - Real-time data updates and notifications
+
+- **Data Integration**
+  - NBA API for player statistics and game data
+  - ESPN public endpoints for injuries, standings, news, and live game context
+  - Real-time data processing and caching
+  - Historical data analysis and backtesting
+
+- **Infrastructure**
+  - Docker containerization for easy deployment
+  - Docker Compose for local development
+  - Nginx reverse proxy for production
+  - SQLite for development, PostgreSQL for production
+  - Optional Redis for advanced caching
+
+## Key Features
+
+### Enhanced Predictions with ESPN Data
+
+The platform's prediction system is enhanced with real-time ESPN data:
+
+**Real Injury Status:**
+- Live injury reports from ESPN (probable/questionable/doubtful/out)
+- Impact analysis on player performance predictions
+- Last-minute lineup changes and updates
+
+**Team Standings:**
+- Conference rankings and playoff race pressure
+- Recent form analysis (last 5, last 10 games)
+- Home/away performance splits
+
+**News & Transactions:**
+- Sentiment analysis of recent news
+- Transaction impact on player performance
+- Team chemistry and rotation changes
+
+**Live Game Context:**
+- Real-time pace adjustments
+- Foul trouble monitoring
+- Game situation analysis for in-game props
+- Quarter-by-quarter performance trends
+
+**Enhanced Matchups:**
+- Actual head-to-head history using ESPN team schedules
+- Defensive matchup analysis
+- Historical performance against specific teams
+
+### AI-Powered Prop Analysis
+
+The core prediction engine provides:
+
+- **Points, Rebounds, Assists** - Comprehensive stat category predictions
+- **3-Point Makes** - Specialized shooting predictions
+- **PRA (Points + Rebounds + Assists)** - Combined stat predictions
+- **Transparent Rationale** - Clear explanation for each suggestion
+- **Confidence Scoring** - ML-based confidence levels for each bet
+- **Expected Value Calculations** - Positive EV identification
+
+### Machine Learning Predictions
+
+Advanced ML capabilities include:
+
+- **Confidence Scoring** - Machine learning models for prediction reliability
+- **Line Prediction** - Forecast where sportsbooks will set lines
+- **Performance Distribution** - Understanding outcome probabilities
+- **Historical Validation** - Backtesting against past results
+
+### Over/Under Analysis
+
+Live game analysis features:
+
+- **Total Predictions** - Game total forecasting
+- **Pace Adjustments** - Real-time pace factor integration
+- **Team Trends** - Recent over/under performance
+- **Situational Factors** - Rest days, back-to-backs, and context
+
+### Parlay Builder
+
+Multi-leg parlay construction:
+
+- **Confidence Calculations** - Combined probability analysis
+- **Expected Value** - Parlay EV calculations
+- **Risk Assessment** - Kelly sizing recommendations
+- **Leg Optimization** - Best combination suggestions
+
+### Bet Tracking
+
+Comprehensive bet management:
+
+- **Performance Analytics** - Track win rate and ROI
+- **Historical Analysis** - Review past bets and outcomes
+- **Category Breakdown** - Performance by stat type
+- **Trend Analysis** - Identify successful patterns
+
+## API Architecture
+
+The platform provides comprehensive API endpoints:
+
+### Core Data Endpoints
+- `GET /api/players` - All NBA players with statistics
+- `GET /api/players/{id}` - Individual player details and analytics
+- `GET /api/games` - Game schedules and results
+- `GET /api/stats` - Performance statistics and leaderboards
+
+### Analytics & Predictions
+- `POST /api/predictions/generate` - Generate player predictions
+- `GET /api/suggestions` - Get prop bet suggestions
+- `POST /api/parlay/build` - Build multi-leg parlays
+- `GET /api/analytics/player/{id}` - Advanced player analytics
+
+### ESPN Integration
+- `GET /api/espn/injuries` - Real-time injury reports
+- `GET /api/espn/standings` - Team standings and rankings
+- `GET /api/espn/news` - Recent news and transactions
+- `GET /api/espn/live/{gameId}` - Live game context
+
+### Bet Tracking
+- `POST /api/bets/track` - Track a new bet
+- `GET /api/bets/history` - Get bet history
+- `GET /api/bets/analytics` - Betting performance analytics
+
+## Educational Applications
+
+This project serves as an excellent learning resource for:
+
+- **Full-Stack Developers** building modern web applications with FastAPI and React
+- **Data Scientists** exploring sports analytics and predictive modeling
+- **Sports Bettors** understanding advanced analytics and expected value
+- **Backend Engineers** working with real-time data integration and caching
+- **Frontend Developers** building responsive interfaces with modern React patterns
+
+The codebase demonstrates:
+- Modern full-stack architecture with FastAPI and React
+- Real-time data integration without API keys
+- Machine learning integration for predictions
+- Docker containerization and deployment
+- Advanced caching strategies with Redis
+- Background task processing with Celery
+- TypeScript for type-safe frontend development
+- Modern data visualization with Recharts
+
+## Performance & Scaling
+
+### Caching Strategy
+- **Redis** for session and application caching (optional)
+- **In-memory caching** with cachetools for development
+- **Database** query result caching
+- **API** response caching with TTL
+- **Prediction** result caching for performance
+
+### Background Processing
+- **Celery** task queue for heavy analytics computations (optional)
+- **Batch Processing** for historical data analysis
+- **Scheduled Tasks** for data updates and maintenance
+- **Async Processing** with FastAPI's async capabilities
+
+### Production Deployment
+The application supports multiple deployment platforms:
+- **Docker** - Containerized deployment with docker-compose
+- **Fly.io** - Global edge deployment (fly.toml included)
+- **Render.com** - Recommended for Docker deployments
+- **Railway** - Excellent for containerized applications
+- **AWS/GCP/Azure** - Enterprise-grade hosting
+
+## Development Process
+
+This project was built using a systematic development approach:
+
+1. **Architecture Design** - Planned scalable full-stack architecture
+2. **Data Integration** - Connected NBA API and ESPN endpoints
+3. **Analytics Development** - Implemented ML prediction models
+4. **API Development** - Built comprehensive RESTful endpoints
+5. **Frontend Development** - Created modern responsive interface
+6. **Real-time Features** - Integrated ESPN data for live context
+7. **Containerization** - Docker setup for easy deployment
+8. **Production Optimization** - Implemented caching and performance tuning
+
+## Quickstart
+
+### Backend Setup
+
+```bash
+# Create and activate virtualenv
+python3 -m venv .venv && source .venv/bin/activate
+
+# Install dependencies
+pip install -r backend/requirements.txt
+
+# Run database migrations (optional)
+cd backend
+alembic upgrade head
+
+# Run server
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000 --app-dir backend
+```
+
+### Frontend Setup
+
+```bash
+# Install dependencies
+cd frontend && npm install
+
+# Run dev server
+npm run dev
+```
+
+Backend runs on `http://localhost:8000`, Frontend on `http://localhost:5173`
+
+## Target Users
+
+The platform is designed to serve:
+
+- **Sports Bettors** - For identifying profitable betting opportunities with transparent rationale
+- **Data Scientists** - For exploring advanced sports analytics and ML models
+- **NBA Fans** - For deeper understanding of player performance and game context
+- **Basketball Analysts** - For comprehensive statistical analysis with real-time data
+- **Fantasy Sports Players** - For player evaluation and lineup decisions
+- **Quantitative Analysts** - For learning advanced modeling techniques
+
+## Future Enhancements
+
+Planned improvements include:
+
+- **Advanced ML Models** - Deep learning models for improved predictions
+- **Mobile Application** - Native mobile app for on-the-go analysis
+- **Social Features** - Community predictions and leaderboards
+- **Advanced Visualizations** - Interactive 3D charts and heat maps
+- **API Marketplace** - Third-party integrations and extensions
+- **Real-time Notifications** - Push notifications for betting opportunities
+- **Custom Model Training** - User-specific model training capabilities
+- **Vegas Line Integration** - Real-time sportsbook line comparisons
+
+## Conclusion
+
+NBA Stat Spot represents a significant advancement in sports analytics technology. By combining sophisticated statistical methods with real-time ESPN data integration and modern web development practices, it provides users with powerful tools for understanding and predicting NBA player performance.
+
+The platform's comprehensive feature set, from AI-powered predictions to automated prop scanning with transparent rationale, makes it valuable for both casual fans and serious analysts. Its lightweight architecture, Docker containerization, and open-source nature make it an excellent resource for learning advanced analytics and full-stack development.
+
+*This project demonstrates the power of combining domain expertise with technical skills to create solutions that provide real value to users while serving as educational resources for the broader community.*
+
