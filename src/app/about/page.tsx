@@ -31,7 +31,7 @@ export default function AboutPage() {
               Software Engineer
             </h2>
             <a
-              href="/documents/Mitchell-Dawkins-II-Resume-2025.pdf"
+              href="/documents/Mitchell-Dawkins-II-Resume-2026.pdf"
               download
               className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
             >
@@ -185,6 +185,21 @@ export default function AboutPage() {
             </div>
             <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Dawkins Family Foundation Inc.</div>
             </div> */}
+
+            {/* Adhoc Assosciates */}
+            <div className="border-l-4 border-blue-600 pl-4 py-1">
+            <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Full Stack Engineer</h3>
+                <div className="text-gray-600 dark:text-gray-300">Oct 2025 - Present</div>
+            </div>
+            <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Ad hoc Research</div>
+              <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
+                <li>Architect and deliver custom enterprise web applications using PHP 8+ and VueJS, leading full stack development initiatives aligned with stakeholder and federal engineering requirements<</li>
+                <li>Integrate automation and AI assisted development workflows to accelerate delivery, improve testing coverage, and enhance code quality standards</li>
+                <li>Design scalable backend services and RESTful APIs in PHP while building reactive, component driven frontends using VueJS and modern JavaScript tooling</li>
+                <li>Apply advanced problem solving and systems analysis techniques to reduce technical debt and guide long term application architecture strategy</li>
+              </ul>
+            </div>
 
             {/* Dropbox */}
             <div className="border-l-4 border-blue-600 pl-4 py-1">
