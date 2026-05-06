@@ -194,7 +194,7 @@ export default function AboutPage() {
             </div>
             <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Ad hoc Research</div>
               <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
-                <li>Architect and deliver custom enterprise web applications using PHP 8+ and VueJS, leading full stack development initiatives aligned with stakeholder and federal engineering requirements<</li>
+                <li>Architect and deliver custom enterprise web applications using PHP 8+ and VueJS, leading full stack development initiatives aligned with stakeholder and federal engineering requirements</li>
                 <li>Integrate automation and AI assisted development workflows to accelerate delivery, improve testing coverage, and enhance code quality standards</li>
                 <li>Design scalable backend services and RESTful APIs in PHP while building reactive, component driven frontends using VueJS and modern JavaScript tooling</li>
                 <li>Apply advanced problem solving and systems analysis techniques to reduce technical debt and guide long term application architecture strategy</li>
