@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 580" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="900" height="580" fill="#f8fafc" rx="12"/>
+  <text x="450" y="38" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">Multi-Tenant Video Processing Platform</text>
+  <text x="450" y="58" text-anchor="middle" font-size="12" fill="#64748b">Architecture Overview</text>
+
+  <!-- CLIENT LAYER -->
+  <rect x="30" y="75" width="840" height="80" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="50" y="96" font-size="11" font-weight="700" fill="#1d4ed8">CLIENT LAYER</text>
+  <rect x="310" y="103" width="280" height="38" rx="6" fill="#3b82f6"/>
+  <text x="450" y="125" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">React Admin Console</text>
+  <text x="450" y="139" text-anchor="middle" font-size="10" fill="#bfdbfe">User management · Video uploads · Analytics</text>
+
+  <line x1="450" y1="155" x2="450" y2="178" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- API LAYER -->
+  <rect x="30" y="180" width="840" height="80" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="50" y="200" font-size="11" font-weight="700" fill="#15803d">API LAYER</text>
+  <rect x="200" y="208" width="210" height="38" rx="6" fill="#22c55e"/>
+  <text x="305" y="229" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Flask REST API</text>
+  <text x="305" y="242" text-anchor="middle" font-size="10" fill="#bbf7d0">JWT Auth · Routing · Rate limiting</text>
+  <rect x="490" y="208" width="210" height="38" rx="6" fill="#16a34a"/>
+  <text x="595" y="229" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Stripe Billing</text>
+  <text x="595" y="242" text-anchor="middle" font-size="10" fill="#bbf7d0">Subscriptions · Tier management</text>
+
+  <line x1="450" y1="260" x2="450" y2="283" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- PROCESSING LAYER -->
+  <rect x="30" y="285" width="840" height="95" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="50" y="305" font-size="11" font-weight="700" fill="#b45309">PROCESSING LAYER</text>
+  <rect x="50" y="312" width="215" height="54" rx="6" fill="#f59e0b"/>
+  <text x="158" y="332" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Tenant Container Manager</text>
+  <text x="158" y="347" text-anchor="middle" font-size="10" fill="#fef3c7">Docker isolation per tenant</text>
+  <text x="158" y="360" text-anchor="middle" font-size="10" fill="#fef3c7">Resource allocation by tier</text>
+  <rect x="343" y="312" width="215" height="54" rx="6" fill="#d97706"/>
+  <text x="451" y="332" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Video Processor</text>
+  <text x="451" y="347" text-anchor="middle" font-size="10" fill="#fef3c7">FFmpeg audio extraction</text>
+  <text x="451" y="360" text-anchor="middle" font-size="10" fill="#fef3c7">Whisper API transcription</text>
+  <rect x="636" y="312" width="215" height="54" rx="6" fill="#b45309"/>
+  <text x="744" y="332" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Model Trainer + RAG</text>
+  <text x="744" y="347" text-anchor="middle" font-size="10" fill="#fef3c7">HuggingFace fine-tuning</text>
+  <text x="744" y="360" text-anchor="middle" font-size="10" fill="#fef3c7">FAISS vector search</text>
+
+  <line x1="450" y1="380" x2="450" y2="403" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- DATA LAYER -->
+  <rect x="30" y="405" width="840" height="80" rx="8" fill="#f3e8ff" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="50" y="425" font-size="11" font-weight="700" fill="#7e22ce">DATA LAYER</text>
+  <rect x="175" y="433" width="210" height="38" rx="6" fill="#a855f7"/>
+  <text x="280" y="454" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">PostgreSQL</text>
+  <text x="280" y="467" text-anchor="middle" font-size="10" fill="#ede9fe">Metadata · Users · Jobs</text>
+  <rect x="515" y="433" width="210" height="38" rx="6" fill="#7c3aed"/>
+  <text x="620" y="454" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">AWS S3</text>
+  <text x="620" y="467" text-anchor="middle" font-size="10" fill="#ede9fe">Videos · Audio · Models · Transcripts</text>
+
+  <!-- INTEGRATIONS -->
+  <text x="450" y="515" text-anchor="middle" font-size="11" font-weight="700" fill="#475569">EXTERNAL INTEGRATIONS</text>
+  <rect x="130" y="522" width="160" height="32" rx="6" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+  <text x="210" y="543" text-anchor="middle" font-size="11" fill="#334155">Whisper API</text>
+  <rect x="370" y="522" width="160" height="32" rx="6" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+  <text x="450" y="543" text-anchor="middle" font-size="11" fill="#334155">HuggingFace Hub</text>
+  <rect x="610" y="522" width="160" height="32" rx="6" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+  <text x="690" y="543" text-anchor="middle" font-size="11" fill="#334155">OpenAI (RAG)</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+</svg>
