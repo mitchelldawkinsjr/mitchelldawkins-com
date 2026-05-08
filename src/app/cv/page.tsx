@@ -17,9 +17,9 @@ export default function CVPage() {
           <div className="mb-10 text-center">
             
             <p className="text-lg text-gray-600 dark:text-gray-300 mb-4">
-              Hi, I&apos;m Mitchell Dawkinms a software engineer passionate about building software, problem solving, and making an impact.
+              Hi, I&apos;m Mitchell Dawkins a software engineer passionate about building software, problem solving, and making an impact.
               With over 10 years of experience in backend &amp; frontend development, I bring a unique perspective to
-              building software systems — using AI alongside solid fundamentals to deliver better results.
+              building software systems using AI alongside solid fundamentals to deliver better results.
             </p>
             <div className="flex items-center justify-center gap-4">
               <a
