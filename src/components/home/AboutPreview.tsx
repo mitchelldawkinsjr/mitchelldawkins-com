@@ -29,17 +29,22 @@ export default function AboutPreview() {
             <div className="flex flex-wrap gap-4 mb-8">
               <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 rounded-lg">
                 <h3 className="font-medium text-gray-900 dark:text-white">Machine Learning</h3>
-                <p className="text-gray-600 dark:text-gray-300">Hugging Face</p>
+                <p className="text-gray-600 dark:text-gray-300">Hugging Face, OpenAI, Ollama, RAG, Whisper, Scikit-learn</p>
               </div>
               
               <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 rounded-lg">
                 <h3 className="font-medium text-gray-900 dark:text-white">Web Development</h3>
-                <p className="text-gray-600 dark:text-gray-300">React, Next.js, Python, Flask</p>
+                <p className="text-gray-600 dark:text-gray-300">React, Next.js, TypeScript, FastAPI, Laravel</p>
               </div>
               
               <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 rounded-lg">
                 <h3 className="font-medium text-gray-900 dark:text-white">Cloud & DevOps</h3>
                 <p className="text-gray-600 dark:text-gray-300">AWS, Docker, CI/CD</p>
+              </div>
+              
+              <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 rounded-lg">
+                <h3 className="font-medium text-gray-900 dark:text-white">Automation</h3>
+                <p className="text-gray-600 dark:text-gray-300">n8n, GitHub Actions, Playwright</p>
               </div>
             </div>
             
