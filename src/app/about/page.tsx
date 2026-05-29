@@ -209,9 +209,13 @@ export default function AboutPage() {
             </div>
             <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Dropbox Inc.</div>
             <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
-                <li>Revamped tier-one support with an AI-powered chatbot, boosting CSAT by 20% and enabling cookie-less tracking for seamless Chrome compatibility.</li>
-                <li>Developed revenue-generating full-stack apps and integrated third-party APIs into the Dropbox ecosystem.</li>
-                <li>Led SEV incident response and monitored production systems using Sentry, Logstash, Kibana, and PagerDuty to protect critical monetization pipelines.</li>
+                <li>Led AI chatbot rollout to revamp tier-one support, boosting CSAT by 20% and ensuring seamless cookie-less tracking for Chrome compatibility.</li>
+                <li>Built full-stack apps driving $MM in revenue, integrating third-party APIs into the Dropbox ecosystem for scalable, user-centric solutions.</li>
+                <li>Managed real-time production monitoring and SEV incident response using Sentry, Kibana, and PagerDuty, safeguarding monetization pipelines and A/B testing systems.</li>
+                <li>Monitored and optimized system performance to ensure continuous improvements and reduce latency across internal services.</li>
+                <li>Implemented API integrations to enhance workflow automation between Dropbox tools and third-party applications.</li>
+                <li>Participated in cross-functional collaboration to support internal tooling, infrastructure, and deployment processes.</li>
+                <li>Leveraged data insights to identify bottlenecks and proactively recommend solutions for platform efficiency.</li>
             </ul>
             </div>
 
@@ -222,9 +226,11 @@ export default function AboutPage() {
                 <div className="text-gray-600 dark:text-gray-300">Dec 2020 - Dec 2023</div>
             </div>
             <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">ThriveDX</div>
-            <p className="text-gray-700 dark:text-gray-300">
-                Taught programming fundamentals remotely, mentoring students to become industry-ready software engineers through practical, real-world curriculum.
-            </p>
+            <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
+                <li>Instructed students in programming fundamentals remotely, equipping them with the skills necessary to become industry-ready software engineers.</li>
+                <li>Developed and delivered practical, real-world curriculum covering full-stack development, problem solving, and professional engineering practices.</li>
+                <li>Mentored students through projects and career preparation, providing guidance on code quality, collaboration, and job readiness.</li>
+            </ul>
             </div>
 
             {/* Service Express */}
@@ -248,8 +254,9 @@ export default function AboutPage() {
             </div>
             <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Varsity News Network</div>
             <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
-                <li>Built JS single-page apps and REST APIs using ReactJS, Silex, Doctrine, Symfony, and Node.js.</li>
-                <li>Maintained test coverage through TDD/BDD and continuous integration practices.</li>
+                <li>Built JS single-page apps and REST APIs using ReactJS, Angular.js, Silex, Doctrine, Symfony, and Node.js.</li>
+                <li>Developed object-oriented PHP applications with Git-based version control and collaborative branching workflows.</li>
+                <li>Maintained test coverage and code quality through TDD, BDD, full-stack integration testing, and continuous integration practices.</li>
             </ul>
             </div>
 
@@ -260,9 +267,10 @@ export default function AboutPage() {
                 <div className="text-gray-600 dark:text-gray-300">Jul 2018 - Mar 2020</div>
             </div>
             <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Remote-Learner</div>
-            <p className="text-gray-700 dark:text-gray-300">
-                Delivered customized Moodle and Totara LMS solutions and created AJAX/jQuery-based UIs for educational clients.
-            </p>
+            <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
+                <li>Delivered advanced Moodle and Totara LMS custom solutions, improving user experience and performance for enterprise clients.</li>
+                <li>Built dynamic AJAX/jQuery-based UIs to enhance interactivity and accessibility within LMS environments.</li>
+            </ul>
             </div>
 
             {/* US Signal */}
@@ -273,8 +281,9 @@ export default function AboutPage() {
             </div>
             <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">US Signal</div>
             <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
-                <li>Maintained critical business software built with Zend Framework and Doctrine ORM on PostgreSQL.</li>
-                <li>Led improvements in performance through SQL optimization and built dynamic reporting systems with PHP and JS.</li>
+                <li>Promoted twice from PHP Analyst to Senior Application Developer within two years based on technical performance and impact.</li>
+                <li>Architected and maintained enterprise CRM and billing systems using PHP, Zend Framework, PostgreSQL, and Git-based deployment workflows.</li>
+                <li>Led performance improvements through SQL optimization and built dynamic reporting systems with PHP and JavaScript.</li>
             </ul>
             </div>
 
