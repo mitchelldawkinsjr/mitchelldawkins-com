@@ -14,31 +14,38 @@ const projects = [
   },
   {
     title: 'NBA Stat Spot',
-    description: 'Advanced NBA analytics platform with AI-powered prop bet predictions, machine learning models, real-time ESPN data integration, and comprehensive betting analysis tools.',
+    description: 'Full-stack NBA analytics platform with AI-powered prop bet predictions, ML models trained on historical player data, real-time ESPN integration, and a Monte Carlo simulation engine for edge finding.',
     image: '/images/projects/nba-stat-spot/header.png',
     link: '/projects/nba-stat-spot',
     tags: ['FastAPI','React','TypeScript','Python','PostgreSQL','Redis','Docker'],
   },
   {
     title: 'GH Film Review Pipeline',
-    description: 'A comprehensive data pipeline and static site generator for weekly and season-long football player evaluations from CSV film logs.',
+    description: 'Automated data pipeline that transforms raw CSV film logs into polished weekly and season-long football player evaluation reports — complete with a static site, PDF exports, and GitHub Actions CI/CD.',
     image: '/images/projects/gh-flim-revew-dashboard/header-1.png',
     link: '/projects/gh-film-review-pipeline',
     tags: ['Python','Pandas','ReportLab','HTML','CSS','GitHub Actions','Google Analytics'],
   },
   {
     title: 'WNBA Stat Spot',
-    description: 'Advanced WNBA analytics platform with AI-powered predictions, prop betting scanner, Monte Carlo simulations, and comprehensive statistical analysis.',
+    description: 'Full-stack WNBA analytics platform with AI-powered prop predictions, a real-time betting scanner, Monte Carlo simulations, and a multi-service backend built across PHP/Laravel and TypeScript/SvelteKit.',
     image: '/images/projects/wnba-stat-spot/header.png',
     link: '/projects/wnba-stat-spot',
     tags: ['Laravel','SvelteKit','PHP','TypeScript','PostgreSQL','Redis','Docker'],
   },
   {
+    title: 'Power & Context',
+    description: 'A fully self-hosted microservices stack that turns any article URL into an NPR-style two-host podcast episode using local LLMs and zero-shot voice cloning — no paid APIs required.',
+    image: '/images/projects/power-and-context/header.png',
+    link: '/projects/power-and-context',
+    tags: ['Python', 'FastAPI', 'Docker', 'Ollama', 'TTS', 'Redis'],
+  },
+  {
     title: 'Video Processing Platform',
-    description: 'A multi-tenant platform for processing, transcribing, and analyzing video content using AI.',
+    description: 'A multi-tenant platform for processing, transcribing, and analyzing video content using AI — with custom model training, RAG-powered search, and tenant-isolated Docker containers.',
     image: '/images/projects/video-processing-platform/header.svg',
     link: '/projects/video-processing-platform',
-    tags: ['Next.js', 'Python', 'Docker', 'ML'],
+    tags: ['Python', 'Flask', 'Docker', 'AWS', 'PostgreSQL', 'Whisper API'],
   },
 ];
 
