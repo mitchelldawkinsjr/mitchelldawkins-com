@@ -6,6 +6,13 @@ import { useState, useEffect } from 'react';
 
 const projects = [
   {
+    title: '360 Web Solutions Cloud',
+    description: 'A self-hosted VPS platform for deploying and managing a fleet of WordPress sites, each running as an isolated Docker stack with Git-driven deploys, centralized MainWP management, automated backups, and a FastAPI + React control plane.',
+    image: '/images/projects/360-web-solutions-cloud/header.png',
+    link: '/projects/360-web-solutions-cloud',
+    tags: ['FastAPI','React','TypeScript','Docker','WordPress','MySQL'],
+  },
+  {
     title: 'NBA Stat Spot',
     description: 'Advanced NBA analytics platform with AI-powered prop bet predictions, machine learning models, real-time ESPN data integration, and comprehensive betting analysis tools.',
     image: '/images/projects/nba-stat-spot/header.png',
