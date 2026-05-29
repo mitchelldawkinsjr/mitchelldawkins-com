@@ -6,13 +6,6 @@ import { useState, useEffect } from 'react';
 
 const projects = [
   {
-    title: 'Video Processing Platform',
-    description: 'A multi-tenant platform for processing, transcribing, and analyzing video content using AI.',
-    image: '/images/projects/video-processing-platform/header.svg',
-    link: '/projects/video-processing-platform',
-    tags: ['Next.js', 'Python', 'Docker', 'ML'],
-  },
-  {
     title: 'NBA Stat Spot',
     description: 'Advanced NBA analytics platform with AI-powered prop bet predictions, machine learning models, real-time ESPN data integration, and comprehensive betting analysis tools.',
     image: '/images/projects/nba-stat-spot/header.png',
@@ -32,7 +25,14 @@ const projects = [
     image: '/images/projects/wnba-stat-spot/header.png',
     link: '/projects/wnba-stat-spot',
     tags: ['Laravel','SvelteKit','PHP','TypeScript','PostgreSQL','Redis','Docker'],
-  },  
+  },
+  {
+    title: 'Video Processing Platform',
+    description: 'A multi-tenant platform for processing, transcribing, and analyzing video content using AI.',
+    image: '/images/projects/video-processing-platform/header.svg',
+    link: '/projects/video-processing-platform',
+    tags: ['Next.js', 'Python', 'Docker', 'ML'],
+  },
 ];
 
 export default function FeaturedProjects() {
