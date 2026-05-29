@@ -26,23 +26,23 @@ export default function AboutPreview() {
               I&apos;m a Softweare Engineer passionate about building software, problem solving and making an impact. With experience in AI/ML, software development, and cloud architecture, I'm constantly exploring the boundaries of what's possible with today's AI tools.
             </p>
             
-            <div className="flex flex-wrap gap-4 mb-8">
-              <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 rounded-lg">
+            <div className="flex flex-wrap items-stretch gap-4 mb-8">
+              <div className="flex-1 basis-full sm:basis-[calc(50%-0.5rem)] bg-blue-50 dark:bg-blue-900/20 px-4 py-3 rounded-lg">
                 <h3 className="font-medium text-gray-900 dark:text-white">Machine Learning</h3>
                 <p className="text-gray-600 dark:text-gray-300">Hugging Face, OpenAI, Ollama, RAG, Whisper, Scikit-learn</p>
               </div>
               
-              <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 rounded-lg">
+              <div className="flex-1 basis-full sm:basis-[calc(50%-0.5rem)] bg-blue-50 dark:bg-blue-900/20 px-4 py-3 rounded-lg">
                 <h3 className="font-medium text-gray-900 dark:text-white">Web Development</h3>
                 <p className="text-gray-600 dark:text-gray-300">React, Next.js, TypeScript, FastAPI, Laravel</p>
               </div>
               
-              <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 rounded-lg">
+              <div className="flex-1 basis-full sm:basis-[calc(50%-0.5rem)] bg-blue-50 dark:bg-blue-900/20 px-4 py-3 rounded-lg">
                 <h3 className="font-medium text-gray-900 dark:text-white">Cloud & DevOps</h3>
                 <p className="text-gray-600 dark:text-gray-300">AWS, Docker, CI/CD</p>
               </div>
               
-              <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 rounded-lg">
+              <div className="flex-1 basis-full sm:basis-[calc(50%-0.5rem)] bg-blue-50 dark:bg-blue-900/20 px-4 py-3 rounded-lg">
                 <h3 className="font-medium text-gray-900 dark:text-white">Automation</h3>
                 <p className="text-gray-600 dark:text-gray-300">n8n, GitHub Actions, Playwright</p>
               </div>

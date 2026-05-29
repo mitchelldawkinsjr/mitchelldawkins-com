@@ -94,7 +94,7 @@ export default function AboutPage() {
                 <div>
                   <h4 className="font-medium text-gray-900 dark:text-white mb-2">Programming Languages</h4>
                   <div className="flex flex-wrap gap-2">
-                    {["TypeScript", "JavaScript", "Python", "PHP"].map((skill) => (
+                    {["TypeScript", "JavaScript", "Python", "PHP", "Go", "SQL"].map((skill) => (
                       <span key={skill} className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">
                         {skill}
                       </span>
@@ -105,7 +105,7 @@ export default function AboutPage() {
                 <div>
                   <h4 className="font-medium text-gray-900 dark:text-white mb-2">Frameworks & Libraries</h4>
                   <div className="flex flex-wrap gap-2">
-                    {["React", "Next.js", "Vue", "Flask", "Redux", "Laravel"].map((skill) => (
+                    {["React", "Next.js", "Vue", "SvelteKit", "Flask", "FastAPI", "Redux", "Laravel", "Symfony", "Node.js"].map((skill) => (
                       <span key={skill} className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">
                         {skill}
                       </span>
@@ -136,7 +136,7 @@ export default function AboutPage() {
                 <div>
                   <h4 className="font-medium text-gray-900 dark:text-white mb-2">AI Development</h4>
                   <div className="flex flex-wrap gap-2">
-                    {["LLM Fine-tuning", "ML Pipelines", "NLP"].map((skill) => (
+                    {["LLM Fine-tuning", "RAG", "ML Pipelines", "NLP", "Predictive Modeling", "Text-to-Speech"].map((skill) => (
                       <span key={skill} className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">
                         {skill}
                       </span>
@@ -147,7 +147,7 @@ export default function AboutPage() {
                 <div>
                   <h4 className="font-medium text-gray-900 dark:text-white mb-2">AI Tools</h4>
                   <div className="flex flex-wrap gap-2">
-                    {["Claude", "ChatGPT", "Grok", "Cursor", "Whisper API"].map((tool) => (
+                    {["Claude", "ChatGPT", "Grok", "Cursor", "Ollama", "Hugging Face", "OpenAI API", "Whisper API", "n8n"].map((tool) => (
                       <span key={tool} className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">
                         {tool}
                       </span>
@@ -254,6 +254,7 @@ export default function AboutPage() {
             </div>
             <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Varsity News Network</div>
             <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
+                <li>Delivered WordPress-based development across both headless and full CMS implementations, powering content-driven sites and APIs.</li>
                 <li>Built JS single-page apps and REST APIs using ReactJS, Angular.js, Silex, Doctrine, Symfony, and Node.js.</li>
                 <li>Developed object-oriented PHP applications with Git-based version control and collaborative branching workflows.</li>
                 <li>Maintained test coverage and code quality through TDD, BDD, full-stack integration testing, and continuous integration practices.</li>
