@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 const projects = [
   {
-    title: '360 Web Solutions Cloud',
+    title: 'Wordpress Solutions Cloud',
     description: 'A self-hosted VPS platform for deploying and managing a fleet of WordPress sites, each running as an isolated Docker stack with Git-driven deploys, centralized MainWP management, automated backups, and a FastAPI + React control plane.',
     image: '/images/projects/360-web-solutions-cloud/header.png',
     link: '/projects/360-web-solutions-cloud',
