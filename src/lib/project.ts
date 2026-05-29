@@ -61,16 +61,17 @@ export function getAllProjects(): Project[] {
     } as Project;
   });
 
-  // Sort projects by priority if available, otherwise by date
+  // Sort projects by date posted (newest first), using priority as a tiebreaker
   return projects.sort((a, b) => {
-    if (a.priority !== undefined && b.priority !== undefined) {
-      return a.priority - b.priority;
-    }
-    
-    // Fall back to date-based sorting if no priority
     const dateA = new Date(a.date || '0');
     const dateB = new Date(b.date || '0');
-    return dateB.getTime() - dateA.getTime();
+    const dateDiff = dateB.getTime() - dateA.getTime();
+    if (dateDiff !== 0) {
+      return dateDiff;
+    }
+
+    // Same date: fall back to priority (lower number first)
+    return (a.priority ?? Infinity) - (b.priority ?? Infinity);
   });
 }
 
