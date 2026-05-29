@@ -1,0 +1,212 @@
+---
+title: "Power & Context"
+description: "A fully self-hosted microservices stack that turns any article URL into an NPR-style podcast episode using local LLMs and zero-shot voice cloning text-to-speech."
+date: "2026-05-29"
+status: "In Development"
+featured: true
+priority: 1
+slug: "power-and-context"
+headerImage: "/images/projects/power-and-context/header.png"
+tech:
+  - Python
+  - FastAPI
+  - Docker
+  - Docker Compose
+  - Redis
+  - RQ
+  - Ollama
+  - F5-TTS
+  - Coqui XTTS-v2
+  - Piper TTS
+  - OpenAI
+  - Playwright
+  - FFmpeg
+  - GitHub Actions
+tags:
+  - AI
+  - Microservices
+  - Podcast Generation
+  - Text-to-Speech
+  - Voice Cloning
+  - Local LLM
+  - Automation
+  - Self-Hosted
+audience:
+  - Developers
+  - Podcasters
+  - AI Engineers
+  - Self-Hosting Enthusiasts
+  - Content Creators
+  - DevOps Engineers
+links:
+  - title: "GitHub Repository"
+    url: "https://github.com/mitchelldawkinsjr/power-and-context"
+  - title: "Live Demo"
+    url: "http://podcast.360web.cloud/"
+---
+
+## Introduction Section
+
+Power & Context is a fully self-hosted, microservices-based platform that transforms any article URL into a polished, NPR-style podcast episode. It pairs local large language models with zero-shot voice cloning text-to-speech to generate two-host conversational audio, all without depending on third-party APIs. Built as a collection of independent FastAPI services orchestrated with Docker Compose, the stack covers the entire pipeline — from article extraction and contextual research, to script writing, to high-quality narration.
+
+**Status: MVP Complete** — The core pipeline is functional end-to-end: articles are extracted, scripts are generated, and audio is synthesized across multiple TTS backends. The project continues to evolve with deployment hardening, additional voice options, and quality improvements.
+
+## Problem & Solution
+
+### The Problem
+
+Turning written content into engaging audio presents several challenges:
+
+- **Vendor lock-in** — Most podcast and TTS solutions depend on paid cloud APIs with usage limits and recurring costs
+- **Missing context** — Naively reading an article aloud strips away the analysis, nuance, and surrounding context that make audio engaging
+- **Robotic narration** — Generic text-to-speech sounds flat and lacks the natural, conversational feel of a real podcast
+- **Monolithic tooling** — Single-application solutions are hard to scale, swap components in, or run partially offline
+- **Privacy concerns** — Sending content and source material to external services isn't always acceptable
+- **Manual effort** — Producing a podcast episode from an article traditionally requires writing, recording, and editing by hand
+
+### The Solution
+
+Power & Context addresses these challenges with a modular, local-first architecture:
+
+1. **Self-hosted by default** — Runs entirely on your own hardware or VPS with local LLMs (Ollama) and local TTS, no required API keys
+2. **Context-aware extraction** — Crawls the source article and linked pages to assemble richer context before scripting
+3. **NPR-style script generation** — Produces a two-host conversational script with analysis, framing, and natural dialogue
+4. **Pluggable TTS backends** — Choose Piper, Coqui XTTS-v2, F5-TTS, or OpenAI at runtime, with zero-shot voice cloning support
+5. **Microservices architecture** — Independent, individually scalable services connected over HTTP and a job queue
+6. **Async job processing** — A Redis-backed RQ worker handles long-running generation without blocking the API
+7. **Production-ready deployment** — Docker Compose orchestration with GitHub Actions CI/CD to a VPS
+
+## Technical Implementation
+
+The platform is composed of four independent services plus shared infrastructure, all orchestrated through Docker Compose:
+
+- **Context Service** (FastAPI, Playwright)
+  - Extracts article content from a URL
+  - Optionally crawls linked pages to gather additional context
+  - Supports Mercury and Playwright-based extraction strategies
+  - Exposes a clean `/api/context/from-url` endpoint
+
+- **Script Service** (FastAPI, Ollama / OpenAI)
+  - Generates NPR-style two-host podcast scripts from extracted context
+  - Uses a local Ollama LLM by default (e.g. `mistral-nemo:12b`) with an OpenAI fallback
+  - Returns a structured episode package ready for narration
+
+- **TTS Service** (FastAPI, multi-backend)
+  - Supports Piper, Coqui XTTS-v2, F5-TTS, and OpenAI TTS
+  - Runtime backend selection via environment variable or per-request override
+  - Zero-shot voice cloning for distinct HOST1 and HOST2 voices
+  - Batch generation and MP3/WAV output
+
+- **Podcast Service** (FastAPI API + RQ Worker)
+  - Orchestrates the full pipeline: context → script → audio → storage
+  - Async job queue backed by Redis for long-running generation
+  - Optional Dropbox integration for episode storage and sharing
+  - Simple web interface for submitting URLs and tracking job status
+
+- **Shared Infrastructure**
+  - **Redis** for the job queue and status tracking
+  - **Ollama** as the local LLM runtime
+  - **FFmpeg** for audio processing and stitching
+
+## Key Features
+
+### Context-Aware Article Extraction
+
+Rather than reading a single page verbatim, the context service can crawl the source URL and its linked pages, assembling a fuller picture of the topic. This richer context feeds directly into script generation, producing episodes that explain and analyze rather than simply recite.
+
+### NPR-Style Script Generation
+
+The script service generates conversational, two-host dialogue in the style of public radio — complete with framing, analysis, and natural back-and-forth. It runs on a local Ollama model by default, keeping content private, and gracefully falls back to OpenAI when configured.
+
+### Multi-Backend Voice Cloning TTS
+
+The TTS service is the heart of the audio experience, supporting four interchangeable backends:
+
+- **Piper** (~200MB) — Fast and lightweight, ideal for CPU
+- **Coqui XTTS-v2** (~2GB) — Strong quality with voice cloning
+- **F5-TTS** (~16GB+) — Highest quality, RAM-intensive
+- **OpenAI** (~50MB) — Cloud-based, no local models
+
+Each backend supports distinct HOST1 and HOST2 voices via zero-shot voice cloning from short reference audio clips, giving each episode a consistent two-host sound.
+
+### Asynchronous Job Pipeline
+
+Podcast generation is a long-running process, so the podcast service submits work to a Redis-backed RQ queue. The API returns immediately with a job ID, while a dedicated worker handles extraction, scripting, synthesis, and storage in the background. Clients poll for status and retrieve a download link when the episode is ready.
+
+### Runtime Configurability
+
+Nearly every aspect of the stack is configurable through environment variables — LLM model and endpoint, TTS backend and voice references, emotion and language settings, storage credentials, and service URLs — making it easy to tune for available hardware or swap components without code changes.
+
+## API Architecture
+
+The services expose clean, focused HTTP APIs:
+
+### Context Service
+- `POST /api/context/from-url` — Extract and combine context from a URL and linked pages
+- `GET /health` — Service health and extractor availability
+
+### Script Service
+- `POST /api/script` — Generate an NPR-style episode script from context
+- `GET /health` — Service health and model availability
+
+### TTS Service
+- `POST /api/tts` — Generate narration for a chunk of text and speaker
+- `POST /api/tts/batch` — Batch-generate multiple audio chunks
+- `GET /health` — Backend status
+
+### Podcast Service
+- `POST /api/generate` — Submit an article URL for podcast generation
+- `GET /api/job/{job_id}` — Check job status and retrieve the download URL
+- `GET /health` — Pipeline and dependency health
+
+## Deployment & Operations
+
+### Containerized Orchestration
+
+The entire stack is defined in Docker Compose, with separate development and production configurations. Each service builds from its own Dockerfile, declares health checks, and sets sensible resource reservations — including memory limits for the LLM and worker containers.
+
+### CI/CD to a VPS
+
+A GitHub Actions workflow handles deployment to a VPS over SSH, aligned with the project's other production services. This enables push-to-deploy updates for the self-hosted stack.
+
+### Local LLM Flexibility
+
+The stack can run Ollama as a local container or point at a remote Ollama instance over a private network (e.g. Tailscale), letting heavier models run on dedicated hardware while the rest of the pipeline stays lightweight.
+
+## Educational Applications
+
+This project is a practical reference for engineers exploring:
+
+- **Microservices design** — Decomposing a pipeline into independent, HTTP-connected services
+- **Async job processing** — Using Redis and RQ for long-running background work
+- **Local AI integration** — Running LLMs and TTS models entirely on-premises
+- **Docker Compose orchestration** — Coordinating multiple services with health checks and resource limits
+- **Pluggable architectures** — Designing systems where components (like TTS backends) can be swapped at runtime
+- **CI/CD for self-hosted apps** — Automating deployment to a VPS with GitHub Actions
+
+## Target Users
+
+The platform is designed to serve:
+
+- **Developers** — Building self-hosted AI and audio pipelines
+- **Podcasters & Content Creators** — Generating audio from written content automatically
+- **AI Engineers** — Experimenting with local LLMs and voice cloning TTS
+- **Self-Hosting Enthusiasts** — Running privacy-preserving, API-free tooling
+- **DevOps Engineers** — Studying microservices orchestration and deployment patterns
+
+## Future Enhancements
+
+Planned improvements include:
+
+- **Expanded voice library** — More reference voices and emotion presets
+- **Web UI improvements** — Richer dashboards for managing episodes and jobs
+- **Additional sources** — Support for RSS feeds, newsletters, and document uploads
+- **Quality tuning** — Refined prompting and audio post-processing for more natural episodes
+- **Observability** — Centralized logging, metrics, and monitoring across services
+- **Multi-language support** — Broader language coverage in scripting and narration
+
+## Conclusion
+
+Power & Context demonstrates how a thoughtful microservices architecture can deliver a complete, private, end-to-end AI pipeline — from raw article URL to finished, two-host podcast episode — without relying on paid cloud services. By combining local LLMs, context-aware extraction, and pluggable voice-cloning TTS, it turns written content into engaging audio while keeping data and infrastructure firmly under the owner's control.
+
+*This project is actively being developed, with ongoing work on deployment hardening, voice quality, and new content sources. The complete source code is available on GitHub for reference and experimentation.*

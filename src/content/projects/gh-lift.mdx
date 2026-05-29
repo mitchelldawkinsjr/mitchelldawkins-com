@@ -1,0 +1,177 @@
+---
+title: "GH Lift"
+description: "A Node.js and Playwright-powered generator that turns workout JSON into print-ready training posters, PDFs, and a static program website for a high school strength and speed program."
+date: "2026-05-21"
+status: "Completed"
+featured: true
+priority: 2
+slug: "gh-lift"
+headerImage: "/images/projects/gh-lift/header.png"
+tech:
+  - Node.js
+  - JavaScript
+  - Playwright
+  - HTML
+  - CSS
+  - SVG
+  - Docker
+  - Nginx
+  - OpenAI
+  - n8n
+  - GitHub Actions
+tags:
+  - Strength & Conditioning
+  - Static Site Generator
+  - Poster Generation
+  - PDF Generation
+  - Automation
+  - Sports
+  - Self-Hosted
+audience:
+  - Strength Coaches
+  - Football Coaches
+  - Athletes
+  - Sports Programs
+  - JavaScript Developers
+  - Athletic Directors
+links:
+  - title: "GitHub Repository"
+    url: "https://github.com/mitchelldawkinsjr/gh-lift"
+  - title: "Live Demo"
+    url: "https://ghlift.360web.cloud/"
+---
+
+## Introduction Section
+
+GH Lift is a content-generation toolkit that transforms structured workout JSON into polished, print-ready training posters, PDFs, and a complete static program website. Built for the Godwin Heights Football strength and speed program, it turns a season's worth of training — organized into phases, weeks, and sessions — into consistent, professional visuals that athletes and coaches can browse online or hang on the weight room wall.
+
+**Status: Completed** — The toolkit reliably generates the full multi-phase program: poster PNGs, PDFs, and a navigable single-page site, all deployed automatically to a VPS via Docker and GitHub Actions.
+
+## Problem & Solution
+
+### The Problem
+
+Distributing a structured training program to athletes presents recurring challenges:
+
+- **Inconsistent formatting** — Hand-built workout sheets vary in layout, branding, and quality
+- **Tedious manual design** — Producing dozens of session posters by hand is slow and error-prone
+- **No single source of truth** — Workout details live across spreadsheets, docs, and printouts that drift out of sync
+- **Hard to update** — Tweaking sets, reps, or cues means redesigning each sheet individually
+- **Limited accessibility** — Printed sheets don't travel well; athletes need program access on their phones
+- **Missing technique guidance** — Static sheets rarely link to demonstration video for speed and lift days
+
+### The Solution
+
+GH Lift addresses these challenges through a data-driven generation pipeline:
+
+1. **JSON-defined workouts** — A single structured contract describes every session, exercise, and cue
+2. **Automated rendering** — Playwright renders HTML/CSS templates into pixel-perfect posters
+3. **Multiple output formats** — Generate PNG posters, print-ready PDFs, or both from the same source
+4. **Branded layouts** — A polished "Godwin" navy-and-gold theme (and a classic layout) ensure consistent branding
+5. **Static program site** — A single-page app lets athletes navigate phases, sessions, and exercises on any device
+6. **Embedded video** — Speed-day sessions link to YouTube playlists for technique demonstration
+7. **Automated deployment** — GitHub Actions builds and ships the site to a VPS on every change
+
+## Technical Implementation
+
+The system is a Node.js CLI built around a headless-browser rendering pipeline:
+
+- **Data Layer (Workout JSON)**
+  - A documented JSON contract defines sessions and exactly eight exercises each
+  - Supports two layouts (`classic` and `godwin`) selectable per-workout or via CLI flag
+  - Optional fields for program metadata, headlines, and lift/speed day labels
+
+- **Rendering Engine (Playwright + HTML/CSS)**
+  - HTML templates are composed from workout data and styled with CSS
+  - Headless Chromium renders each template to a high-resolution PNG or PDF
+  - SVG exercise icons are inlined and sanitized for safe, theme-aware rendering
+
+- **Static Site Builder**
+  - Generates a single-page program site with hash-based routing (`#phase/0/workout/0`)
+  - Stable, shareable links by poster filename (`#poster/<slug>`)
+  - Warmup and core-finisher blocks injected on lifting days
+  - Responsive YouTube playlist embeds on speed-day sessions
+
+- **Deployment Layer**
+  - Dockerized build served by Nginx behind a reverse proxy
+  - GitHub Actions CI/CD builds posters and deploys to a VPS on push
+
+## Key Features
+
+### Data-Driven Poster Generation
+
+Every poster is generated from a structured JSON definition rather than hand-designed. Each workout declares exactly eight exercises with names, coaching cues, sets, reps, tempo, rest, and a "what it builds" summary — guaranteeing consistent, complete sessions across the entire program.
+
+### Multiple Layouts & Output Formats
+
+GH Lift ships two visual layouts: a clean **classic** template and the branded **Godwin** navy-and-gold grid used for the program. From the same source data, it can emit:
+
+- **PNG posters** for the web and quick sharing
+- **Print-ready PDFs** for the weight room
+- **Both at once** via a single build command
+
+### SVG Exercise Icons with AI Assist
+
+Exercises can carry inline SVG icons or figures. The toolkit includes an "asset brief" generator that produces a prompt for an LLM, plus an OpenAI-powered CLI and an optional n8n flow that generate icon SVGs automatically. A validator sanitizes incoming SVG — stripping scripts and unsafe patterns — before rendering.
+
+### Navigable Static Program Site
+
+The build produces a single-page program website where athletes can:
+
+- Browse the program by **phase**, then drill into individual **sessions**
+- View the full-size session poster with a lightbox and hide/show toggle
+- See **warmup** and **core-finisher** blocks automatically on lifting days
+- Watch **YouTube playlist embeds** for speed-day technique work
+- Share **stable links** tied directly to a poster filename
+
+### Automated, Self-Hosted Deployment
+
+A GitHub Actions workflow rebuilds the program posters and static site whenever workout data or templates change, then deploys the Dockerized, Nginx-served site to a VPS behind a shared reverse-proxy network — keeping the live program always in sync with the source data.
+
+## CLI Workflow
+
+The toolkit is driven by a small set of npm scripts and CLI flags:
+
+- `npm run build` — Render posters from the sample workouts (PNG)
+- `npm run build:pdf` — Render print-ready PDFs
+- `npm run build:all` — Emit both PNG and PDF
+- `npm run build:program` — Emit the full program data and render it with the Godwin layout
+- `npm run build:pages:prod` — Build the static program site from the rendered posters
+- `npm run merge-svgs:llm-godwin` — Generate exercise icon SVGs via OpenAI and merge them in
+
+## Educational Applications
+
+This project is a practical reference for developers and coaches exploring:
+
+- **Headless-browser rendering** — Using Playwright to turn HTML/CSS into pixel-perfect images and PDFs
+- **Data-driven design systems** — Generating consistent visual assets from a single JSON source of truth
+- **Static site generation** — Building a navigable SPA with hash routing and shareable deep links
+- **Safe SVG handling** — Validating and sanitizing user/AI-provided SVG before rendering
+- **AI-assisted content** — Wiring OpenAI and n8n into an asset-generation pipeline
+- **Self-hosted CI/CD** — Automating Docker builds and VPS deployment with GitHub Actions
+
+## Target Users
+
+The platform is designed to serve:
+
+- **Strength & Conditioning Coaches** — For distributing consistent, branded training programs
+- **Football Coaches & Athletic Directors** — For program-wide organization and presentation
+- **Athletes** — For accessing their full program and technique videos on any device
+- **JavaScript Developers** — As a reference for Playwright-based generation pipelines
+- **Sports Programs** — For modernizing how training plans are produced and shared
+
+## Future Enhancements
+
+Planned improvements include:
+
+- **Expanded exercise library** — A larger catalog of reusable, icon-backed movements
+- **Athlete tracking** — Logging completed sessions and progress over time
+- **Print kits** — One-click bundles of every poster for a phase
+- **Additional themes** — More layout and branding options for other programs
+- **Richer media** — Per-exercise demonstration clips alongside playlist embeds
+
+## Conclusion
+
+GH Lift demonstrates how a thoughtful, data-driven pipeline can replace hours of manual design with a single source of truth. By rendering structured workout JSON into branded posters, PDFs, and a navigable program site — and shipping it all automatically to a VPS — it gives a strength program professional, always-current training materials that work on the wall and on the phone.
+
+*This project is deployed and in active use. The complete source code is available on GitHub for reference and adaptation to other programs.*
