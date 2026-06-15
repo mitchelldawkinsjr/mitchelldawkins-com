@@ -178,13 +178,19 @@ export default function AboutPage() {
 
         <div className="space-y-8">
             {/* DFF */}
-            {/* <div className="border-l-4 border-blue-600 pl-4 py-1">
+            <div className="border-l-4 border-blue-600 pl-4 py-1">
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white">Vice President</h3>
                 <div className="text-gray-600 dark:text-gray-300">May 2023 - Present</div>
             </div>
             <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Dawkins Family Foundation Inc.</div>
-            </div> */}
+              <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
+                  <li>
+                    The Dawkins Family Foundation is a 501c3 nonprofit that supports underserved youth and families through targeted outreach and community programs. We provide school supplies, holiday assistance, food and basic-needs support, and offer enrichment, mentorship and family services. Partnering with schools, community groups and volunteers, we focus on consistent, accessible programs that build trust and measurable impact. 
+                    <a href="dawkinsfamilyfoundation.org">dawkinsfamilyfoundation.org</a>
+                  </li>
+                </ul>
+            </div>
 
             {/* Adhoc Assosciates */}
             <div className="border-l-4 border-blue-600 pl-4 py-1">
