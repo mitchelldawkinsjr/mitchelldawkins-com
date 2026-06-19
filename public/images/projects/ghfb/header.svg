@@ -1,15 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" font-family="system-ui, -apple-system, sans-serif">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#0a0c10"/>
       <stop offset="100%" stop-color="#12161e"/>
     </linearGradient>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#8b93a7"/>
+    </marker>
   </defs>
   <rect width="800" height="450" fill="url(#bg)" rx="12"/>
   <text x="400" y="42" text-anchor="middle" font-size="22" font-weight="700" fill="#e8eaef">GHFB Team Tools Hub</text>
-  <text x="400" y="68" text-anchor="middle" font-size="13" fill="#8b93a7">Sheet-first football ops ù live CSV ù coach check-in</text>
+  <text x="400" y="68" text-anchor="middle" font-size="13" fill="#8b93a7">Sheet-first football ops &#183; live CSV &#183; coach check-in</text>
 
-  <!-- Google Sheet -->
   <rect x="40" y="110" width="200" height="120" rx="10" fill="#181e2a" stroke="#e5a32a" stroke-width="1.5"/>
   <text x="140" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#e5a32a">Google Sheet</text>
   <text x="140" y="162" text-anchor="middle" font-size="10" fill="#8b93a7">Attendance tab</text>
@@ -17,12 +20,10 @@
   <text x="140" y="198" text-anchor="middle" font-size="10" fill="#8b93a7">Practice Schedule</text>
   <text x="140" y="218" text-anchor="middle" font-size="9" fill="#5dd39e">Source of truth</text>
 
-  <!-- Publish CSV -->
   <rect x="290" y="130" width="120" height="80" rx="8" fill="#181e2a" stroke="#CA0000" stroke-width="1.5"/>
   <text x="350" y="162" text-anchor="middle" font-size="11" font-weight="600" fill="#CA0000">Publish</text>
-  <text x="350" y="182" text-anchor="middle" font-size="10" fill="#8b93a7">to web ù CSV</text>
+  <text x="350" y="182" text-anchor="middle" font-size="10" fill="#8b93a7">to web &#183; CSV</text>
 
-  <!-- nginx proxy -->
   <rect x="460" y="110" width="140" height="120" rx="10" fill="#181e2a" stroke="#CA0000" stroke-width="1.5"/>
   <text x="530" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#e8eaef">nginx proxy</text>
   <text x="530" y="162" text-anchor="middle" font-size="10" fill="#8b93a7">/api/attendance.csv</text>
@@ -30,14 +31,12 @@
   <text x="530" y="198" text-anchor="middle" font-size="10" fill="#8b93a7">/api/practice-schedule.csv</text>
   <text x="530" y="218" text-anchor="middle" font-size="9" fill="#8b93a7">90s server cache</text>
 
-  <!-- Apps Script write -->
   <rect x="640" y="130" width="120" height="80" rx="8" fill="#181e2a" stroke="#e5a32a" stroke-width="1.5"/>
   <text x="700" y="162" text-anchor="middle" font-size="11" font-weight="600" fill="#e5a32a">Apps Script</text>
   <text x="700" y="182" text-anchor="middle" font-size="10" fill="#8b93a7">toggleCheckIn</text>
 
-  <!-- UI layer -->
   <rect x="80" y="280" width="640" height="130" rx="10" fill="#181e2a" stroke="rgba(212,175,55,0.35)" stroke-width="1.5"/>
-  <text x="400" y="308" text-anchor="middle" font-size="12" font-weight="700" fill="#e8eaef">Vanilla JS PWA ù ghfb.360web.cloud</text>
+  <text x="400" y="308" text-anchor="middle" font-size="12" font-weight="700" fill="#e8eaef">Vanilla JS PWA &#183; ghfb.360web.cloud</text>
 
   <rect x="110" y="322" width="130" height="68" rx="6" fill="#CA0000"/>
   <text x="175" y="352" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Coach</text>
@@ -53,18 +52,11 @@
 
   <rect x="590" y="322" width="100" height="68" rx="6" fill="#181e2a" stroke="#e5a32a" stroke-width="1"/>
   <text x="640" y="352" text-anchor="middle" font-size="11" font-weight="600" fill="#e5a32a">Hub</text>
-  <text x="640" y="370" text-anchor="middle" font-size="10" fill="#8b93a7">Lift ù Film</text>
+  <text x="640" y="370" text-anchor="middle" font-size="10" fill="#8b93a7">Lift &#183; Film</text>
 
-  <!-- Arrows -->
   <path d="M240 170 L285 170" stroke="#8b93a7" stroke-width="2" marker-end="url(#arr)"/>
   <path d="M410 170 L455 170" stroke="#CA0000" stroke-width="2"/>
   <path d="M600 170 L635 170" stroke="#e5a32a" stroke-width="2"/>
   <path d="M700 210 L700 250 L175 250 L175 275" stroke="#e5a32a" stroke-width="2" fill="none"/>
   <path d="M530 230 L530 275 L335 275" stroke="#CA0000" stroke-width="2" fill="none"/>
-
-  <defs>
-    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L8,3 z" fill="#8b93a7"/>
-    </marker>
-  </defs>
 </svg>

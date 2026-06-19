@@ -2,7 +2,7 @@
 title: "I Didn't Replace the Spreadsheet — I Built Around It"
 date: "2026-06-19"
 excerpt: "How live CSV from Google Sheets powers coach check-in, attendance dashboards, and practice timers for a high school football program — without asking coaches to leave the spreadsheet they already trust."
-coverImage: "/images/projects/ghfb/header.svg"
+coverImage: "/images/projects/ghfb/header.png"
 series: "Low to No Cost Solutions"
 ---
 
@@ -212,7 +212,7 @@ GHFB sits alongside [GH Lift](/projects/gh-lift) and the [GH Film Review Pipelin
 The pattern generalizes: if your users already maintain a spreadsheet well, your first move probably isn't a database. It's a better window into the sheet they already open every day.
 
 <HumanReflection>
-The moment this clicked was watching a coach add a new date column before practice, mark a few `X`s by hand, and ask why the check-in app "already knew" the roster. It didn't magic anything — it read the same published CSV they had just edited. No deploy. No ticket to me. That was the whole point.
+The moment this clicked was watching a coach add a new date column before practice, mark a few `X`s by hand, and ask why the check-in app "already knew" the roster. It read the same published CSV they had just edited. No deploy. No ticket to me. That was the whole point.
 
 The hardest part wasn't JavaScript. It was resisting the urge to "properly" rebuild attendance in Postgres. The sheet was already the source of truth; the staff already trusted it. My job was to make the phone experience match the floor experience.
 
