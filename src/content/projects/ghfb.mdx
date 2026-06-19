@@ -1,0 +1,201 @@
+---
+title: "GHFB Team Tools Hub"
+description: "A sheet-first PWA that wraps Google Spreadsheets coaches already use — live CSV proxies for dashboards, tap-list check-in via Apps Script, and a unified hub for lift, film, and practice tools."
+date: "2026-06-19"
+status: "Completed"
+featured: true
+priority: 2
+slug: "ghfb"
+headerImage: "/images/projects/ghfb/header.svg"
+tech:
+  - JavaScript
+  - HTML
+  - CSS
+  - nginx
+  - Docker
+  - Google Sheets
+  - Google Apps Script
+  - Python
+  - GitHub Actions
+  - PWA
+tags:
+  - Sports
+  - Google Sheets
+  - Live CSV
+  - Coach Tools
+  - PWA
+  - Static Site
+  - Self-Hosted
+  - Football
+audience:
+  - Football Coaches
+  - Strength Coaches
+  - Athletic Directors
+  - JavaScript Developers
+  - Sports Programs
+links:
+  - title: "GitHub Repository"
+    url: "https://github.com/mitchelldawkinsjr/ghfb"
+  - title: "Live Demo"
+    url: "https://ghfb.360web.cloud"
+  - title: "Technical Deep Dive"
+    url: "/blog/building-around-coach-spreadsheets-live-csv"
+---
+
+## Introduction Section
+
+GHFB (Godwin Heights Football Team Tools Hub) is a static, installable PWA that centralizes football program tools without replacing the workflows coaches already trust. Attendance, daily lift plans, and practice schedules all live in Google Sheets — the same spreadsheet the staff was already maintaining. The hub reads those tabs as live CSV snapshots and writes check-in marks back through Google Apps Script, then wraps everything in purpose-built UIs: a tap-list for coaches, analytics dashboards, a practice countdown timer, and deep links into sibling apps for lift and film review.
+
+**Status: Completed** — In active use during summer weightroom and conditioning. Coaches add new session columns in the sheet; the web app picks them up without a deploy.
+
+## Problem & Solution
+
+### The Problem
+
+High school football programs often fail at custom software not because the tech is wrong, but because adoption is:
+
+- **Coaches live in spreadsheets** — Attendance, lift assignments, and practice blocks are already tracked in Google Sheets or Forms
+- **Custom apps ask for migration** — New databases and admin panels mean retraining staff mid-season
+- **Manual `X` marks are slow** — Tapping through a 53-player roster on a phone screen beats scrolling a wide sheet, but only if the sheet stays canonical
+- **Analytics are buried in formulas** — Ironman thresholds, momentum, and at-risk lists exist in the workbook but are hard to read on a phone
+- **Tools are scattered** — Lift posters, film review, attendance, and schedules live on different URLs with no single entry point
+
+### The Solution
+
+GHFB builds **around** the spreadsheet instead of replacing it:
+
+1. **Sheet as database** — Three tabs (`2026 Summer WR & Conditioning`, `Daily Lift Plan`, `Practice Schedule`) remain the source of truth
+2. **Live CSV read path** — Each tab is published to web as CSV and proxied through nginx at same-origin `/api/*.csv` routes
+3. **Apps Script write path** — Coach check-in toggles `X` marks in the same cells a coach would type into
+4. **Hybrid UX** — Instant roster from cached CSV; authoritative marks merged from the API; queued saves for flaky gym Wi‑Fi
+5. **Unified PWA hub** — One installable home screen linking check-in, dashboards, practice timer, GH Lift, and Film Review
+6. **Coach-friendly errors** — When today's column is missing, the UI tells staff exactly what to add (e.g. column `6/19` with `C` to the right)
+
+## Technical Implementation
+
+The system is static-first: vanilla HTML/CSS/JS ES modules served by nginx in Docker, with a small Python sidecar for check-in proxying.
+
+- **Read Layer (Live CSV)**
+  - Google Sheets "Publish to web" → CSV URL per tab (`gid=` per sheet)
+  - nginx reverse-proxies `/api/attendance.csv`, `/api/lift-plan.csv`, `/api/practice-schedule.csv`
+  - 90-second server-side cache; browser `sessionStorage` TTLs (3–5 min) for repeat visits
+  - Custom RFC-style CSV parser in `shared/ghfb-csv.js`
+
+- **Write Layer (Apps Script)**
+  - `toggleCheckIn` flips `X` in weightroom, conditioning (`C`), or practice (`P M/D`) columns
+  - School sheet shared with personal Gmail; Apps Script deployed from personal account (school IT constraints)
+  - Python `checkin_proxy.py` follows redirect URLs and avoids browser CORS issues
+
+- **Shared Business Logic**
+  - `shared/ghfb-attendance.js` mirrors column rules in Apps Script `Code.gs` — rolling %, ironmen, momentum, at-risk lists
+  - `shared/ghfb-lift-plan.js` and `shared/ghfb-practice-schedule.js` parse their respective tabs
+  - Verify scripts (`tools/verify-attendance-practice.mjs`) validate sheet structure against JS rules
+
+- **Front-End Pages**
+  - `check-in.html` — Tap-list with optimistic UI and FIFO save queue
+  - `attendance-dashboard.html` — Bar charts, pie charts, scrollable roster, needs-attention lists
+  - `practice-schedule.html` — 5-minute grid, live "now" marker, countdown timer, coach PIN edits
+  - `index.html` — Hub with "Today" strip (lift, practice, attendance status, momentum, ironmen)
+
+- **Deployment Layer**
+  - GitHub Actions on push to `main` → rsync + Docker Compose on VPS
+  - nginx Proxy Manager terminates TLS at `ghfb.360web.cloud`
+  - Sibling apps proxied in-app at `/lift/` and `/film/`
+
+## Key Features
+
+### Sheet-First Attendance Model
+
+The attendance tab uses conventions coaches already understand:
+
+- **Cols A–B:** First and last name (~53 players)
+- **Cols 3+:** Alternating `[M/D date]` headers with optional **`C`** (conditioning) in the next column
+- **`P 6/9` columns:** Practice attendance tracked separately from ironman calculations
+- **Mark:** `X` = attended; empty = not marked
+- **Summary cols:** `Current Total`, `Ironman %`, `# of sessions this summer`, `% required for ironman`
+
+Adding a new training day is adding a column — no deploy, no database migration.
+
+### Live CSV as a Micro-API
+
+Each published tab becomes a read-only API endpoint:
+
+| Tab | Proxy route | Consumers |
+|-----|-------------|-----------|
+| `2026 Summer WR & Conditioning` | `/api/attendance.csv` | Dashboard, check-in roster, hub today strip |
+| `Daily Lift Plan` | `/api/lift-plan.csv` | Hub banner, check-in header, GH Lift deep links |
+| `Practice Schedule` | `/api/practice-schedule.csv` | Practice timer, hub now/next |
+
+Same-origin proxying solves CORS, enables caching, and keeps the browser talking to one domain.
+
+### Coach Check-in with Optimistic Sync
+
+Check-in deliberately splits read and write:
+
+- **CSV first** — Roster grid renders instantly from cached published CSV
+- **API merge** — Reconciles local `checked` state with `serverChecked` from Apps Script
+- **Queued writes** — Grid stays tappable while marks sync in the background
+- **Dashboard lag** — Reads are eventually consistent (~90s nginx + up to 3 min browser cache); writes are immediate on the sheet
+
+### Attendance Analytics Dashboard
+
+Read-only dashboard mirrors workbook rolling logic:
+
+- Rolling attendance % through today (weightroom dates + paired `C` columns; stops at first future date)
+- Ironmen at or above `% required for ironman` from the sheet
+- Team momentum over the last seven valid sessions
+- Bar chart, roster participation pie charts, scrollable table with session-type styling
+- Needs-attention lists: near ironman, 24+ misses, WR/conditioning split
+
+### Practice Schedule + Live Timer
+
+The practice tab is a 5-minute grid (4:00–6:15 PM). Merged activity labels collapse into blocks; Eastern Time–aware logic drives a live "now" marker and wall-clock countdown on practice days. Coaches with a PIN can edit period title, notes, and end time — writes go back to the sheet via `updatePracticeBlock`.
+
+### Installable PWA Hub
+
+`manifest.webmanifest` and `sw.js` precache the hub shell. GH Lift and Film Review load in-app at `/lift/` and `/film/` without leaving the installed app. The hub footer reflects the current season (Winter/Spring/Summer/Fall) from the visitor's local date.
+
+## Data Flow
+
+```text
+WRITE:  check-in.html → /api/checkin → Python proxy → Apps Script → School Sheet
+READ:   dashboard/hub → /api/*.csv → nginx (90s cache) → Google published CSV → same Sheet
+LEGACY: Google Form (still linked) → backup entry path coaches already know
+```
+
+## Educational Applications
+
+This project is a practical reference for:
+
+- **Meeting users where they are** — Wrapping familiar tools instead of forcing migration
+- **Live CSV patterns** — Turning published spreadsheets into read-only APIs
+- **Hybrid read/write UX** — Fast reads from snapshots, authoritative writes through a thin API
+- **Static PWA architecture** — No React, no database, full coach-facing product
+- **nginx as integration layer** — Proxy, cache, and sibling-app routing in one container
+- **Dual logic maintenance** — Keeping JS and Apps Script column rules in sync with verify scripts
+
+## Target Users
+
+The platform is designed to serve:
+
+- **Football & Strength Coaches** — Fast tap-list check-in and practice edits on a phone
+- **Athletes & Parents** — Hub access to lift, film, schedule, and drive links
+- **Athletic Directors** — Rolling attendance analytics without exporting spreadsheets
+- **JavaScript Developers** — A reference for sheet-first, zero-dependency front ends
+- **Sports Programs** — A template for building ops tools around existing workflows
+
+## Future Enhancements
+
+Planned improvements include:
+
+- **Weightroom tracker integration** — Re-enable proxied session logging at `/weightroom/`
+- **Push notifications** — Practice start reminders from the PWA
+- **Offline check-in queue** — Persist saves when gym Wi‑Fi drops entirely
+- **Multi-program templates** — Generalize sheet conventions for other schools
+- **Reduced dashboard lag** — Shorter cache TTLs with ETag or sheet revision polling
+
+## Conclusion
+
+GHFB demonstrates that the best coach software often isn't a replacement for the spreadsheet — it's a better interface on top of it. By publishing sheet tabs as live CSV, proxying them through nginx, and writing marks back through Apps Script, the project gives a high school program professional check-in, analytics, and a unified hub while keeping the Google Sheet as the single source of truth coaches already maintain.
+
+*This project is deployed and in active use. The complete source code is available on GitHub, with architecture docs in the repo's `docs/` folder.*
