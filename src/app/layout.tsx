@@ -63,8 +63,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="mask-icon" href="/images/logo/logo-stamp.png" color="#5bbad5" />
-        <meta name="msapplication-TileColor" content="#2b5797" />
+        <link rel="mask-icon" href="/images/logo/logo-stamp.png" color="#CA0000" />
+        <meta name="msapplication-TileColor" content="#CA0000" />
         <meta name="theme-color" content="#ffffff" />
       </head>
       <body className={`${inter.className} min-h-screen flex flex-col`}>
