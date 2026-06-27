@@ -6,7 +6,7 @@ coverImage: "/images/blog/cursor-agent-pipeline.png"
 series: "Building AI with AI"
 ---
 
-For years I've been building software *with* AI — pairing with assistants in the editor, iterating in long chat threads, shipping features faster than I could alone. That worked. But it didn't scale. Context lived in conversations, not in the repo. Changes were bundled. Rollback meant archaeology.
+For about 2 years I've been building software *with* AI — pairing with assistants in the editor, iterating in long chat threads, shipping features faster than I could alone. That worked. But it didn't scale. Context lived in conversations, not in the repo. Changes were bundled. Rollback meant archaeology.
 
 The next step wasn't a smarter prompt. It was **architecture**: treat AI agents like engineers on a team, give them a ticket queue, enforce small PRs, and keep humans at the merge gate.
 
@@ -126,7 +126,7 @@ That's the feedback loop this architecture enables: **ship → observe where the
 Here's what a typical session looks like now:
 
 1. I create an issue with a clear description while building something else locally
-2. I add **`needs-spec`** and go back to my work — the spec comment arrives before I finish my coffee
+2. I add **`needs-spec`** and go back to my work — the spec comment arrives before I finish reading a few reddit posts
 3. I skim acceptance criteria on my phone, add **`ready`** if it looks right
 4. The cloud agent runs while I review another PR or write a blog post (like this one)
 5. When **`pr-opened`** appears — or the agent comments with the link — I review a focused diff, check screenshots, merge or request changes
@@ -170,9 +170,9 @@ The longer vision: multiple agents on a queue, each producing small PRs, humans 
 That's the architecture I think we're heading toward. Not fewer humans. **Humans at the decision layer, agents at the execution layer, Git as the contract between them.**
 
 <HumanReflection>
-The moment this clicked wasn't when the agent opened PR #33. It was when I added `ready`, went to make breakfast, and came back to a branch with passing e2e tests and a PR description better structured than half the ones I've written tired at midnight.
+The moment this clicked wasn't when the agent opened PR #33. It was when I added `ready`, left my desk, and came back to a branch with passing e2e tests and a PR description better structured than half the ones I've written tired at midnight.
 
-I still merged manually. I still fixed the labels the agent missed. But the *shape* of the work was right — one issue, one branch, one revert boundary. That's how teams ship. I just built the team out of labels and API keys.
+I still merged manually. I still fixed the labels the agent missed. But the *shape* of the work was right one issue, one branch, one revert boundary. That's how teams ship. I just built the team out of labels and API keys.
 
 The hard part wasn't the Cursor SDK or the GitHub Action YAML. It was accepting that my job is changing: less typing, more triage, review, and context curation. The repo's `.github/ai-implement-context.md` file is now as important as any component. That's not a downgrade. That's a promotion to engineering manager — with a very fast bench.
 
