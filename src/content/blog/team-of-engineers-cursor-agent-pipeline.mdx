@@ -1,0 +1,180 @@
+---
+title: "Building a Team of Engineers: From GitHub Issues to Small, Reversible PRs"
+date: "2026-06-27"
+excerpt: "How I wired a two-stage GitHub Actions pipeline — OpenAI specs, Cursor cloud agents, and human gates — so AI engineers work in tandem on one issue at a time, with every step tracked and every change easy to roll back."
+coverImage: "/images/blog/cursor-agent-pipeline.png"
+series: "Building AI with AI"
+---
+
+For about 2 years I've been building software *with* AI — pairing with assistants in the editor, iterating in long chat threads, shipping features faster than I could alone. That worked. But it didn't scale. Context lived in conversations, not in the repo. Changes were bundled. Rollback meant archaeology.
+
+The next step wasn't a smarter prompt. It was **architecture**: treat AI agents like engineers on a team, give them a ticket queue, enforce small PRs, and keep humans at the merge gate.
+
+This post documents what I shipped on [Fasted](https://github.com/mitchelldawkinsjr/Fasted) — a two-stage GitHub issue automation pipeline ([issue #30](https://github.com/mitchelldawkinsjr/Fasted/issues/30)) — and what happened when I ran it in production for the first time.
+
+<LiveSiteButton href="https://github.com/mitchelldawkinsjr/Fasted/issues/30">View Pipeline Docs</LiveSiteButton>
+
+## The Problem I'm Solving
+
+Solo development with AI assistants has a ceiling:
+
+- **No shared queue.** Work happens wherever you remember to ask — not where the team (even a team of one human and several agents) can see status.
+- **No audit trail.** Decisions disappear into chat history instead of issue comments and PR descriptions.
+- **No revert boundary.** A "quick fix" session can touch twelve files across three concerns. Rolling back one idea means untangling everything else.
+- **No human checkpoints.** Either the agent runs unsupervised, or you babysit every keystroke.
+
+I wanted a system where I could **describe intent once**, get a **reviewable spec**, **approve implementation explicitly**, and receive a **small PR** I could merge, revise, or revert — with the entire journey visible on the GitHub issue.
+
+## The Meta Approach: A Team, Not a Chatbot
+
+In an earlier post I described building AI *with* AI — Claude as architect, ChatGPT as coder, Cursor as editor. That was collaboration inside my head.
+
+This pipeline externalizes that collaboration into **roles with handoffs**:
+
+| Role | Who | Job |
+|------|-----|-----|
+| Product / triage | Human (me) | Write the issue, add labels, merge PRs |
+| Spec writer | OpenAI via GitHub Action | Read repo context, post acceptance criteria |
+| Implementer | Cursor cloud agent | Branch, code, test, open PR |
+| QA / release | Human (me) | Review diff, screenshots, CI — then merge |
+
+Each role produces an artifact the next role consumes. Nothing skips a gate unless I remove the gate.
+
+That's the difference between "I asked Cursor to fix something" and "I run a team of engineers in tandem."
+
+## Architecture Overview
+
+The pipeline has two stages, both triggered by GitHub labels:
+
+```text
+Issue → needs-spec → [Stage 1: OpenAI spec] → spec-added
+     → ready        → [Stage 2: Cursor agent] → pr-opened → human merge
+```
+
+<img src="/images/blog/cursor-agent-pipeline-architecture.svg" alt="Architecture diagram showing human layer, Stage 1 spec generation, Stage 2 Cursor cloud agent dispatch, and small reversible PR output" />
+
+### Stage 1 — Spec generation (`issue-spec.yml`)
+
+When I add the **`needs-spec`** label:
+
+1. A GitHub Action reads `.github/ai-spec-context.md` (stack, conventions, constraints)
+2. OpenAI generates acceptance criteria from the issue title and body
+3. The spec posts as an issue comment
+4. Labels swap automatically: `needs-spec` → **`spec-added`**
+
+This takes about 30 seconds. I read the comment, edit the issue if needed, and decide whether to proceed.
+
+### Stage 2 — Implementation (`issue-implement.yml`)
+
+When I add **`ready`**:
+
+1. Guards verify `spec-added` is present and no agent is already running
+2. Labels swap: `ready` → **`agent-working`**
+3. `scripts/dispatch-cursor-agent.mjs` launches a Cursor cloud agent via `@cursor/sdk`
+4. The agent clones the repo, reads `.github/ai-implement-context.md` plus the issue and all comments
+5. It implements on branch `issue-{N}-{slug}`, runs `npm ci && npm run build` (and e2e for UI changes)
+6. It opens a PR with `Fixes #{N}`, marks it ready for review, posts screenshots if UI changed, and updates labels to **`pr-opened`**
+
+I track live runs at [cursor.com/agents](https://cursor.com/agents). The issue gets a comment with the agent ID and link.
+
+<img src="/images/blog/cursor-agent-label-state.svg" alt="GitHub label state machine from Open through needs-spec, spec-added, ready, agent-working, pr-opened, and merged, with agent-failed retry path" />
+
+### What gets built (the plumbing)
+
+| File | Purpose |
+|------|---------|
+| `.github/workflows/issue-spec.yml` | Stage 1: label → OpenAI spec |
+| `.github/workflows/issue-implement.yml` | Stage 2: label → cloud agent dispatch |
+| `.github/ai-spec-context.md` | Repo context for spec generation |
+| `.github/ai-implement-context.md` | Senior-engineer prompt + completion checklist |
+| `scripts/dispatch-cursor-agent.mjs` | Cursor SDK dispatch script |
+
+Secrets: `OPENAI_API_KEY` (Stage 1), `CURSOR_API_KEY` (Stage 2), plus GitHub ↔ Cursor repo access for cloud agents.
+
+## Why Small PRs Are the Architecture
+
+The agent is instructed to implement **minimally** — match repo conventions, one issue per branch, no drive-by refactors. The PR body includes a test plan. UI changes require screenshots committed to `artifacts/issue-{N}/`.
+
+This isn't politeness. It's **operational design**:
+
+- **Revert = one `git revert` merge.** If the verse-of-the-day label change is wrong, I revert PR #33 — not a week's worth of mixed work.
+- **Review = bounded diff.** 183 additions across 8 files is reviewable in ten minutes. A "fix everything" session is not.
+- **Traceability = issue ↔ branch ↔ PR.** `Fixes #16` links the merge to the original intent. Labels tell me where it stalled.
+- **Parallel-ready.** Once this pattern is stable, multiple issues can queue. Each gets its own branch and PR. Conflicts surface at merge time, not inside one giant changeset.
+
+The architecture of the future isn't "AI writes all the code." It's **AI writes small, reviewable units of code inside a system humans control.**
+
+## First Production Test: Issue #16 → PR #33
+
+I ran the pipeline end-to-end on a real feature: rename a journal field to "VERSE of the Day" and link the scripture reference to Bible.com.
+
+| Step | Result |
+|------|--------|
+| GitHub Action dispatch | ✅ ~26 seconds |
+| Cloud agent implementation | ✅ [PR #33](https://github.com/mitchelldawkinsjr/Fasted/pull/33) — 183 additions, 8 files |
+| Build + e2e tests | ✅ Agent ran `npm run build` and journal e2e suite |
+| Draft PR → ready for review | ❌ Missed initially — now in completion checklist |
+| Screenshots on issue | ❌ Missed initially — now mandatory for UI changes |
+| Issue comment + `pr-opened` label | ❌ Missed initially — fixed manually; now in checklist |
+
+The agent did the hard part: new `VerseOfTheDayLabel` component, Bible.com URL helpers, updated e2e selectors, markdown export label. The gaps were **process**, not capability — draft PRs, post-merge housekeeping. I tightened `.github/ai-implement-context.md` in commit `6fc4e51` so the next run closes the loop automatically.
+
+That's the feedback loop this architecture enables: **ship → observe where the agent stopped short → encode the fix in repo context → retry.**
+
+## Working in Tandem
+
+Here's what a typical session looks like now:
+
+1. I create an issue with a clear description while building something else locally
+2. I add **`needs-spec`** and go back to my work — the spec comment arrives before I finish reading a few reddit posts
+3. I skim acceptance criteria on my phone, add **`ready`** if it looks right
+4. The cloud agent runs while I review another PR or write a blog post (like this one)
+5. When **`pr-opened`** appears — or the agent comments with the link — I review a focused diff, check screenshots, merge or request changes
+
+I'm not pair-programming every line. I'm **managing a bench** — dispatching work, reviewing output, merging when quality meets the bar. The agents don't replace judgment. They compress implementation latency.
+
+## Guards, Failures, and Retry
+
+The pipeline fails safely:
+
+- Stage 2 won't dispatch without **`spec-added`**
+- It won't double-dispatch if **`agent-working`** or **`pr-opened`** is already set
+- On dispatch failure, labels restore to **`ready`** + **`agent-failed`** so I can retry
+- If the agent is blocked, it comments on the issue and does **not** open a half-baked PR
+
+Every transition is visible as a label change and/or comment. When something goes wrong, I know *which stage* failed — not "the AI broke."
+
+## Lessons Learned
+
+**GitHub is the project manager.** Issues, labels, comments, Actions logs, and PRs are the coordination layer. Don't build a custom dashboard until you've exhausted the platform you already pay for.
+
+**Context files are the employee handbook.** `ai-spec-context.md` and `ai-implement-context.md` are living documents. Every production gap becomes a new checklist item. The agents get better when the *repo* gets better, not when you craft a one-off mega-prompt.
+
+**Human gates are features, not friction.** `needs-spec` and `ready` are intentional pauses. They cost seconds and prevent expensive wrong-direction runs.
+
+**Completion checklists beat hope.** "Please comment on the issue when done" failed once. A numbered checklist in the implement context file is enforceable — the agent reads it every run.
+
+**Small PRs are how you trust automation.** I wouldn't auto-merge a 2,000-line diff. I will review and merge 183 lines that fix one issue with tests attached.
+
+## What's Next
+
+The pipeline is live on `main`. Follow-ups I'm tracking:
+
+- Optional **`implement-now`** label as a second spend gate before cloud agent dispatch
+- Follow-up GitHub Action when a PR opens to fix labels if the agent skips post-PR steps
+- Cursor cloud dev environment for faster Playwright runs ([#31](https://github.com/mitchelldawkinsjr/Fasted/pull/31))
+- Update spec context to reflect Supabase (still mentions PocketBase from an earlier stack)
+
+The longer vision: multiple agents on a queue, each producing small PRs, humans merging in priority order — a software team where the bottleneck moves from "typing code" to "deciding what to build next."
+
+That's the architecture I think we're heading toward. Not fewer humans. **Humans at the decision layer, agents at the execution layer, Git as the contract between them.**
+
+<HumanReflection>
+The moment this clicked wasn't when the agent opened PR #33. It was when I added `ready`, left my desk, and came back to a branch with passing e2e tests and a PR description better structured than half the ones I've written tired at midnight.
+
+I still merged manually. I still fixed the labels the agent missed. But the *shape* of the work was right one issue, one branch, one revert boundary. That's how teams ship. I just built the team out of labels and API keys.
+
+The hard part wasn't the Cursor SDK or the GitHub Action YAML. It was accepting that my job is changing: less typing, more triage, review, and context curation. The repo's `.github/ai-implement-context.md` file is now as important as any component. That's not a downgrade. That's a promotion to engineering manager — with a very fast bench.
+
+More about the implementation [on GitHub](https://github.com/mitchelldawkinsjr/Fasted/issues/30).
+</HumanReflection>

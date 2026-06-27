@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 220" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="900" height="220" fill="#f8fafc" rx="12"/>
+  <text x="450" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">GitHub Label State Machine</text>
+
+  <!-- States -->
+  <rect x="20" y="70" width="90" height="36" rx="18" fill="#e2e8f0" stroke="#94a3b8"/>
+  <text x="65" y="93" text-anchor="middle" font-size="10" font-weight="600" fill="#334155">Open</text>
+
+  <rect x="130" y="70" width="110" height="36" rx="18" fill="#dbeafe" stroke="#3b82f6"/>
+  <text x="185" y="93" text-anchor="middle" font-size="10" font-weight="600" fill="#1d4ed8">needs-spec</text>
+
+  <rect x="260" y="70" width="110" height="36" rx="18" fill="#dbeafe" stroke="#2563eb"/>
+  <text x="315" y="93" text-anchor="middle" font-size="10" font-weight="600" fill="#1d4ed8">spec-added</text>
+
+  <rect x="390" y="70" width="80" height="36" rx="18" fill="#FFE8E8" stroke="#CA0000"/>
+  <text x="430" y="93" text-anchor="middle" font-size="10" font-weight="600" fill="#A00000">ready</text>
+
+  <rect x="490" y="70" width="120" height="36" rx="18" fill="#dcfce7" stroke="#22c55e"/>
+  <text x="550" y="93" text-anchor="middle" font-size="10" font-weight="600" fill="#15803d">agent-working</text>
+
+  <rect x="630" y="70" width="100" height="36" rx="18" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="680" y="93" text-anchor="middle" font-size="10" font-weight="600" fill="#15803d">pr-opened</text>
+
+  <rect x="750" y="70" width="130" height="36" rx="18" fill="#f3e8ff" stroke="#a855f7"/>
+  <text x="815" y="93" text-anchor="middle" font-size="10" font-weight="600" fill="#7e22ce">merged / closed</text>
+
+  <!-- Arrows -->
+  <line x1="110" y1="88" x2="128" y2="88" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="240" y1="88" x2="258" y2="88" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="370" y1="88" x2="388" y2="88" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="470" y1="88" x2="488" y2="88" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="610" y1="88" x2="628" y2="88" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="730" y1="88" x2="748" y2="88" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Failure branch -->
+  <rect x="490" y="140" width="100" height="36" rx="18" fill="#fee2e2" stroke="#ef4444"/>
+  <text x="540" y="163" text-anchor="middle" font-size="10" font-weight="600" fill="#b91c1c">agent-failed</text>
+  <line x1="550" y1="106" x2="540" y2="138" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrRed)"/>
+  <path d="M430 176 Q430 190 430 106" fill="none" stroke="#CA0000" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrRed)"/>
+  <text x="380" y="198" text-anchor="middle" font-size="9" fill="#CA0000">re-add ready to retry</text>
+
+  <!-- Legend -->
+  <circle cx="60" cy="175" r="6" fill="#CA0000"/>
+  <text x="74" y="179" font-size="9" fill="#64748b">Human trigger</text>
+  <circle cx="180" cy="175" r="6" fill="#3b82f6"/>
+  <text x="194" y="179" font-size="9" fill="#64748b">Stage 1 auto</text>
+  <circle cx="300" cy="175" r="6" fill="#22c55e"/>
+  <text x="314" y="179" font-size="9" fill="#64748b">Stage 2 auto</text>
+  <circle cx="430" cy="175" r="6" fill="#a855f7"/>
+  <text x="444" y="179" font-size="9" fill="#64748b">Human merge</text>
+
+  <defs>
+    <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L6,3 z" fill="#64748b"/>
+    </marker>
+    <marker id="arrRed" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L6,3 z" fill="#CA0000"/>
+    </marker>
+  </defs>
+</svg>
