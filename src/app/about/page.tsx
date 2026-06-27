@@ -61,14 +61,10 @@ export default function AboutPage() {
           </h2>
           <div className="prose dark:prose-invert prose-lg max-w-none">
             <p>
-              I&apos;m a Software Engineer and passionate about building software, problem solving and making an impact. My current development focus is building a multi-tenant video processing platform that allows organizations to extract value from their video content through automated
-              transcription and custom model training.
+              Full-stack engineer with 10+ years of experience building scalable web applications across enterprise and growth-stage environments. I specialize in full-stack engineering with a track record delivering revenue-driving features at Dropbox and leading full-stack architecture for federal and enterprise clients. Adept at AI-assisted development workflows, cross-functional collaboration, and technical mentorship.
             </p>
             <p>
-              With over 10 years of experience in backend & frontend development, I bring a unique perspective to
-              building sofware systems. I believe we&apos;re at a fascinating inflection point where AI can be
-              used in tandem with experince and a good grasp of fundamentals to build better software, creating 
-              improvements that will dramatically change how we develop software.
+              I believe we&apos;re at a fascinating inflection point where AI can be used in tandem with experience and a good grasp of fundamentals to build better software — creating improvements that will dramatically change how we develop it.
             </p>
             <p>
               When I&apos;m not coding or experimenting with AI tools, you&apos;ll find me coaching football, playing video games,
@@ -177,33 +173,18 @@ export default function AboutPage() {
         </h2>
 
         <div className="space-y-8">
-            {/* DFF */}
+            {/* AdHoc Research Associates */}
             <div className="border-l-4 border-blue-600 pl-4 py-1">
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Vice President</h3>
-                <div className="text-gray-600 dark:text-gray-300">May 2023 - Present</div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Senior Computer Programmer</h3>
+                <div className="text-gray-600 dark:text-gray-300">Oct 2025 – Present · Contract · Remote</div>
             </div>
-            <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Dawkins Family Foundation Inc.</div>
+            <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">AdHoc Research Associates — Havre de Grace, MD</div>
               <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
-                  <li>
-                    The Dawkins Family Foundation is a 501c3 nonprofit that supports underserved youth and families through targeted outreach and community programs. We provide school supplies, holiday assistance, food and basic-needs support, and offer enrichment, mentorship and family services. Partnering with schools, community groups and volunteers, we focus on consistent, accessible programs that build trust and measurable impact. 
-                    <a href="dawkinsfamilyfoundation.org">dawkinsfamilyfoundation.org</a>
-                  </li>
-                </ul>
-            </div>
-
-            {/* Adhoc Assosciates */}
-            <div className="border-l-4 border-blue-600 pl-4 py-1">
-            <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Full Stack Engineer</h3>
-                <div className="text-gray-600 dark:text-gray-300">Oct 2025 - Present</div>
-            </div>
-            <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Ad hoc Research</div>
-              <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
-                <li>Architect and deliver custom enterprise web applications using PHP 8+ and VueJS, leading full stack development initiatives aligned with stakeholder and federal engineering requirements</li>
-                <li>Integrate automation and AI assisted development workflows to accelerate delivery, improve testing coverage, and enhance code quality standards</li>
-                <li>Design scalable backend services and RESTful APIs in PHP while building reactive, component driven frontends using VueJS and modern JavaScript tooling</li>
-                <li>Apply advanced problem solving and systems analysis techniques to reduce technical debt and guide long term application architecture strategy</li>
+                <li>Architect and deliver custom enterprise web applications using PHP 8+ and VueJS, leading full stack development initiatives aligned with stakeholder and federal engineering requirements.</li>
+                <li>Integrate automation and AI-assisted development workflows to accelerate delivery, improve testing coverage, and enhance code quality standards.</li>
+                <li>Design scalable backend services and RESTful APIs in PHP while building reactive, component-driven frontends using VueJS and modern JavaScript tooling.</li>
+                <li>Apply advanced problem solving and systems analysis techniques to reduce technical debt and guide long-term application architecture strategy.</li>
               </ul>
             </div>
 
@@ -211,17 +192,17 @@ export default function AboutPage() {
             <div className="border-l-4 border-blue-600 pl-4 py-1">
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white">Full Stack Engineer</h3>
-                <div className="text-gray-600 dark:text-gray-300">May 2021 - April 2025</div>
+                <div className="text-gray-600 dark:text-gray-300">May 2021 – April 2025 · Remote</div>
             </div>
-            <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Dropbox Inc.</div>
+            <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Dropbox — San Francisco, CA</div>
             <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
-                <li>Led AI chatbot rollout to revamp tier-one support, boosting CSAT by 20% and ensuring seamless cookie-less tracking for Chrome compatibility.</li>
-                <li>Built full-stack apps driving $MM in revenue, integrating third-party APIs into the Dropbox ecosystem for scalable, user-centric solutions.</li>
-                <li>Managed real-time production monitoring and SEV incident response using Sentry, Kibana, and PagerDuty, safeguarding monetization pipelines and A/B testing systems.</li>
-                <li>Monitored and optimized system performance to ensure continuous improvements and reduce latency across internal services.</li>
-                <li>Implemented API integrations to enhance workflow automation between Dropbox tools and third-party applications.</li>
-                <li>Participated in cross-functional collaboration to support internal tooling, infrastructure, and deployment processes.</li>
-                <li>Leveraged data insights to identify bottlenecks and proactively recommend solutions for platform efficiency.</li>
+                <li>Led AI chatbot rollout to revamp tier-one support, boosting CSAT by 20% and ensuring seamless cookieless tracking for Chrome compatibility.</li>
+                <li>Built full-stack applications supporting multi-million dollar revenue pipelines, integrating third-party APIs for scalable, user-centric solutions.</li>
+                <li>Owned real-time production monitoring and SEV incident response using Sentry, Kibana, and PagerDuty, safeguarding monetization pipelines and A/B testing systems.</li>
+                <li>Drove measurable performance gains across internal services by identifying and resolving latency bottlenecks through systematic profiling and optimization.</li>
+                <li>Architected API integrations to streamline workflow automation between Dropbox tools and third-party platforms, reducing manual engineering overhead.</li>
+                <li>Led cross-functional initiatives to improve internal tooling, infrastructure reliability, and deployment processes across multiple engineering teams.</li>
+                <li>Built data-driven dashboards to surface platform efficiency metrics, enabling proactive bottleneck resolution and reducing incident response time.</li>
             </ul>
             </div>
 
@@ -229,13 +210,11 @@ export default function AboutPage() {
             <div className="border-l-4 border-blue-600 pl-4 py-1">
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white">Lead Software Development Instructor</h3>
-                <div className="text-gray-600 dark:text-gray-300">Dec 2020 - Dec 2023</div>
+                <div className="text-gray-600 dark:text-gray-300">Dec 2020 – Dec 2023 · Part-time · Remote</div>
             </div>
-            <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">ThriveDX</div>
+            <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">ThriveDX — Miami, FL</div>
             <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
-                <li>Instructed students in programming fundamentals remotely, equipping them with the skills necessary to become industry-ready software engineers.</li>
-                <li>Developed and delivered practical, real-world curriculum covering full-stack development, problem solving, and professional engineering practices.</li>
-                <li>Mentored students through projects and career preparation, providing guidance on code quality, collaboration, and job readiness.</li>
+                <li>Instructed students in programming fundamentals and equipped them with the skills necessary to become successful Software Engineers.</li>
             </ul>
             </div>
 
@@ -243,12 +222,13 @@ export default function AboutPage() {
             <div className="border-l-4 border-blue-600 pl-4 py-1">
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white">Senior Software Engineer</h3>
-                <div className="text-gray-600 dark:text-gray-300">Jul 2020 - Apr 2021</div>
+                <div className="text-gray-600 dark:text-gray-300">Jul 2020 – Apr 2021 · Remote</div>
             </div>
-            <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Service Express</div>
+            <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Service Express — Grand Rapids, MI</div>
             <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
-                <li>Developed features for legacy PHP/MSSQL systems and partnered cross-functionally to deliver business-aligned solutions.</li>
-                <li>Built a Salesforce-integrated API in Golang to support sales and marketing teams.</li>
+                <li>Designed, implemented, and deployed features for legacy back-office software systems focused on PHP and MSSQL.</li>
+                <li>Partnered with stakeholders and business users to deliver successful technical solutions.</li>
+                <li>Developed a Salesforce API-integrated system to support the sales and marketing team, written in Golang.</li>
             </ul>
             </div>
 
@@ -256,14 +236,13 @@ export default function AboutPage() {
             <div className="border-l-4 border-blue-600 pl-4 py-1">
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white">Software Engineer</h3>
-                <div className="text-gray-600 dark:text-gray-300">Aug 2017 - Mar 2020</div>
+                <div className="text-gray-600 dark:text-gray-300">Aug 2017 – Mar 2020 · Remote</div>
             </div>
-            <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Varsity News Network</div>
+            <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Varsity News Network — Grand Rapids, MI</div>
             <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
-                <li>Delivered WordPress-based development across both headless and full CMS implementations, powering content-driven sites and APIs.</li>
-                <li>Built JS single-page apps and REST APIs using ReactJS, Angular.js, Silex, Doctrine, Symfony, and Node.js.</li>
-                <li>Developed object-oriented PHP applications with Git-based version control and collaborative branching workflows.</li>
-                <li>Maintained test coverage and code quality through TDD, BDD, full-stack integration testing, and continuous integration practices.</li>
+                <li>Object-oriented PHP development and Git-based version control.</li>
+                <li>Automated testing: TDD, BDD, full-stack integration, and continuous integration.</li>
+                <li>Development & support for JS single-page applications and REST APIs using Silex, Doctrine, ReactJS, Symfony, Angular.js, and Node.js.</li>
             </ul>
             </div>
 
@@ -271,12 +250,11 @@ export default function AboutPage() {
             <div className="border-l-4 border-blue-600 pl-4 py-1">
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white">Frontend Developer</h3>
-                <div className="text-gray-600 dark:text-gray-300">Jul 2018 - Mar 2020</div>
+                <div className="text-gray-600 dark:text-gray-300">Jul 2018 – Mar 2020 · Remote</div>
             </div>
-            <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Remote-Learner</div>
+            <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Remote-Learner — Denver, CO</div>
             <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
                 <li>Delivered advanced Moodle and Totara LMS custom solutions, improving user experience and performance for enterprise clients.</li>
-                <li>Built dynamic AJAX/jQuery-based UIs to enhance interactivity and accessibility within LMS environments.</li>
             </ul>
             </div>
 
@@ -284,13 +262,12 @@ export default function AboutPage() {
             <div className="border-l-4 border-blue-600 pl-4 py-1">
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white">Senior Application Developer</h3>
-                <div className="text-gray-600 dark:text-gray-300">Oct 2015 - Aug 2017</div>
+                <div className="text-gray-600 dark:text-gray-300">2015 – 2017</div>
             </div>
-            <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">US Signal</div>
+            <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">US Signal — Grand Rapids, MI</div>
             <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
-                <li>Promoted twice from PHP Analyst to Senior Application Developer within two years based on technical performance and impact.</li>
-                <li>Architected and maintained enterprise CRM and billing systems using PHP, Zend Framework, PostgreSQL, and Git-based deployment workflows.</li>
-                <li>Led performance improvements through SQL optimization and built dynamic reporting systems with PHP and JavaScript.</li>
+                <li>Promoted twice from PHP Analyst to Senior Application Developer within two years.</li>
+                <li>Architected and maintained enterprise CRM and billing systems using PHP, Zend, PostgreSQL, and Git-based deployment workflows.</li>
             </ul>
             </div>
 
