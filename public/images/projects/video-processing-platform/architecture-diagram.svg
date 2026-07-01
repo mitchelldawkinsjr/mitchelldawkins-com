@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 580" font-family="system-ui, -apple-system, sans-serif">
   <rect width="900" height="580" fill="#f8fafc" rx="12"/>
   <text x="450" y="38" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">Multi-Tenant Video Processing Platform</text>
@@ -8,7 +9,7 @@
   <text x="50" y="96" font-size="11" font-weight="700" fill="#A00000">CLIENT LAYER</text>
   <rect x="310" y="103" width="280" height="38" rx="6" fill="#CA0000"/>
   <text x="450" y="125" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">React Admin Console</text>
-  <text x="450" y="139" text-anchor="middle" font-size="10" fill="#FFCCCC">User management · Video uploads · Analytics</text>
+  <text x="450" y="139" text-anchor="middle" font-size="10" fill="#FFCCCC">User management | Video uploads | Analytics</text>
 
   <line x1="450" y1="155" x2="450" y2="178" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
 
@@ -17,10 +18,10 @@
   <text x="50" y="200" font-size="11" font-weight="700" fill="#15803d">API LAYER</text>
   <rect x="200" y="208" width="210" height="38" rx="6" fill="#22c55e"/>
   <text x="305" y="229" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Flask REST API</text>
-  <text x="305" y="242" text-anchor="middle" font-size="10" fill="#bbf7d0">JWT Auth · Routing · Rate limiting</text>
+  <text x="305" y="242" text-anchor="middle" font-size="10" fill="#bbf7d0">JWT Auth | Routing | Rate limiting</text>
   <rect x="490" y="208" width="210" height="38" rx="6" fill="#16a34a"/>
   <text x="595" y="229" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Stripe Billing</text>
-  <text x="595" y="242" text-anchor="middle" font-size="10" fill="#bbf7d0">Subscriptions · Tier management</text>
+  <text x="595" y="242" text-anchor="middle" font-size="10" fill="#bbf7d0">Subscriptions | Tier management</text>
 
   <line x1="450" y1="260" x2="450" y2="283" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
 
@@ -47,10 +48,10 @@
   <text x="50" y="425" font-size="11" font-weight="700" fill="#7e22ce">DATA LAYER</text>
   <rect x="175" y="433" width="210" height="38" rx="6" fill="#a855f7"/>
   <text x="280" y="454" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">PostgreSQL</text>
-  <text x="280" y="467" text-anchor="middle" font-size="10" fill="#ede9fe">Metadata · Users · Jobs</text>
+  <text x="280" y="467" text-anchor="middle" font-size="10" fill="#ede9fe">Metadata | Users | Jobs</text>
   <rect x="515" y="433" width="210" height="38" rx="6" fill="#7c3aed"/>
   <text x="620" y="454" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">AWS S3</text>
-  <text x="620" y="467" text-anchor="middle" font-size="10" fill="#ede9fe">Videos · Audio · Models · Transcripts</text>
+  <text x="620" y="467" text-anchor="middle" font-size="10" fill="#ede9fe">Videos | Audio | Models | Transcripts</text>
 
   <!-- INTEGRATIONS -->
   <text x="450" y="515" text-anchor="middle" font-size="11" font-weight="700" fill="#475569">EXTERNAL INTEGRATIONS</text>

@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/sanitize-blog-svgs.mjs && next build",
+    "sanitize:svgs": "node scripts/sanitize-blog-svgs.mjs",
     "start": "next start",
     "lint": "next lint"
   },

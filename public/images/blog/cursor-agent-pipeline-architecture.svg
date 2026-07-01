@@ -1,7 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 640" font-family="system-ui, -apple-system, sans-serif">
   <rect width="920" height="640" fill="#f8fafc" rx="12"/>
   <text x="460" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">Issue-to-PR Agent Pipeline</text>
-  <text x="460" y="56" text-anchor="middle" font-size="12" fill="#64748b">Human gates · Small PRs · Full audit trail</text>
+  <text x="460" y="56" text-anchor="middle" font-size="12" fill="#64748b">Human gates - Small PRs - Full audit trail</text>
 
   <!-- HUMAN LAYER -->
   <rect x="24" y="72" width="872" height="88" rx="8" fill="#FFE8E8" stroke="#CA0000" stroke-width="1.5"/>
@@ -26,7 +27,7 @@
 
   <!-- STAGE 1 -->
   <rect x="24" y="184" width="872" height="96" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
-  <text x="44" y="204" font-size="11" font-weight="700" fill="#1d4ed8">STAGE 1  issue-spec.yml</text>
+  <text x="44" y="204" font-size="11" font-weight="700" fill="#1d4ed8">STAGE 1  issue-spec.yml</text>
   <rect x="60" y="212" width="180" height="52" rx="6" fill="#3b82f6"/>
   <text x="150" y="232" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">GitHub Action</text>
   <text x="150" y="246" text-anchor="middle" font-size="9" fill="#dbeafe">Label: needs-spec</text>
@@ -37,7 +38,7 @@
   <text x="370" y="258" text-anchor="middle" font-size="9" fill="#dbeafe">Posts AC comment</text>
   <rect x="500" y="212" width="180" height="52" rx="6" fill="#1d4ed8"/>
   <text x="590" y="232" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Label Swap</text>
-  <text x="590" y="246" text-anchor="middle" font-size="9" fill="#dbeafe">needs-spec ’ spec-added</text>
+  <text x="590" y="246" text-anchor="middle" font-size="9" fill="#dbeafe">needs-spec - spec-added</text>
   <text x="590" y="258" text-anchor="middle" font-size="9" fill="#dbeafe">Issue stays open</text>
   <rect x="720" y="212" width="160" height="52" rx="6" fill="#e2e8f0" stroke="#94a3b8"/>
   <text x="800" y="232" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">Spec Comment</text>
@@ -48,7 +49,7 @@
 
   <!-- STAGE 2 -->
   <rect x="24" y="304" width="872" height="96" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
-  <text x="44" y="324" font-size="11" font-weight="700" fill="#15803d">STAGE 2  issue-implement.yml</text>
+  <text x="44" y="324" font-size="11" font-weight="700" fill="#15803d">STAGE 2  issue-implement.yml</text>
   <rect x="60" y="332" width="160" height="52" rx="6" fill="#22c55e"/>
   <text x="140" y="352" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Guard Checks</text>
   <text x="140" y="366" text-anchor="middle" font-size="9" fill="#dcfce7">spec-added present</text>
@@ -56,10 +57,10 @@
   <rect x="260" y="332" width="180" height="52" rx="6" fill="#16a34a"/>
   <text x="350" y="352" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">dispatch-cursor-agent</text>
   <text x="350" y="366" text-anchor="middle" font-size="9" fill="#dcfce7">@cursor/sdk API</text>
-  <text x="350" y="378" text-anchor="middle" font-size="9" fill="#dcfce7">ready ’ agent-working</text>
+  <text x="350" y="378" text-anchor="middle" font-size="9" fill="#dcfce7">ready - agent-working</text>
   <rect x="480" y="332" width="180" height="52" rx="6" fill="#15803d"/>
   <text x="570" y="352" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Cursor Cloud Agent</text>
-  <text x="570" y="366" text-anchor="middle" font-size="9" fill="#dcfce7">Clone · implement · test</text>
+  <text x="570" y="366" text-anchor="middle" font-size="9" fill="#dcfce7">Clone - implement - test</text>
   <text x="570" y="378" text-anchor="middle" font-size="9" fill="#dcfce7">Branch issue-N-slug</text>
   <rect x="700" y="332" width="180" height="52" rx="6" fill="#e2e8f0" stroke="#94a3b8"/>
   <text x="790" y="352" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">Track at cursor.com</text>
@@ -70,7 +71,7 @@
 
   <!-- OUTPUT LAYER -->
   <rect x="24" y="424" width="872" height="96" rx="8" fill="#f3e8ff" stroke="#a855f7" stroke-width="1.5"/>
-  <text x="44" y="444" font-size="11" font-weight="700" fill="#7e22ce">OUTPUT  Small, Reversible PR</text>
+  <text x="44" y="444" font-size="11" font-weight="700" fill="#7e22ce">OUTPUT  Small, Reversible PR</text>
   <rect x="60" y="452" width="155" height="52" rx="6" fill="#a855f7"/>
   <text x="138" y="472" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">npm ci + build</text>
   <text x="138" y="486" text-anchor="middle" font-size="9" fill="#ede9fe">e2e when UI changes</text>
@@ -94,9 +95,9 @@
   <!-- LABEL STATE MACHINE -->
   <text x="460" y="548" text-anchor="middle" font-size="11" font-weight="700" fill="#475569">LABEL STATE MACHINE</text>
   <rect x="40" y="558" width="840" height="68" rx="8" fill="#fff" stroke="#cbd5e1"/>
-  <text x="460" y="582" text-anchor="middle" font-size="10" fill="#334155">Open ’ needs-spec ’ spec-added ’ ready ’ agent-working ’ pr-opened ’ merged</text>
-  <text x="460" y="600" text-anchor="middle" font-size="10" fill="#64748b">Failure path: agent-failed ’ re-add ready to retry · Every transition logged on the issue</text>
-  <text x="460" y="618" text-anchor="middle" font-size="10" fill="#64748b">Each stage is a checkpoint  nothing ships without a human merge</text>
+  <text x="460" y="582" text-anchor="middle" font-size="10" fill="#334155">Open - needs-spec - spec-added - ready - agent-working - pr-opened - merged</text>
+  <text x="460" y="600" text-anchor="middle" font-size="10" fill="#64748b">Failure path: agent-failed - re-add ready to retry - Every transition logged on the issue</text>
+  <text x="460" y="618" text-anchor="middle" font-size="10" fill="#64748b">Each stage is a checkpoint  nothing ships without a human merge</text>
 
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 480" font-family="system-ui, -apple-system, sans-serif">
   <rect width="920" height="480" fill="#f8fafc" rx="12"/>
   <text x="460" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">v1 Pipeline vs SEOS</text>
