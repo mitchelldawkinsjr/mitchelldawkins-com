@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 520" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="520" height="520" fill="#f8fafc" rx="12"/>
+  <text x="260" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">Knowledge Loop</text>
+  <text x="260" y="50" text-anchor="middle" font-size="11" fill="#64748b">The OS learns from production failures</text>
+
+  <!-- Circular path -->
+  <circle cx="260" cy="280" r="160" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 4"/>
+
+  <!-- Node 1: Merge -->
+  <rect x="200" y="88" width="120" height="48" rx="8" fill="#A00000"/>
+  <text x="260" y="110" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Human merge</text>
+  <text x="260" y="126" text-anchor="middle" font-size="9" fill="#FFCCCC">Final gate</text>
+
+  <!-- Node 2: Deploy -->
+  <rect x="380" y="200" width="120" height="48" rx="8" fill="#f59e0b"/>
+  <text x="440" y="222" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">deploy-vps</text>
+  <text x="440" y="238" text-anchor="middle" font-size="9" fill="#fef3c7">Auto on merge</text>
+
+  <!-- Node 3: Health check -->
+  <rect x="340" y="360" width="120" height="48" rx="8" fill="#d97706"/>
+  <text x="400" y="382" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">health-check</text>
+  <text x="400" y="398" text-anchor="middle" font-size="9" fill="#fef3c7">Post-deploy probe</text>
+
+  <!-- Node 4: Failure branch -->
+  <rect x="160" y="400" width="120" height="48" rx="8" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="220" y="422" text-anchor="middle" font-size="11" font-weight="600" fill="#b91c1c">Failure</text>
+  <text x="220" y="438" text-anchor="middle" font-size="9" fill="#991b1b">Guard missed</text>
+
+  <!-- Node 5: Append lesson -->
+  <rect x="60" y="280" width="120" height="48" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="120" y="300" text-anchor="middle" font-size="10" font-weight="600" fill="#b45309">append-agent-</text>
+  <text x="120" y="314" text-anchor="middle" font-size="10" font-weight="600" fill="#b45309">lesson.mjs</text>
+
+  <!-- Node 6: Knowledge store -->
+  <rect x="100" y="160" width="120" height="48" rx="8" fill="#fff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="160" y="182" text-anchor="middle" font-size="10" font-weight="600" fill="#334155">agent-knowledge/</text>
+  <text x="160" y="198" text-anchor="middle" font-size="9" fill="#64748b">Structured lessons</text>
+
+  <!-- Center: next agent run -->
+  <circle cx="260" cy="280" r="72" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="260" y="268" text-anchor="middle" font-size="11" font-weight="700" fill="#15803d">Next agent run</text>
+  <text x="260" y="284" text-anchor="middle" font-size="9" fill="#166534">reads rules +</text>
+  <text x="260" y="298" text-anchor="middle" font-size="9" fill="#166534">accumulated lessons</text>
+
+  <!-- Arrows clockwise -->
+  <path d="M260 136 Q360 160 420 200" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M440 248 Q440 320 400 360" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M340 404 Q280 440 220 424" fill="none" stroke="#ef4444" stroke-width="2" marker-end="url(#arrowRed)"/>
+  <path d="M160 400 Q80 360 120 328" fill="none" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrowOrange)"/>
+  <path d="M100 280 Q80 220 160 184" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M160 160 Q200 120 260 136" fill="none" stroke="#22c55e" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+  <!-- Success path from health -->
+  <path d="M340 384 Q260 420 220 400" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="290" y="448" font-size="8" fill="#15803d">pass ’ loop continues</text>
+
+  <!-- Bottom note -->
+  <rect x="40" y="468" width="440" height="40" rx="6" fill="#fff" stroke="#cbd5e1"/>
+  <text x="260" y="486" text-anchor="middle" font-size="9" fill="#334155">Lesson template: what broke · which guard failed · rule change needed</text>
+  <text x="260" y="500" text-anchor="middle" font-size="9" fill="#64748b">Not hoping someone remembers the Postgres migration footgun  encoding it after it happens once</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#94a3b8"/></marker>
+    <marker id="arrowRed" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ef4444"/></marker>
+    <marker id="arrowOrange" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f59e0b"/></marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#22c55e"/></marker>
+  </defs>
+</svg>
