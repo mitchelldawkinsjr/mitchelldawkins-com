@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 320" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="960" height="320" fill="#f8fafc" rx="12"/>
+  <text x="480" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">SEOS Label State Machine</text>
+  <text x="480" y="46" text-anchor="middle" font-size="11" fill="#64748b">Issue lifecycle  auto transitions solid, human gates dashed red</text>
+
+  <!-- Main issue path row 1 -->
+  <rect x="16" y="68" width="72" height="32" rx="16" fill="#e2e8f0" stroke="#94a3b8"/>
+  <text x="52" y="88" text-anchor="middle" font-size="9" font-weight="600" fill="#334155">Open</text>
+
+  <rect x="108" y="68" width="96" height="32" rx="16" fill="#dbeafe" stroke="#3b82f6"/>
+  <text x="156" y="88" text-anchor="middle" font-size="9" font-weight="600" fill="#1d4ed8">needs-spec</text>
+
+  <rect x="224" y="68" width="96" height="32" rx="16" fill="#dbeafe" stroke="#2563eb"/>
+  <text x="272" y="88" text-anchor="middle" font-size="9" font-weight="600" fill="#1d4ed8">spec-added</text>
+
+  <rect x="340" y="68" width="120" height="32" rx="16" fill="#bfdbfe" stroke="#1d4ed8" stroke-dasharray="4 2"/>
+  <text x="400" y="88" text-anchor="middle" font-size="9" font-weight="600" fill="#1e40af">needs-architecture</text>
+
+  <rect x="480" y="68" width="72" height="32" rx="16" fill="#FFE8E8" stroke="#CA0000" stroke-dasharray="4 2"/>
+  <text x="516" y="88" text-anchor="middle" font-size="9" font-weight="600" fill="#A00000">ready</text>
+
+  <rect x="572" y="68" width="104" height="32" rx="16" fill="#dcfce7" stroke="#22c55e"/>
+  <text x="624" y="88" text-anchor="middle" font-size="9" font-weight="600" fill="#15803d">agent-working</text>
+
+  <rect x="696" y="68" width="88" height="32" rx="16" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="740" y="88" text-anchor="middle" font-size="9" font-weight="600" fill="#15803d">pr-opened</text>
+
+  <rect x="804" y="68" width="72" height="32" rx="16" fill="#f3e8ff" stroke="#a855f7"/>
+  <text x="840" y="88" text-anchor="middle" font-size="9" font-weight="600" fill="#7e22ce">merged</text>
+
+  <!-- Arrows row 1 -->
+  <line x1="88" y1="84" x2="106" y2="84" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="204" y1="84" x2="222" y2="84" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="320" y1="84" x2="338" y2="84" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="460" y1="84" x2="478" y2="84" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="552" y1="84" x2="570" y2="84" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="676" y1="84" x2="694" y2="84" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="784" y1="84" x2="802" y2="84" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Skip architecture shortcut -->
+  <path d="M272 100 Q272 130 516 100" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arrBlue)"/>
+  <text x="394" y="128" text-anchor="middle" font-size="9" fill="#2563eb">simple issues skip</text>
+
+  <!-- PR review row -->
+  <text x="24" y="168" font-size="10" font-weight="700" fill="#7e22ce">PR REVIEW (parallel)</text>
+
+  <rect x="696" y="152" width="88" height="32" rx="16" fill="#f3e8ff" stroke="#a855f7"/>
+  <text x="740" y="172" text-anchor="middle" font-size="9" font-weight="600" fill="#7e22ce">pr-opened</text>
+
+  <rect x="580" y="152" width="96" height="32" rx="16" fill="#ede9fe" stroke="#9333ea"/>
+  <text x="628" y="172" text-anchor="middle" font-size="9" font-weight="600" fill="#6d28d9">review-findings</text>
+
+  <rect x="440" y="152" width="88" height="32" rx="16" fill="#ede9fe" stroke="#7c3aed"/>
+  <text x="484" y="172" text-anchor="middle" font-size="9" font-weight="600" fill="#6d28d9">auto-fix (1x)</text>
+
+  <rect x="320" y="152" width="96" height="32" rx="16" fill="#e9d5ff" stroke="#a855f7"/>
+  <text x="368" y="172" text-anchor="middle" font-size="9" font-weight="600" fill="#7e22ce">review-clean</text>
+
+  <line x1="696" y1="168" x2="678" y2="168" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="580" y1="168" x2="528" y2="168" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <path d="M440 168 Q400 168 400 200 Q400 220 516 220 Q628 220 628 184" fill="none" stroke="#9333ea" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arr)"/>
+  <text x="520" y="212" text-anchor="middle" font-size="9" fill="#64748b">fix amends PR branch</text>
+
+  <!-- Failure + opt-out -->
+  <rect x="572" y="248" width="104" height="32" rx="16" fill="#fee2e2" stroke="#ef4444"/>
+  <text x="624" y="268" text-anchor="middle" font-size="9" font-weight="600" fill="#b91c1c">agent-failed</text>
+  <line x1="624" y1="100" x2="624" y2="246" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrRed)"/>
+  <path d="M516 280 Q480 280 516 108" fill="none" stroke="#CA0000" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrRed)"/>
+  <text x="448" y="292" text-anchor="middle" font-size="9" fill="#CA0000">human: re-add ready</text>
+
+  <rect x="804" y="248" width="88" height="32" rx="16" fill="#f1f5f9" stroke="#64748b"/>
+  <text x="848" y="268" text-anchor="middle" font-size="9" font-weight="600" fill="#475569">no-agent</text>
+  <line x1="52" y1="100" x2="52" y2="248" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <line x1="52" y1="248" x2="802" y2="264" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arr)"/>
+  <text x="120" y="238" font-size="9" fill="#64748b">opt-out: skip entire pipeline</text>
+
+  <!-- Post-merge -->
+  <rect x="876" y="68" width="68" height="32" rx="16" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="910" y="88" text-anchor="middle" font-size="8" font-weight="600" fill="#b45309">deploy</text>
+  <line x1="876" y1="84" x2="876" y2="84" stroke="#64748b"/>
+  <line x1="876" y1="84" x2="804" y2="84" stroke="none"/>
+  <line x1="876" y1="84" x2="876" y2="84" stroke="none"/>
+
+  <!-- Legend -->
+  <circle cx="40" cy="302" r="5" fill="#CA0000"/>
+  <text x="52" y="305" font-size="9" fill="#64748b">Human gate</text>
+  <circle cx="130" cy="302" r="5" fill="#3b82f6"/>
+  <text x="142" y="305" font-size="9" fill="#64748b">Auto (planning)</text>
+  <circle cx="240" cy="302" r="5" fill="#22c55e"/>
+  <text x="252" y="305" font-size="9" fill="#64748b">Auto (build)</text>
+  <circle cx="340" cy="302" r="5" fill="#a855f7"/>
+  <text x="352" y="305" font-size="9" fill="#64748b">Auto (review/fix)</text>
+  <circle cx="450" cy="302" r="5" fill="#f59e0b"/>
+  <text x="462" y="305" font-size="9" fill="#64748b">Auto (deploy)</text>
+
+  <defs>
+    <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#64748b"/></marker>
+    <marker id="arrBlue" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#2563eb"/></marker>
+    <marker id="arrRed" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#CA0000"/></marker>
+  </defs>
+</svg>

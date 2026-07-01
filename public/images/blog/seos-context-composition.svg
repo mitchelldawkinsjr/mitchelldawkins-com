@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 400" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="920" height="400" fill="#f8fafc" rx="12"/>
+  <text x="460" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">Context Composition Pipeline</text>
+  <text x="460" y="50" text-anchor="middle" font-size="11" fill="#64748b">One source of truth, many role-specific prompts  CI blocks drift</text>
+
+  <!-- Sources -->
+  <rect x="24" y="72" width="200" height="120" rx="8" fill="#fff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="124" y="92" text-anchor="middle" font-size="11" font-weight="700" fill="#475569">SOURCES</text>
+  <rect x="40" y="102" width="168" height="24" rx="4" fill="#f1f5f9"/>
+  <text x="124" y="118" text-anchor="middle" font-size="10" fill="#334155">AGENT.md</text>
+  <rect x="40" y="132" width="168" height="24" rx="4" fill="#f1f5f9"/>
+  <text x="124" y="148" text-anchor="middle" font-size="10" fill="#334155">agent-rules/*.md</text>
+  <rect x="40" y="162" width="168" height="24" rx="4" fill="#f1f5f9"/>
+  <text x="124" y="178" text-anchor="middle" font-size="10" fill="#334155">agent-overrides/*-tail.md</text>
+
+  <!-- Manifest -->
+  <rect x="260" y="72" width="180" height="120" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="350" y="92" text-anchor="middle" font-size="11" font-weight="700" fill="#1d4ed8">MANIFEST</text>
+  <text x="350" y="112" text-anchor="middle" font-size="9" fill="#1e40af">agent-manifest.json</text>
+  <text x="350" y="132" text-anchor="middle" font-size="9" fill="#334155">role: rules[] + tail</text>
+  <text x="350" y="150" text-anchor="middle" font-size="9" fill="#334155">includeAgentGuide: bool</text>
+  <text x="350" y="168" text-anchor="middle" font-size="9" fill="#334155">output path per role</text>
+
+  <!-- Compose script -->
+  <rect x="476" y="72" width="180" height="120" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="566" y="92" text-anchor="middle" font-size="11" font-weight="700" fill="#15803d">COMPOSE</text>
+  <text x="566" y="112" text-anchor="middle" font-size="9" fill="#166534">compose-context.mjs</text>
+  <text x="566" y="132" text-anchor="middle" font-size="9" fill="#334155">npm run agent:compose</text>
+  <text x="566" y="150" text-anchor="middle" font-size="9" fill="#334155">--check in CI</text>
+  <text x="566" y="168" text-anchor="middle" font-size="9" fill="#334155">fail on drift</text>
+
+  <!-- Outputs -->
+  <rect x="692" y="72" width="204" height="120" rx="8" fill="#f3e8ff" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="794" y="92" text-anchor="middle" font-size="11" font-weight="700" fill="#7e22ce">OUTPUTS</text>
+  <text x="794" y="112" text-anchor="middle" font-size="9" fill="#334155">ai-spec-context.md</text>
+  <text x="794" y="128" text-anchor="middle" font-size="9" fill="#334155">ai-implement-context.md</text>
+  <text x="794" y="144" text-anchor="middle" font-size="9" fill="#334155">ai-bugbot-context.md</text>
+  <text x="794" y="160" text-anchor="middle" font-size="9" fill="#334155">agent-context/*.md</text>
+  <text x="794" y="176" text-anchor="middle" font-size="8" fill="#64748b">12+ composed files</text>
+
+  <!-- Arrows between top boxes -->
+  <line x1="224" y1="132" x2="258" y2="132" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="440" y1="132" x2="474" y2="132" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="656" y1="132" x2="690" y2="132" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Example: implement role -->
+  <text x="460" y="220" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">Example: Coding Agent context</text>
+  <rect x="40" y="236" width="840" height="140" rx="8" fill="#fff" stroke="#cbd5e1"/>
+
+  <rect x="60" y="256" width="120" height="36" rx="6" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text x="120" y="278" text-anchor="middle" font-size="9" font-weight="600" fill="#334155">AGENT.md</text>
+
+  <text x="190" y="278" font-size="14" fill="#94a3b8">+</text>
+
+  <rect x="210" y="256" width="130" height="36" rx="6" fill="#dbeafe" stroke="#3b82f6"/>
+  <text x="275" y="272" text-anchor="middle" font-size="8" font-weight="600" fill="#1d4ed8">architecture-rules</text>
+  <text x="275" y="284" text-anchor="middle" font-size="8" fill="#64748b">ui, testing, docs, commit</text>
+
+  <text x="355" y="278" font-size="14" fill="#94a3b8">+</text>
+
+  <rect x="375" y="256" width="130" height="36" rx="6" fill="#dcfce7" stroke="#22c55e"/>
+  <text x="440" y="278" text-anchor="middle" font-size="9" font-weight="600" fill="#15803d">implement-tail.md</text>
+
+  <text x="520" y="278" font-size="14" fill="#94a3b8">=</text>
+
+  <rect x="540" y="252" width="320" height="44" rx="6" fill="#f3e8ff" stroke="#a855f7"/>
+  <text x="700" y="272" text-anchor="middle" font-size="10" font-weight="600" fill="#7e22ce">ai-implement-context.md</text>
+  <text x="700" y="286" text-anchor="middle" font-size="9" fill="#64748b">used by issue-implement.yml + Cursor cloud agent</text>
+
+  <!-- Rule files list -->
+  <text x="60" y="320" font-size="10" font-weight="600" fill="#475569">Shared rule files (edit once):</text>
+  <text x="60" y="340" font-size="9" fill="#64748b">product-rules · architecture-rules · ui-rules · testing-rules · accessibility-rules · security-rules · documentation-rules · commit-rules</text>
+  <text x="60" y="358" font-size="9" fill="#64748b">Change testing-rules.md once ’ regenerate ’ spec, implement, bugbot, and test agent all stay in sync</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+</svg>

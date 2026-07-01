@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 420" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="920" height="420" fill="#f8fafc" rx="12"/>
+  <text x="460" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">Specialist Agent Triggers</text>
+  <text x="460" y="50" text-anchor="middle" font-size="11" fill="#64748b">Who runs when  auto vs manual vs advisory</text>
+
+  <!-- Timeline axis -->
+  <line x1="40" y1="88" x2="880" y2="88" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="40" y="78" font-size="9" font-weight="600" fill="#64748b">ISSUE OPEN</text>
+  <text x="280" y="78" font-size="9" font-weight="600" fill="#64748b">PRE-BUILD</text>
+  <text x="480" y="78" font-size="9" font-weight="600" fill="#64748b">BUILD</text>
+  <text x="680" y="78" font-size="9" font-weight="600" fill="#64748b">PR REVIEW</text>
+  <text x="840" y="78" font-size="9" font-weight="600" fill="#64748b">POST-MERGE</text>
+
+  <!-- Planning -->
+  <rect x="60" y="100" width="140" height="64" rx="8" fill="#3b82f6"/>
+  <text x="130" y="122" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Planning</text>
+  <text x="130" y="138" text-anchor="middle" font-size="9" fill="#dbeafe">needs-spec</text>
+  <text x="130" y="152" text-anchor="middle" font-size="8" fill="#bfdbfe">Spec + Task Breakdown</text>
+  <rect x="168" y="104" width="36" height="16" rx="3" fill="#dbeafe"/>
+  <text x="186" y="115" text-anchor="middle" font-size="7" font-weight="700" fill="#1d4ed8">AUTO</text>
+
+  <!-- Architecture -->
+  <rect x="240" y="100" width="140" height="64" rx="8" fill="#2563eb"/>
+  <text x="310" y="122" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Architecture</text>
+  <text x="310" y="138" text-anchor="middle" font-size="9" fill="#dbeafe">needs-architecture</text>
+  <text x="310" y="152" text-anchor="middle" font-size="8" fill="#bfdbfe">Complex changes only</text>
+  <rect x="348" y="104" width="36" height="16" rx="3" fill="#dbeafe"/>
+  <text x="366" y="115" text-anchor="middle" font-size="7" font-weight="700" fill="#1d4ed8">AUTO</text>
+
+  <!-- Coding -->
+  <rect x="440" y="100" width="140" height="64" rx="8" fill="#22c55e"/>
+  <text x="510" y="122" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Coding</text>
+  <text x="510" y="138" text-anchor="middle" font-size="9" fill="#dcfce7">ready label</text>
+  <text x="510" y="152" text-anchor="middle" font-size="8" fill="#bbf7d0">Cursor cloud agent</text>
+  <rect x="548" y="104" width="36" height="16" rx="3" fill="#dcfce7"/>
+  <text x="566" y="115" text-anchor="middle" font-size="7" font-weight="700" fill="#15803d">AUTO</text>
+
+  <!-- Review row -->
+  <rect x="620" y="100" width="100" height="64" rx="8" fill="#a855f7"/>
+  <text x="670" y="122" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Testing</text>
+  <text x="670" y="138" text-anchor="middle" font-size="8" fill="#ede9fe">PR opened</text>
+  <text x="670" y="152" text-anchor="middle" font-size="8" fill="#ede9fe">Advisory</text>
+  <rect x="688" y="104" width="36" height="16" rx="3" fill="#ede9fe"/>
+  <text x="706" y="115" text-anchor="middle" font-size="7" font-weight="700" fill="#7e22ce">AUTO</text>
+
+  <rect x="730" y="100" width="80" height="64" rx="8" fill="#9333ea"/>
+  <text x="770" y="122" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Bugbot</text>
+  <text x="770" y="142" text-anchor="middle" font-size="8" fill="#ede9fe">Correctness</text>
+  <rect x="778" y="104" width="36" height="16" rx="3" fill="#ede9fe"/>
+  <text x="796" y="115" text-anchor="middle" font-size="7" font-weight="700" fill="#7e22ce">AUTO</text>
+
+  <rect x="820" y="100" width="80" height="64" rx="8" fill="#7c3aed"/>
+  <text x="860" y="122" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Ponytail</text>
+  <text x="860" y="142" text-anchor="middle" font-size="8" fill="#ede9fe">Bloat</text>
+  <rect x="868" y="104" width="36" height="16" rx="3" fill="#ede9fe"/>
+  <text x="886" y="115" text-anchor="middle" font-size="7" font-weight="700" fill="#7e22ce">AUTO</text>
+
+  <!-- Fix agent -->
+  <rect x="620" y="184" width="120" height="56" rx="8" fill="#6d28d9"/>
+  <text x="680" y="206" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">PR Fix</text>
+  <text x="680" y="222" text-anchor="middle" font-size="8" fill="#ede9fe">review-findings (1x)</text>
+  <rect x="708" y="188" width="36" height="16" rx="3" fill="#ede9fe"/>
+  <text x="726" y="199" text-anchor="middle" font-size="7" font-weight="700" fill="#6d28d9">AUTO</text>
+
+  <!-- Docs -->
+  <rect x="760" y="184" width="100" height="56" rx="8" fill="#c4b5fd"/>
+  <text x="810" y="206" text-anchor="middle" font-size="10" font-weight="600" fill="#4c1d95">Docs</text>
+  <text x="810" y="222" text-anchor="middle" font-size="8" fill="#5b21b6">review-clean</text>
+  <rect x="828" y="188" width="36" height="16" rx="3" fill="#ede9fe"/>
+  <text x="846" y="199" text-anchor="middle" font-size="7" font-weight="700" fill="#6d28d9">ADV</text>
+
+  <!-- Manual specialists -->
+  <text x="40" y="268" font-size="11" font-weight="700" fill="#475569">Manual specialists (workflow_dispatch)</text>
+  <text x="40" y="284" font-size="9" fill="#64748b">High cost, high signal  auth changes, migrations, large UI refactors</text>
+
+  <rect x="40" y="296" width="160" height="56" rx="8" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+  <text x="120" y="318" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">UI Agent</text>
+  <text x="120" y="334" text-anchor="middle" font-size="8" fill="#64748b">Overlay + layout deep dive</text>
+  <rect x="148" y="300" width="48" height="16" rx="3" fill="#fff"/>
+  <text x="172" y="311" text-anchor="middle" font-size="7" font-weight="700" fill="#64748b">MANUAL</text>
+
+  <rect x="220" y="296" width="160" height="56" rx="8" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+  <text x="300" y="318" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">A11y Agent</text>
+  <text x="300" y="334" text-anchor="middle" font-size="8" fill="#64748b">Beyond axe CI checks</text>
+  <rect x="328" y="300" width="48" height="16" rx="3" fill="#fff"/>
+  <text x="352" y="311" text-anchor="middle" font-size="7" font-weight="700" fill="#64748b">MANUAL</text>
+
+  <rect x="400" y="296" width="160" height="56" rx="8" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+  <text x="480" y="318" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">Security Agent</text>
+  <text x="480" y="334" text-anchor="middle" font-size="8" fill="#64748b">Auth / RLS / secrets review</text>
+  <rect x="508" y="300" width="48" height="16" rx="3" fill="#fff"/>
+  <text x="532" y="311" text-anchor="middle" font-size="7" font-weight="700" fill="#64748b">MANUAL</text>
+
+  <!-- Deploy -->
+  <rect x="760" y="296" width="140" height="56" rx="8" fill="#f59e0b"/>
+  <text x="830" y="318" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Deploy</text>
+  <text x="830" y="334" text-anchor="middle" font-size="8" fill="#fef3c7">deploy-vps on merge</text>
+  <rect x="848" y="300" width="36" height="16" rx="3" fill="#fef3c7"/>
+  <text x="866" y="311" text-anchor="middle" font-size="7" font-weight="700" fill="#b45309">AUTO</text>
+
+  <!-- Legend -->
+  <rect x="40" y="372" width="840" height="36" rx="6" fill="#fff" stroke="#cbd5e1"/>
+  <rect x="56" y="384" width="36" height="14" rx="2" fill="#dbeafe"/><text x="104" y="395" font-size="9" fill="#64748b">AUTO  label or event triggered</text>
+  <rect x="280" y="384" width="36" height="14" rx="2" fill="#ede9fe"/><text x="328" y="395" font-size="9" fill="#64748b">ADV  advisory comment only</text>
+  <rect x="520" y="384" width="48" height="14" rx="2" fill="#e2e8f0"/><text x="580" y="395" font-size="9" fill="#64748b">MANUAL  Actions workflow_dispatch</text>
+  <rect x="760" y="384" width="36" height="14" rx="2" fill="#FFE8E8" stroke="#CA0000"/><text x="808" y="395" font-size="9" fill="#64748b">Human merge gate</text>
+</svg>

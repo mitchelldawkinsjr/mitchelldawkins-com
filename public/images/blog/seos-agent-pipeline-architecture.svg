@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 720" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="920" height="720" fill="#f8fafc" rx="12"/>
+  <text x="460" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">Software Engineering OS (SEOS)</text>
+  <text x="460" y="56" text-anchor="middle" font-size="12" fill="#64748b">Specialist agents ù Composed context ù Hands-off automation</text>
+
+  <!-- HUMAN GATES -->
+  <rect x="24" y="72" width="872" height="72" rx="8" fill="#FFE8E8" stroke="#CA0000" stroke-width="1.5"/>
+  <text x="44" y="92" font-size="11" font-weight="700" fill="#A00000">HUMAN GATES (intentional)</text>
+  <rect x="80" y="100" width="180" height="36" rx="6" fill="#CA0000"/>
+  <text x="170" y="122" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Open issue</text>
+  <rect x="370" y="100" width="180" height="36" rx="6" fill="#A00000"/>
+  <text x="460" y="122" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Merge PR</text>
+  <rect x="660" y="100" width="200" height="36" rx="6" fill="#CA0000"/>
+  <text x="760" y="122" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Recover agent-failed</text>
+
+  <line x1="460" y1="144" x2="460" y2="166" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- PLANNING LAYER -->
+  <rect x="24" y="168" width="872" height="88" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="44" y="188" font-size="11" font-weight="700" fill="#1d4ed8">PLANNING ù auto on issue open</text>
+  <rect x="60" y="196" width="200" height="48" rx="6" fill="#3b82f6"/>
+  <text x="160" y="216" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">needs-spec</text>
+  <text x="160" y="232" text-anchor="middle" font-size="9" fill="#dbeafe">Planning Agent</text>
+  <rect x="300" y="196" width="200" height="48" rx="6" fill="#2563eb"/>
+  <text x="400" y="216" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">spec-added</text>
+  <text x="400" y="232" text-anchor="middle" font-size="9" fill="#dbeafe">Task Breakdown</text>
+  <rect x="540" y="196" width="200" height="48" rx="6" fill="#1d4ed8"/>
+  <text x="640" y="216" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">needs-architecture</text>
+  <text x="640" y="232" text-anchor="middle" font-size="9" fill="#dbeafe">Complex changes only</text>
+  <rect x="780" y="196" width="100" height="48" rx="6" fill="#e2e8f0" stroke="#94a3b8"/>
+  <text x="830" y="222" text-anchor="middle" font-size="10" font-weight="600" fill="#334155">ready</text>
+
+  <line x1="460" y1="256" x2="460" y2="278" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- BUILD LAYER -->
+  <rect x="24" y="280" width="872" height="88" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="44" y="300" font-size="11" font-weight="700" fill="#15803d">BUILD ù Coding Agent (centerpiece)</text>
+  <rect x="60" y="308" width="180" height="48" rx="6" fill="#22c55e"/>
+  <text x="150" y="328" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">AGENT.md + rules</text>
+  <text x="150" y="344" text-anchor="middle" font-size="9" fill="#dcfce7">Composed context</text>
+  <rect x="280" y="308" width="180" height="48" rx="6" fill="#16a34a"/>
+  <text x="370" y="328" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Cursor Cloud Agent</text>
+  <text x="370" y="344" text-anchor="middle" font-size="9" fill="#dcfce7">issue-N-slug branch</text>
+  <rect x="500" y="308" width="180" height="48" rx="6" fill="#15803d"/>
+  <text x="590" y="328" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Draft PR</text>
+  <text x="590" y="344" text-anchor="middle" font-size="9" fill="#dcfce7">Build + e2e + screenshots</text>
+  <rect x="720" y="308" width="160" height="48" rx="6" fill="#e2e8f0" stroke="#94a3b8"/>
+  <text x="800" y="328" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">pr-opened</text>
+  <text x="800" y="344" text-anchor="middle" font-size="9" fill="#64748b">Small, reversible</text>
+
+  <line x1="460" y1="368" x2="460" y2="390" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- REVIEW LAYER -->
+  <rect x="24" y="392" width="872" height="88" rx="8" fill="#f3e8ff" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="44" y="412" font-size="11" font-weight="700" fill="#7e22ce">REVIEW ù parallel on PR open</text>
+  <rect x="40" y="420" width="130" height="48" rx="6" fill="#a855f7"/>
+  <text x="105" y="440" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">CI</text>
+  <text x="105" y="456" text-anchor="middle" font-size="9" fill="#ede9fe">build + e2e</text>
+  <rect x="190" y="420" width="130" height="48" rx="6" fill="#9333ea"/>
+  <text x="255" y="440" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Testing</text>
+  <text x="255" y="456" text-anchor="middle" font-size="9" fill="#ede9fe">Advisory</text>
+  <rect x="340" y="420" width="130" height="48" rx="6" fill="#7c3aed"/>
+  <text x="405" y="440" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Bugbot</text>
+  <text x="405" y="456" text-anchor="middle" font-size="9" fill="#ede9fe">Correctness</text>
+  <rect x="490" y="420" width="130" height="48" rx="6" fill="#6d28d9"/>
+  <text x="555" y="440" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Ponytail</text>
+  <text x="555" y="456" text-anchor="middle" font-size="9" fill="#ede9fe">Bloat audit</text>
+  <rect x="640" y="420" width="130" height="48" rx="6" fill="#5b21b6"/>
+  <text x="705" y="440" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Auto-fix</text>
+  <text x="705" y="456" text-anchor="middle" font-size="9" fill="#ede9fe">Once on findings</text>
+  <rect x="790" y="420" width="90" height="48" rx="6" fill="#e2e8f0" stroke="#94a3b8"/>
+  <text x="835" y="440" text-anchor="middle" font-size="10" font-weight="600" fill="#334155">UI/A11y</text>
+  <text x="835" y="456" text-anchor="middle" font-size="9" fill="#64748b">Manual</text>
+
+  <line x1="460" y1="480" x2="460" y2="502" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- SHIP LAYER -->
+  <rect x="24" y="504" width="872" height="88" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="44" y="524" font-size="11" font-weight="700" fill="#b45309">SHIP + LEARN ù post-merge</text>
+  <rect x="80" y="532" width="180" height="48" rx="6" fill="#f59e0b"/>
+  <text x="170" y="552" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Human merge</text>
+  <text x="170" y="568" text-anchor="middle" font-size="9" fill="#fef3c7">Final approval</text>
+  <rect x="300" y="532" width="180" height="48" rx="6" fill="#d97706"/>
+  <text x="390" y="552" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">deploy-vps</text>
+  <text x="390" y="568" text-anchor="middle" font-size="9" fill="#fef3c7">Auto on merge</text>
+  <rect x="520" y="532" width="180" height="48" rx="6" fill="#b45309"/>
+  <text x="610" y="552" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">health-check</text>
+  <text x="610" y="568" text-anchor="middle" font-size="9" fill="#fef3c7">Append lessons</text>
+  <rect x="740" y="532" width="140" height="48" rx="6" fill="#e2e8f0" stroke="#94a3b8"/>
+  <text x="810" y="552" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">Docs agent</text>
+  <text x="810" y="568" text-anchor="middle" font-size="9" fill="#64748b">Advisory</text>
+
+  <!-- REPO INTELLIGENCE -->
+  <text x="460" y="628" text-anchor="middle" font-size="11" font-weight="700" fill="#475569">REPOSITORY INTELLIGENCE</text>
+  <rect x="40" y="638" width="840" height="68" rx="8" fill="#fff" stroke="#cbd5e1"/>
+  <text x="460" y="662" text-anchor="middle" font-size="10" fill="#334155">AGENT.md ∑ agent-rules/ ∑ agent-manifest.json ∑ compose-context.mjs ∑ agent-knowledge/</text>
+  <text x="460" y="682" text-anchor="middle" font-size="10" fill="#64748b">One source of truth ? composed prompts per role ? CI drift check ? lessons from failures</text>
+  <text x="460" y="700" text-anchor="middle" font-size="10" fill="#64748b">Evolution: "AI writes code" ? "AI plans, builds, validates, documents, deploys, and learns"</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+</svg>

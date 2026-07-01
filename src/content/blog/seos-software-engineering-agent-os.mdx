@@ -1,0 +1,224 @@
+---
+title: "From One Agent to an OS: Building SEOS on Fasted"
+date: "2026-07-01"
+excerpt: "How I evolved a single coding-agent pipeline into SEOS — a Software Engineering OS with specialist agents, composed repository intelligence, hands-off automation, and a feedback loop that learns from every deploy."
+coverImage: "/images/blog/cursor-agent-pipeline.png"
+series: "Building AI with AI"
+---
+
+Three weeks ago I wrote about [building a team of engineers from GitHub issues](/blog/team-of-engineers-cursor-agent-pipeline) — a two-stage pipeline where OpenAI writes specs and a Cursor cloud agent opens small, reversible PRs. It worked. I shipped real features with it.
+
+But "one agent that writes code" is not a software team. It's a fast intern with a good checklist.
+
+This post documents what came next: **SEOS** (Software Engineering OS), landed in [PR #93](https://github.com/mitchelldawkinsjr/Fasted/pull/93) and documented in [issue #94](https://github.com/mitchelldawkinsjr/Fasted/issues/94). The shift is simple to state and hard to build:
+
+> From **"AI writes code"** to **"AI plans, builds, validates, documents, deploys, and learns"** — with coding as the centerpiece, not the whole system.
+
+<LiveSiteButton href="https://github.com/mitchelldawkinsjr/SEOS">Get SEOS on GitHub</LiveSiteButton>
+
+Open source: **[SEOS](https://github.com/mitchelldawkinsjr/SEOS)** — template, CLI, and workflow recipes. Production reference: **[Fasted](https://github.com/mitchelldawkinsjr/Fasted)**. Technical deep dive: **[SEOS project page](/projects/seos)**.
+
+## Where We Started
+
+The original pipeline was a single coding agent with human label gates:
+
+<img src="/images/blog/cursor-agent-pipeline-architecture.svg" alt="v1 two-stage pipeline: human label gates, OpenAI spec stage, Cursor cloud agent stage, small reversible PR output" />
+
+That architecture had real strengths:
+
+- Goal-driven implementation via `ai-implement-context.md`
+- Strong review (Bugbot, Ponytail) on every PR
+- Human gates at every step (`needs-spec`, `ready`)
+- Small PRs with full audit trail on the issue
+
+It also had a ceiling. Context lived in duplicated `ai-*-context.md` files. Planning, testing, documentation, and deploy were afterthoughts — or my job after the agent finished. Every new concern meant another monolithic prompt file, copy-pasted conventions, and drift.
+
+I wasn't running a team. I was running one very capable engineer and doing everyone else's work myself.
+
+## What SEOS Is
+
+SEOS treats the repository as an **operating system for agents**. Instead of one mega-prompt, the repo exposes:
+
+| Layer | What it does |
+|-------|--------------|
+| **Repository intelligence** | Canonical rules, composed prompts, CI drift checks |
+| **Specialist agents** | Planning, architecture, coding, testing, docs, deploy, fix |
+| **Automation graph** | Label-triggered workflows with intentional human gates |
+| **Local CLI** | Run any agent role from your terminal |
+| **Knowledge loop** | Failures append lessons; the OS gets smarter over time |
+
+The coding agent is still the centerpiece. Everything else exists so it ships better code, faster, with less babysitting.
+
+<img src="/images/blog/seos-agent-pipeline-architecture.svg" alt="SEOS architecture diagram showing human gates, planning agents, coding agent, parallel review layer, ship and learn loop, and repository intelligence foundation" />
+
+## Phase 1 — Repository Intelligence
+
+The first problem was prompt sprawl. `ai-spec-context.md` and `ai-implement-context.md` worked — until I added review agents, fix agents, and architecture review. Each file duplicated stack info, conventions, and product context. Change the testing strategy once, update six files. Miss one, get inconsistent agent behavior.
+
+SEOS centralizes that:
+
+| Asset | Purpose |
+|-------|---------|
+| [`.github/AGENT.md`](https://github.com/mitchelldawkinsjr/Fasted/blob/main/.github/AGENT.md) | Canonical entry point for all agents |
+| [`.github/agent-rules/`](https://github.com/mitchelldawkinsjr/Fasted/tree/main/.github/agent-rules) | Focused rules: product, architecture, UI, testing, a11y, security, docs, commits |
+| [`agent-manifest.json`](https://github.com/mitchelldawkinsjr/Fasted/blob/main/.github/agent-manifest.json) + [`compose-context.mjs`](https://github.com/mitchelldawkinsjr/Fasted/blob/main/scripts/lib/compose-context.mjs) | Composes role-specific prompts; CI verifies no drift |
+| Regenerated `ai-*-context.md` | Backward-compatible paths for existing workflows |
+
+The manifest declares which rules and overrides each agent role needs. `compose-context.mjs` assembles the final prompt. CI runs `npm run agent:compose -- --check` so nobody merges a rule change without regenerating the composed files.
+
+<img src="/images/blog/seos-context-composition.svg" alt="Context composition pipeline: AGENT.md and agent-rules feed into agent-manifest.json, compose-context.mjs generates 12+ role-specific ai-*-context.md files, CI blocks drift" />
+
+This is the employee handbook pattern from the first pipeline — but now there's one handbook, many role-specific views, and a linter that catches stale copies.
+
+## Phase 2 — Specialist Agents
+
+A real team has specialists. SEOS adds them as first-class workflow roles:
+
+| Agent | Trigger | Role |
+|-------|---------|------|
+| **Planning** | auto `needs-spec` | Spec + Task Breakdown |
+| **Architecture** | auto `needs-architecture` | Pre-impl structure review for migrations, routes, schema |
+| **Coding** | auto `ready` | Implementation (the core, unchanged in spirit) |
+| **Testing** | PR opened | Advisory test-coverage comment |
+| **Bugbot / Ponytail** | PR opened | Correctness + bloat (unchanged) |
+| **UI / A11y / Security** | manual `workflow_dispatch` | Deep dives on high-risk PRs |
+| **Documentation** | `review-clean` | Advisory docs checklist |
+| **PR Fix** | auto on `review-findings` (once) + `/agent` | Amends the PR branch |
+
+<img src="/images/blog/seos-specialist-agents.svg" alt="Timeline of specialist agent triggers across issue lifecycle: planning, architecture, coding auto agents; parallel PR review agents; manual UI, A11y, Security specialists" />
+
+The architecture agent is the biggest behavioral change from v1. Simple issues skip straight from spec to `ready`. Complex changes — database migrations, new routes, schema changes — get an architecture review gate first. The system decides which path based on issue content, not my memory at 11pm.
+
+The auto-fix agent closes another gap I hit in production. Bugbot or Ponytail finds issues, labels flip to `review-findings`, and one fix pass runs automatically before I look at the PR. Not infinite loops — once per review cycle. Enough to handle the "agent missed a checklist item" class of problems without another manual dispatch.
+
+## Phase 3 — Hands-Off Automation
+
+The v1 pipeline required me to add labels manually: `needs-spec`, then `ready`. That was intentional — human gates as features, not friction. But after dozens of issues, the pattern was predictable. Specs were almost always fine. I was a bottleneck clicking labels.
+
+SEOS automates the predictable parts while keeping the decisions that matter:
+
+<img src="/images/blog/seos-hands-off-flow.svg" alt="Vertical flowchart of hands-off issue automation from open issue through planning, architecture gate, coding agent, parallel PR review, auto-fix, human merge, and deploy" />
+
+<img src="/images/blog/seos-label-state-machine.svg" alt="SEOS GitHub label state machine showing issue path from Open through needs-spec, spec-added, optional needs-architecture, ready, agent-working, pr-opened, merged; PR review path with review-findings, auto-fix, review-clean; agent-failed and no-agent opt-out branches" />
+
+### Human gates (still intentional)
+
+| You still do | Why |
+|--------------|-----|
+| Open the issue | Product intent can't be automated |
+| **Merge the PR** | Final approval stays human |
+| Recover `agent-failed` | Ambiguous specs and blockers need judgment |
+| Secrets / VPS | Security boundary |
+
+### Opt-out controls
+
+Not every issue should run the pipeline. Meta-documentation, experiments, and "I'll do this myself" work need an escape hatch:
+
+| Label / marker | Effect |
+|----------------|--------|
+| `no-agent` or `[no-agent]` | Skip entire pipeline |
+| `agent-manual` | Auto spec; you add `ready` |
+| `AGENT_AUTO_*_ENABLED=false` repo vars | Disable auto spec/ready/fix per environment |
+
+Issue #94 — the meta-doc that inspired this post — carries `[no-agent]` in the title. The system that documents itself opts out of itself. That's the kind of detail that tells you the design is intentional.
+
+## Phase 4 — Local CLI
+
+Cloud agents handle the heavy implementation runs. But I wanted to invoke any role locally — debug a prompt, re-run a review, fix findings without waiting for Actions:
+
+```bash
+npm run agent:compose      # Regenerate all ai-*-context.md files
+npm run agent:issue -- 88  # Compose context for issue #88
+npm run agent:review -- 42 # Run review agent against PR #42
+npm run agent:fix -- 42 "fix findings"
+npm run agent:test         # Testing agent locally
+npm run agent:docs -- 88   # Documentation checklist
+npm run agent:deploy       # Deploy context
+```
+
+The CLI uses the same manifest and compose pipeline as CI. Local and cloud agents read identical context. No "works on my machine" for prompts.
+
+## Phase 5 — Continuous Improvement
+
+The last piece is the one most repos skip: **the system learns from failure**.
+
+[`.github/agent-knowledge/`](https://github.com/mitchelldawkinsjr/Fasted/tree/main/.github/agent-knowledge) stores lesson templates. When a health-check fails post-deploy, `append-agent-lesson.mjs` appends a structured note — what broke, what guard failed, what rule should change. Next run, agents read the accumulated lessons alongside the rules.
+
+<img src="/images/blog/seos-knowledge-loop.svg" alt="Circular knowledge loop: human merge triggers deploy-vps, health-check on failure appends lesson to agent-knowledge, next agent run reads rules plus accumulated lessons" />
+
+This is how a team actually gets better. Not by hoping someone remembers the Postgres migration footgun from three months ago, but by encoding it in the OS after it happens once.
+
+## Why Some Agents Stay Manual
+
+UI, A11y, and Security agents exist but aren't in the automatic loop. That was a deliberate cost/signal tradeoff:
+
+1. **Cost** — each run is a full Cursor cloud agent invocation
+2. **Redundancy** — CI already runs axe a11y, e2e, and `security.yml`
+3. **Overlap** — the UI agent duplicates overlay-scroll e2e and nightly visual regression
+4. **Signal** — these are for auth changes, migrations, and large UI refactors where you want depth, not volume
+
+Trigger them via **Actions → PR Specialist Review** when the PR warrants it. Automation everywhere is not the goal. Automation where the signal-to-cost ratio is high is.
+
+## Quality Pipeline (Same PR)
+
+SEOS wasn't only agent architecture. PR #93 also hardened the test surface the agents rely on:
+
+<img src="/images/blog/seos-quality-feedback-loop.svg" alt="Agent quality feedback loop: coding agent runs tests, CI gates include build, overlay-scroll e2e, axe a11y, e2e suite, nightly visual regression; pass reduces fix cycles, fail triggers auto-fix, new gaps become new tests" />
+
+- **Mobile overlay-scroll e2e** (`e2e/overlay-scroll.spec.ts`) — catches the modal/nav scroll bugs that kept slipping through
+- **Visual regression suite** (`e2e/visual/`, nightly `visual.yml`) — snapshot modals at desktop, tablet, and mobile
+- **Artifact compression** (`compress:artifacts`, CI check) — keeps screenshot artifacts from bloating the repo
+- **App fixes** — hide bottom nav when modals open; journal editor scroll and pinned save
+
+Agents are only as good as the feedback loop. Better tests mean better agent output, which means fewer fix cycles, which means I merge faster. The test investment pays for itself in agent runs avoided.
+
+## Evolution in One Comparison
+
+<img src="/images/blog/seos-v1-vs-seos.svg" alt="Side-by-side comparison of v1 issue pipeline versus SEOS: v1 requires manual label gates and standalone context files; SEOS auto-specs, composes context from manifest, adds specialist agents, auto-fix, deploy, and knowledge loop" />
+
+| v1 (issue #30) | SEOS (PR #93) |
+|----------------|---------------|
+| One coding agent | Specialist agents per role |
+| Duplicated context files | Composed from `agent-rules/` + manifest |
+| Manual `needs-spec` + `ready` | Auto spec, auto ready, architecture gate |
+| Review on PR open | Review + auto-fix + docs advisory |
+| Deploy was separate | deploy-vps + health-check + lessons |
+| Local = edit markdown by hand | `npm run agent:*` CLI |
+
+The human job didn't disappear. It moved upstack. I spend less time clicking labels and more time writing good issue descriptions, reviewing diffs, and curating the rules that make every agent run better.
+
+## Key Files to Read
+
+If you want to explore the implementation:
+
+1. [`.github/AGENT.md`](https://github.com/mitchelldawkinsjr/Fasted/blob/main/.github/AGENT.md) — start here
+2. [`.github/issue-bench.yml`](https://github.com/mitchelldawkinsjr/Fasted/blob/main/.github/issue-bench.yml) — labels and model config
+3. [PR #93](https://github.com/mitchelldawkinsjr/Fasted/pull/93) — the full diff (~100 files)
+4. [Issue #94](https://github.com/mitchelldawkinsjr/Fasted/issues/94) — architecture doc and flow reference
+
+The v1 two-stage pipeline lives on as **[issue-bench](https://github.com/mitchelldawkinsjr/issue-bench)**. **[SEOS](https://github.com/mitchelldawkinsjr/SEOS)** is the opinionated evolution — specialist agents, composed context, hands-off automation, and a knowledge loop. See the [SEOS project page](/projects/seos) for workflow tables, manifest schema, CLI reference, and secrets config.
+
+## What's Next
+
+SEOS is on `main` and running on real issues. Open items:
+
+- Team reads `AGENT.md` before the next agent-driven issue (the one unchecked box in #94)
+- Tune auto-ready heuristics — when should architecture gate fire vs. skip?
+- Measure fix-agent success rate — is one pass enough, or do certain finding types need two?
+- Extract SEOS patterns back into issue-bench as optional modules
+
+The longer arc hasn't changed from the first post. Humans at the decision layer. Agents at the execution layer. Git as the contract between them.
+
+What's different is scope. It's not one agent pretending to be a team. It's an OS that composes a team from rules, manifests, and workflows — and gets better every time something breaks in production.
+
+<HumanReflection>
+The v1 pipeline felt like a breakthrough when PR #33 landed with passing e2e tests while I was writing another post. SEOS feels like admitting the truth: I was never going to scale "one smart agent" into a engineering org. I needed to build the org.
+
+The moment that clicked was composing contexts from a manifest and watching CI fail because I'd edited a rule without regenerating. That's not agent magic that's boring software engineering. Good. The exciting part should be what the agents produce, not whether the prompts are in sync.
+
+I'm still the merge button. I'm still the person who writes "here's what I want" in an issue. But I don't add `needs-spec` anymore. I don't re-explain testing conventions in six files. I don't manually dispatch a fix when Bugbot finds a missing null check.
+
+I open an issue. The OS takes it from there. That's the job I wanted when I started building with AI, not typing faster, but **shipping with a bench that runs itself**.
+
+More on GitHub: [SEOS](https://github.com/mitchelldawkinsjr/SEOS) · [issue #94](https://github.com/mitchelldawkinsjr/Fasted/issues/94) · [PR #93](https://github.com/mitchelldawkinsjr/Fasted/pull/93) · [project page](/projects/seos).
+</HumanReflection>
