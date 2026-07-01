@@ -110,15 +110,32 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         </div>
         
         {post.coverImage && (
-          <div className="relative h-80 w-full mb-8 rounded-xl overflow-hidden">
-            <Image
-              src={post.coverImage}
-              alt={post.title}
-              fill
-              style={{ objectFit: 'cover' }}
-              priority
-            />
-          </div>
+          post.coverImageFit === 'contain' ? (
+            <div className="mb-8 overflow-hidden rounded-xl bg-[#0a1628]">
+              <Image
+                src={post.coverImage}
+                alt={post.title}
+                width={1536}
+                height={1024}
+                className="mx-auto h-auto w-full object-contain object-center"
+                priority
+                sizes="(max-width: 768px) 100vw, 768px"
+              />
+            </div>
+          ) : (
+            <div className="relative mb-8 h-80 w-full overflow-hidden rounded-xl">
+              <Image
+                src={post.coverImage}
+                alt={post.title}
+                fill
+                style={{
+                  objectFit: 'cover',
+                  objectPosition: post.coverImagePosition ?? 'center',
+                }}
+                priority
+              />
+            </div>
+          )
         )}
         
         <div className="prose dark:prose-invert prose-blue prose-lg max-w-none">

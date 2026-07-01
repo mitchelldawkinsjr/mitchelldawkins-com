@@ -18,6 +18,8 @@ export type Post = {
   excerpt: string;
   content: string;
   coverImage: string;
+  coverImageFit?: 'cover' | 'contain';
+  coverImagePosition?: string;
   series?: string;
   readingTime: number;
 };
@@ -57,6 +59,8 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
       excerpt: data.excerpt || '',
       content,
       coverImage: data.coverImage || '/images/blog/default.jpg',
+      coverImageFit: data.coverImageFit,
+      coverImagePosition: data.coverImagePosition,
       series: data.series,
       readingTime,
     };
