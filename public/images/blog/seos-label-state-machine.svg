@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 320" font-family="system-ui, -apple-system, sans-serif">
   <rect width="960" height="320" fill="#f8fafc" rx="12"/>
   <text x="480" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">SEOS Label State Machine</text>
-  <text x="480" y="46" text-anchor="middle" font-size="11" fill="#64748b">Issue lifecycle  auto transitions solid, human gates dashed red</text>
+  <text x="480" y="46" text-anchor="middle" font-size="11" fill="#64748b">Issue lifecycle  auto transitions solid, human gates dashed red</text>
 
   <!-- Main issue path row 1 -->
   <rect x="16" y="68" width="72" height="32" rx="16" fill="#e2e8f0" stroke="#94a3b8"/>

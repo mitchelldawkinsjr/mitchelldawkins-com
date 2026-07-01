@@ -52,12 +52,12 @@
 
   <!-- Success path from health -->
   <path d="M340 384 Q260 420 220 400" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="4 3"/>
-  <text x="290" y="448" font-size="8" fill="#15803d">pass ’ loop continues</text>
+  <text x="290" y="448" font-size="8" fill="#15803d">pass - loop continues</text>
 
   <!-- Bottom note -->
   <rect x="40" y="468" width="440" height="40" rx="6" fill="#fff" stroke="#cbd5e1"/>
-  <text x="260" y="486" text-anchor="middle" font-size="9" fill="#334155">Lesson template: what broke · which guard failed · rule change needed</text>
-  <text x="260" y="500" text-anchor="middle" font-size="9" fill="#64748b">Not hoping someone remembers the Postgres migration footgun  encoding it after it happens once</text>
+  <text x="260" y="486" text-anchor="middle" font-size="9" fill="#334155">Lesson template: what broke - which guard failed - rule change needed</text>
+  <text x="260" y="500" text-anchor="middle" font-size="9" fill="#64748b">Not hoping someone remembers the Postgres migration footgun  encoding it after it happens once</text>
 
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#94a3b8"/></marker>

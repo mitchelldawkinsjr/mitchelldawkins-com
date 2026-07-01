@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 420" font-family="system-ui, -apple-system, sans-serif">
   <rect width="920" height="420" fill="#f8fafc" rx="12"/>
   <text x="460" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">Specialist Agent Triggers</text>
-  <text x="460" y="50" text-anchor="middle" font-size="11" fill="#64748b">Who runs when  auto vs manual vs advisory</text>
+  <text x="460" y="50" text-anchor="middle" font-size="11" fill="#64748b">Who runs when  auto vs manual vs advisory</text>
 
   <!-- Timeline axis -->
   <line x1="40" y1="88" x2="880" y2="88" stroke="#cbd5e1" stroke-width="2"/>
@@ -71,7 +71,7 @@
 
   <!-- Manual specialists -->
   <text x="40" y="268" font-size="11" font-weight="700" fill="#475569">Manual specialists (workflow_dispatch)</text>
-  <text x="40" y="284" font-size="9" fill="#64748b">High cost, high signal  auth changes, migrations, large UI refactors</text>
+  <text x="40" y="284" font-size="9" fill="#64748b">High cost, high signal  auth changes, migrations, large UI refactors</text>
 
   <rect x="40" y="296" width="160" height="56" rx="8" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
   <text x="120" y="318" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">UI Agent</text>
@@ -100,8 +100,8 @@
 
   <!-- Legend -->
   <rect x="40" y="372" width="840" height="36" rx="6" fill="#fff" stroke="#cbd5e1"/>
-  <rect x="56" y="384" width="36" height="14" rx="2" fill="#dbeafe"/><text x="104" y="395" font-size="9" fill="#64748b">AUTO  label or event triggered</text>
-  <rect x="280" y="384" width="36" height="14" rx="2" fill="#ede9fe"/><text x="328" y="395" font-size="9" fill="#64748b">ADV  advisory comment only</text>
-  <rect x="520" y="384" width="48" height="14" rx="2" fill="#e2e8f0"/><text x="580" y="395" font-size="9" fill="#64748b">MANUAL  Actions workflow_dispatch</text>
+  <rect x="56" y="384" width="36" height="14" rx="2" fill="#dbeafe"/><text x="104" y="395" font-size="9" fill="#64748b">AUTO  label or event triggered</text>
+  <rect x="280" y="384" width="36" height="14" rx="2" fill="#ede9fe"/><text x="328" y="395" font-size="9" fill="#64748b">ADV  advisory comment only</text>
+  <rect x="520" y="384" width="48" height="14" rx="2" fill="#e2e8f0"/><text x="580" y="395" font-size="9" fill="#64748b">MANUAL  Actions workflow_dispatch</text>
   <rect x="760" y="384" width="36" height="14" rx="2" fill="#FFE8E8" stroke="#CA0000"/><text x="808" y="395" font-size="9" fill="#64748b">Human merge gate</text>
 </svg>

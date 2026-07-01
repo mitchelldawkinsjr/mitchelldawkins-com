@@ -7,6 +7,8 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import HumanReflection from '@/components/blog/HumanReflection';
 import SeriesNavigation from '@/components/blog/SeriesNavigation';
 import LiveSiteButton from '@/components/blog/LiveSiteButton';
+import MdxImage from '@/components/mdx/MdxImage';
+import { mdxRemoteOptions } from '@/lib/mdx-options';
 
 // Define the type for the params
 type Props = {
@@ -76,7 +78,7 @@ export async function generateMetadata(
 const components = {
   HumanReflection,
   LiveSiteButton,
-  // Add other custom components here
+  img: MdxImage,
 };
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
@@ -120,7 +122,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         )}
         
         <div className="prose dark:prose-invert prose-blue prose-lg max-w-none">
-          <MDXRemote source={post.content} components={components} />
+          <MDXRemote source={post.content} components={components} options={mdxRemoteOptions} />
         </div>
         
         {post.series && post.slug && (

@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import ProjectTechBadge from '@/components/ProjectTechBadge';
+import MdxImage from '@/components/mdx/MdxImage';
+import { mdxRemoteOptions } from '@/lib/mdx-options';
 import { Metadata } from 'next';
 
 // Generate metadata for each project page
@@ -43,6 +45,10 @@ export default function ProjectPage({ params }: {
     notFound();
   }
 
+  const mdxComponents = {
+    img: MdxImage,
+  };
+
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl">
       {/* Project header */}
@@ -72,18 +78,20 @@ export default function ProjectPage({ params }: {
         
         {/* Project links */}
         {project.links && project.links.length > 0 && (
-          <div className="flex gap-4 mb-8">
-            {project.links.map((link) => (
+          <div className="flex flex-wrap gap-4 mb-8">
+            {project.links.map((link) => {
+              const isExternal = link.url.startsWith('http');
+              return (
               <a 
                 key={link.url}
                 href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
+                {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 className="px-4 py-2 bg-gray-800 dark:bg-gray-700 text-white rounded hover:bg-gray-700 dark:hover:bg-gray-600 transition"
               >
                 {link.title}
               </a>
-            ))}
+              );
+            })}
           </div>
         )}
         
@@ -104,7 +112,7 @@ export default function ProjectPage({ params }: {
       
       {/* Project content */}
       <article className="prose prose-lg dark:prose-invert max-w-none">
-        <MDXRemote source={project.content} />
+        <MDXRemote source={project.content} components={mdxComponents} options={mdxRemoteOptions} />
       </article>
       
       {/* Target audience section */}

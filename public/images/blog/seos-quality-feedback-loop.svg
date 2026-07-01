@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 340" font-family="system-ui, -apple-system, sans-serif">
   <rect width="920" height="340" fill="#f8fafc" rx="12"/>
   <text x="460" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">Agent Quality Feedback Loop</text>
-  <text x="460" y="50" text-anchor="middle" font-size="11" fill="#64748b">Test hardening in PR #93  same PR as SEOS architecture</text>
+  <text x="460" y="50" text-anchor="middle" font-size="11" fill="#64748b">Test hardening in PR #93  same PR as SEOS architecture</text>
 
   <!-- Agent produces -->
   <rect x="40" y="80" width="160" height="64" rx="8" fill="#22c55e"/>
@@ -36,29 +36,29 @@
   <!-- Nightly -->
   <rect x="720" y="80" width="160" height="64" rx="8" fill="#1e293b"/>
   <text x="800" y="104" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Nightly visual.yml</text>
-  <text x="800" y="120" text-anchor="middle" font-size="9" fill="#94a3b8">desktop · tablet · mobile</text>
+  <text x="800" y="120" text-anchor="middle" font-size="9" fill="#94a3b8">desktop - tablet - mobile</text>
   <text x="800" y="134" text-anchor="middle" font-size="9" fill="#94a3b8">modal snapshots</text>
 
   <!-- Outcomes row -->
   <line x1="460" y1="156" x2="460" y2="180" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
 
   <rect x="120" y="182" width="200" height="56" rx="8" fill="#dcfce7" stroke="#22c55e"/>
-  <text x="220" y="206" text-anchor="middle" font-size="10" font-weight="600" fill="#15803d">Pass ’ fewer fix cycles</text>
-  <text x="220" y="222" text-anchor="middle" font-size="9" fill="#64748b">Agent output trusted · merge faster</text>
+  <text x="220" y="206" text-anchor="middle" font-size="10" font-weight="600" fill="#15803d">Pass - fewer fix cycles</text>
+  <text x="220" y="222" text-anchor="middle" font-size="9" fill="#64748b">Agent output trusted - merge faster</text>
 
   <rect x="360" y="182" width="200" height="56" rx="8" fill="#fee2e2" stroke="#ef4444"/>
-  <text x="460" y="206" text-anchor="middle" font-size="10" font-weight="600" fill="#b91c1c">Fail ’ review-findings</text>
+  <text x="460" y="206" text-anchor="middle" font-size="10" font-weight="600" fill="#b91c1c">Fail - review-findings</text>
   <text x="460" y="222" text-anchor="middle" font-size="9" fill="#64748b">Auto-fix agent amends PR once</text>
 
   <rect x="600" y="182" width="200" height="56" rx="8" fill="#dbeafe" stroke="#3b82f6"/>
-  <text x="700" y="206" text-anchor="middle" font-size="10" font-weight="600" fill="#1d4ed8">New gap ’ new test</text>
+  <text x="700" y="206" text-anchor="middle" font-size="10" font-weight="600" fill="#1d4ed8">New gap - new test</text>
   <text x="700" y="222" text-anchor="middle" font-size="9" fill="#64748b">Encode in agent-rules/ + regenerate</text>
 
   <!-- App fixes callout -->
   <rect x="40" y="260" width="840" height="64" rx="8" fill="#fff" stroke="#cbd5e1"/>
   <text x="460" y="282" text-anchor="middle" font-size="10" font-weight="700" fill="#475569">App fixes shipped alongside test hardening</text>
-  <text x="460" y="300" text-anchor="middle" font-size="9" fill="#64748b">Hide bottom nav when modals open · journal editor scroll + pinned save · artifact compression (compress:artifacts)</text>
-  <text x="460" y="316" text-anchor="middle" font-size="9" fill="#64748b">Better tests ’ better agent output ’ fewer agent runs ’ test investment pays for itself</text>
+  <text x="460" y="300" text-anchor="middle" font-size="9" fill="#64748b">Hide bottom nav when modals open - journal editor scroll + pinned save - artifact compression (compress:artifacts)</text>
+  <text x="460" y="316" text-anchor="middle" font-size="9" fill="#64748b">Better tests - better agent output - fewer agent runs - test investment pays for itself</text>
 
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#94a3b8"/></marker>

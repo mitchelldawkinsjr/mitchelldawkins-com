@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 480" font-family="system-ui, -apple-system, sans-serif">
   <rect width="920" height="480" fill="#f8fafc" rx="12"/>
   <text x="460" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">v1 Pipeline vs SEOS</text>
-  <text x="460" y="50" text-anchor="middle" font-size="11" fill="#64748b">Same repo, same human merge gate  different operating model</text>
+  <text x="460" y="50" text-anchor="middle" font-size="11" fill="#64748b">Same repo, same human merge gate  different operating model</text>
 
   <!-- v1 column -->
   <rect x="24" y="68" width="420" height="396" rx="8" fill="#fff" stroke="#94a3b8" stroke-width="1.5"/>
-  <text x="234" y="92" text-anchor="middle" font-size="13" font-weight="700" fill="#475569">v1  Issue #30</text>
+  <text x="234" y="92" text-anchor="middle" font-size="13" font-weight="700" fill="#475569">v1  Issue #30</text>
   <text x="234" y="108" text-anchor="middle" font-size="10" fill="#64748b">"One agent that writes code"</text>
 
   <rect x="44" y="124" width="380" height="40" rx="6" fill="#FFE8E8" stroke="#CA0000"/>
-  <text x="234" y="148" text-anchor="middle" font-size="10" fill="#A00000">Human: needs-spec ’ review ’ ready</text>
+  <text x="234" y="148" text-anchor="middle" font-size="10" fill="#A00000">Human: needs-spec - review - ready</text>
 
   <rect x="44" y="176" width="380" height="48" rx="6" fill="#dbeafe" stroke="#3b82f6"/>
   <text x="234" y="198" text-anchor="middle" font-size="10" font-weight="600" fill="#1d4ed8">Stage 1: OpenAI spec writer</text>
@@ -21,17 +21,17 @@
 
   <rect x="44" y="296" width="380" height="48" rx="6" fill="#f3e8ff" stroke="#a855f7"/>
   <text x="234" y="318" text-anchor="middle" font-size="10" font-weight="600" fill="#7e22ce">PR review: Bugbot + Ponytail + CI</text>
-  <text x="234" y="334" text-anchor="middle" font-size="9" fill="#64748b">No auto-fix · no test advisory · no docs agent</text>
+  <text x="234" y="334" text-anchor="middle" font-size="9" fill="#64748b">No auto-fix - no test advisory - no docs agent</text>
 
   <rect x="44" y="356" width="380" height="40" rx="6" fill="#A00000"/>
   <text x="234" y="380" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Human: merge PR</text>
 
   <rect x="44" y="408" width="380" height="40" rx="6" fill="#e2e8f0" stroke="#94a3b8"/>
-  <text x="234" y="432" text-anchor="middle" font-size="9" fill="#64748b">Deploy separate · no knowledge loop · edit prompts by hand</text>
+  <text x="234" y="432" text-anchor="middle" font-size="9" fill="#64748b">Deploy separate - no knowledge loop - edit prompts by hand</text>
 
   <!-- SEOS column -->
   <rect x="476" y="68" width="420" height="396" rx="8" fill="#fff" stroke="#22c55e" stroke-width="2"/>
-  <text x="686" y="92" text-anchor="middle" font-size="13" font-weight="700" fill="#15803d">SEOS  PR #93</text>
+  <text x="686" y="92" text-anchor="middle" font-size="13" font-weight="700" fill="#15803d">SEOS  PR #93</text>
   <text x="686" y="108" text-anchor="middle" font-size="10" fill="#64748b">"AI plans, builds, validates, deploys, learns"</text>
 
   <rect x="496" y="124" width="380" height="40" rx="6" fill="#CA0000"/>
@@ -43,11 +43,11 @@
 
   <rect x="496" y="236" width="380" height="48" rx="6" fill="#22c55e"/>
   <text x="686" y="258" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Auto: Coding agent + auto-ready</text>
-  <text x="686" y="274" text-anchor="middle" font-size="9" fill="#dcfce7">12+ composed context files · npm run agent:*</text>
+  <text x="686" y="274" text-anchor="middle" font-size="9" fill="#dcfce7">12+ composed context files - npm run agent:|</text>
 
   <rect x="496" y="296" width="380" height="48" rx="6" fill="#9333ea"/>
   <text x="686" y="318" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Auto: CI + Testing + Bugbot + Ponytail + Fix</text>
-  <text x="686" y="334" text-anchor="middle" font-size="9" fill="#ede9fe">Manual UI/A11y/Security · docs advisory</text>
+  <text x="686" y="334" text-anchor="middle" font-size="9" fill="#ede9fe">Manual UI/A11y/Security - docs advisory</text>
 
   <rect x="496" y="356" width="380" height="40" rx="6" fill="#A00000"/>
   <text x="686" y="380" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Human: merge PR (still)</text>
@@ -56,5 +56,5 @@
   <text x="686" y="432" text-anchor="middle" font-size="9" font-weight="600" fill="#fff">Auto: deploy-vps + health-check + append lessons</text>
 
   <!-- Arrow between columns -->
-  <text x="460" y="260" text-anchor="middle" font-size="24" fill="#94a3b8">’</text>
+  <text x="460" y="260" text-anchor="middle" font-size="24" fill="#94a3b8">-</text>
 </svg>

@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 400" font-family="system-ui, -apple-system, sans-serif">
   <rect width="920" height="400" fill="#f8fafc" rx="12"/>
   <text x="460" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">Context Composition Pipeline</text>
-  <text x="460" y="50" text-anchor="middle" font-size="11" fill="#64748b">One source of truth, many role-specific prompts  CI blocks drift</text>
+  <text x="460" y="50" text-anchor="middle" font-size="11" fill="#64748b">One source of truth, many role-specific prompts  CI blocks drift</text>
 
   <!-- Sources -->
   <rect x="24" y="72" width="200" height="120" rx="8" fill="#fff" stroke="#cbd5e1" stroke-width="1.5"/>
@@ -9,9 +9,9 @@
   <rect x="40" y="102" width="168" height="24" rx="4" fill="#f1f5f9"/>
   <text x="124" y="118" text-anchor="middle" font-size="10" fill="#334155">AGENT.md</text>
   <rect x="40" y="132" width="168" height="24" rx="4" fill="#f1f5f9"/>
-  <text x="124" y="148" text-anchor="middle" font-size="10" fill="#334155">agent-rules/*.md</text>
+  <text x="124" y="148" text-anchor="middle" font-size="10" fill="#334155">agent-rules/|.md</text>
   <rect x="40" y="162" width="168" height="24" rx="4" fill="#f1f5f9"/>
-  <text x="124" y="178" text-anchor="middle" font-size="10" fill="#334155">agent-overrides/*-tail.md</text>
+  <text x="124" y="178" text-anchor="middle" font-size="10" fill="#334155">agent-overrides/|-tail.md</text>
 
   <!-- Manifest -->
   <rect x="260" y="72" width="180" height="120" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
@@ -35,7 +35,7 @@
   <text x="794" y="112" text-anchor="middle" font-size="9" fill="#334155">ai-spec-context.md</text>
   <text x="794" y="128" text-anchor="middle" font-size="9" fill="#334155">ai-implement-context.md</text>
   <text x="794" y="144" text-anchor="middle" font-size="9" fill="#334155">ai-bugbot-context.md</text>
-  <text x="794" y="160" text-anchor="middle" font-size="9" fill="#334155">agent-context/*.md</text>
+  <text x="794" y="160" text-anchor="middle" font-size="9" fill="#334155">agent-context/|.md</text>
   <text x="794" y="176" text-anchor="middle" font-size="8" fill="#64748b">12+ composed files</text>
 
   <!-- Arrows between top boxes -->
@@ -69,8 +69,8 @@
 
   <!-- Rule files list -->
   <text x="60" y="320" font-size="10" font-weight="600" fill="#475569">Shared rule files (edit once):</text>
-  <text x="60" y="340" font-size="9" fill="#64748b">product-rules · architecture-rules · ui-rules · testing-rules · accessibility-rules · security-rules · documentation-rules · commit-rules</text>
-  <text x="60" y="358" font-size="9" fill="#64748b">Change testing-rules.md once ’ regenerate ’ spec, implement, bugbot, and test agent all stay in sync</text>
+  <text x="60" y="340" font-size="9" fill="#64748b">product-rules - architecture-rules - ui-rules - testing-rules - accessibility-rules - security-rules - documentation-rules - commit-rules</text>
+  <text x="60" y="358" font-size="9" fill="#64748b">Change testing-rules.md once - regenerate - spec, implement, bugbot, and test agent all stay in sync</text>
 
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
