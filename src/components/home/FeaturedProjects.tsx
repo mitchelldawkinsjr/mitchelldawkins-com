@@ -6,6 +6,13 @@ import { useState, useEffect } from 'react';
 
 const projects = [
   {
+    title: 'Thinker',
+    description: 'A microlearning PWA that replaces doomscrolling with a one-card feed of ideas, news, Gutenberg books, and free learning sites — plus catalog-grounded Ask via OpenAI or Ollama.',
+    image: '/images/projects/thinker/header.png',
+    link: '/projects/thinker',
+    tags: ['React','TypeScript','Vite','PWA','Docker','OpenAI','Ollama'],
+  },
+  {
     title: 'Wordpress Solutions Cloud',
     description: 'A self-hosted VPS platform for deploying and managing a fleet of WordPress sites, each running as an isolated Docker stack with Git-driven deploys, centralized MainWP management, automated backups, and a FastAPI + React control plane.',
     image: '/images/projects/360-web-solutions-cloud/header.png',

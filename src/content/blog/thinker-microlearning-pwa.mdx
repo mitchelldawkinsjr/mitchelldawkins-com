@@ -1,0 +1,112 @@
+---
+title: "Thinker: Replace Doomscrolling with Microlearning"
+date: "2026-07-22"
+excerpt: "I built Thinker — a microlearning PWA that mixes bite-sized ideas, news, Gutenberg books, and free learning sites into a one-card feed. Remembers this device for today; tomorrow starts fresh."
+coverImage: "/images/blog/thinker-blog-cover.png"
+coverImageFit: cover
+series: "Low to No Cost Solutions"
+---
+
+Phone in hand. Thumb on autopilot. Twenty minutes gone and I couldn't name a single useful thing I'd learned.
+
+That loop is the product most social feeds are optimized for. I wanted the opposite: **stay tapped in without doomscrolling** — short ideas on AI, sports, markets, and history, then a clean jump to the real source (Gutenberg, Quanta, Farnam Street, SEP) instead of another endless tab.
+
+So I shipped **[Thinker](https://thinker.360web.cloud)** — a Progressive Web App you can install to the home screen. Technical deep dive: **[Thinker project page](/projects/thinker)**.
+
+<LiveSiteButton href="https://thinker.360web.cloud">Open Thinker</LiveSiteButton>
+
+## The product in one sentence
+
+One idea at a time. Keep what matters. Open the source when you want depth. Forget the rest when the day rolls over.
+
+<img src="/images/projects/thinker/home.png" alt="Thinker homepage hero: Replace doomscrolling with microlearning, floating idea cards, Start thinking CTA" />
+
+## Why not another reading list?
+
+Bookmarks pile up. RSS readers become inbox zero theater. “Read later” becomes never.
+
+Thinker’s bet is **session design**, not another archive:
+
+| Behavior | Social feed | Thinker |
+|----------|-------------|---------|
+| Unit of attention | Infinite scroll | One card |
+| Memory | Algorithmic trap | Device-local day session |
+| Destination | More of the same app | Outbound to free source sites |
+| Freshness | Engagement bait | News expires; tomorrow reshuffles |
+
+The feed is a **deck**, not a wall. You swipe through ideas, news, scripture, curated free sites, Gutenberg books, and a few brain games — interleaved so no single stream owns the night.
+
+<img src="/images/projects/thinker/feed.png" alt="Thinker feed showing one idea card at a time with Keep and Ask actions, mix stats for ideas news scripture sites books games" />
+
+## What’s in the mix
+
+Live on the device today (counts move as ingest runs):
+
+- **Ideas** — curated micro-lessons across 14 topics (AI agents, LLMs, RAG, NBA, WNBA, football film, finance, mental models, and more)
+- **News** — RSS-ingested items with expiry so headlines don’t go stale
+- **Scripture** — short passages for slower reading
+- **Free sites** — a Knowledge Lover / Go Highbrow–style shelf
+- **Gutenberg** — public-domain books linked by shelf and topic
+- **Brain games** — tiny breaks that still feel intentional
+
+Topics are first-class. Filter the feed to `#AI Agents & Tooling` or `#Finance & Markets` when you want a lane; leave it open when you want the full mix.
+
+## Ask without inventing the internet
+
+Every card can open **Ask**. The important design choice: the model is a **research guide over Thinker’s catalog**, not a free-roaming chatbot.
+
+1. **Instant path** — keyword match against topics, resources, and Gutenberg (&lt;5ms)
+2. **LLM refine** — OpenAI (`gpt-4o-mini`) preferred, Ollama fallback
+3. **Contract** — short answer, dig-deeper chips, links **only** from the catalog
+
+The API key never ships in the browser bundle. Nginx on the VPS injects `Authorization` for `/api/openai/*`. If OpenAI isn’t configured, local/VPS Ollama still works. If neither is up, the rest of the app is fine — Ask falls back to the instant catalog path.
+
+<img src="/images/blog/thinker-ask-flow.svg" alt="Ask flow: user question, exploreInstant catalog match, then OpenAI preferred or Ollama fallback, catalog-only links" />
+
+## Remembers today; tomorrow starts fresh
+
+No accounts. No cloud sync tax. Just `localStorage` with a deliberate split:
+
+<img src="/images/blog/thinker-day-session.svg" alt="Device memory diagram: today-only day key, cursor, and seen vs overnight kept, hidden, and subscriptions" />
+
+- **Today only** — day key, feed cursor, “seen” rotation
+- **Survives overnight** — Kept bookmarks, permanent dismissals, custom subscriptions
+
+Leave mid-feed and Home becomes **Continue · card N**. Wake up tomorrow and the deck is new again. Kept thoughts stay.
+
+That matches how I actually want to use a phone: **a daily practice**, not a second inbox.
+
+## Built to run cheap on my own cloud
+
+Thinker lives at [thinker.360web.cloud](https://thinker.360web.cloud) on the same VPS pattern as my other [360 Web Solutions Cloud](/projects/360-web-solutions-cloud) apps.
+
+| Piece | Choice |
+|-------|--------|
+| UI | React 19 + Vite + TypeScript |
+| Routing | react-router |
+| Install | `vite-plugin-pwa` |
+| Serve | nginx in Docker |
+| Deploy | push `main` → GitHub Actions → VPS compose |
+| Content refresh | weekly Actions ingest for news / scriptures / book ideas |
+
+<img src="/images/blog/thinker-architecture.svg" alt="Thinker architecture: PWA client, content layer, nginx edge proxies to OpenAI Ollama and RSS feed proxy" />
+
+Content is mostly **data in the repo** (`src/data/` plus `public/content/*.json`). Ingest scripts refresh JSON on a schedule; the client mixes it locally. No per-user database. No engagement graph. The cost curve stays flat.
+
+## Install it like an app
+
+On your phone: open the live site → browser menu → **Add to Home Screen**. You get the offline shell, the thinking-man icon, and a feed that feels like a product — not a tab you lose.
+
+<img src="/images/projects/thinker/home-mobile.png" alt="Thinker mobile homepage with floating idea cards and Start thinking button" />
+
+## What I’m optimizing for
+
+Not “time on site.” Not streaks that guilt you.
+
+I’m optimizing for **minutes that leave a residue**: a takeaway I can Keep, a source I actually open, a question Ask can route to SEP or Quanta instead of a comment section.
+
+<HumanReflection>
+Doomscrolling isn’t a willpower failure for me it’s a UI that wins by default. Thinker is me designing a different default: one card, one idea, one outbound link to something worth reading. If it only replaces ten minutes of empty scroll a day, it already paid for itself.
+</HumanReflection>
+
+Try it: **[thinker.360web.cloud](https://thinker.360web.cloud)** · Source: **[github.com/mitchelldawkinsjr/thinker](https://github.com/mitchelldawkinsjr/thinker)** · Architecture notes: **[/projects/thinker](/projects/thinker)**.

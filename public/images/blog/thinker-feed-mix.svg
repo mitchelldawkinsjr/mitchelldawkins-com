@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 520" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="920" height="520" fill="#e6e9ef" rx="12"/>
+  <text x="460" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#12161e">Mixed feed  weighted interleave</text>
+  <text x="460" y="56" text-anchor="middle" font-size="12" fill="#5a6472">One card at a time · unseen rises · news expires · day-local shuffle</text>
+
+  <!-- Queues -->
+  <text x="44" y="96" font-size="11" font-weight="700" fill="#5a6472">SOURCE QUEUES</text>
+
+  <rect x="44" y="110" width="130" height="56" rx="8" fill="#1a2332"/>
+  <text x="109" y="134" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Ideas</text>
+  <text x="109" y="152" text-anchor="middle" font-size="10" fill="#94a3b8">weight 2</text>
+
+  <rect x="190" y="110" width="130" height="56" rx="8" fill="#1a2332"/>
+  <text x="255" y="134" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">News</text>
+  <text x="255" y="152" text-anchor="middle" font-size="10" fill="#94a3b8">weight 2</text>
+
+  <rect x="336" y="110" width="130" height="56" rx="8" fill="#1a2332"/>
+  <text x="401" y="134" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Scripture</text>
+  <text x="401" y="152" text-anchor="middle" font-size="10" fill="#94a3b8">weight 1</text>
+
+  <rect x="482" y="110" width="130" height="56" rx="8" fill="#1a2332"/>
+  <text x="547" y="134" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Sites</text>
+  <text x="547" y="152" text-anchor="middle" font-size="10" fill="#94a3b8">weight 1</text>
+
+  <rect x="628" y="110" width="130" height="56" rx="8" fill="#1a2332"/>
+  <text x="693" y="134" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Books</text>
+  <text x="693" y="152" text-anchor="middle" font-size="10" fill="#94a3b8">weight 1</text>
+
+  <rect x="774" y="110" width="102" height="56" rx="8" fill="#1a2332"/>
+  <text x="825" y="134" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Games</text>
+  <text x="825" y="152" text-anchor="middle" font-size="10" fill="#94a3b8">weight 1</text>
+
+  <!-- Arrows down -->
+  <line x1="109" y1="166" x2="300" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="255" y1="166" x2="380" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="401" y1="166" x2="460" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="547" y1="166" x2="540" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="693" y1="166" x2="620" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="825" y1="166" x2="700" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <!-- Mixer -->
+  <rect x="260" y="214" width="400" height="70" rx="12" fill="#ff4d3a"/>
+  <text x="460" y="244" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">buildMixedFeed()</text>
+  <text x="460" y="266" text-anchor="middle" font-size="11" fill="#ffe8e4">seededShuffle · filterHidden · weightedInterleave · topic filter</text>
+
+  <line x1="460" y1="284" x2="460" y2="318" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Deck -->
+  <rect x="120" y="320" width="680" height="100" rx="12" fill="#f4f6fa" stroke="#12161e" stroke-width="1.5"/>
+  <text x="140" y="348" font-size="11" font-weight="700" fill="#5a6472">ONE-CARD DECK</text>
+  <rect x="140" y="360" width="100" height="40" rx="8" fill="#1a2332"/>
+  <text x="190" y="385" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Idea</text>
+  <rect x="256" y="360" width="100" height="40" rx="8" fill="#2a3548"/>
+  <text x="306" y="385" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">News</text>
+  <rect x="372" y="360" width="100" height="40" rx="8" fill="#1a2332"/>
+  <text x="422" y="385" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Idea</text>
+  <rect x="488" y="360" width="100" height="40" rx="8" fill="#2a3548"/>
+  <text x="538" y="385" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Book</text>
+  <rect x="604" y="360" width="100" height="40" rx="8" fill="#1a2332"/>
+  <text x="654" y="385" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Site</text>
+  <text x="740" y="385" font-size="18" fill="#ff4d3a" font-weight="700">’</text>
+
+  <!-- Day session -->
+  <rect x="120" y="440" width="680" height="56" rx="10" fill="#fff" stroke="#ff4d3a" stroke-width="1.5"/>
+  <text x="460" y="464" text-anchor="middle" font-size="13" font-weight="600" fill="#12161e">Day session: cursor + seen live on this device today</text>
+  <text x="460" y="484" text-anchor="middle" font-size="11" fill="#5a6472">Kept / hidden survive overnight · tomorrow starts fresh</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+</svg>

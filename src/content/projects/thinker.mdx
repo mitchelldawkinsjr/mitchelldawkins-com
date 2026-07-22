@@ -1,0 +1,214 @@
+---
+title: "Thinker"
+description: "A microlearning PWA that replaces doomscrolling with a one-card feed of ideas, news, Gutenberg books, and free learning sites — plus catalog-grounded Ask via OpenAI or Ollama."
+date: "2026-07-22"
+status: "Active"
+featured: true
+priority: 1
+slug: "thinker"
+headerImage: "/images/projects/thinker/header.png"
+tech:
+  - React
+  - TypeScript
+  - Vite
+  - PWA
+  - nginx
+  - Docker
+  - OpenAI
+  - Ollama
+  - GitHub Actions
+tags:
+  - Microlearning
+  - PWA
+  - Knowledge
+  - AI
+  - Self-Hosted
+audience:
+  - Builders who want focused learning
+  - People replacing social scroll habits
+  - Developers exploring catalog-grounded Ask UIs
+  - Anyone who prefers free primary sources
+links:
+  - title: "Live App"
+    url: "https://thinker.360web.cloud"
+  - title: "GitHub Repository"
+    url: "https://github.com/mitchelldawkinsjr/thinker"
+  - title: "Blog: Replace Doomscrolling with Microlearning"
+    url: "/blog/thinker-microlearning-pwa"
+---
+
+## Introduction
+
+**Thinker** is a Progressive Web App for intentional microlearning. Instead of an infinite scroll, it presents **one card at a time** — curated ideas, ingested news, scripture, free learning sites, Project Gutenberg books, and short brain games — then pushes you toward the real source when you want depth.
+
+**Live:** [https://thinker.360web.cloud](https://thinker.360web.cloud)  
+**Source:** [mitchelldawkinsjr/thinker](https://github.com/mitchelldawkinsjr/thinker)
+
+For the product narrative, see the companion post: [Thinker: Replace Doomscrolling with Microlearning](/blog/thinker-microlearning-pwa).
+
+**Status: Active** — Deployed on 360 Web Solutions Cloud with weekly content ingest and optional Ask (OpenAI preferred, Ollama fallback).
+
+<img src="/images/projects/thinker/home.png" alt="Thinker homepage with brand hero, floating idea cards, and Start thinking CTA" />
+
+## Problem & Solution
+
+### The Problem
+
+- **Doomscrolling wins by default** — feeds optimize for time-on-app, not residue of learning
+- **Read-later piles never shrink** — bookmarks and RSS become another inbox
+- **Generic AI chat invents links** — answers without a trustworthy outbound shelf
+- **Accounts and sync** are overkill for a personal daily practice
+
+### The Solution
+
+1. **One-card deck** — mixed feed with weighted interleave across content kinds  
+2. **Day-local memory** — cursor and “seen” reset each calendar day; Kept/hidden survive  
+3. **Catalog-grounded Ask** — instant keyword path, then LLM refine restricted to known URLs  
+4. **Static + ingest** — content in-repo / JSON files; no per-user database  
+5. **Self-hosted PWA** — Docker + nginx on VPS, installable to the home screen  
+
+## Architecture Overview
+
+<img src="/images/blog/thinker-architecture.svg" alt="Thinker system architecture: React PWA, content layer, nginx edge, OpenAI Ollama and feed proxy backends" />
+
+| Layer | Implementation |
+|-------|----------------|
+| Client | React 19, react-router, TypeScript, Vite |
+| Install / offline | `vite-plugin-pwa` (service worker + webmanifest) |
+| Content | `src/data/*` + `public/content/{news,scriptures,book-ideas}.json` |
+| Edge | nginx SPA routing, healthz, aggressive `/assets/` cache |
+| Ask | `/api/openai/*` (server-side key) · `/api/ollama/*` · instant `exploreInstant()` |
+| User feeds | Node sidecar `/api/feed-proxy` for CORS-safe RSS |
+| Deploy | `.github/workflows/deploy-vps.yml` → Docker Compose on VPS |
+| Ingest | Weekly Actions: news + scriptures + book ideas → commit JSON |
+
+## Mixed Feed
+
+The feed is assembled client-side by `buildMixedFeed()`:
+
+<img src="/images/blog/thinker-feed-mix.svg" alt="Weighted interleave of ideas news scripture sites books games into a one-card deck with day session" />
+
+**Item kinds:** `idea` · `news` · `scripture` · `resource` · `book` · `game`
+
+Key behaviors:
+
+- **Weighted interleave** — ideas/news pulled more often without duplicates  
+- **Seeded shuffle** — stable-enough day mix; **Reshuffle** bumps a key  
+- **Unseen rises / news expires** — freshness without an engagement algorithm  
+- **Topic filter** — URL `?topic=` plus subscription affinities  
+- **Hide** — permanent dismiss from the pool; **Keep** — bookmark for later  
+
+<img src="/images/projects/thinker/feed.png" alt="Thinker feed UI with idea card, Keep and Ask actions, and mix counts" />
+
+## Day Session & Device Memory
+
+No auth. Persistence is `localStorage` with an intentional split:
+
+<img src="/images/blog/thinker-day-session.svg" alt="Today-only day key cursor and seen versus overnight kept hidden and subscriptions" />
+
+| Key / concern | Lifetime | Role |
+|---------------|----------|------|
+| `thinker-day-v1` | Today | Calendar day marker; roll clears session memory |
+| `thinker-day-cursor-v1` | Today | Card index per topic for Continue CTA |
+| Seen / rotation | Today | Avoid immediate re-shows in the mix |
+| `thinker-kept` | Forever | Bookmarked card IDs |
+| Hidden | Forever | Permanently removed from pool |
+| Subscriptions | Forever | Custom sites / feeds / preferences |
+
+`ensureFreshDay()` runs on open: if the local calendar day changed, wipe seen + cursor; leave Kept and hidden alone.
+
+## Ask: Instant + LLM Refine
+
+<img src="/images/blog/thinker-ask-flow.svg" alt="Ask pipeline from question through instant catalog match to OpenAI or Ollama refine" />
+
+### Instant path (`exploreInstant`)
+
+- Tokenize question + optional idea/topic context  
+- Score topics, browseable resources, Gutenberg meta  
+- Always return at least one catalog link (SEP fallback)  
+- Target latency: **under 5ms**
+
+### LLM refine (same JSON contract)
+
+```json
+{
+  "answer": "max 50 words",
+  "digDeeper": ["q1", "q2"],
+  "links": [{"title": "t", "url": "https://...", "why": "short"}],
+  "topics": ["topic-id"]
+}
+```
+
+Rules enforced in the system prompt: **use only catalog URLs**, never invent links, no social-feed URLs, tight token budgets (`max_tokens` / `num_predict` ~220).
+
+| Provider | When | How |
+|----------|------|-----|
+| OpenAI `gpt-4o-mini` | Preferred when `OPENAI_API_KEY` set | nginx proxies to `api.openai.com`; key not in JS |
+| Ollama | Fallback | `/api/ollama/` → host/VPS runtime |
+| Instant only | Neither available | App still fully usable |
+
+## Topics & Content Model
+
+Fourteen built-in topics (AI agents, LLMs, RAG, AI frontend craft, NBA, WNBA, football film, sports biz, current events, history, politics, finance, mental models, building products) each with color/accent and curated idea pools.
+
+An `Idea` carries hook → body/lesson → takeaway → example, plus `source` / `sourceUrl` / optional `gutenbergId` and `readMinutes`.
+
+Weekly CI (`ingest-news.yml`) refreshes:
+
+- `public/content/news.json`
+- `public/content/scriptures.json`
+- `public/content/book-ideas.json`
+
+## Production Deploy
+
+| Item | Detail |
+|------|--------|
+| URL | `https://thinker.360web.cloud` |
+| DNS | CNAME `thinker` → `360web.cloud` |
+| Runtime | Docker (`Dockerfile` multi-stage: Node build → nginx Alpine) |
+| Network | Shared `360ws-network` with sibling 360web apps |
+| Health | `GET /healthz` → `ok` |
+| Secrets | `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`; runtime `.env` for OpenAI/Ollama |
+
+```bash
+cd /opt/thinker
+docker compose -f docker-compose.prod.yml up -d --build
+```
+
+PWA assets (`sw.js`, `manifest.webmanifest`) are served with `Cache-Control: no-cache`; hashed Vite assets are immutable long-cache.
+
+## Key Features
+
+- **Installable PWA** — Add to Home Screen; offline shell  
+- **One-card microlearning deck** — mixed content, not a timeline  
+- **Continue today** — resume mid-feed on the same device  
+- **Kept shelf** — durable bookmarks without an account  
+- **Resources + Gutenberg** — curated outbound destinations  
+- **Ask** — instant catalog paths + optional cheap LLM refine  
+- **Custom subscriptions** — user sites/feeds via feed proxy  
+- **Self-hosted cost curve** — static app + scheduled ingest  
+
+<img src="/images/projects/thinker/home-mobile.png" alt="Thinker on mobile showing hero and floating idea cards" />
+<img src="/images/projects/thinker/icon.png" alt="Thinker PWA icon: contemplative profile with coral idea accents" />
+
+## Local Development
+
+```bash
+git clone git@github.com:mitchelldawkinsjr/thinker.git
+cd thinker
+cp .env.example .env   # optional — Ask (OpenAI or Ollama)
+npm install
+npm run dev
+```
+
+Optional Ask env:
+
+```bash
+OPENAI_API_KEY=sk-...
+OPENAI_MODEL=gpt-4o-mini
+# or
+OLLAMA_URL=http://127.0.0.1:11434
+VITE_OLLAMA_MODEL=phi3:mini
+```
+
+Without either, Feed / Topics / Resources / Kept still work; Ask uses the instant catalog path.
