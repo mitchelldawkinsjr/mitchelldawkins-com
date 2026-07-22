@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 620" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="920" height="620" fill="#f9faf0" rx="12"/>
+  <text x="460" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#173d00">Fasted  system architecture</text>
+  <text x="460" y="56" text-anchor="middle" font-size="12" fill="#506442">Offline-first PWA · optional Supabase sync · groups · push reminders</text>
+
+  <!-- Client -->
+  <rect x="24" y="80" width="872" height="110" rx="10" fill="#edefe5" stroke="#173d00" stroke-width="1.5"/>
+  <text x="44" y="104" font-size="11" font-weight="700" fill="#173d00">CLIENT  installable PWA (React + Vite + Tailwind)</text>
+  <rect x="44" y="118" width="110" height="50" rx="8" fill="#173d00"/>
+  <text x="99" y="148" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Today</text>
+  <rect x="168" y="118" width="110" height="50" rx="8" fill="#29560d"/>
+  <text x="223" y="148" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Calendar</text>
+  <rect x="292" y="118" width="110" height="50" rx="8" fill="#29560d"/>
+  <text x="347" y="148" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Journal</text>
+  <rect x="416" y="118" width="110" height="50" rx="8" fill="#29560d"/>
+  <text x="471" y="148" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Progress</text>
+  <rect x="540" y="118" width="110" height="50" rx="8" fill="#29560d"/>
+  <text x="595" y="148" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Phases</text>
+  <rect x="664" y="118" width="100" height="50" rx="8" fill="#29560d"/>
+  <text x="714" y="148" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Groups</text>
+  <rect x="778" y="118" width="100" height="50" rx="8" fill="#735c00"/>
+  <text x="828" y="148" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Settings</text>
+
+  <line x1="460" y1="190" x2="460" y2="218" stroke="#73796b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Local data -->
+  <rect x="24" y="220" width="430" height="130" rx="10" fill="#fff" stroke="#173d00" stroke-width="1.5"/>
+  <text x="44" y="244" font-size="11" font-weight="700" fill="#173d00">LOCAL  always works offline</text>
+  <rect x="44" y="260" width="390" height="36" rx="6" fill="#bbf297"/>
+  <text x="239" y="283" text-anchor="middle" font-size="12" font-weight="600" fill="#173d00">localStorage progress JSON</text>
+  <text x="44" y="320" font-size="11" fill="#42493c">check-ins · journal · badges · journeys · settings · meal photos (IDB)</text>
+  <text x="44" y="338" font-size="11" fill="#42493c">Phase templates + daily plan computed on device</text>
+
+  <rect x="470" y="220" width="426" height="130" rx="10" fill="#fff" stroke="#735c00" stroke-width="1.5"/>
+  <text x="490" y="244" font-size="11" font-weight="700" fill="#735c00">PLAN ENGINE</text>
+  <text x="490" y="272" font-size="12" fill="#191d16">8 phase templates ’ schedule patterns</text>
+  <text x="490" y="294" font-size="12" fill="#191d16">weekday / Daniel / rotating / prayer days</text>
+  <text x="490" y="316" font-size="12" fill="#191d16">Today instructions + meditation verse</text>
+  <text x="490" y="338" font-size="12" fill="#191d16">Streaks · milestones · mood visualizer</text>
+
+  <line x1="240" y1="350" x2="240" y2="378" stroke="#73796b" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="680" y1="350" x2="680" y2="378" stroke="#73796b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Optional cloud -->
+  <rect x="24" y="380" width="872" height="120" rx="10" fill="#173d00"/>
+  <text x="44" y="404" font-size="11" font-weight="700" fill="#fed65b">OPTIONAL CLOUD  Supabase on VPS (sign-in)</text>
+  <rect x="44" y="420" width="200" height="58" rx="8" fill="#29560d"/>
+  <text x="144" y="445" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Auth + sync</text>
+  <text x="144" y="463" text-anchor="middle" font-size="10" fill="#bbf297">user_progress JSON</text>
+  <rect x="260" y="420" width="200" height="58" rx="8" fill="#29560d"/>
+  <text x="360" y="445" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Groups</text>
+  <text x="360" y="463" text-anchor="middle" font-size="10" fill="#bbf297">shared journal · covenants</text>
+  <rect x="476" y="420" width="200" height="58" rx="8" fill="#29560d"/>
+  <text x="576" y="445" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Meal images</text>
+  <text x="576" y="463" text-anchor="middle" font-size="10" fill="#bbf297">storage bucket</text>
+  <rect x="692" y="420" width="182" height="58" rx="8" fill="#735c00"/>
+  <text x="783" y="445" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Web Push</text>
+  <text x="783" y="463" text-anchor="middle" font-size="10" fill="#ffe088">daily reminders</text>
+
+  <text x="460" y="540" text-anchor="middle" font-size="12" fill="#42493c">Deploy: push main ’ Docker PWA + migrate Supabase · fasted.360web.cloud</text>
+  <text x="460" y="562" text-anchor="middle" font-size="11" fill="#73796b">Also the production reference for SEOS (agent OS) workflows</text>
+  <text x="460" y="596" text-anchor="middle" font-size="11" fill="#506442">Fasting is a spiritual discipline, not medical treatment</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#73796b"/>
+    </marker>
+  </defs>
+</svg>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 480" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="920" height="480" fill="#f9faf0" rx="12"/>
+  <text x="460" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#173d00">Fasted Journey  8 phases · 190 days</text>
+  <text x="460" y="56" text-anchor="middle" font-size="12" fill="#506442">June 13  December 19, 2026 · each phase has schedule, food rules, prayer focus</text>
+
+  <!-- Phase pills -->
+  <rect x="24" y="84" width="210" height="70" rx="10" fill="#8397b8"/>
+  <text x="129" y="112" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">1 · Daniel 1</text>
+  <text x="129" y="132" text-anchor="middle" font-size="10" fill="#edf2ff">29d · Wed water fast</text>
+
+  <rect x="246" y="84" width="210" height="70" rx="10" fill="#735c00"/>
+  <text x="351" y="112" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">2 · David's Fast</text>
+  <text x="351" y="132" text-anchor="middle" font-size="10" fill="#ffe088">28d · Wed+Fri</text>
+
+  <rect x="468" y="84" width="210" height="70" rx="10" fill="#4b5f7e"/>
+  <text x="573" y="112" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">3 · First Daniel</text>
+  <text x="573" y="132" text-anchor="middle" font-size="10" fill="#dbeafe">21d consecutive</text>
+
+  <rect x="690" y="84" width="206" height="70" rx="10" fill="#ba1a1a"/>
+  <text x="793" y="112" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">4 · Joel</text>
+  <text x="793" y="132" text-anchor="middle" font-size="10" fill="#ffdad6">28d · Mon+Thu</text>
+
+  <rect x="24" y="170" width="210" height="70" rx="10" fill="#334865"/>
+  <text x="129" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">5 · Isaiah 58</text>
+  <text x="129" y="218" text-anchor="middle" font-size="10" fill="#dbeafe">21d · service + Wed</text>
+
+  <rect x="246" y="170" width="210" height="70" rx="10" fill="#e9c349"/>
+  <text x="351" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="#191d16">6 · Second Daniel</text>
+  <text x="351" y="218" text-anchor="middle" font-size="10" fill="#574500">21d + daily walk</text>
+
+  <rect x="468" y="170" width="210" height="70" rx="10" fill="#021a35"/>
+  <text x="573" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">7 · Esther</text>
+  <text x="573" y="218" text-anchor="middle" font-size="10" fill="#dbeafe">21d · rotating fasts</text>
+
+  <rect x="690" y="170" width="206" height="70" rx="10" fill="#574500"/>
+  <text x="793" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">8 · Year-End</text>
+  <text x="793" y="218" text-anchor="middle" font-size="10" fill="#ffe088">21d · consecrate</text>
+
+  <!-- Flow -->
+  <rect x="120" y="280" width="680" height="150" rx="12" fill="#edefe5" stroke="#173d00" stroke-width="1.5"/>
+  <text x="460" y="312" text-anchor="middle" font-size="13" font-weight="700" fill="#173d00">Daily loop</text>
+
+  <rect x="150" y="332" width="130" height="70" rx="8" fill="#173d00"/>
+  <text x="215" y="362" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Plan day</text>
+  <text x="215" y="382" text-anchor="middle" font-size="10" fill="#bbf297">instructions</text>
+
+  <text x="300" y="372" font-size="20" fill="#173d00">’</text>
+
+  <rect x="320" y="332" width="130" height="70" rx="8" fill="#29560d"/>
+  <text x="385" y="362" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Pray / fast</text>
+  <text x="385" y="382" text-anchor="middle" font-size="10" fill="#bbf297">meditation</text>
+
+  <text x="470" y="372" font-size="20" fill="#173d00">’</text>
+
+  <rect x="490" y="332" width="130" height="70" rx="8" fill="#29560d"/>
+  <text x="555" y="362" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Check-in</text>
+  <text x="555" y="382" text-anchor="middle" font-size="10" fill="#bbf297">streak + mood</text>
+
+  <text x="640" y="372" font-size="20" fill="#173d00">’</text>
+
+  <rect x="660" y="332" width="120" height="70" rx="8" fill="#735c00"/>
+  <text x="720" y="362" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Journal</text>
+  <text x="720" y="382" text-anchor="middle" font-size="10" fill="#ffe088">reflect</text>
+
+  <text x="460" y="460" text-anchor="middle" font-size="12" fill="#506442">Custom journeys supported in Settings · default journey is locked</text>
+</svg>

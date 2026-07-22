@@ -1,0 +1,118 @@
+---
+title: "Fasted: A 190-Day Biblical Fasting Companion"
+date: "2026-07-22"
+excerpt: "I built Fasted — an offline-first PWA that walks a June–December biblical fasting journey day by day: phase instructions, scripture, check-ins, journal, streaks, and optional group sync."
+coverImage: "/images/blog/fasted-blog-cover.png"
+coverImageFit: cover
+series: "Low to No Cost Solutions"
+---
+
+Most fasting plans live in a PDF you open once and forget, or a group chat that goes quiet by week three.
+
+I wanted something that shows up on the home screen every morning and answers one question: **what does today ask of me?**
+
+So I shipped **[Fasted](https://fasted.360web.cloud)** — a Progressive Web App for a **190-day biblical fasting journey** (June 13 – December 19, 2026). Eight phases. Daily instructions. Scripture. Check-ins. A journal. Progress that prefers grace over guilt.
+
+Technical deep dive: **[Fasted project page](/projects/fasted)**.
+
+<LiveSiteButton href="https://fasted.360web.cloud">Open Fasted</LiveSiteButton>
+
+## The product in one sentence
+
+Open the app → see today’s phase, fast type, and prayer focus → check in when you’ve walked it → journal what God is doing — offline by default, cloud when you want community.
+
+<img src="/images/projects/fasted/today.png" alt="Fasted Today screen showing David's Fast phase, sunrise-to-sunset instructions, and check-in" />
+
+## Why an app instead of a spreadsheet?
+
+A long fast fails in the gaps between motivation spikes. The design problem isn’t “more content.” It’s **daily clarity**:
+
+| Need | What Fasted does |
+|------|------------------|
+| What am I doing today? | Phase card + instructions + beverage/food rules |
+| What do I pray? | Prayer focus + daily meditation verse |
+| Did I show up? | Check-in → streak + sacred milestones |
+| What am I learning? | Journal (reflection, prayer, gratitude, food, fitness) |
+| Where am I going? | Calendar + eight color-coded phases |
+
+<img src="/images/blog/fasted-journey-phases.svg" alt="Eight Fasted journey phases from Daniel 1 through Year-End Consecration with daily loop" />
+
+## Eight phases, one journey
+
+The default **Fasted Journey** chains eight templates — Daniel patterns, David’s seeking fast, Joel repentance, Isaiah 58 compassion, Esther preparation, year-end consecration — each with its own schedule pattern (weekday sunrise-to-sunset, consecutive Daniel, rotating weekly, prayer days).
+
+<img src="/images/projects/fasted/phases.png" alt="Fasted Journey phases grid showing all eight phases with scripture, schedule, and prayer focus" />
+
+Settings also supports **custom multi-phase journeys** if you need a different path. The built-in plan stays locked so the shared calendar stays coherent for groups walking it together.
+
+## Today is the product
+
+Calendar and phases matter, but **Today** is the home screen:
+
+- Current phase artwork and status (e.g. *Fast Day: Water, Coffee & Tea*)
+- Instructions computed from the phase schedule pattern
+- Meditation verse that changes with the calendar date
+- Prayer focus and daily encouragement
+- Check-in for the spiritual rhythm
+- Jump into morning reflection / journal tags
+
+<img src="/images/projects/fasted/calendar.png" alt="Fasted calendar with phase chips and fast-day water drop markers" />
+
+Water drops mark fast days. Green checks mark check-ins. Tap a day to jump back into that day’s plan.
+
+## Progress without shame spirals
+
+Progress tracks streaks, phase completion, badges, sacred milestones, and a mood visualizer — with copy like *“Grace over guilt—every step of obedience matters.”*
+
+<img src="/images/projects/fasted/progress.png" alt="Fasted Progress page with streak stats, phase completion ring, and sacred milestones" />
+
+Miss a day and the streak resets honestly. The journey doesn’t. That distinction matters for a six-month spiritual discipline.
+
+## Offline-first, optional cloud
+
+No account required. Progress lives in `localStorage` (meal photos in IndexedDB). Install the PWA and it keeps working after the first load.
+
+Sign in under Settings when you want:
+
+- Cross-device sync of progress JSON
+- **Groups** — shared journal, prayer requests, commitments, leader dashboard
+- **Web Push** morning/evening reminders (Home Screen install required on iOS)
+
+<img src="/images/blog/fasted-offline-cloud.svg" alt="Guest offline features versus signed-in Supabase sync groups and Web Push" />
+
+## Built on my own cloud
+
+Live at [fasted.360web.cloud](https://fasted.360web.cloud) on the same VPS pattern as my other 360 Web apps: Dockerized nginx PWA, optional self-hosted Supabase, GitHub Actions deploy on push to `main`.
+
+| Piece | Choice |
+|-------|--------|
+| UI | React 18 + Vite + Tailwind (Playfair Display + Inter) |
+| Install | `vite-plugin-pwa` + in-app update toast |
+| Data | Offline JSON · optional Supabase RLS |
+| Quality | Playwright e2e / visual / a11y · Vitest |
+| Deploy | VPS Docker + migrations on `main` |
+
+<img src="/images/blog/fasted-architecture.svg" alt="Fasted architecture: PWA screens, local storage and plan engine, optional Supabase cloud" />
+
+Fasted is also the **production reference** for [SEOS](/projects/seos) — the Software Engineering OS that plans, builds, reviews, and deploys through GitHub agents. The product and the agent OS grew up together; the earlier posts cover that side of the story:
+
+- [Building a Team of Engineers](/blog/team-of-engineers-cursor-agent-pipeline)
+- [From One Agent to an OS](/blog/seos-software-engineering-agent-os)
+
+This post is about the fasting companion people actually open.
+
+## Install it
+
+Phone → open the live site → **Add to Home Screen**. Offline shell, phase artwork, daily plan in one tap.
+
+<img src="/images/projects/fasted/today-mobile.png" alt="Fasted Today on mobile with phase card and bottom navigation" />
+
+## A necessary note
+
+Fasting is a **spiritual discipline**, not medical treatment. The app includes safety notes (especially around extended water fasts). Consult a healthcare professional if you have medical concerns.
+
+<HumanReflection>
+I didn’t need another content library. I needed a companion that removes ambiguity at 6am: what’s today, what do I pray, did I show up. Fasted is that companion — and building it as an offline-first PWA on my own VPS kept the cost curve flat while the journey itself stayed sacred.
+</HumanReflection>
+
+Try it: **[fasted.360web.cloud](https://fasted.360web.cloud)** · Source: **[github.com/mitchelldawkinsjr/Fasted](https://github.com/mitchelldawkinsjr/Fasted)** · Architecture: **[/projects/fasted](/projects/fasted)**.

@@ -1,0 +1,206 @@
+---
+title: "Fasted"
+description: "An offline-first biblical fasting companion PWA for a 190-day journey — daily plans, scripture, check-ins, journal, streaks, badges, and optional Supabase groups with Web Push reminders."
+date: "2026-07-22"
+status: "Active"
+featured: true
+priority: 1
+slug: "fasted"
+headerImage: "/images/projects/fasted/header.png"
+tech:
+  - React
+  - TypeScript
+  - Vite
+  - Tailwind CSS
+  - PWA
+  - Supabase
+  - Docker
+  - Playwright
+  - GitHub Actions
+tags:
+  - Spiritual Tech
+  - PWA
+  - Offline-First
+  - Self-Hosted
+  - Community
+audience:
+  - People walking a structured biblical fast
+  - Small groups / church communities
+  - Builders of offline-first PWAs
+  - Developers interested in SEOS reference apps
+links:
+  - title: "Live App"
+    url: "https://fasted.360web.cloud"
+  - title: "GitHub Repository"
+    url: "https://github.com/mitchelldawkinsjr/Fasted"
+  - title: "Blog: 190-Day Biblical Fasting Companion"
+    url: "/blog/fasted-biblical-fasting-companion"
+  - title: "SEOS (agent OS reference)"
+    url: "/projects/seos"
+---
+
+## Introduction
+
+**Fasted** is a Progressive Web App for a structured biblical fasting journey spanning **June 13 – December 19, 2026** (190 days, 8 phases). It answers the daily question — *what does today ask of me?* — with phase instructions, scripture, prayer focus, check-ins, journaling, and progress tracking.
+
+**Live:** [https://fasted.360web.cloud](https://fasted.360web.cloud)  
+**Source:** [mitchelldawkinsjr/Fasted](https://github.com/mitchelldawkinsjr/Fasted)
+
+Product narrative: [Fasted: A 190-Day Biblical Fasting Companion](/blog/fasted-biblical-fasting-companion).
+
+**Status: Active** — Deployed on 360 Web Solutions Cloud. Offline-first by default; optional self-hosted Supabase for sync, groups, and Web Push. Also the production reference implementation for [SEOS](/projects/seos).
+
+<img src="/images/projects/fasted/today.png" alt="Fasted Today view with phase status, instructions, and check-in" />
+
+## Problem & Solution
+
+### The Problem
+
+- Long fasting plans collapse into forgotten PDFs and quiet group chats  
+- Daily ambiguity (*am I fasting today? water only?*) kills consistency  
+- Accountability tools often require accounts before the first useful screen  
+- Community features usually force always-online architecture  
+
+### The Solution
+
+1. **Today-first UX** — computed daily plan from phase schedule patterns  
+2. **Eight-phase journey** — color-coded templates with food rules and prayer focus  
+3. **Offline-first storage** — full core loop in `localStorage` / IndexedDB  
+4. **Optional Supabase** — sync, groups, meal images, push subscriptions behind sign-in  
+5. **Installable PWA** — Home Screen + offline shell + update toast  
+
+## Architecture Overview
+
+<img src="/images/blog/fasted-architecture.svg" alt="Fasted architecture diagram: PWA screens, local progress and plan engine, optional Supabase cloud" />
+
+| Layer | Implementation |
+|-------|----------------|
+| Client | React 18, react-router 6, TypeScript, Vite 5, Tailwind 3 |
+| Typography | Playfair Display (display) · Inter (body) |
+| Install / offline | `vite-plugin-pwa`, no-cache SW/manifest, immutable hashed assets |
+| Plan engine | `phaseTemplates` + `dailyPlan` schedule interpreters |
+| Local data | `fasted-calendar-progress:*` JSON · meal images in IDB |
+| Cloud (optional) | Self-hosted Supabase auth, `user_progress`, groups, storage, push |
+| Quality | Playwright e2e / visual / a11y · Vitest unit |
+| Deploy | Docker nginx PWA · Actions `deploy-vps.yml` · SQL migrations |
+
+## Journey & Plan Engine
+
+<img src="/images/blog/fasted-journey-phases.svg" alt="Eight Fasted phases and the daily plan-pray-check-in-journal loop" />
+
+Default journey (`FASTED_JOURNEY`) locks eight templates:
+
+| # | Phase | Pattern highlight |
+|---|-------|-------------------|
+| 1 | Daniel 1 Fast Pattern | Wed sunrise–sunset water |
+| 2 | David's Fast for Seeking God | Wed + Fri; coffee/tea allowed |
+| 3 | First Daniel Fast | 21 consecutive Daniel days |
+| 4 | Joel Repentance Fast | Mon + Thu water fasts |
+| 5 | Isaiah 58 Fast | Wed fast + weekly service acts |
+| 6 | Second Daniel Fast | 21 days + daily walk |
+| 7 | Esther Preparation | Rotating 24h / sunrise–sunset |
+| 8 | Year-End Consecration | Mon + Thu + Saturday prayer |
+
+`getDailyPlan(date)` resolves the active phase, whether the day is a fast day, instruction list, encouragement, and meditation verse. Custom journeys can be composed in Settings; the default remains locked for shared calendars.
+
+<img src="/images/projects/fasted/phases.png" alt="Phases page grid of all eight Fasted Journey phase cards" />
+<img src="/images/projects/fasted/phase-artwork.png" alt="Phase artwork card for David's Fast for Seeking God" />
+
+## Core Screens
+
+| Route | Role |
+|-------|------|
+| `/` Today | Phase status, instructions, meditation, prayer, check-in, journal jump |
+| `/calendar` | Full journey grid — water drops (fast) · checks (check-in) |
+| `/journal` | Reflection / prayer / gratitude / food / fitness · lightbox editor · export |
+| `/progress` | Streaks, phase %, badges, sacred milestones, mood visualizer |
+| `/phases` | Journey overview with artwork and rules |
+| `/groups/*` | Community hub, detail, join codes, leader dashboard (auth) |
+| `/settings` | Sync, journeys, preferences, reminders, safety, export/import |
+
+<img src="/images/projects/fasted/calendar.png" alt="Calendar page with phase chips and fast-day legend" />
+<img src="/images/projects/fasted/progress.png" alt="Progress dashboard with streaks and phase completion" />
+<img src="/images/projects/fasted/journal.png" alt="Journal page for daily reflections" />
+
+## Offline-First & Sync
+
+<img src="/images/blog/fasted-offline-cloud.svg" alt="Guest offline capabilities versus signed-in sync groups and push" />
+
+**Guest mode (default)**
+
+- Progress key: `fasted-calendar-progress:guest`  
+- Check-ins, journal, badges, journeys, settings persist locally  
+- Export/import JSON (and print/PDF journal paths)  
+
+**Signed-in mode**
+
+- Scoped key `fasted-calendar-progress:{userId}`  
+- Sync state machine: `idle | syncing | synced | error | offline`  
+- Guest progress can migrate into the cloud account on first sign-in  
+- RLS-backed tables for progress, groups, covenants, meal images, push subscriptions  
+
+## Groups & Reminders
+
+Groups require cloud sign-in:
+
+- Shared journal / prayer requests  
+- Group commitments and member covenants  
+- Leader dashboard for shepherding participation  
+
+Web Push (VAPID):
+
+- Morning reminder (user-editable, default 07:00)  
+- Evening reminder (20:00)  
+- Skip rules after today’s check-in / existing daily reflection  
+- Cron sender on VPS every 15 minutes  
+
+## Production Deploy
+
+| Item | Detail |
+|------|--------|
+| URL | `https://fasted.360web.cloud` |
+| PWA container | nginx serving Vite `dist/` |
+| API | Self-hosted Supabase Kong (optional but used in prod) |
+| Secrets | `VPS_SSH_KEY`, `VPS_HOST`, `VPS_USER` |
+| Variables | `DEPLOY_DIR`, `SUPABASE_DIR`, `DOCKER_NETWORK`, domains |
+| Migrations | Applied on deploy when `supabase-db` is running |
+
+```bash
+VPS_REMOTE=user@vps npm run deploy:vps
+# or push to main with Actions configured
+```
+
+## SEOS Reference
+
+Fasted hosts the full [SEOS](/projects/seos) agent stack in production — composed agent context, label state machines, specialist workflows, deploy health checks, and lesson accumulation. Product posts:
+
+- [Building a Team of Engineers](/blog/team-of-engineers-cursor-agent-pipeline)  
+- [From One Agent to an OS](/blog/seos-software-engineering-agent-os)  
+
+## Local Development
+
+```bash
+git clone git@github.com:mitchelldawkinsjr/Fasted.git
+cd Fasted
+npm install
+npm run dev
+```
+
+Optional cloud sync:
+
+```bash
+cp .env.example .env.local
+# VITE_SUPABASE_URL + VITE_SUPABASE_ANON_KEY
+```
+
+```bash
+npm run test:unit
+npm run test:e2e
+```
+
+## Safety
+
+Fasting is a spiritual discipline, not medical treatment. Extended / no-water patterns include in-app safety notes. Users with medical concerns should consult a healthcare professional.
+
+<img src="/images/projects/fasted/today-mobile.png" alt="Fasted mobile Today screen" />
+<img src="/images/projects/fasted/icon.png" alt="Fasted PWA icon" />

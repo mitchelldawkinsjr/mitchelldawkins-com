@@ -6,6 +6,13 @@ import { useState, useEffect } from 'react';
 
 const projects = [
   {
+    title: 'Fasted',
+    description: 'An offline-first biblical fasting companion PWA for a 190-day journey — daily plans, scripture, check-ins, journal, streaks, and optional Supabase groups with Web Push reminders.',
+    image: '/images/projects/fasted/header.png',
+    link: '/projects/fasted',
+    tags: ['React','TypeScript','Vite','Tailwind','PWA','Supabase','Docker'],
+  },
+  {
     title: 'Thinker',
     description: 'A microlearning PWA that replaces doomscrolling with a one-card feed of ideas, news, Gutenberg books, and free learning sites — plus catalog-grounded Ask via OpenAI or Ollama.',
     image: '/images/projects/thinker/header.png',

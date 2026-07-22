@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 440" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="920" height="440" fill="#f9faf0" rx="12"/>
+  <text x="460" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#173d00">Offline-first, cloud when you want it</text>
+  <text x="460" y="56" text-anchor="middle" font-size="12" fill="#506442">Guest mode needs no account · sign-in unlocks sync, groups, and push</text>
+
+  <!-- Offline -->
+  <rect x="40" y="90" width="400" height="280" rx="14" fill="#173d00"/>
+  <text x="240" y="124" text-anchor="middle" font-size="15" font-weight="700" fill="#fed65b">GUEST / OFFLINE</text>
+  <text x="240" y="146" text-anchor="middle" font-size="11" fill="#bbf297">default  works after first load</text>
+
+  <rect x="70" y="170" width="340" height="44" rx="8" fill="#29560d"/>
+  <text x="240" y="197" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">Today · Calendar · Phases</text>
+
+  <rect x="70" y="228" width="340" height="44" rx="8" fill="#29560d"/>
+  <text x="240" y="255" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">Journal · Progress · Badges</text>
+
+  <rect x="70" y="286" width="340" height="44" rx="8" fill="#29560d"/>
+  <text x="240" y="313" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">Export / import · custom journeys</text>
+
+  <!-- Cloud -->
+  <rect x="480" y="90" width="400" height="280" rx="14" fill="#edefe5" stroke="#173d00" stroke-width="2"/>
+  <text x="680" y="124" text-anchor="middle" font-size="15" font-weight="700" fill="#173d00">SIGNED IN</text>
+  <text x="680" y="146" text-anchor="middle" font-size="11" fill="#506442">Supabase auth + RLS on VPS</text>
+
+  <rect x="510" y="170" width="340" height="44" rx="8" fill="#fff" stroke="#173d00"/>
+  <text x="680" y="197" text-anchor="middle" font-size="13" font-weight="600" fill="#173d00">Cloud sync of progress JSON</text>
+
+  <rect x="510" y="228" width="340" height="44" rx="8" fill="#fff" stroke="#173d00"/>
+  <text x="680" y="255" text-anchor="middle" font-size="13" font-weight="600" fill="#173d00">Groups · covenants · leader board</text>
+
+  <rect x="510" y="286" width="340" height="44" rx="8" fill="#fff" stroke="#173d00"/>
+  <text x="680" y="313" text-anchor="middle" font-size="13" font-weight="600" fill="#173d00">Web Push morning / evening</text>
+
+  <text x="460" y="410" text-anchor="middle" font-size="12" fill="#42493c">Guest progress can migrate into a signed-in account on first sync</text>
+</svg>
