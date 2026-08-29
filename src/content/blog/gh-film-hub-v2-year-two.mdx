@@ -1,0 +1,220 @@
+---
+title: "GH Film Hub v2: Year Two of the Grading System"
+date: "2026-08-29"
+excerpt: "The grading math still holds. Year two is about the hub: two seasons on one landing page, a player-facing rubric, and a week file that grades and publishes itself."
+coverImage: "/images/blog/gh-film-hub-v2-cover.png"
+coverImageFit: contain
+series: "Building AI with AI"
+---
+
+Last October I wrote about [building a film review pipeline](/blog/gh-film-review-pipeline-deep-dive) — CSV in, grades out, PDFs and dashboards for the Godwin Heights wide receivers. In April I wrote about [hosting that site for $0 on GitHub Pages](/blog/hosting-gh-film-review-free-github-pages). Both posts were about getting the system *to exist*.
+
+This post is about using it for a second season.
+
+Week 1 vs Holland is already on the hub. The 2026–2027 season card sits next to last year's Top 5. The grading engine is the same family of codes I started with. What changed is everything around it: how a week file gets in, how pages get out, and whether a player can open the site and understand *how to score well* without asking me what `ER` means.
+
+<LiveSiteButton href="https://ghfb.360web.cloud/film/">Open the Film Review Hub</LiveSiteButton>
+
+Live hub (behind the Team Tools PWA): **[ghfb.360web.cloud/film](https://ghfb.360web.cloud/film/)**. Public mirror: **[GitHub Pages](https://mitchelldawkinsjr.github.io/GH-Flim-Review/)**. Source: **[GH-Flim-Review](https://github.com/mitchelldawkinsjr/GH-Flim-Review)**. Project page: **[GH Film Review Pipeline](/projects/gh-film-review-pipeline)**.
+
+## The Problem I'm Solving
+
+Year one proved the rubric. Year two exposed the *ceremony*:
+
+- **Sunday-night Python.** Prep the CSV, run `film_grade.py`, generate PDFs and HTML, commit `out/`, wait for Pages.
+- **One season, one index.** Last year's grades lived in a folder. There was no "this is year two, that is year one" landing page.
+- **Codes without a legend in front of players.** I knew `LF` from the sheet. They saw a letter grade and asked what they did wrong.
+- **Sheet and site drifted.** New codes on the film tab (`LF`, `BBL`, `EP`) did not show up in Code Counts until the pipeline knew them.
+- **Group film that collapsed `++` into `--`.** Key-play positives and negatives looked like the same column if you stripped the `+` and `-` while matching headers.
+
+I did not want a new grading system. I wanted the one I already trust to show up on the hub a few minutes after I finish the week tab.
+
+## Where Year One Left Us
+
+The v1 pipeline was a local ritual that produced a static site:
+
+```text
+CSV Input → Data Preparation → Film Grading → Report Generation → Static Site
+```
+
+That still happens. The difference is *who runs it, and from where*.
+
+<img src="/images/blog/gh-film-v1-vs-v2.svg" alt="Side-by-side of year-one local scripts versus Film Hub v2: sheet or upload into process-week, then grade, commit, and deploy to Pages and the VPS /film/ hub" />
+
+v1 strengths I kept:
+
+- Custom rubric, snap-normalized metrics, player PDFs, weekly snapshot, group film
+- Static HTML that coaches can open on a phone
+- GitHub Pages as a public mirror, VPS `/film/` behind the Team Tools hub
+
+v1 ceiling I hit by week one of year two:
+
+- I was the only person who could publish a week
+- The hub did not explain the rubric
+- A CSV sitting in Google Sheets was not enough — I still had to babysit the pipeline
+
+## What's Live in v2
+
+I walked the live hub today. This is what coaches and players actually get.
+
+### Two seasons on one landing page
+
+The Film Review Hub is no longer a single-year index. The season selector shows **2026–2027** and **2025–2026** as cards, each with a **Top 5 wide receivers** list by season-average grade. Year two is already ahead of last year's opening pace on the leaderboard — which is the point of keeping last season one click away. The same landing page links **Upload week CSV** and **Team Tools**.
+
+### How to score well, on the season page
+
+Every season index now has a **How to score well** panel above the weeks table. It is the rubric in coaching language, not a code dump:
+
+- Relentless effort every rep (earn Relentless Effort, avoid Loaf / Not Full Speed)
+- Master your assignment (avoid Missed Assignment)
+- Elite, crisp routes (earn Elite / Good Route, avoid Bad Route)
+- Win the ball (earn Spectacular Catch, avoid Dropped Pass)
+- Add yards and chains (`C+` / `R+` at +0.5 per yard, broken tackles at +0.5, First Downs +5)
+- Dominate the run game (Good Block +2, Pancake +10)
+- Finish drives (Touchdown +15, Extra Point Conversion +2)
+- Stay locked in (avoid Lack of Focus and Bad Body Language)
+
+Players can open the hub and see the same legend the sheet uses. That is the usability change I cared about most.
+
+### Week 1 vs Holland, generated this afternoon
+
+The 2026–2027 weeks table is live: dashboards, snapshot, summary PDF, group film PDF, and CSVs. The Week 1 dashboard has a player filter, letter grades, average scores, and a PDF link per player. Footer timestamp: **2026-08-29 17:19**. That is the ingest pipeline, not a hand-built page.
+
+## Three Ways a Week File Becomes Pages
+
+The new **Process week CSV** Action (`process-week.yml`) is the product. Finish the film tab, get it into `csv/{season}/WkN_Opponent.csv`, and `tools/run_week.py` grades, writes `out/`, then dispatches Pages and VPS deploys so a CSV-only push does not publish a stale site.
+
+<img src="/images/blog/gh-film-ingest-pipeline.svg" alt="Three ingest paths — published Google Sheet, git push, and hub upload helper — converging on process-week.yml and run_week.py, then grade, commit, and deploy" />
+
+| Path | When I use it |
+|------|----------------|
+| **Published Google Sheet** | Usual path. Actions → Process week CSV → source `published_sheet`, season, week, opponent. `tools/fetch_published_csv.py` pulls the tab. |
+| **git push** | I already have the file. `csv/2026-2027/Wk1_Holland.csv` on `main` triggers the path filter. |
+| **Hub upload helper** | `/film/upload.html` builds the required filename from season / week / opponent and opens GitHub's upload UI. |
+
+The upload page is a filename helper, not a mystery form. Season defaults to 2026–2027, week 1, opponent Holland, required path `csv/2026-2027/Wk1_Holland.csv`, buttons for **Upload on GitHub** and **View Actions**. After the file lands, pages appear on the hub in a few minutes. Same result from `git add csv/… && git push`.
+
+That workflow landed in [PR #2](https://github.com/mitchelldawkinsjr/GH-Flim-Review/pull/2). The rest of today was making the grades *match the sheet* once the pages existed.
+
+## The Technology Stack
+
+```text
+Film log:     Google Sheet (published CSV) or csv/{season}/WkN_Opponent.csv
+Grading:      Python, pandas, film_grade.py, tools/run_week.py
+Reports:      ReportLab PDFs, HTML dashboards, snapshot tables
+Hub:          Static site on VPS /film/ (Team Tools proxy) + GitHub Pages mirror
+Ingest CI:    process-week.yml → commit out/ → dispatch deploy.yml + deploy-vps.yml
+Coach UX:     Season selector, upload helper, How to score well, player filter
+```
+
+No new database. No new app framework. The hub is still generated HTML. v2 is the path *into* that HTML.
+
+## Rubric Updates From a Year of Film
+
+The original post listed the year-one legend. After a full season of coding plays, three codes were on the sheet and missing from the pipeline — so Code Counts lied. Today they are first-class:
+
+<img src="/images/blog/gh-film-year-two-rubric.svg" alt="Year-two rubric codes: Extra Point Conversion +2, Lack of Focus -0.5, Bad Body Language -0.5, with the coaching language that appears on reports and the hub" />
+
+| Code | Meaning | Points |
+|------|---------|--------|
+| **EP** | Extra Point Conversion | +2 |
+| **LF** | Lack of Focus | -0.5 |
+| **BBL** | Bad Body Language | -0.5 |
+
+Broken tackles are **+0.5 per tackle** (not +1.0). Dashboards always list the full code legend. Player reports now emit coaching lines for `LF` and `BBL` instead of swallowing those tags.
+
+I also had to stop normalizing headers by stripping every non-alphanumeric character. `Key play ++` and `Key play --` were collapsing into the same field, so the group film PDF mixed positives and negatives. The matcher now keeps `+` and `-`. That is a one-line usability bug that only shows up when you actually run group film for a real week.
+
+## Custom Scoring System (Year Two)
+
+The pipeline still scores from codes, then maps a 0–100 score to A–F. The live season page prints this legend:
+
+### Positive plays
+- **Touchdown**: +15
+- **Relentless Effort**: +5
+- **Elite Route**: +7
+- **Good Route**: +2
+- **Catch/Rush yardage**: +0.5 per yard
+- **Broken Tackles**: +0.5 per tackle
+- **Good Block**: +2
+- **Pancake Block**: +10
+- **First Down**: +5
+- **Spectacular Catch**: +10
+- **Extra Point Conversion**: +2
+
+### Negative plays
+- **Missed Assignment**: -10
+- **Dropped Pass**: -15
+- **Bad Route**: -2
+- **Loaf**: -2
+- **Not Full Speed**: -3
+- **Whiffed Block**: -1
+- **Holding**: 0
+- **Lack of Focus**: -0.5
+- **Bad Body Language**: -0.5
+
+Letter bands are unchanged: A 90+, B 80+, C 70+, D 60+, else F. Outstanding still means 95+.
+
+## Implementation Highlights
+
+### One Action, three sources
+
+`process-week.yml` either fetches the published sheet, takes a `csv_path` from workflow_dispatch, or diffs `csv/**/*.csv` on push. Then it runs `run_week.py` per file, regenerates `upload.html`, commits `out/` (and `csv/` when the sheet was fetched), and dispatches both deploys.
+
+```yaml
+on:
+  push:
+    branches: [main]
+    paths:
+      - "csv/**/*.csv"
+  workflow_dispatch:
+    inputs:
+      source:
+        type: choice
+        options: [published_sheet, git]
+        default: published_sheet
+```
+
+### Shared hub chrome
+
+Season selector and upload page import the same `HUB_LINK_SCRIPT` so **Team Tools** and hub navigation stay consistent instead of forking copy in two generators.
+
+### Batch is still there
+
+I can still rebuild a season locally. I should not *have* to, for a normal Friday night.
+
+## Technical Challenges Solved
+
+### Sheet-first ingest without a new app
+The film log already lived in Google Sheets. v2 treats the published CSV as the source of truth and GitHub as the build worker — same idea as [building around coach spreadsheets](/blog/building-around-coach-spreadsheets-live-csv), applied to film instead of attendance.
+
+### Deploy after a CSV-only commit
+Generating `out/` in CI is useless if Pages still serves last week's HTML. Process-week commits artifacts, then **dispatches** Pages and VPS workflows so the hub and the mirror move together.
+
+### Rubric fidelity
+If the sheet has a code the pipeline ignores, Code Counts and the group film PDF are fiction. Year two started by making `LF`, `BBL`, and `EP` count, and by not treating `++` and `--` as the same column.
+
+## Project Impact
+
+- **Time:** A week file can go sheet → hub without a local venv session.
+- **Clarity:** Players see How to score well on the same page as their week links.
+- **Continuity:** Last season stays on the hub instead of disappearing into an old folder.
+- **Trust:** Code Counts match the sheet; group film keeps positives and negatives apart.
+
+<HumanReflection>
+Year one was "can I grade film in a way that survives a Friday night and still makes sense on Monday?" Year two is "can the receivers open the same site I open, see last year next to this year, and know what the codes mean without a meeting?"
+
+The grading system did not need a rewrite. It needed to stop being a private script. Putting **How to score well** on the season page sounds small until you remember that the whole point of the codes is player development — not a dashboard I am proud of.
+
+The ingest work is the other half of that. If publishing a week takes twenty minutes of Python, I will skip a week when the game ends late. If publishing a week is "finish the tab, run Process week CSV," the hub stays current. Week 1 vs Holland going live this afternoon is the test I actually care about.
+
+I am entering the second year with the same philosophy I started with: watch the film, log the truth, let the pipeline do the arithmetic. v2 just means the arithmetic shows up where the kids already look.
+</HumanReflection>
+
+## What's Next
+
+This is still the [GH Film Review Pipeline](/projects/gh-film-review-pipeline). v2 is the hub growing up around a rubric that already worked.
+
+Next weeks of 2026–2027 should be boring in the best way: finish the tab, publish, check Top 5, send the group film PDF. If a new code appears on the sheet, it has to land in `LEGEND_POINTS` the same day or Code Counts will lie again.
+
+If you are building a coach tool, the lesson I keep relearning is the same one as the attendance hub: **do not replace the spreadsheet. Make the spreadsheet publish.**

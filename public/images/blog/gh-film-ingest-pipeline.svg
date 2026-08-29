@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 420" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="920" height="420" fill="#f8fafc" rx="12"/>
+  <text x="460" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">Three ways a week file becomes hub pages</text>
+  <text x="460" y="52" text-anchor="middle" font-size="11" fill="#64748b">All three land in csv/{season}/WkN_Opponent.csv and run the same Action</text>
+
+  <rect x="24" y="76" width="270" height="88" rx="8" fill="#dbeafe" stroke="#3b82f6"/>
+  <text x="159" y="108" text-anchor="middle" font-size="12" font-weight="700" fill="#1d4ed8">Published Google Sheet</text>
+  <text x="159" y="128" text-anchor="middle" font-size="10" fill="#475569">Actions - Process week CSV</text>
+  <text x="159" y="146" text-anchor="middle" font-size="10" fill="#475569">source: published_sheet</text>
+
+  <rect x="325" y="76" width="270" height="88" rx="8" fill="#ede9fe" stroke="#7c3aed"/>
+  <text x="460" y="108" text-anchor="middle" font-size="12" font-weight="700" fill="#6d28d9">git push</text>
+  <text x="460" y="128" text-anchor="middle" font-size="10" fill="#475569">csv/2026-2027/Wk1_Holland.csv</text>
+  <text x="460" y="146" text-anchor="middle" font-size="10" fill="#475569">path filter on csv/**/*.csv</text>
+
+  <rect x="626" y="76" width="270" height="88" rx="8" fill="#ffedd5" stroke="#ea580c"/>
+  <text x="761" y="108" text-anchor="middle" font-size="12" font-weight="700" fill="#c2410c">Hub upload helper</text>
+  <text x="761" y="128" text-anchor="middle" font-size="10" fill="#475569">/film/upload.html names the file</text>
+  <text x="761" y="146" text-anchor="middle" font-size="10" fill="#475569">opens GitHub upload UI</text>
+
+  <path d="M159 164 L159 196" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M460 164 L460 196" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M761 164 L761 196" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M159 196 L761 196" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M460 196 L460 214" stroke="#94a3b8" stroke-width="2"/>
+
+  <rect x="250" y="214" width="420" height="56" rx="8" fill="#1e293b"/>
+  <text x="460" y="248" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">process-week.yml  tools/run_week.py</text>
+
+  <path d="M460 270 L460 292" stroke="#94a3b8" stroke-width="2"/>
+
+  <rect x="80" y="292" width="240" height="48" rx="8" fill="#dcfce7" stroke="#22c55e"/>
+  <text x="200" y="322" text-anchor="middle" font-size="11" font-weight="600" fill="#166534">Grade + PDFs + HTML</text>
+
+  <rect x="340" y="292" width="240" height="48" rx="8" fill="#fef9c3" stroke="#eab308"/>
+  <text x="460" y="322" text-anchor="middle" font-size="11" font-weight="600" fill="#854d0e">Commit out/ (and csv/ if fetched)</text>
+
+  <rect x="600" y="292" width="240" height="48" rx="8" fill="#fee2e2" stroke="#ef4444"/>
+  <text x="720" y="322" text-anchor="middle" font-size="11" font-weight="600" fill="#b91c1c">Dispatch Pages + VPS /film/</text>
+
+  <text x="460" y="372" text-anchor="middle" font-size="12" fill="#334155">Hub result: season selector, week dashboards, snapshot, summary PDF, group film</text>
+  <text x="460" y="394" text-anchor="middle" font-size="11" fill="#64748b">Week 1 vs Holland published 2026-08-29 17:19</text>
+</svg>
