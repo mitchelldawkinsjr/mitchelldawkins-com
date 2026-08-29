@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 500" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="920" height="500" fill="#f8fafc" rx="12"/>
+  <text x="460" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">Year one pipeline vs Film Hub v2</text>
+  <text x="460" y="52" text-anchor="middle" font-size="11" fill="#64748b">Same grading engine. Different path from film notes to a coach-facing page.</text>
+
+  <rect x="24" y="72" width="420" height="400" rx="8" fill="#fff" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="234" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#475569">v1  2025-2026</text>
+  <text x="234" y="118" text-anchor="middle" font-size="10" fill="#64748b">Local scripts, then a static folder</text>
+
+  <rect x="44" y="136" width="380" height="44" rx="6" fill="#e2e8f0" stroke="#94a3b8"/>
+  <text x="234" y="163" text-anchor="middle" font-size="11" fill="#334155">Watch film. Log codes in a spreadsheet.</text>
+
+  <rect x="44" y="192" width="380" height="44" rx="6" fill="#dbeafe" stroke="#3b82f6"/>
+  <text x="234" y="219" text-anchor="middle" font-size="11" fill="#1d4ed8">Export CSV. Run prep + film_grade.py locally.</text>
+
+  <rect x="44" y="248" width="380" height="44" rx="6" fill="#f3e8ff" stroke="#a855f7"/>
+  <text x="234" y="275" text-anchor="middle" font-size="11" fill="#7e22ce">Generate PDFs, dashboards, snapshot, index.</text>
+
+  <rect x="44" y="304" width="380" height="44" rx="6" fill="#A00000"/>
+  <text x="234" y="331" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Commit out/ and wait for Pages</text>
+
+  <rect x="44" y="360" width="380" height="88" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="234" y="390" text-anchor="middle" font-size="10" fill="#64748b">Worked. It also meant Sunday nights were</text>
+  <text x="234" y="408" text-anchor="middle" font-size="10" fill="#64748b">a Python session, not a coaching session.</text>
+  <text x="234" y="426" text-anchor="middle" font-size="10" fill="#64748b">Players still asked what ER vs LF meant.</text>
+
+  <rect x="476" y="72" width="420" height="400" rx="8" fill="#fff" stroke="#22c55e" stroke-width="2"/>
+  <text x="686" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#15803d">v2  2026-2027</text>
+  <text x="686" y="118" text-anchor="middle" font-size="10" fill="#64748b">Finish the tab. Publish. Hub updates.</text>
+
+  <rect x="496" y="136" width="380" height="44" rx="6" fill="#e2e8f0" stroke="#94a3b8"/>
+  <text x="686" y="163" text-anchor="middle" font-size="11" fill="#334155">Watch film. Log codes in the same sheet.</text>
+
+  <rect x="496" y="192" width="380" height="44" rx="6" fill="#2563eb"/>
+  <text x="686" y="219" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Process week CSV  sheet, git, or upload</text>
+
+  <rect x="496" y="248" width="380" height="44" rx="6" fill="#22c55e"/>
+  <text x="686" y="275" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">run_week.py grades and writes out/</text>
+
+  <rect x="496" y="304" width="380" height="44" rx="6" fill="#f59e0b"/>
+  <text x="686" y="331" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Dispatch Pages + VPS /film/ deploys</text>
+
+  <rect x="496" y="360" width="380" height="88" rx="6" fill="#dcfce7" stroke="#22c55e"/>
+  <text x="686" y="390" text-anchor="middle" font-size="10" fill="#166534">Season hub, Top 5, How to score well,</text>
+  <text x="686" y="408" text-anchor="middle" font-size="10" fill="#166534">dashboards, PDFs, snapshot, group film.</text>
+  <text x="686" y="426" text-anchor="middle" font-size="10" fill="#166534">Same rubric. Minutes instead of a ritual.</text>
+</svg>

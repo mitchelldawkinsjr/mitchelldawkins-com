@@ -1,10 +1,10 @@
 ---
 title: "GH Film Review Pipeline"
-description: "A comprehensive data pipeline and static site generator for weekly and season-long football player evaluations from CSV film logs."
-date: "2025-10-29"
-status: "Completed"
+description: "A film-grading pipeline and coach hub for weekly and season-long receiver evaluations — year-two v2 adds drop-a-CSV ingest, a two-season landing page, and a player-facing rubric."
+date: "2026-08-29"
+status: "Active"
 featured: true
-priority: 2
+priority: 9
 slug: "gh-film-review-pipeline"
 headerImage: "/images/projects/gh-flim-revew-dashboard/header.png"
 tech:
@@ -14,6 +14,7 @@ tech:
   - HTML
   - CSS
   - GitHub Actions
+  - Google Sheets
   - Google Analytics
   - FFmpeg
   - Pillow
@@ -34,17 +35,32 @@ audience:
 links:
   - title: "GitHub Repository"
     url: "https://github.com/mitchelldawkinsjr/GH-Flim-Review"
-  - title: "Live Demo"
-    url: "https://mitchelldawkinsjr.github.io/GH-Flim-Review/"
+  - title: "Live Hub"
+    url: "https://ghfb.360web.cloud/film/"
   - title: "Technical Deep Dive"
     url: "/blog/gh-film-review-pipeline-deep-dive"
+  - title: "Blog: Film Hub v2"
+    url: "/blog/gh-film-hub-v2-year-two"
+why: "Coaches should not spend Sundays hand-building film reports. Automate CSV film logs into weekly and season evaluations coaches actually use."
+streamFocus: "Year-two hub UX, sheet-to-pages ingest, and keeping the rubric in front of players."
+lessons:
+  - "Meet coaches where the data already is — CSV film logs."
+  - "Static sites + Actions beat bespoke hosting for seasonal sports tools."
+  - "A rubric players cannot read on the hub is still a private script."
+roadmap:
+  - "Keep 2026-2027 weeks publishing through process-week"
+  - "Add sheet codes to LEGEND_POINTS the same day they appear on film"
+relatedPosts:
+  - "gh-film-hub-v2-year-two"
+  - "gh-film-review-pipeline-deep-dive"
+  - "hosting-gh-film-review-free-github-pages"
 ---
 
 ## Introduction Section
 
 The GH Film Review Pipeline is a comprehensive data processing system designed to transform raw football game film data into professional-grade reports, dashboards, and analytics. Built for coaching staff and sports analysts, this pipeline automates the entire process from CSV data ingestion to report generation, providing consistent, data-driven player evaluations.
 
-**Status: Completed** — The pipeline is fully functional and has been successfully used for multiple seasons of player evaluation. The system processes weekly game data and generates comprehensive reports automatically.
+**Status: Active** — Year two (2026–2027) is live on the Film Review Hub. Week files ingest from a published sheet, git, or the hub upload helper; the same grading engine publishes dashboards, PDFs, and a two-season landing page. See [GH Film Hub v2](/blog/gh-film-hub-v2-year-two).
 
 ## Problem & Solution
 
@@ -107,11 +123,12 @@ The pipeline implements a sophisticated scoring rubric that evaluates players on
 - Elite Route: +7 points
 - Good Route: +2 points
 - Catch/Rush yardage: +0.5 per yard
-- Broken Tackles: +1.0 per tackle
+- Broken Tackles: +0.5 per tackle
 - Good Block: +2 points
 - Pancake Block: +10 points
 - First Down: +5 points
 - Spectacular Catch: +10 points
+- Extra Point Conversion: +2 points
 
 **Negative Plays:**
 - Missed Assignment: -10 points
@@ -120,6 +137,8 @@ The pipeline implements a sophisticated scoring rubric that evaluates players on
 - Loaf: -2 points
 - Not Full Speed: -3 points
 - Whiffed Block: -1 point
+- Lack of Focus: -0.5 points
+- Bad Body Language: -0.5 points
 
 ### Advanced Analytics
 
@@ -175,14 +194,17 @@ The codebase demonstrates:
 
 ## Future Enhancements
 
-Planned improvements include:
+Shipped in v2 (2026–2027):
 
-- **Machine Learning Integration** for predictive analytics and player development forecasting
+- **CSV ingest Action** — published sheet, git push, or hub upload helper
+- **Two-season hub** with Top 5 WRs and year-one archive
+- **How to score well** on every season page
+- **Year-two codes** — Extra Point, Lack of Focus, Bad Body Language
+
+Still on the board when coaches ask:
+
 - **Video Integration** linking reports to specific game footage timestamps
-- **Mobile Application** for real-time sideline data entry during games
-- **Advanced Visualization** with interactive charts and graphs
-- **API Development** for integration with other sports management systems
-- **Real-time Processing** for live game analysis
+- **Sideline data entry** without leaving the film sheet workflow
 
 ## Development Process
 
