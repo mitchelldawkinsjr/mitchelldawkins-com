@@ -23,7 +23,7 @@ export default function AboutPreview() {
             </h2>
             
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-              I&apos;m a Softweare Engineer passionate about building software, problem solving and making an impact. With experience in AI/ML, software development, and cloud architecture, I'm constantly exploring the boundaries of what's possible with today's AI tools.
+              I&apos;m a Senior Full Stack Software Engineer focused on building practical software that solves real-world problems. With 10+ years of experience across full-stack development, AI systems, and cloud architecture, I'm always exploring better ways to build, automate, and create meaningful technology.
             </p>
             
             <div className="flex flex-wrap items-stretch gap-4 mb-8">
