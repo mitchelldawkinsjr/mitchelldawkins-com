@@ -61,7 +61,7 @@ export default function AboutPage() {
           </h2>
           <div className="prose dark:prose-invert prose-lg max-w-none">
             <p>
-              Full-stack engineer with 10+ years of experience building scalable web applications across enterprise and growth-stage environments. I specialize in full-stack engineering with a track record delivering revenue-driving features at Dropbox and leading full-stack architecture for federal and enterprise clients. Adept at AI-assisted development workflows, cross-functional collaboration, and technical mentorship.
+              Full-stack engineer with 10+ years of experience building production software across enterprise and growth-stage environments, including four years at Dropbox. I specialize in scalable full-stack systems, AI-powered applications, and developer infrastructure, with a track record of delivering revenue-driving products and leading architecture for federal and enterprise clients. Today, I’m focused on AI-native engineering, automation, and sports technology that solves real-world operational problems.
             </p>
             <p>
               I believe we&apos;re at a fascinating inflection point where AI can be used in tandem with experience and a good grasp of fundamentals to build better software — creating improvements that will dramatically change how we develop it.
