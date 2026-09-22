@@ -28,7 +28,7 @@ export default function AboutPage() {
               Mitchell Dawkins
             </h1>
             <h2 className="text-xl text-blue-600 dark:text-blue-400 mb-6">
-              Software Engineer
+              Senior Software Engineer | AI Systems • Full Stack • Sports Technology
             </h2>
             <a
               href="/documents/Mitchell-Dawkins-II-Resume-2026.pdf"
