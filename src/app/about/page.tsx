@@ -176,6 +176,19 @@ export default function AboutPage() {
             {/* AdHoc Research Associates */}
             <div className="border-l-4 border-blue-600 pl-4 py-1">
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Senior Full Stack AI Engineer</h3>
+                <div className="text-gray-600 dark:text-gray-300">Aug 2026 – Present · Contract · Remote</div>
+            </div>
+            <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Sportsbiz — New York, NY</div>
+              <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
+                <li>Contributed to <strong>ApprovalLab</strong>, working across AWS infrastructure, backend architecture, database design, and frontend development.</li>
+                <li>Partnered with Product and Engineering to strengthen <strong>agile delivery</strong>, including standups, CI/CD standards, and PR workflows.</li>
+                <li>Establish <strong>AI-assisted development practices</strong>, including Cursor rules that standardized frontend and backend conventions.</li>
+              </ul>
+            </div> 
+            {/* AdHoc Research Associates */}
+            <div className="border-l-4 border-blue-600 pl-4 py-1">
+            <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white">Senior Computer Programmer</h3>
                 <div className="text-gray-600 dark:text-gray-300">Oct 2025 – Present · Contract · Remote</div>
             </div>
