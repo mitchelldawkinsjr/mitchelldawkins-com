@@ -1,0 +1,129 @@
+---
+title: "Esports Dashboard MVP"
+description: "A production-ready modular monolith for esports competition management, built with Laravel and Next.js."
+date: "2025-12-28"
+status: "Completed"
+featured: true
+priority: 1
+slug: "e-sports-dashboard"
+headerImage: "/images/projects/placeholder.jpg"
+<!-- TODO: Replace placeholder image with actual project image -->
+tech:
+  - Blade
+  - CSS
+  - Docker
+  - Dockerfile
+  - JavaScript
+  - Makefile
+  - PHP
+  - Shell
+  - TypeScript
+tags:
+  - Web Application
+  - Docker
+  - TypeScript
+audience:
+  - Designers
+  - Devops
+links:
+  - title: "GitHub Repository"
+    url: "https://github.com/mitchelldawkinsjr/E-Sports-Dashboard"
+---
+
+## Introduction Section
+
+This is a web application that demonstrates modern development practices. Built with Blade, CSS, Docker and other modern technologies.
+
+**Status: Completed** — The application is fully functional and ready for use.
+
+## Problem & Solution
+
+### The Problem
+
+This project addresses common challenges in the domain, providing an efficient and scalable solution.
+
+### The Solution
+
+This project addresses these challenges through:
+
+1. **Install PHP 8.3+, Composer, Node.js 20+, PostgreSQL, Redis**
+2. **Copy `.env.example` to `.env` in the backend directory**
+3. **Install dependencies and setup** - 
+4. **Start services** - 
+5. **`draft` → `scheduled` → `awaiting_results` → `results_submitted` → `results_confirmed`**
+6. **Any state can transition to `disputed` → `resolved`**
+7. **Any state can transition to `canceled`**
+
+## Technical Implementation
+
+This application follows a **modular monolith** architecture with clear domain boundaries:
+
+- **IdentityAccess**: Users, organizations, roles, permissions, invites, audit logging
+- **Competition**: Game titles, rulesets, seasons, divisions, conferences, teams, rosters, eligibility
+- **MatchOps**: Matches, participants, games, result submissions/confirmations, disputes, rulings
+- **Communications**: Announcements, notifications, email deliveries
+- **Reporting**: Standings snapshots, export jobs
+
+## Key Features
+
+### Install PHP 8.3+, Composer, Node.js 20+, PostgreSQL, Redis
+
+This feature provides key functionality for the project.
+
+### Copy `.env.example` to `.env` in the backend directory
+
+This feature provides key functionality for the project.
+
+### Install dependencies and setup
+
+
+
+### Start services
+
+
+
+### `draft` → `scheduled` → `awaiting_results` → `results_submitted` → `results_confirmed`
+
+This feature provides key functionality for the project.
+
+### Any state can transition to `disputed` → `resolved`
+
+This feature provides key functionality for the project.
+
+### Any state can transition to `canceled`
+
+This feature provides key functionality for the project.
+
+### **Middleware**
+
+`SetOrganizationContext` sets organization context from route parameters
+
+### **Traits**
+
+`HasOrganizationScope` automatically scopes queries
+
+### **Policies**
+
+Laravel Policies enforce organization-level permissions
+
+## Educational Applications
+
+This project serves as an excellent learning resource for:
+- **DevOps Engineers** learning containerization
+
+The codebase demonstrates modern development practices and architectural patterns.
+
+## Target Users
+
+The platform is designed to serve:
+- **Designers** - For relevant use cases in the domain
+- **Devops** - For relevant use cases in the domain
+
+## Future Enhancements
+
+Planned improvements include additional features, performance optimizations, and expanded functionality based on user feedback.
+
+## Conclusion
+
+This web application demonstrates the power of combining technical skills with practical problem-solving to create valuable solutions.
+
