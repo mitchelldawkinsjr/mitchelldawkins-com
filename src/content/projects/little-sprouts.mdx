@@ -1,0 +1,239 @@
+---
+title: "Little Sprouts"
+description: "A static browser app of early-learning games. One learner record in localStorage drives every round. Questions come from a CSV. Speech and pose tracking stay on the device."
+date: "2026-10-24T12:00:00.000Z"
+status: "Active"
+featured: true
+priority: 10
+slug: "little-sprouts"
+headerImage: "/images/projects/little-sprouts/header.jpg"
+tech:
+  - JavaScript
+  - Canvas
+  - Web Workers
+  - IndexedDB
+  - MediaPipe
+  - Three.js
+  - nginx
+tags:
+  - Static site
+  - On-device ML
+  - Canvas games
+  - Early learning
+audience:
+  - Builders shipping a static app with no account system
+  - People wiring one profile into many canvas games
+  - Anyone running speech or pose models in the browser
+links:
+  - title: "GitHub Repository"
+    url: "https://github.com/mitchelldawkinsjr/little-sprouts"
+  - title: "Blog: Play That Teaches"
+    url: "/blog/little-sprouts-play-and-learn"
+why: "Each game was about to grow its own profile, question list, and voice. Little Sprouts keeps one learner record and lets every round read it."
+streamFocus: "Question generation in logic.mjs, the sidecar postMessage bridge, on-device Kokoro, and MediaPipe reach."
+lessons:
+  - "Pure round rules belong in logic.mjs so node:test can run them without a DOM."
+  - "A sidecar must not store the learner. The host posts the question and scores the answer."
+  - "Speech has to fail open in about 220ms or the next tap sits in silence."
+roadmap:
+  - "Host a static copy so a phone can open it without a local server"
+  - "Keep sheet.csv the parent-editable source of words and facts"
+  - "Leave tap play working when the pose model or camera never arrives"
+relatedPosts:
+  - "little-sprouts-play-and-learn"
+---
+
+## Introduction
+
+**Little Sprouts** is a no-build static site. `index.html` loads `app.js` as a module. Each game is its own module with a `mount*` / `stop*` pair. Round rules that do not touch the DOM live in `logic.mjs` and run under `node --test`.
+
+**Source:** [mitchelldawkinsjr/little-sprouts](https://github.com/mitchelldawkinsjr/little-sprouts)
+
+The product story is in [Little Sprouts: Play That Teaches](/blog/little-sprouts-play-and-learn).
+
+**Status: Active** — `python3 -m http.server` is enough to play. A Dockerfile serves the same files from nginx and builds the Backroad rally sidecar, whose stage files are not in git.
+
+<img src="/images/projects/little-sprouts/shapes.jpg" alt="Shape safari asking the learner to find the circle" />
+
+## Problem & Solution
+
+### The Problem
+
+- **Per-game state** would split stars, levels, and sight words across siblings and across toys
+- **Canvas games cannot share a DOM form** with a printable floor-card round
+- **A bundled SPA** is the wrong shape for a folder of games, some of which are other people’s pages
+- **Speech and pose models** freeze the main thread and must not upload a child’s video or voice
+
+### The Solution
+
+1. **One record** in `localStorage` key `sprouts-v1`, up to 8 learners
+2. **`logic.mjs`** builds the question, the choices, and the score update
+3. **`app.js`** picks a renderer from the play style: tap, move, hunt, or reach
+4. **Sidecar iframes** for games that already have their own document
+5. **A worker** for Kokoro, and MediaPipe Pose only after a grown-up turns Reach on
+
+## Architecture Overview
+
+| Layer | Files | Role |
+|-------|--------|------|
+| Shell | `index.html`, `style.css`, `app.js` | Shelf, parent gate, round loop, save |
+| Rules | `logic.mjs` | Questions, boards, scoring, CSV parse |
+| Page games | `arcade.js`, `lunar.js`, `hook.js`, `chase.js`, `hop.js`, … | Canvas or DOM rounds inside the shell |
+| Sidecars | `sidecar.js`, `sidecar-guest.js`, `sidecars/*` | Own document, `postMessage` bridge |
+| Speech | `speech.js`, `speech-worker.js` | Kokoro in a worker, `speechSynthesis` fallback |
+| Reach | `camera.js` | Pose landmarker, dwell-to-tap |
+| Questions | `sheet.csv` | Local rows, overlaid by a published Google Sheet |
+| Tests | `logic.test.mjs`, `camera.test.mjs`, `sidecars/bike/dirt-bike.test.mjs` | `node:test`, no browser |
+| Host | `Dockerfile`, `nginx.conf` | nginx static files, COOP / COEP for WASM threads |
+
+A round does not go through a server.
+
+```
+Parent corner → sprouts-v1
+sheet.csv + Google Sheet CSV → parseSheet → mergeSheets
+        ↓
+logic.mjs builds the question for this learner, level, and style
+        ↓
+app.js mounts a module  —or—  postMessage into a sidecar iframe
+        ↓
+applyRound writes stars, first tries, and skills[mode][key]
+```
+
+<img src="/images/projects/little-sprouts/parents.jpg" alt="Parent corner for the learner, garden buddy, and name" />
+
+## Learner record
+
+`defaults()` seeds three profiles. Names, stages, and starting levels are data, not accounts: Malik preschool level 1, Micah kindergarten level 2, Mitch 4th grade level 3. A grown-up can rename them.
+
+```js
+{
+  active: 0,
+  sound: true,
+  voice: 'af_heart',
+  camera: false,
+  profiles: [{
+    name, stage,            // preschool | kindergarten | grade4
+    level, rounds,          // rounds is only 5, 10, or 15
+    style,                  // tap | move | hunt | reach
+    sprite, words,          // fox, bear, bunny, frog, owl, chick
+    stars, earned,
+    sessions, correct, total,
+    levels: { count, path },
+    skills: { [gameId]: { [progressKey]: { total, correct, sessions } } }
+  }],
+  sheet: { at, rows, note, games, error }
+}
+```
+
+`progressKey(style, level)` stores tap practice under the level number and every other style under `style + level`, so a Move round does not overwrite Tap. `applyRound` adds the round length to `stars`, adds first-try hits to `correct`, and bumps `skills[mode][key]`. `resetProgress` clears stars and skills and leaves the name, levels, and words.
+
+Gas race standings are a second key, `sprouts-race-board`, because that board is shared across learners.
+
+Parent corner is not a password. `gateQuestion()` draws a teen addition problem. `gateOk` checks the typed sum, then the form can edit the active profile. Words must pass `validWord`: letters, at most one apostrophe, up to 12 characters, at least three distinct words.
+
+## Question sheet
+
+`loadSheet()` fetches `./sheet.csv`, then a published Google Sheet CSV. `parseSheet` wants columns `learner`, `game`, `item`, and optional `extra`. A `hide` / `off` cell drops the row. Game values collapse to `words`, `count`, `hunt`, or `facts`. A blank learner is `*`.
+
+`mergeSheets` lets the Google Sheet replace the games it actually contains. Default facts and band words (`preschool`, `kindergarten`, `grade4`) are added back when the overlay does not already have that item. The merged rows are saved on the profile blob so a failed reload still has the last good sheet. The status line is the only network error the parent sees.
+
+`factSetFromRows` turns `facts` rows into multiplication tables (2–12), decades, and double-digit switches. `countQuestion`, `pathQuestion`, and `grade4Prompt` then build the prompt for the stage. 4th grade questions do not show a picture (`show: 'none'`).
+
+## Play styles
+
+The style is a field on the profile, not a separate app. `app.js` rewrites the prompt and the controls.
+
+| Style | Who answers | What changes |
+|-------|-------------|--------------|
+| Tap | The child, on screen | Choices are buttons or canvas targets |
+| Move | A grown-up taps ✓ | Floor cards, no picture on the screen |
+| Hunt | A grown-up taps ✓ | The prompt names a real object. What’s missing? falls back to Move |
+| Reach | A held hand | `camera.js` turns a wrist into a tap. Off until `camera: true` |
+
+If the saved style is `reach` and `data.camera` is false, the shell plays the round as tap and hides the Reach button. When Reach is on, choice buttons get `data-zone`. Catch the answer and Hook the fish steer from `watchHands`. Word lanes uses `watchBody` and a 10 second step into the lane. `camera.js` is imported the first time a round needs it. If that import fails, the status line says so and the buttons still take a tap. Move and Hunt do not rewrite the arcade canvases. A finished round still ends in `applyRound`.
+
+<img src="/images/projects/little-sprouts/hop.jpg" alt="Sprout hop, bouncing toward leaves labeled with sight words" />
+
+## Speech
+
+`speech.js` owns the `AudioContext` on the main thread. Generation runs in `speech-worker.js` so a prompt cannot freeze the Next button.
+
+| Piece | Choice |
+|-------|--------|
+| Runtime | `kokoro-js@1.2.1` from jsDelivr |
+| Model | `onnx-community/Kokoro-82M-v1.0-ONNX` |
+| Build | `dtype: 'q8'`, `device: 'wasm'` |
+| Cache | 24 clips in the worker `Map`, 80 in IndexedDB `sprouts-voice` v3 |
+| Fallback | If the clip is not ready in 220ms, `speechSynthesis` speaks the line |
+
+The model returns a view of its own buffer. The worker copies every sample into a new `Float32Array` before the next line reuses that memory. A clip is rejected unless it has a sane peak, RMS, and zero-crossing rate, so static does not get cached. Default voice is `af_heart`. The voice id is shared by every learner on the device.
+
+## Reach
+
+`camera.js` loads MediaPipe Tasks Vision `1.1.1` and the float16 pose landmarker (`full`, then `lite`). Frames are read in this tab. Nothing is recorded, stored, or uploaded.
+
+`pickPose` keeps the pose with the widest visible shoulders. `pointerNorm` blends wrist and fingertip. `mapCover` mirrors x so a raised right hand lands on the right side of the mirrored video. A hand has to dwell **700ms** on a `[data-zone]` target. **200ms** of grace covers a flicker. **320ms** away counts as lost. The default profile has `camera: false`, so a new device never opens the camera until Parent corner allows it.
+
+`camera.test.mjs` checks the mirror math, pose pick, and shoulder midpoint with fake landmarks. No camera required.
+
+## Sidecars
+
+Rally, Sky flight, Dirt ride, Garden walk, and Paint sphere boot in an iframe. `findBuiltSidecars()` `HEAD`s each `src`. A missing page is dropped from the shelf. Rally’s stage files are gitignored, so that card stays hidden unless `tools/build-sidecar.sh` has filled `sidecars/rally/`.
+
+Messages are `{ source: 'sprouts-sidecar', type, ... }`.
+
+| Direction | Types |
+|-----------|--------|
+| Host → guest | `boot`, `ask`, `mark`, `config` |
+| Guest → host | `ready`, `show`, `pick`, `slip`, `progress`, `finish`, `quit`, `need` |
+
+The guest does not read `sprouts-v1`. `sidecar-guest.js` exposes `SproutsSidecar.ready()`, `.progress()`, `.finish()`, and `.quit()`. On rally, `ask` pauses the drive, paints the question, then resumes. A right answer holds a short turbo. A wrong answer holds the brake. Sky flight, the bike, the walk, and the paint sphere use the same bridge with their own `mark` handling.
+
+<img src="/images/projects/little-sprouts/sky.jpg" alt="Sky shot, a ship aiming at numbered rocks in a starfield" />
+
+<img src="/images/projects/little-sprouts/paint.jpg" alt="Paint sphere, looking down a track inside a painted shell" />
+
+## What each engine actually uses
+
+Most modules draw their own pictures and call `logic.mjs` for the board. A few reuse a published mechanic and say so in the file header.
+
+| Module | Borrowed piece | Local piece |
+|--------|----------------|-------------|
+| `arcade.js` | Jake Gordon road projection (MIT) | Word lanes and Gas race questions |
+| `chase.js` | hellokatili maze movement | Berries labeled from this learner |
+| `hop.js` | FRADAR jump physics | Sprout, leaves, and the word on each leaf |
+| `toast.js` | Megafry arc and lives | Toast labeled from the profile |
+| `sidecars/walk` | BlocksJS 0.5.32 (William Malone, MIT) | Garden signs and the match |
+| `sidecars/flight` | OpenSkyFlight chase camera, pjedvaj Rafale glTF | Gate questions from `sim.mjs` |
+| `sidecars/paint`, flight | Three.js (MIT, 2010–2024) | Shell halves and the learner’s math |
+| `sidecars/bike` | None. `LICENSE` is Little Sprouts, 2026 | Canvas bike, `dirt-bike.js` |
+| `hook.js`, `planet.js`, `sky.js`, `match.js` | Idea only. No imported game code | Drawing and questions |
+
+Kokoro is Apache 2.0. MediaPipe Pose is Google’s model, loaded at runtime. Outfit and DM Sans come from Google Fonts.
+
+## Tests and local run
+
+```bash
+python3 -m http.server 8000
+node --test logic.test.mjs camera.test.mjs
+node --test sidecars/bike/dirt-bike.test.mjs
+```
+
+`logic.test.mjs` also imports the flight step (`sim.mjs`, `terrain.mjs`) and the sidecar registry, so a board-size or gate change fails without opening a browser. `camera.test.mjs` imports the pose helpers only.
+
+Open `http://localhost:8000`. Module URLs carry a `?v=` query so a static host does not keep a stale `app.js`. There is no bundler on the shell.
+
+## Deploy
+
+```dockerfile
+FROM node:24-bookworm AS sidecars
+# tools/build-sidecar.sh → /out/sidecars/rally
+
+FROM nginx:alpine
+# flight, bike, walk, paint copied as-is
+# shell modules copied to /usr/share/nginx/html
+```
+
+`nginx.conf` turns on gzip and sends `Cross-Origin-Opener-Policy: same-origin` plus `Cross-Origin-Embedder-Policy: credentialless`. That is what lets the Kokoro WASM build use more than one thread without breaking font and CDN loads. `.mjs`, `.js`, `.css`, and `.csv` are `Cache-Control: no-cache`. `.wasm` is served as `application/wasm`.
+
+There is no app server, no account, and no uploaded media. A phone still needs a static host. That hosted URL is not up yet.

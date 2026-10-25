@@ -1,0 +1,67 @@
+---
+title: "Little Sprouts: Play That Teaches"
+date: "2026-10-24T12:00:00.000Z"
+excerpt: "I built Little Sprouts so a child can tap a picture, hear the question, and answer. Three learners, four ways to play, and a grown-up corner for levels and sight words."
+coverImage: "/images/blog/little-sprouts-cover.jpg"
+coverImageFit: contain
+series: "Low to No Cost Solutions"
+---
+
+A worksheet asks a child to sit still. A game asks them to catch the number, hook the fish, or hop on the word. I wanted the second one, with the same questions a parent would actually assign.
+
+So I shipped **Little Sprouts** — early-learning games that run in the browser. No account. No build step. Open the folder, start a static server, and hand over the screen. The project notes are on **[the Little Sprouts project page](/projects/little-sprouts)**.
+
+<LiveSiteButton href="https://github.com/mitchelldawkinsjr/little-sprouts">View on GitHub</LiveSiteButton>
+
+## The product in one sentence
+
+Pick a picture. Hear the question. Answer it. A grown-up sets the level so the next round is a little harder, not a different app.
+
+<img src="/images/projects/little-sprouts/library.jpg" alt="Little Sprouts game shelf, a grid of cards from Shape safari through Paint sphere" />
+
+Three learners start on the device: Malik in preschool, Micah in kindergarten, and Mitch in 4th grade. Each one keeps a name, a garden buddy, a math band, sight words, and stars. Progress stays in that browser.
+
+## How a round works
+
+Under **How are we playing?** the same question can be a tap, a movement, a hunt around the room, or a reach toward the camera.
+
+| Style | What the child does | Who confirms |
+|-------|---------------------|--------------|
+| Tap | Answers on the screen | The game |
+| Move | Lands on a printed floor card | A grown-up |
+| Hunt | Finds a real thing that matches | A grown-up |
+| Reach | Holds a hand on the answer until it fills | The camera, on device |
+
+Reach is off until a grown-up allows it. The pose model finds hands in the browser. Video is never recorded or uploaded.
+
+Most rounds are 5, 10, or 15 questions. A right answer on the first try earns a learning star. Gas race, Dirt ride, and Sky flight keep their own clocks instead of a fixed question count.
+
+<img src="/images/projects/little-sprouts/hook.jpg" alt="Hook the fish, counting apples and steering a hook toward numbered fish" />
+
+<img src="/images/projects/little-sprouts/lanes.jpg" alt="Word lanes, a car driving toward the sight word go" />
+
+## Parent corner is the settings, not a lock
+
+The gear in the header asks a small addition problem, then opens the learner. Rename them, pick a garden buddy, set the math band, set each game’s level, and type the sight words. Read-aloud is shared by everyone on that device. Kokoro speaks on the device when it can load. If it cannot, the browser’s own voice does.
+
+<img src="/images/projects/little-sprouts/parents.jpg" alt="Parent corner, choosing a learner, a garden buddy, and a name" />
+
+## Same questions, different toys
+
+The shelf is shapes, colors, words, and counting next to the arcade games. Catch the answer, Moon shot, Garden chase, and Sky flight ask the learner’s own math and words. The toy changes. The question does not.
+
+<img src="/images/projects/little-sprouts/chase.jpg" alt="Garden chase, a maze where the berries are sight words" />
+
+<img src="/images/projects/little-sprouts/flight.jpg" alt="Sky flight, a plane flying toward letter gates" />
+
+## Credit where the play came from
+
+Most of the pictures and questions are Little Sprouts’ own. Some of the motion is not. Word lanes and Gas race use Jake Gordon’s road drawing. Garden chase follows hellokatili’s Pac-Man maze. Sprout hop follows FRADAR’s Doodle Jump pen. Toast pop follows Megafry’s Toast Catcher. Garden walk runs on William Malone’s BlocksJS. Sky flight uses jeanjerome’s OpenSkyFlight camera and pjedvaj’s Rafale model. Paint sphere and Sky flight draw with Three.js. The spoken voice is hexgrad’s Kokoro. Reach uses Google’s MediaPipe pose model.
+
+The full list, with links, is on the site under **Credits** and in the [README](https://github.com/mitchelldawkinsjr/little-sprouts#credits).
+
+<HumanReflection>
+I did not want another app that stores a child’s face or their scores on my server. Little Sprouts keeps the stars in the browser and names the people whose games I learned from. If a kid can play a round without me installing anything, and a parent can see who the pieces came from, that is the product.
+</HumanReflection>
+
+Source: **[github.com/mitchelldawkinsjr/little-sprouts](https://github.com/mitchelldawkinsjr/little-sprouts)** · Build notes: **[/projects/little-sprouts](/projects/little-sprouts)**.
