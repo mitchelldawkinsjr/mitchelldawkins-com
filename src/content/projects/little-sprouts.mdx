@@ -1,0 +1,132 @@
+---
+title: "Little Sprouts"
+description: "Browser games for early learning. A child taps, moves, hunts, or reaches. A grown-up sets the math band, the level, and the sight words. Progress stays on the device."
+date: "2026-10-24"
+status: "Active"
+featured: true
+priority: 10
+slug: "little-sprouts"
+headerImage: "/images/projects/little-sprouts/header.jpg"
+tech:
+  - HTML
+  - CSS
+  - JavaScript
+  - Canvas
+  - Static site
+tags:
+  - Learning
+  - Kids
+  - Games
+  - Family
+audience:
+  - Parents who want screen time to practice words and math
+  - Teachers who need printable floor cards for movement play
+  - Builders making static learning toys with no account system
+links:
+  - title: "GitHub Repository"
+    url: "https://github.com/mitchelldawkinsjr/little-sprouts"
+  - title: "Blog: Play That Teaches"
+    url: "/blog/little-sprouts-play-and-learn"
+why: "Worksheets ask a child to sit still. Little Sprouts asks the same kinds of questions inside a game they can tap, drive, or hop."
+streamFocus: "Question design across play styles, arcade games that reuse one learner profile, and on-device speech and pose tracking."
+lessons:
+  - "One learner profile should own the level, the words, and the stars so siblings do not share a score."
+  - "The same question can be a tap, a floor card, a real-world hunt, or a camera reach."
+  - "Adapted game feel needs a public credit. The pictures can still be yours."
+roadmap:
+  - "Keep the question sheet easy for a parent to edit"
+  - "Host a playable copy so a phone can open it without a local server"
+  - "Tighten Reach so a missed camera still leaves tap play intact"
+relatedPosts:
+  - "little-sprouts-play-and-learn"
+---
+
+## Introduction
+
+**Little Sprouts** is a static browser app of early-learning games. A learner picks a card, hears the prompt, and answers. Grown-ups set the math band, each game’s level, and the sight-word list in Parent corner.
+
+**Source:** [mitchelldawkinsjr/little-sprouts](https://github.com/mitchelldawkinsjr/little-sprouts)
+
+For the product story, see [Little Sprouts: Play That Teaches](/blog/little-sprouts-play-and-learn).
+
+**Status: Active** — play it from the repo with a static file server. There is no account and no build step.
+
+<img src="/images/projects/little-sprouts/shapes.jpg" alt="Shape safari asking the learner to find the circle" />
+
+## Problem & Solution
+
+### The Problem
+
+- **One shared profile** mixes up siblings’ words and scores
+- **Screen-only play** leaves out kids who need to move
+- **A new app per skill** means a new login, a new progress store, and a new voice
+- **Borrowed game ideas** disappear into the code unless someone writes them down
+
+### The Solution
+
+1. **A learner profile** — name, buddy, math band, levels, sight words, and stars in `localStorage`
+2. **Four play styles** — Tap, Move, Hunt, and Reach, on the same questions
+3. **One shelf** — shapes, colors, words, counting, and arcade games read that profile
+4. **A static folder** — `python3 -m http.server` is the whole deploy
+5. **A credits list** — on the site and in the README, with links
+
+## Run it
+
+From the repo:
+
+```bash
+python3 -m http.server 8000
+```
+
+Open `http://localhost:8000`.
+
+| Piece | Choice |
+|-------|--------|
+| UI | `index.html`, `style.css`, one module per game |
+| State | `localStorage` on this browser |
+| Speech | Kokoro in a worker, browser voice as fallback |
+| Reach | MediaPipe Pose, loaded on first use, video stays local |
+| Questions | `sheet.csv`, with an optional published Google Sheet |
+| Tests | `node --test logic.test.mjs` and `camera.test.mjs` |
+| Hosting | Any static host. No server runtime |
+
+<img src="/images/projects/little-sprouts/parents.jpg" alt="Parent corner for the learner, garden buddy, and name" />
+
+## Play styles
+
+| Style | Child | Grown-up |
+|-------|-------|----------|
+| Tap | Taps the answer | Optional |
+| Move | Moves to a printed floor card | Taps when they land |
+| Hunt | Finds a real object that matches | Confirms |
+| Reach | Holds a hand on the answer | Allows the camera once |
+
+Move and Hunt do not rewrite the arcade games. Those stay on the screen. Reach changes Catch the answer, Word lanes, and Hook the fish.
+
+<img src="/images/projects/little-sprouts/hop.jpg" alt="Sprout hop, bouncing toward leaves labeled with sight words" />
+
+<img src="/images/projects/little-sprouts/walk.jpg" alt="Garden walk, a sprout walking toward word signs" />
+
+## What the shelf is made of
+
+Learning cards (Shape safari, Color garden, Word parking, Count & clap, Number path) render choices in the page. Arcade games draw on canvas or in their own page: Moon shot, Gas race, Hook the fish, Sky shot, Garden chase, Dirt ride, Sky flight, Paint sphere, and the rest of the shelf.
+
+Sky flight and Paint sphere use Three.js. Garden walk uses BlocksJS for the canvas and the walk. Dirt ride is its own canvas bike. Backroad rally’s stage files are large and are not in the GitHub repo, so that card stays hidden unless those files are added locally.
+
+<img src="/images/projects/little-sprouts/sky.jpg" alt="Sky shot, a ship aiming at numbered rocks in a starfield" />
+
+<img src="/images/projects/little-sprouts/paint.jpg" alt="Paint sphere, looking down a track inside a painted shell" />
+
+## Credits
+
+The pictures, questions, and most of the games are Little Sprouts’ own. These creators made work the app uses or follows:
+
+- [Jake Gordon — javascript-racer](https://github.com/jakesgordon/javascript-racer) (MIT) for the road in Word lanes and Gas race
+- [cnrasili — Hooked](https://github.com/cnrasili/Hooked) for the cast-and-steer idea
+- [hellokatili — HTML5 Pacman](https://codepen.io/hellokatili/pen/xwKRmo), [FRADAR — Doodle Jump](https://codepen.io/FRADAR/pen/XWMzvaM), and [Megafry — Toast Catcher](https://codepen.io/Megafry/pen/yyyZyYw) for chase, hop, and toast
+- [William Malone](https://www.williammalone.com/) for BlocksJS and the canvas brush
+- [jeanjerome — OpenSkyFlight](https://github.com/jeanjerome/OpenSkyFlight) and [pjedvaj’s Rafale model](https://www.cgtrader.com/free-3d-models/aircraft/military-aircraft/dassault-rafale-b-bdc1590e-5936-4912-ba44-79f5c2e09f07)
+- [Three.js](https://github.com/mrdoob/three.js) (MIT), [Kokoro](https://github.com/hexgrad/kokoro) (Apache 2.0), and [MediaPipe Pose](https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker)
+- [Outfit](https://fonts.google.com/specimen/Outfit) by Rodrigo Fuenzalida and [DM Sans](https://fonts.google.com/specimen/DM+Sans) by Colophon Foundry
+
+The in-app **Credits** button and the repo README carry the same list.
