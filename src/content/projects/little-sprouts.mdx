@@ -4,7 +4,7 @@ description: "A static browser app of early-learning games. One learner record i
 date: "2026-10-24T12:00:00.000Z"
 status: "Active"
 featured: true
-priority: 10
+priority: 0
 slug: "little-sprouts"
 headerImage: "/images/projects/little-sprouts/header.jpg"
 tech:
@@ -25,6 +25,8 @@ audience:
   - People wiring one profile into many canvas games
   - Anyone running speech or pose models in the browser
 links:
+  - title: "Live App"
+    url: "https://grow.360web.cloud"
   - title: "GitHub Repository"
     url: "https://github.com/mitchelldawkinsjr/little-sprouts"
   - title: "Blog: Play That Teaches"
@@ -36,7 +38,6 @@ lessons:
   - "A sidecar must not store the learner. The host posts the question and scores the answer."
   - "Speech has to fail open in about 220ms or the next tap sits in silence."
 roadmap:
-  - "Host a static copy so a phone can open it without a local server"
   - "Keep sheet.csv the parent-editable source of words and facts"
   - "Leave tap play working when the pose model or camera never arrives"
 relatedPosts:
@@ -47,11 +48,12 @@ relatedPosts:
 
 **Little Sprouts** is a no-build static site. `index.html` loads `app.js` as a module. Each game is its own module with a `mount*` / `stop*` pair. Round rules that do not touch the DOM live in `logic.mjs` and run under `node --test`.
 
+**Live:** [https://grow.360web.cloud](https://grow.360web.cloud)  
 **Source:** [mitchelldawkinsjr/little-sprouts](https://github.com/mitchelldawkinsjr/little-sprouts)
 
 The product story is in [Little Sprouts: Play That Teaches](/blog/little-sprouts-play-and-learn).
 
-**Status: Active** — `python3 -m http.server` is enough to play. A Dockerfile serves the same files from nginx and builds the Backroad rally sidecar, whose stage files are not in git.
+**Status: Active** — live at [grow.360web.cloud](https://grow.360web.cloud). The same files run locally with `python3 -m http.server`. A Dockerfile serves them from nginx and builds the Backroad rally sidecar, whose stage files are not in git.
 
 <img src="/images/projects/little-sprouts/shapes.jpg" alt="Shape safari asking the learner to find the circle" />
 
@@ -236,4 +238,11 @@ FROM nginx:alpine
 
 `nginx.conf` turns on gzip and sends `Cross-Origin-Opener-Policy: same-origin` plus `Cross-Origin-Embedder-Policy: credentialless`. That is what lets the Kokoro WASM build use more than one thread without breaking font and CDN loads. `.mjs`, `.js`, `.css`, and `.csv` are `Cache-Control: no-cache`. `.wasm` is served as `application/wasm`.
 
-There is no app server, no account, and no uploaded media. A phone still needs a static host. That hosted URL is not up yet.
+| Item | Detail |
+|------|--------|
+| URL | `https://grow.360web.cloud` |
+| Runtime | nginx serving the static folder |
+| Accounts | None. Progress stays in the browser |
+| Media | Nothing is uploaded |
+
+There is no app server. The phone opens [grow.360web.cloud](https://grow.360web.cloud).
