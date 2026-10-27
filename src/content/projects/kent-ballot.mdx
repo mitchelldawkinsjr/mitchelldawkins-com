@@ -1,0 +1,133 @@
+---
+title: "Grand Rapids Practice Ballot"
+description: "A static practice ballot for the Grand Rapids area. One county contest list, filtered by precinct scope, with millage questions priced from a taxable value. Marks stay in the browser."
+date: "2026-10-27T16:30:00.000Z"
+status: "Active"
+featured: true
+priority: 1
+slug: "kent-ballot"
+headerImage: "/images/projects/kent-ballot/header.png"
+tech:
+  - HTML
+  - JavaScript
+  - JSON
+  - Python
+  - nginx
+  - Docker
+tags:
+  - Static site
+  - Civic tool
+  - Local-first
+  - Elections
+audience:
+  - People facing a long November ballot
+  - Builders shipping a static page with no account
+  - Anyone turning a rate-per-thousand into a dollar amount
+links:
+  - title: "Live App"
+    url: "https://ballot.360web.cloud"
+  - title: "GitHub Repository"
+    url: "https://github.com/mitchelldawkinsjr/kent-elections"
+  - title: "Blog: A Ballot You Can Actually Read"
+    url: "/blog/a-ballot-you-can-actually-read"
+why: "A county candidate list is one PDF. By the last millage, the offices at the top are gone. This page keeps one precinct’s contests on a single sheet and prices the tax questions."
+streamFocus: "Precinct scopes over copied ballots, the three-column layout, and millage math from taxable value."
+lessons:
+  - "Store each contest once and give every precinct a list of scopes. A second ballot file per precinct will drift."
+  - "A ZIP code is not a precinct. Narrow the menu and make the person choose."
+  - "Millage copy should show the yes bill, the baseline, and what a no vote does. The rate alone does not."
+roadmap:
+  - "Fill the local contests this guide still marks as missing, including city offices and the other school boards"
+  - "Keep the county list as the source when names or proposal wording change"
+relatedPosts:
+  - "a-ballot-you-can-actually-read"
+---
+
+## Introduction
+
+**Grand Rapids Practice Ballot** is one HTML file. It loads `data/ballot.json` and `data/precincts.json`, and if those requests fail it reads the same JSON embedded in the page. There is no account, no build step, and no server-side store.
+
+**Live:** [https://ballot.360web.cloud](https://ballot.360web.cloud)  
+**Source:** [mitchelldawkinsjr/kent-elections](https://github.com/mitchelldawkinsjr/kent-elections)
+
+The product story is in [A Ballot You Can Actually Read](/blog/a-ballot-you-can-actually-read).
+
+**Status: Active** — live at [ballot.360web.cloud](https://ballot.360web.cloud). The same files run locally with `python3 -m http.server`. nginx serves them from the `kent-ballot` image on the VPS.
+
+<img src="/images/projects/kent-ballot/ballot.png" alt="Practice ballot columns for the November 3, 2026 general election, including the taxable value box on the county millages" />
+
+This is a reference guide for the November 3, 2026 general election. It is not a ballot an election office will count. The official ballot for an address is at the [Michigan Voter Information Center](https://mvic.sos.state.mi.us/).
+
+## Problem & Solution
+
+### The Problem
+
+- **One county PDF** lists every contest in Kent County, including offices a given precinct will not see
+- **Millage questions** are written as a rate per thousand dollars of taxable value
+- **A guide per precinct** would copy the statewide races 132 times and then go stale
+- **An account** would turn practice marks into a stored vote
+
+### The Solution
+
+1. **One contest list** of 24 races, each tagged with a scope
+2. **One precinct catalog** of 132 precincts, each a list of scopes
+3. **`prepare()`** turns candidates into options and proposals into Yes / No
+4. **`columnize()`** balances three columns by a rough height, with proposals weighted heavier
+5. **`localStorage`** keeps marks per precinct on this device
+
+## Architecture Overview
+
+| Layer | Files | Role |
+|-------|--------|------|
+| Page | `index.html` | Layout, precinct filter, marks, review, print, millage math |
+| Contests | `data/ballot.json` | Offices and proposals, notes, filings, outbound links |
+| Places | `data/precincts.json` | Municipality, ZIP codes, school label, scopes, district lines |
+| Notes | `scripts/build_guide.py` | Writes short sourced biographies back into `ballot.json` |
+| Edge | `nginx.conf`, `Dockerfile` | Static files, `Cache-Control: no-store` on `/data/` |
+| Host | `docker-compose.prod.yml` | Container `kent-ballot-app` on `360ws-network` |
+
+`loadJson()` fetches the file. On any failure it parses the `<script type="application/json">` block with the same id. Opening `index.html` as a file still renders. Serving the directory still picks up edits to the JSON without a rebuild of the HTML.
+
+## Scopes, not copies
+
+A contest carries `scope`. Statewide offices and the two statewide proposals use `statewide`. Kent County offices and the two millages use `kent`. Congress, the state legislature, the appeals court, the district court, Grand Rapids Community College, and the Byron Center school board each have their own scope.
+
+`applyPrecinct()` keeps races where `precinct.scopes` includes `race.scope`. The default precinct is `gaines-charter-township-precinct-7`. The last choice is stored as `gr-precinct-id`.
+
+ZIP lookup filters the `<select>`. If several precincts share the ZIP, the ballot stays on the current precinct until one is chosen. If the precinct is missing a House, Senate, school, or district-court scope, a line on the sheet says those contests are not in this guide yet.
+
+Nine municipalities are in the catalog today: Grand Rapids City (59 precincts), Wyoming, Kentwood, Gaines Charter Township, Byron Township, Grand Rapids Charter Township, Grandville, Walker, and East Grand Rapids.
+
+## Marks
+
+`prepare()` assigns option ids. A proposal becomes `{ id: "yes" }` and `{ id: "no" }`, with write-in off. An office maps each candidate to a string index and allows a write-in. `voteLimit` decides the control: one choice is a radio, more than one is a checkbox. The State Board, the three university boards, the Supreme Court, the appeals court, the circuit court, one GRCC seat, and the Byron Center board all allow more than one mark.
+
+State lives in memory as `{ selections, writeInText }` per race, then `persist()` writes:
+
+```json
+{ "v": 1, "marks": { "race-1": { "selections": ["0"], "writeInText": "" } } }
+```
+
+The key is `gr-practice-ballot:<precinct id>`. Gaines Precinct 7 still reads the older key `precinct7-practice-ballot` if the new key is empty. Reset clears the current precinct only. Review lists every contest, including blanks, and print uses a sheet that is hidden on screen.
+
+## Millage math
+
+Two contests carry a `levy` object: `kind` of `increase` or `renewal`, `proposedMills`, `baselineMills`, and the year spans. The taxable value is one number for the page, stored as `precinct7-taxable-value`.
+
+One mill is $1 per $1,000 of taxable value. The page works in cents:
+
+```javascript
+function taxCents(taxable, mills) {
+  return Math.round(taxable * mills / 10);
+}
+```
+
+`taxable * mills / 1000` is the dollar amount. Dividing by 10 instead yields cents, and `Math.round` keeps the displayed bill on a cent. `levyFigures()` returns the yes amount, the baseline amount, and `delta`.
+
+An **increase** headline is the extra annual bill, plus that gap divided by 12. The corrections levy is 0.98 mill from 2026 through 2045, against a 0.7332 mill baseline. A **renewal** headline is the yes bill through the proposed span. The zoo and museum levy is 0.4086 mill from 2026 through 2035, next to the 2025 rate of 0.4134 mill. The copy for a no vote says the line ends. It does not pretend the old rate continues.
+
+## Sources and deploy
+
+Candidate notes are short and tied to a public page: Ballotpedia, Wikipedia, Michigan Public, Bridge Michigan, MLive, and the county list for the filing line. `scripts/build_guide.py` is the place those sentences are edited. Home addresses are not in the file. If a biography could not be checked, the card says so instead of inventing one.
+
+Production is the same static tree in nginx. Nginx Proxy Manager terminates HTTPS for `ballot.360web.cloud` and forwards to `kent-ballot-app:80`. Port 8033 on the host is the direct check. JSON responses send `Cache-Control: no-store` so a data edit is visible on the next load.

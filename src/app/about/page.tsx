@@ -30,7 +30,7 @@ export default function AboutPage() {
               {site.shortName}
             </h1>
             <h2 className="text-xl text-blue-600 dark:text-blue-400 mb-3">
-              {site.title}
+              Senior Software Engineer | AI Systems • Full Stack • Sports Technology
             </h2>
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
               {site.brandLine} This site is my journal of that work: live builds,
@@ -120,7 +120,7 @@ export default function AboutPage() {
           </h2>
           <div className="prose dark:prose-invert prose-lg max-w-none">
             <p>
-              Full-stack software engineer with 10+ years of experience building production applications, APIs, internal tools, and data-driven systems across enterprise and sports technology environments. Experienced with JavaScript, React, TypeScript, REST APIs, SQL, AWS, Git-based development workflows, and AI-assisted software development. Combines deep technical experience with lifelong involvement in football as a former Division I wide receiver at Eastern Michigan University and six-year high school football coach, including personally designing and developing software used to support football operations, player development, practice planning, attendance, strength training, and film evaluation.
+              Full-stack engineer with 10+ years of experience building production software across enterprise and growth-stage environments, including four years at Dropbox. I specialize in scalable full-stack systems, AI-powered applications, and developer infrastructure, with a track record of delivering revenue-driving products and leading architecture for federal and enterprise clients. Today, I&apos;m focused on AI-native engineering, automation, and sports technology that solves real-world operational problems. I also bring lifelong involvement in football as a former Division I wide receiver at Eastern Michigan University and a six-year high school football coach, including software I designed for football operations, player development, practice planning, attendance, strength training, and film evaluation.
             </p>
             <p>
               I believe we&apos;re at a fascinating inflection point where AI can be used in tandem with experience and a good grasp of fundamentals to build better software, creating improvements that will dramatically change how we develop it.
@@ -241,17 +241,15 @@ export default function AboutPage() {
             <div className="border-l-4 border-blue-600 pl-4 py-1">
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white">Senior Full Stack AI Engineer</h3>
-                <div className="text-gray-600 dark:text-gray-300">Jul 2026 – Present · Contract · United States</div>
+                <div className="text-gray-600 dark:text-gray-300">Aug 2026 – Present · Contract · Remote</div>
             </div>
-            <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">SportsBiz</div>
+            <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Sportsbiz — New York, NY</div>
               <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
-                <li>Architect and ship full-stack AI-driven product features as a senior engineer within SportsBiz&rsquo;s Center of AI Excellence, partnering with the Tech Lead, data science, and product teams.</li>
-                <li>Deploy daily-use AI tools and reusable components that elevate the brand and strengthen user trust across sports marketing workflows.</li>
-                <li>Establish scalable frameworks, systems, and engineering standards to accelerate AI code creation and team velocity.</li>
-                <li>Build world-class full-stack solutions spanning backend services, APIs, and reactive frontends for a sports marketing platform.</li>
+                <li>Contributed to <strong>ApprovalLab</strong>, working across AWS infrastructure, backend architecture, database design, and frontend development.</li>
+                <li>Partnered with Product and Engineering to strengthen <strong>agile delivery</strong>, including standups, CI/CD standards, and PR workflows.</li>
+                <li>Establish <strong>AI-assisted development practices</strong>, including Cursor rules that standardized frontend and backend conventions.</li>
               </ul>
-            </div>
-
+            </div> 
             {/* AdHoc Research Associates */}
             <div className="border-l-4 border-blue-600 pl-4 py-1">
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">

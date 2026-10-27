@@ -7,7 +7,8 @@
     "build": "node scripts/sanitize-blog-svgs.mjs && next build",
     "sanitize:svgs": "node scripts/sanitize-blog-svgs.mjs",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "resume:pdf": "bash resume/build.sh"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
