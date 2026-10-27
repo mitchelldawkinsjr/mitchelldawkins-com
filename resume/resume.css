@@ -1,0 +1,202 @@
+/* Mitchell L. Dawkins II — Resume
+   Build: npm run resume:pdf  (Chrome headless HTML -> PDF)
+   Specs measured from the original PDF: all Georgia, black arrows,
+   terracotta (#C03B2F) section headers, no underline rules. */
+
+@page {
+  size: letter;
+  margin: 0.4in 0.5in 0.35in 0.5in;
+}
+
+:root {
+  --accent: #c03b2f;   /* terracotta section headers */
+  --ink: #000000;      /* all body text is black */
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 7.9pt;
+  line-height: 1.42;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ---------- Masthead ---------- */
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 0.08in;
+  margin-bottom: 34px;
+}
+.mast-left { flex: 1 1 auto; min-width: 0; }
+.name {
+  margin: 0;
+  font-size: 19.5pt;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-family: Georgia, serif;
+  line-height: 1;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.phone-email {
+  margin: 6px 0 0 0;
+  font-family: Georgia, serif;
+  font-size: 8.6pt;
+  color: var(--ink);
+  text-align: center;
+  white-space: nowrap;
+}
+.contact {
+  margin: 0;
+  font-style: normal;
+  font-family: Georgia, serif;
+  text-align: right;
+  line-height: 1.4;
+  color: var(--ink);
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+.contact a { color: var(--ink); text-decoration: underline; font-style: italic; }
+
+/* ---------- Section headers ---------- */
+h2.section {
+  font-family: Georgia, serif;
+  font-size: 8.2pt;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 5px 0;
+  padding: 0;
+  border: 0;
+}
+.summary { margin-bottom: 35px; }
+.summary p { margin: 0; }
+
+/* ---------- Two columns ---------- */
+.columns {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+.col-left { flex: 1.94; min-width: 0; }
+.col-right { flex: 1; min-width: 0; }
+.col-right section { margin-bottom: 9px; }
+.col-right section:last-child { margin-bottom: 0; }
+
+/* ---------- Page 2: second two-column block (forced page break) ---------- */
+.columns2 {
+  break-before: page;
+  page-break-before: always;
+}
+
+/* ---------- Football Experience (right sidebar, page 2) ---------- */
+.fb { margin-bottom: 7px; }
+.fb:last-child { margin-bottom: 0; }
+.fb-role { margin: 0; font-weight: 700; font-size: 8.6pt; }
+.fb-org { margin: 0; font-size: 7.5pt; font-style: italic; }
+.fb-detail { margin: 0; font-size: 7.5pt; color: var(--ink); }
+
+/* ---------- Selected systems (forward-deployed variant) ---------- */
+.sys { margin-bottom: 7px; }
+.sys:last-child { margin-bottom: 0; }
+.sys-name { margin: 0; font-weight: 700; font-size: 8.6pt; }
+.sys-role { margin: 0; font-size: 7.5pt; font-style: italic; }
+.sys-detail { margin: 1px 0 0 0; font-size: 7.5pt; line-height: 1.3; }
+.sys .url { margin: 0; font-size: 7.5pt; }
+.sys .url a { color: var(--ink); text-decoration: underline; font-style: italic; }
+.sys-name .sys-role { font-weight: 400; font-style: italic; }
+
+.earlier { margin-top: 8px; }
+.earlier-line { margin: 0 0 4px 0; line-height: 1.3; }
+.earlier-line:last-child { margin-bottom: 0; }
+.earlier-line .company { font-weight: 700; }
+
+/* Grand Rapids line in the masthead can wrap the phone row; keep it one line. */
+body.fde .phone-email { font-size: 8.2pt; text-align: left; }
+body.fde .summary { margin-bottom: 10px; }
+body.fde .masthead { margin-bottom: 10px; }
+body.fde .job { margin-bottom: 5px; }
+body.fde .skill-group { margin-bottom: 4px; }
+body.fde .col-right section { margin-bottom: 6px; }
+body.fde .sys { margin-bottom: 5px; }
+body.fde .fb { margin-bottom: 4px; }
+body.fde .edu { margin-bottom: 4px; }
+
+/* ---------- Jobs ---------- */
+.job { margin-bottom: 7px; }
+.job:last-child { margin-bottom: 0; }
+.job-head { margin-bottom: 1px; }
+.job-head .title { margin: 0; font-size: 9.4pt; line-height: 1.25; }
+.job-head .company { font-weight: 700; }
+.job-head .role { font-style: italic; }
+.job-head .meta {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 7.9pt;
+  color: var(--ink);
+  line-height: 1.25;
+}
+.job-head .url { margin: 0; font-size: 7.9pt; }
+.job-head .url a { color: var(--ink); text-decoration: underline; font-style: italic; }
+.job-head .stack { margin: 0; font-size: 7.5pt; font-style: italic; color: var(--ink); }
+.job-head .cont { font-style: italic; font-weight: 400; font-size: 7.9pt; color: var(--ink); }
+
+/* ---------- Bullets (black double-chevron arrow) ---------- */
+ul.bullets {
+  list-style: none;
+  margin: 2px 0 0 0;
+  padding: 0;
+}
+ul.bullets li {
+  position: relative;
+  padding-left: 13px;
+  margin-bottom: 1px;
+  text-align: left;
+  line-height: 1.3;
+}
+ul.bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.9em;
+  width: 8px;
+  height: 6px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'><path d='M1 1L4.5 4L1 7M4.5 1L8 4L4.5 7' stroke='black' stroke-width='1' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") no-repeat center / contain;
+}
+
+/* ---------- Skills ---------- */
+.skill-group { margin: 0 0 6px 0; }
+.skill-label {
+  display: block;
+  font-family: Georgia, serif;
+  font-size: 8.6pt;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 1px;
+}
+
+/* ---------- Education ---------- */
+.edu { margin-bottom: 6px; }
+.edu:last-child { margin-bottom: 0; }
+.edu .degree { margin: 0; font-weight: 700; font-size: 8.6pt; }
+.edu .school { margin: 0; font-size: 7.5pt; font-style: normal; }
+.edu .honors { margin: 0; font-size: 7.9pt; color: var(--ink); }
+
+/* ---------- Certifications ---------- */
+ul.certs { list-style: none; margin: 0; padding: 0; }
+ul.certs li {
+  margin-bottom: 5px;
+  font-size: 7.5pt;
+  line-height: 1.25;
+}
+ul.certs .cert-name { display: block; font-weight: 700; font-size: 8.2pt; }
+ul.certs .cert-school { display: block; font-style: normal; }
+ul.certs .cert-date { display: block; color: var(--ink); }
