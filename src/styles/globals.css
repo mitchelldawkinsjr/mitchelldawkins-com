@@ -49,16 +49,102 @@
 }
 
 body {
-  @apply bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100;
+  @apply bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 font-sans;
   font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  letter-spacing: -0.02em;
 }
 
 .prose a {
   @apply transition-colors;
 }
 
+.prose h2,
+.prose h3,
+.prose h4 {
+  scroll-margin-top: 6rem;
+}
+
 .prose pre {
   @apply border border-gray-200 dark:border-gray-800 rounded-lg;
+  overflow-x: auto;
+}
+
+.prose pre code.hljs {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #6b7280;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in,
+.hljs-section {
+  color: #a00000;
+}
+
+.hljs-string,
+.hljs-attr,
+.hljs-bullet {
+  color: #7a4e00;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-symbol {
+  color: #1d4ed8;
+}
+
+.hljs-title,
+.hljs-function,
+.hljs-name {
+  color: #7a0000;
+}
+
+.dark .hljs-keyword,
+.dark .hljs-selector-tag,
+.dark .hljs-built_in,
+.dark .hljs-section,
+.dark .hljs-title,
+.dark .hljs-function,
+.dark .hljs-name {
+  color: #ff9999;
+}
+
+.dark .hljs-string,
+.dark .hljs-attr,
+.dark .hljs-bullet {
+  color: #fbbf24;
+}
+
+.dark .hljs-number,
+.dark .hljs-literal,
+.dark .hljs-symbol {
+  color: #93c5fd;
+}
+
+.dark .hljs-comment,
+.dark .hljs-quote {
+  color: #9ca3af;
 }
 
 .prose img {

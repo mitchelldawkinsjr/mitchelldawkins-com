@@ -1,13 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { compileMDX } from 'next-mdx-remote/rsc';
-import rehypeHighlight from 'rehype-highlight';
-import rehypeSlug from 'rehype-slug';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import remarkGfm from 'remark-gfm';
-import { calculateReadingTime } from './utils';
+import { calculateReadingTime, parseSiteDate } from './utils';
 
 const postsDirectory = path.join(process.cwd(), 'src/content/blog');
 
@@ -15,6 +9,8 @@ export type Post = {
   slug: string;
   title: string;
   date: string;
+  /** Set only when the article body changed in a meaningful way. */
+  updated?: string;
   excerpt: string;
   content: string;
   coverImage: string;
@@ -24,46 +20,36 @@ export type Post = {
   readingTime: number;
 };
 
+function readPost(slug: string): Post | null {
+  const fullPath = path.join(postsDirectory, `${slug}.mdx`);
+
+  if (!fs.existsSync(fullPath)) {
+    return null;
+  }
+
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const { data, content } = matter(fileContents);
+  const series = typeof data.series === 'string' && data.series.trim() ? data.series.trim() : undefined;
+  const updated = typeof data.updated === 'string' && data.updated.trim() ? data.updated.trim() : undefined;
+
+  return {
+    slug,
+    title: data.title,
+    date: data.date,
+    updated,
+    excerpt: data.excerpt || '',
+    content,
+    coverImage: data.coverImage || '',
+    coverImageFit: data.coverImageFit,
+    coverImagePosition: data.coverImagePosition,
+    series,
+    readingTime: calculateReadingTime(content),
+  };
+}
+
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   try {
-    const fullPath = path.join(postsDirectory, `${slug}.mdx`);
-    
-    if (!fs.existsSync(fullPath)) {
-      return null;
-    }
-    
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const { data, content } = matter(fileContents);
-    
-    // Calculate reading time
-    const readingTime = calculateReadingTime(content);
-    
-    const result = await compileMDX({
-      source: content,
-      options: {
-        mdxOptions: {
-          rehypePlugins: [
-            rehypeHighlight as any,
-            rehypeSlug as any,
-            [rehypeAutolinkHeadings as any, { behavior: 'wrap' }],
-          ],
-          remarkPlugins: [remarkGfm as any],
-        },
-      },
-    });
-    
-    return {
-      slug,
-      title: data.title,
-      date: data.date,
-      excerpt: data.excerpt || '',
-      content,
-      coverImage: data.coverImage || '/images/blog/default.jpg',
-      coverImageFit: data.coverImageFit,
-      coverImagePosition: data.coverImagePosition,
-      series: data.series,
-      readingTime,
-    };
+    return readPost(slug);
   } catch (error) {
     console.error(`Error getting post by slug ${slug}:`, error);
     return null;
@@ -73,25 +59,18 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 export async function getAllPosts(): Promise<Post[]> {
   try {
     if (!fs.existsSync(postsDirectory)) {
-      fs.mkdirSync(postsDirectory, { recursive: true });
       return [];
     }
-    
-    const slugs = fs.readdirSync(postsDirectory)
+
+    const slugs = fs
+      .readdirSync(postsDirectory)
       .filter((file) => file.endsWith('.mdx'))
       .map((file) => file.replace(/\.mdx$/, ''));
-    
-    const posts = await Promise.all(
-      slugs.map(async (slug) => {
-        const post = await getPostBySlug(slug);
-        return post;
-      })
-    );
-    
-    // Filter out any null posts and sort by date (newest first)
-    return posts
+
+    return slugs
+      .map((slug) => readPost(slug))
       .filter((post): post is Post => post !== null)
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      .sort((a, b) => parseSiteDate(b.date).getTime() - parseSiteDate(a.date).getTime());
   } catch (error) {
     console.error('Error getting all posts:', error);
     return [];

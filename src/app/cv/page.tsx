@@ -1,12 +1,16 @@
 import { Metadata } from 'next';
 import FeaturedProjects from '@/components/home/FeaturedProjects';
+import { getFeaturedProjectsForCarousel } from '@/lib/project';
+import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Video CV | Mitchell Dawkins',
+  title: 'Video CV',
   description: 'Watch Mitchell Dawkins\' video CV and explore featured projects.',
+  alternates: { canonical: '/cv' },
 };
 
 export default function CVPage() {
+  const featuredProjects = getFeaturedProjectsForCarousel();
   return (
     <>
       {/* Video Section */}
@@ -17,9 +21,8 @@ export default function CVPage() {
           <div className="mb-10 text-center">
             
             <p className="text-lg text-gray-600 dark:text-gray-300 mb-4">
-              Hi, I&apos;m Mitchell Dawkins a software engineer passionate about building software, problem solving, and making an impact.
-              With over 10 years of experience in backend &amp; frontend development, I bring a unique perspective to
-              building software systems using AI alongside solid fundamentals to deliver better results.
+              Hi, I&apos;m {site.shortName} — {site.title}. {site.brandLine}{' '}
+              {site.tagline}
             </p>
             <div className="flex items-center justify-center gap-4">
               <a
@@ -71,9 +74,9 @@ export default function CVPage() {
       <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-            Latest Projects
+            What I&apos;m building
           </h2>
-          <FeaturedProjects />
+          <FeaturedProjects projects={featuredProjects} />
         </div>
       </section>
     </>

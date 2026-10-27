@@ -2,128 +2,87 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllPosts } from '@/lib/mdx';
 import BlogCard from '@/components/blog/BlogCard';
+import { seriesSlug } from '@/lib/utils';
+import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Blog | Mitchell Dawkins II',
-  description: 'Articles about AI development, the "Building AI with AI" series, and technical insights.',
+  title: 'Blog',
+  description: 'Engineering write-ups from real builds: AI agents, sports tools, hosting, and the lessons in between.',
+  alternates: { canonical: `${site.url}/blog` },
   openGraph: {
-    title: 'Blog | Mitchell Dawkins II',
-    description: 'Articles about AI development, the "Building AI with AI" series, and technical insights.',
+    title: 'Blog',
+    description: 'Engineering write-ups from real builds: AI agents, sports tools, hosting, and the lessons in between.',
+    url: `${site.url}/blog`,
     images: [
       {
-        url: '/images/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Mitchell Dawkins Blog',
+        url: '/images/logo/logo-full.png',
+        alt: 'Mitchell Dawkins II',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Blog | Mitchell Dawkins II',
-    description: 'Articles about AI development, the "Building AI with AI" series, and technical insights.',
-    images: ['/images/og-image.jpg'],
+    title: 'Blog',
+    description: 'Engineering write-ups from real builds: AI agents, sports tools, hosting, and the lessons in between.',
+    images: ['/images/logo/logo-full.png'],
   },
 };
 
 export default async function BlogPage() {
-  // Get all blog posts
   const posts = await getAllPosts();
-  
-  // Group posts by series if needed
-  const groupedBySeries = posts.reduce((acc, post) => {
-    if (post.series) {
-      if (!acc[post.series]) {
-        acc[post.series] = [];
-      }
-      acc[post.series].push(post);
-    } else {
-      if (!acc['Other']) {
-        acc['Other'] = [];
-      }
-      acc['Other'].push(post);
-    }
-    return acc;
-  }, {} as Record<string, typeof posts>);
-  
-  // Get all series names
-  const seriesNames = Object.keys(groupedBySeries).filter(name => name !== 'Other');
-  
+  const seriesNames = Array.from(
+    new Set(posts.map((post) => post.series).filter((series): series is string => Boolean(series)))
+  );
+
   return (
     <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
-        Blog
-      </h1>
-      <p className="text-xl text-gray-600 dark:text-gray-300 mb-12">
-        Thoughts, insights and project updates about AI development
+      <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Blog</h1>
+      <p className="text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl">
+        Write-ups from the work: architecture, failures, and what I would repeat.
       </p>
-      
-      {/* All posts */}
+
       {posts.length > 0 ? (
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-            All Posts
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.map((post) => (
-              <BlogCard
-                key={post.slug}
-                slug={post.slug}
-                title={post.title}
-                excerpt={post.excerpt}
-                date={post.date}
-                coverImage={post.coverImage}
-                series={post.series}
-              />
-            ))}
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {posts.map((post) => (
+            <BlogCard
+              key={post.slug}
+              slug={post.slug}
+              title={post.title}
+              excerpt={post.excerpt}
+              date={post.date}
+              coverImage={post.coverImage}
+              series={post.series}
+            />
+          ))}
         </div>
       ) : (
-        <div className="text-center py-16 bg-gray-50 dark:bg-gray-800 rounded-xl mb-16">
-          <h3 className="text-xl font-medium text-gray-700 dark:text-gray-300 mb-4">No posts yet</h3>
+        <div className="text-center py-16 bg-gray-50 dark:bg-gray-800 rounded-xl">
+          <h2 className="text-xl font-medium text-gray-700 dark:text-gray-300 mb-4">No posts yet</h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-md mx-auto">
-            I&apos;m currently working on some exciting content. Check back soon for updates on my &quot;Building AI with AI&quot; journey!
+            I&apos;m currently working on some exciting content. Check back soon.
           </p>
         </div>
       )}
-      
-      {/* Featured series */}
+
       {seriesNames.length > 0 && (
-        <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-            Series & Categories
-          </h2>
-          {seriesNames.map(seriesName => (
-            <section key={seriesName} className="mb-12">
-              <div className="flex justify-between items-baseline mb-6">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  {seriesName} Series
-                </h3>
-                {groupedBySeries[seriesName].length > 3 && (
-                  <Link 
-                    href={`/blog/series/${encodeURIComponent(seriesName.toLowerCase())}`}
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Series</h2>
+          <ul className="space-y-2">
+            {seriesNames.map((series) => {
+              const count = posts.filter((post) => post.series === series).length;
+              return (
+                <li key={series}>
+                  <Link
+                    href={`/blog/series/${seriesSlug(series)}`}
                     className="text-blue-600 dark:text-blue-400 hover:underline"
                   >
-                    View all
+                    {series}
                   </Link>
-                )}
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {groupedBySeries[seriesName].slice(0, 3).map((post) => (
-                  <BlogCard
-                    key={post.slug}
-                    slug={post.slug}
-                    title={post.title}
-                    excerpt={post.excerpt}
-                    date={post.date}
-                    coverImage={post.coverImage}
-                    series={post.series}
-                  />
-                ))}
-              </div>
-            </section>
-          ))}
+                  <span className="text-gray-600 dark:text-gray-400"> ({count})</span>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       )}
     </div>
