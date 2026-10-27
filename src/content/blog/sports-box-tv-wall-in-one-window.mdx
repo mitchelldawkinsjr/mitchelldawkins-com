@@ -1,0 +1,98 @@
+---
+title: "Sports Box: A TV Wall in One Browser Window"
+date: "2026-10-27T16:00:00.000Z"
+excerpt: "I built Sports Box so a full slate fits in one Chrome window: multiple streams, one audible channel, scores on the panel that is showing that game, and a phone keypad on the same Wi-Fi."
+coverImage: "/images/blog/sports-box-cover.jpg"
+coverImageFit: contain
+series: "Low to No Cost Solutions"
+---
+
+A sports bar puts eight games on the wall and one announcer in the room. At home I had the opposite: a pile of tabs, every one of them trying to talk, and the score living in a tab I had already left.
+
+So I built **Sports Box** — a multiview dashboard that ships inside a Chrome extension. Up to 16 streams in one window, one channel audible, a scorebug on the panel you linked to that game. Source: **[github.com/mitchelldawkinsjr/sports-box](https://github.com/mitchelldawkinsjr/sports-box)**. Architecture notes: **[Sports Box project page](/projects/sports-box)**.
+
+## The product in one sentence
+
+Paste the games. Pick which one you can hear. Glance the slate without leaving the picture.
+
+<img src="/images/projects/sports-box/header.jpg" alt="Sports Box in watch mode: a three-column matrix, one channel marked on air, scorebugs, and a college football ticker" />
+
+## A webpage cannot do this job alone
+
+Iframes are how you put two pages in one window. They are also how sites refuse to be put in a window. `X-Frame-Options` and a CSP `frame-ancestors` rule blank the panel before the stream starts. Login cookies for ESPN, the league sites, and the subscription apps are not sent into a frame, so that panel spins on a login wall.
+
+The dashboard is a React app. The part that makes the wall work is a Manifest V3 extension:
+
+- **declarativeNetRequest** strips `X-Frame-Options` and CSP on http and https responses, main frame and subframe
+- a **page-world** script owns mute, because the player's own JavaScript ignores an isolated content script
+- login-gated sites open as their own Chrome window, snapped to the panel, and the picture is mirrored back
+
+`npm run build:ext` writes the dashboard into `extension/app`. The toolbar icon opens that page. No Vite server on game day.
+
+## What each URL becomes
+
+`resolveEmbed` sorts a paste into a player before the panel mounts anything.
+
+| URL | What the panel does |
+| --- | --- |
+| YouTube, Twitch, Vimeo | Official embed. Mute goes through the player API, so the iframe does not reload |
+| `.m3u8` | hls.js inside the panel |
+| Spectrum | Iframe, after the extension removes the frame headers. `sportsbox=1` marks it for Fill video |
+| ESPN, league sites, subscription apps | A docked Chrome window. The session stays on a real tab |
+
+Anything else is an iframe and gets the same frame-header treatment.
+
+## One announcer
+
+**Solo** is the move that matters. That panel comes up. Every other panel is muted. The button does it, so does ⌘/Ctrl+1 through 9, and so does clicking a ticker game that is already linked to a panel. A plain unmute still exists when you want two feeds, but the wall is built around one voice. Watch mode prints **AUDIO ON-AIR** with the channel number on every panel that is actually audible.
+
+Embed pages set `video.muted` back on their own. An isolated content script can write the property and lose the next `play()`. `mute-main.js` runs in the page world (`world: "MAIN"`), patches `HTMLMediaElement.prototype.play`, and walks open shadow roots. The service worker applies that state per panel. One unmute must not wake the other fifteen.
+
+Docked windows stay separate. Sound stays on the source tab. The mirror `<video>` in the panel is picture only, so the game is not doubled.
+
+## Fill video, one panel at a time
+
+A lot of these pages are a player under a header, a chat column, and ads. Fill video hides that chrome and pins the player to the frame.
+
+The dangerous version fills every iframe in the tab. Sports Box names each panel iframe `sb-${panelId}`. `webNavigation.getAllFrames` walks the parent chain from that frame, and `chrome.scripting` runs only on that tree. Nested players are included. The panel next door is not.
+
+Inside the frame, the content script scores `<video>` nodes by whether they are playing, ready, and how much area they cover. Player iframes get a bonus. Ad frames get dropped. The winner is marked `sports-box-target`. `focus.css` hides everything else and fixes that node to the viewport.
+
+## Scores on the game you are watching
+
+The ticker reads ESPN's public scoreboard for the NFL, college football, the NBA, and the WNBA. Link a panel to a game and the scorebug sits on that picture. Hover a ticker row for the network. Click it to focus the panel already linked to that game.
+
+College football TV data is optional. A [CollegeFootballData](https://collegefootballdata.com) key can fill the network. The result is cached in `localStorage`, and Sports Box will not ask again for three hours. A soft cap at 800 calls leaves headroom under the free 1,000 a month. Live scores stay on ESPN either way. The paid CFBD scoreboard route is opt-in. A free key never polls it.
+
+Close games raise a banner. Football qualifies within one score in the fourth or overtime, and within a possession late in the third. Basketball qualifies within eight in the fourth or overtime, and within five late in the third. If that game is linked to a panel, the banner names the channel.
+
+## The phone is the remote
+
+The wall is full screen. I did not want to get up to swap audio.
+
+`npm run remote` starts a Node HTTP server on port 8787, bound to the LAN, with a four-digit PIN minted for that process. The desktop opens a Server-Sent Events stream as the **host** and pushes board state. The phone opens the keypad on the same Wi-Fi — QR code or the printed URL — and posts commands with that PIN. Solo, volume, mute, swap, box count, matrix preset, Watch or Edit.
+
+The hub is a few hundred lines of `node:http`. It dies when the terminal does. There is no account on the other side of it.
+
+## Layouts that survive a refresh
+
+Four matrix presets: an equal grid, a 1+N hero, a forced 3-column board, and a wide strip. One to sixteen panels. Named layouts and the live board live in `localStorage`. Watch hides the URL bars. Control opacity and scorebug opacity fade on their own. Escape leaves showtime.
+
+## Stack
+
+| Piece | Choice |
+| --- | --- |
+| UI | React 19, TypeScript, Vite |
+| Ship | Vite build written into the extension package |
+| Extension | Manifest V3 — declarativeNetRequest, scripting, webNavigation, tabs, windows |
+| HLS | hls.js |
+| Scores | ESPN scoreboard JSON, optional CFBD media |
+| Remote | Node `http`, Server-Sent Events, a PIN, same Wi-Fi |
+
+No database. Layouts stay in the browser. The only process you leave running is the remote hub, and only while the phone is in your hand.
+
+<HumanReflection>
+I wanted the sports-bar wall without the sports-bar noise. Eight games up, one voice in the room, the close one tapping me when it gets late. Sports Box is that, in the browser I already had open.
+</HumanReflection>
+
+Source: **[github.com/mitchelldawkinsjr/sports-box](https://github.com/mitchelldawkinsjr/sports-box)** · Build notes: **[/projects/sports-box](/projects/sports-box)**.

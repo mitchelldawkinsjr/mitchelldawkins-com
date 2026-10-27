@@ -6,6 +6,13 @@ import { useState, useEffect } from 'react';
 
 const projects = [
   {
+    title: 'Sports Box',
+    description: 'A Chrome extension that turns one window into a sports-bar wall — up to 16 streams, one audible channel, scorebugs, close-game alerts, and a phone keypad on the same Wi-Fi.',
+    image: '/images/projects/sports-box/header.jpg',
+    link: '/projects/sports-box',
+    tags: ['React', 'TypeScript', 'Vite', 'Chrome Extension', 'Manifest V3'],
+  },
+  {
     title: 'Fasted',
     description: 'An offline-first biblical fasting companion PWA for a 190-day journey — daily plans, scripture, check-ins, journal, streaks, and optional Supabase groups with Web Push reminders.',
     image: '/images/projects/fasted/header.png',
