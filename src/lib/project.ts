@@ -15,11 +15,46 @@ export interface ProjectFrontmatter {
   tech?: string[];
   tags?: string[];
   audience?: string[];
+  /** Short problem/care statement for the project story */
+  why?: string;
+  /** What gets built live for this project */
+  streamFocus?: string;
+  lessons?: string[];
+  roadmap?: string[];
+  relatedPosts?: string[];
   links?: {
     title: string;
     url: string;
   }[];
   [key: string]: any; // For any additional frontmatter properties
+}
+
+/** Card shape for homepage / CV carousels */
+export interface FeaturedProjectCard {
+  title: string;
+  description: string;
+  image: string;
+  link: string;
+  tags: string[];
+}
+
+/**
+ * Featured projects for carousels, driven by MDX `featured` + `priority`.
+ */
+export function getFeaturedProjectsForCarousel(): FeaturedProjectCard[] {
+  const featured = getAllProjects()
+    .filter((p) => p.featured)
+    .sort((a, b) => (a.priority ?? Infinity) - (b.priority ?? Infinity));
+
+  const source = featured.length > 0 ? featured : getAllProjects().slice(0, 8);
+
+  return source.map((p) => ({
+    title: p.title,
+    description: p.description,
+    image: p.headerImage || '/images/logo/logo-stamp.png',
+    link: `/projects/${p.slug}`,
+    tags: (p.tech || p.tags || []).slice(0, 7),
+  }));
 }
 
 export interface Project extends ProjectFrontmatter {

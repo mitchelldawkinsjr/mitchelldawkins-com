@@ -1,10 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'About Me | Mitchell Dawkins',
-  description: 'Learn more about Mitchell Dawkins, AI engineer and developer of the Video Processing Platform.',
+  title: 'About Me',
+  description: `${site.shortName}, ${site.title}. ${site.tagline}`,
+  alternates: { canonical: '/about' },
 };
 
 export default function AboutPage() {
@@ -16,7 +18,7 @@ export default function AboutPage() {
           <div className="w-48 h-48 relative rounded-full overflow-hidden flex-shrink-0">
             <Image 
               src="/images/profile.jpg" 
-              alt="Mitchell Dawkins" 
+              alt={site.shortName} 
               fill 
               style={{ objectFit: 'cover' }} 
               priority
@@ -24,14 +26,28 @@ export default function AboutPage() {
           </div>
           
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Mitchell Dawkins
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+              {site.shortName}
             </h1>
-            <h2 className="text-xl text-blue-600 dark:text-blue-400 mb-6">
+            <h2 className="text-xl text-blue-600 dark:text-blue-400 mb-3">
               Senior Software Engineer | AI Systems • Full Stack • Sports Technology
             </h2>
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
+              {site.brandLine} This site is my journal of that work: live builds,
+              project stories, and honest lessons. I also help lead the{' '}
+              <a
+                href={site.social.foundation}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 dark:text-blue-400 hover:underline"
+              >
+                Dawkins Family Foundation
+              </a>
+              , continuing a family legacy of service through education, empowerment, and
+              community impact.
+            </p>
             <a
-              href="/documents/Mitchell-Dawkins-II-Resume-2026.pdf"
+              href={site.resumePath}
               download
               className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
             >
@@ -53,22 +69,72 @@ export default function AboutPage() {
             </a>
           </div>
         </div>
+
+        {/* Role ladder */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            Engineer → Founder → Teacher → Service Provider
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {site.roleLadder.map((item) => (
+              <div
+                key={item.role}
+                className="border-l-4 border-blue-600 pl-4 py-2"
+              >
+                <h3 className="font-bold text-gray-900 dark:text-white">{item.role}</h3>
+                <p className="text-gray-700 dark:text-gray-300 text-sm mt-1">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Manifesto */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            Manifesto
+          </h2>
+          <blockquote className="prose dark:prose-invert prose-lg max-w-none border-l-4 border-blue-600 pl-6 italic text-gray-700 dark:text-gray-300">
+            <p>{site.manifesto}</p>
+          </blockquote>
+        </section>
+
+        {/* Ethos */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            Ethos
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {site.ethos.map((item) => (
+              <div key={item.name} className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                <h3 className="font-bold text-gray-900 dark:text-white mb-2">{item.name}</h3>
+                <p className="text-sm text-gray-700 dark:text-gray-300">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
         
         {/* About Me Section */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-            About Me
+            Background
           </h2>
           <div className="prose dark:prose-invert prose-lg max-w-none">
             <p>
-              Full-stack engineer with 10+ years of experience building production software across enterprise and growth-stage environments, including four years at Dropbox. I specialize in scalable full-stack systems, AI-powered applications, and developer infrastructure, with a track record of delivering revenue-driving products and leading architecture for federal and enterprise clients. Today, I’m focused on AI-native engineering, automation, and sports technology that solves real-world operational problems.
+              Full-stack engineer with 10+ years of experience building production software across enterprise and growth-stage environments, including four years at Dropbox. I specialize in scalable full-stack systems, AI-powered applications, and developer infrastructure, with a track record of delivering revenue-driving products and leading architecture for federal and enterprise clients. Today, I&apos;m focused on AI-native engineering, automation, and sports technology that solves real-world operational problems. I also bring lifelong involvement in football as a former Division I wide receiver at Eastern Michigan University and a six-year high school football coach, including software I designed for football operations, player development, practice planning, attendance, strength training, and film evaluation.
             </p>
             <p>
-              I believe we&apos;re at a fascinating inflection point where AI can be used in tandem with experience and a good grasp of fundamentals to build better software — creating improvements that will dramatically change how we develop it.
+              I believe we&apos;re at a fascinating inflection point where AI can be used in tandem with experience and a good grasp of fundamentals to build better software, creating improvements that will dramatically change how we develop it.
             </p>
             <p>
-              When I&apos;m not coding or experimenting with AI tools, you&apos;ll find me coaching football, playing video games,
-              or hanging out with family.
+              When I&apos;m not coding or experimenting with AI tools, you&apos;ll find me coaching football, hanging out with family, or working with the{' '}
+              <a
+                href={site.social.foundation}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Dawkins Family Foundation
+              </a>
+              {' '}to serve communities through education and opportunity.
             </p>
           </div>
         </section>
@@ -80,7 +146,6 @@ export default function AboutPage() {
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Technical Skills */}
             <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                 Technical Skills
@@ -122,7 +187,6 @@ export default function AboutPage() {
               </div>
             </div>
             
-            {/* AI Experience */}
             <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                 AI Experience
@@ -173,7 +237,7 @@ export default function AboutPage() {
         </h2>
 
         <div className="space-y-8">
-            {/* AdHoc Research Associates */}
+            {/* SportsBiz */}
             <div className="border-l-4 border-blue-600 pl-4 py-1">
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white">Senior Full Stack AI Engineer</h3>
@@ -346,37 +410,63 @@ export default function AboutPage() {
         </section>
 
         
-        {/* Current Project Section */}
+
+        {/* Building in public */}
         <section>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-            Current Project: Video Processing Platform
+            Building in public
           </h2>
           
           <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-xl">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Code & Impact
+              Live builds → projects → lessons
             </h3>
             
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              I&apos;m currently building a multi-tenant video processing platform with AI assistance.
-              This meta-project explores how AI tools can be used to build AI systems, documenting
-              the entire process through my blog series.
+              Everything hinges on streaming real work. Watch live on Twitch and YouTube, then
+              follow the stories for Fasted, SEOS, Thinker, and the rest of the studio.
+            </p>
+            <p className="text-gray-700 dark:text-gray-300 mb-4">
+              The same Serve ethos drives the{' '}
+              <a
+                href={site.social.foundation}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+              >
+                Dawkins Family Foundation
+              </a>
+              : using what we build and what we learn to leave people better than we found them.
             </p>
             
-            <div className="flex flex-wrap gap-3 mb-6">
-              {["AI-Assisted Development", "Multi-Tenant Architecture", "Video Processing", "Machine Learning"].map((tag) => (
-                <span key={tag} className="bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">
-                  {tag}
-                </span>
-              ))}
+            <div className="flex flex-wrap gap-3">
+              <Link 
+                href="/streams" 
+                className="inline-block px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Watch streams
+              </Link>
+              <Link 
+                href="/projects" 
+                className="inline-block px-4 py-2 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium rounded-lg border border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
+              >
+                Project stories
+              </Link>
+              <a
+                href={site.social.foundation}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-4 py-2 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium rounded-lg border border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
+              >
+                Dawkins Family Foundation
+              </a>
+              <Link 
+                href="/contact" 
+                className="inline-block px-4 py-2 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium rounded-lg border border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
+              >
+                Work with me
+              </Link>
             </div>
-            
-            <Link 
-              href="/blog/introducing-video-processing-platform" 
-              className="inline-block px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Read About the Project
-            </Link>
           </div>
         </section>
       </div>

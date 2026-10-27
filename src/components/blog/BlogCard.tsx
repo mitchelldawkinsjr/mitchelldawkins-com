@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { formatDistanceToNow } from 'date-fns';
+import { parseSiteDate } from '@/lib/utils';
 
 type BlogCardProps = {
   slug: string;
@@ -13,11 +14,12 @@ type BlogCardProps = {
 
 export default function BlogCard({ slug, title, excerpt, date, coverImage, series }: BlogCardProps) {
 
-  if (!date || isNaN(new Date(date).getTime())) {
-    return <div>Invalid date</div>; // Handle the invalid date case
+  const parsedDate = parseSiteDate(date);
+  if (!date || isNaN(parsedDate.getTime())) {
+    return <div>Invalid date</div>;
   }
 
-  const formattedDate = formatDistanceToNow(new Date(date), { addSuffix: true });
+  const formattedDate = formatDistanceToNow(parsedDate, { addSuffix: true });
   
   return (
     <Link href={`/blog/${slug}`} className="block group">

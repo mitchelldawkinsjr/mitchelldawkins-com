@@ -4,11 +4,14 @@ date: "2025-10-29"
 excerpt: "A deep dive into building a complete data pipeline and static site generator for football player evaluations using Python, pandas, and automated reporting."
 coverImage: "/images/blog/gh-film-review-pipeline.png"
 series: "Building AI with AI"
+updated: "2026-10-27"
 ---
 
 A comprehensive data pipeline and static site generator for weekly and season-long player evaluations from CSV film logs. This project transforms raw game film data into professional-grade reports, dashboards, and analytics for football coaching staff.
 
-<LiveSiteButton href="https://mitchelldawkins.com/oag" />
+Year two of this same system is [GH Film Hub v2](/blog/gh-film-hub-v2-year-two): two seasons on one hub, a rubric players can read, and a week file that publishes itself. How the static site is hosted is in [Hosting a Full Analytics Site for $0](/blog/hosting-gh-film-review-free-github-pages).
+
+<LiveSiteButton href="https://mitchelldawkinsjr.github.io/GH-Flim-Review/">Open the GitHub Pages mirror</LiveSiteButton>
 
 ## The Problem I'm Solving
 
@@ -194,6 +197,12 @@ Building this pipeline taught me valuable lessons about:
 ## What's Next
 
 This project demonstrates how thoughtful automation can transform manual processes into efficient, scalable systems that provide real value to end users. The pipeline continues to evolve with new features and improvements based on user feedback and changing requirements.
+
+## Business applications
+
+The input is a CSV from film study. The output is the weekly report: grades, PDFs, and a dashboard a coach can open on a phone. I kept the spreadsheet as the source. I automated the part that used to be reassembled by hand.
+
+Year two of the hub, linked above, is the current system.
 
 <HumanReflection>
 This film review pipeline represents one of my most comprehensive data engineering projects. What started as a simple script to help with wide reciever evaluations evolved into a full-featured system that the coaching staff could now use weekly. After watching the flim and taking notes for years I realized there I coudl developer a better way to grade player performace and share that information with them quickly and permanantly. 

@@ -5,6 +5,10 @@ module.exports = {
     ],
     theme: {
       extend: {
+        fontFamily: {
+          sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+          display: ['var(--font-display)', 'var(--font-sans)', 'system-ui', 'sans-serif'],
+        },
         colors: {
           // Brand red palette anchored on #CA0000, mirroring former blue shade roles
           blue: {

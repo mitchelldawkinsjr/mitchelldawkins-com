@@ -3,87 +3,25 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import type { FeaturedProjectCard } from '@/lib/project';
 
-const projects = [
-  {
-    title: 'Sports Box',
-    description: 'A Chrome extension that turns one window into a sports-bar wall — up to 16 streams, one audible channel, scorebugs, close-game alerts, and a phone keypad on the same Wi-Fi.',
-    image: '/images/projects/sports-box/header.jpg',
-    link: '/projects/sports-box',
-    tags: ['React', 'TypeScript', 'Vite', 'Chrome Extension', 'Manifest V3'],
-  },
-  {
-    title: 'Fasted',
-    description: 'An offline-first biblical fasting companion PWA for a 190-day journey — daily plans, scripture, check-ins, journal, streaks, and optional Supabase groups with Web Push reminders.',
-    image: '/images/projects/fasted/header.png',
-    link: '/projects/fasted',
-    tags: ['React','TypeScript','Vite','Tailwind','PWA','Supabase','Docker'],
-  },
-  {
-    title: 'Thinker',
-    description: 'A microlearning PWA that replaces doomscrolling with a one-card feed of ideas, news, Gutenberg books, and free learning sites — plus catalog-grounded Ask via OpenAI or Ollama.',
-    image: '/images/projects/thinker/header.png',
-    link: '/projects/thinker',
-    tags: ['React','TypeScript','Vite','PWA','Docker','OpenAI','Ollama'],
-  },
-  {
-    title: 'Wordpress Solutions Cloud',
-    description: 'A self-hosted VPS platform for deploying and managing a fleet of WordPress sites, each running as an isolated Docker stack with Git-driven deploys, centralized MainWP management, automated backups, and a FastAPI + React control plane.',
-    image: '/images/projects/360-web-solutions-cloud/header.png',
-    link: '/projects/360-web-solutions-cloud',
-    tags: ['FastAPI','React','TypeScript','Docker','WordPress','MySQL'],
-  },
-  {
-    title: 'NBA Stat Spot',
-    description: 'Full-stack NBA analytics platform with AI-powered prop bet predictions, ML models trained on historical player data, real-time ESPN integration, and a Monte Carlo simulation engine for edge finding.',
-    image: '/images/projects/nba-stat-spot/header.png',
-    link: '/projects/nba-stat-spot',
-    tags: ['FastAPI','React','TypeScript','Python','PostgreSQL','Redis','Docker'],
-  },
-  {
-    title: 'GH Film Review Pipeline',
-    description: 'Automated data pipeline that transforms raw CSV film logs into polished weekly and season-long football player evaluation reports — complete with a static site, PDF exports, and GitHub Actions CI/CD.',
-    image: '/images/projects/gh-flim-revew-dashboard/header-1.png',
-    link: '/projects/gh-film-review-pipeline',
-    tags: ['Python','Pandas','ReportLab','HTML','CSS','GitHub Actions','Google Analytics'],
-  },
-  {
-    title: 'WNBA Stat Spot',
-    description: 'Full-stack WNBA analytics platform with AI-powered prop predictions, a real-time betting scanner, Monte Carlo simulations, and a multi-service backend built across PHP/Laravel and TypeScript/SvelteKit.',
-    image: '/images/projects/wnba-stat-spot/header.png',
-    link: '/projects/wnba-stat-spot',
-    tags: ['Laravel','SvelteKit','PHP','TypeScript','PostgreSQL','Redis','Docker'],
-  },
-  {
-    title: 'Power & Context',
-    description: 'A fully self-hosted microservices stack that turns any article URL into an NPR-style two-host podcast episode using local LLMs and zero-shot voice cloning — no paid APIs required.',
-    image: '/images/projects/power-and-context/header.png',
-    link: '/projects/power-and-context',
-    tags: ['Python', 'FastAPI', 'Docker', 'Ollama', 'TTS', 'Redis'],
-  },
-  {
-    title: 'Video Processing Platform',
-    description: 'A multi-tenant platform for processing, transcribing, and analyzing video content using AI — with custom model training, RAG-powered search, and tenant-isolated Docker containers.',
-    image: '/images/projects/video-processing-platform/header.svg',
-    link: '/projects/video-processing-platform',
-    tags: ['Python', 'Flask', 'Docker', 'AWS', 'PostgreSQL', 'Whisper API'],
-  },
-];
+type FeaturedProjectsProps = {
+  projects: FeaturedProjectCard[];
+};
 
-export default function FeaturedProjects() {
+export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [itemsPerView, setItemsPerView] = useState(1);
 
-  // Calculate items per view based on screen size
   useEffect(() => {
     const updateItemsPerView = () => {
       if (window.innerWidth >= 1024) {
-        setItemsPerView(3); // lg: 3 items
+        setItemsPerView(3);
       } else if (window.innerWidth >= 768) {
-        setItemsPerView(2); // md: 2 items
+        setItemsPerView(2);
       } else {
-        setItemsPerView(1); // sm: 1 item
+        setItemsPerView(1);
       }
     };
 
@@ -94,23 +32,25 @@ export default function FeaturedProjects() {
 
   const maxIndex = Math.max(0, projects.length - itemsPerView);
 
-  // Auto-play carousel
   useEffect(() => {
-    if (!isAutoPlaying) return;
+    if (!isAutoPlaying || projects.length === 0) return;
 
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => {
         const nextIndex = prevIndex + 1;
         return nextIndex > maxIndex ? 0 : nextIndex;
       });
-    }, 5000); // Change slide every 5 seconds
+    }, 5000);
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying, maxIndex]);
+  }, [isAutoPlaying, maxIndex, projects.length]);
+
+  if (!projects.length) {
+    return null;
+  }
 
   const goToSlide = (index: number) => {
-    const clampedIndex = Math.min(index, maxIndex);
-    setCurrentIndex(clampedIndex);
+    setCurrentIndex(Math.min(index, maxIndex));
     setIsAutoPlaying(false);
   };
 
@@ -135,15 +75,14 @@ export default function FeaturedProjects() {
   return (
     <>
       <div className="relative w-full">
-        {/* Carousel Container */}
         <div className="relative overflow-hidden rounded-xl">
-          <div 
+          <div
             className="flex transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(-${currentIndex * slideWidth}%)` }}
           >
-            {projects.map((project, index) => (
-              <div 
-                key={index} 
+            {projects.map((project) => (
+              <div
+                key={project.link}
                 className="px-4 flex-shrink-0"
                 style={{ width: `${slideWidth}%` }}
               >
@@ -156,20 +95,20 @@ export default function FeaturedProjects() {
                       style={{ objectFit: 'cover' }}
                     />
                   </div>
-                  
+
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                       {project.title}
                     </h3>
-                    
+
                     <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
                       {project.description}
                     </p>
-                    
+
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tags.slice(0, 4).map((tag, tagIndex) => (
-                        <span 
-                          key={tagIndex} 
+                      {project.tags.slice(0, 4).map((tag) => (
+                        <span
+                          key={tag}
                           className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-2 py-1 rounded"
                         >
                           {tag}
@@ -181,12 +120,12 @@ export default function FeaturedProjects() {
                         </span>
                       )}
                     </div>
-                    
-                    <Link 
-                      href={project.link} 
+
+                    <Link
+                      href={project.link}
                       className="text-blue-600 dark:text-blue-400 font-medium hover:underline"
                     >
-                      Learn more →
+                      Read the story →
                     </Link>
                   </div>
                 </div>
@@ -195,20 +134,24 @@ export default function FeaturedProjects() {
           </div>
         </div>
 
-        {/* Navigation Arrows */}
         {currentIndex > 0 && (
           <button
             onClick={goToPrevious}
             className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 bg-white dark:bg-gray-800 rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow z-10"
             aria-label="Previous project"
           >
-            <svg 
-              className="w-6 h-6 text-gray-700 dark:text-gray-300" 
-              fill="none" 
-              stroke="currentColor" 
+            <svg
+              className="w-6 h-6 text-gray-700 dark:text-gray-300"
+              fill="none"
+              stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
             </svg>
           </button>
         )}
@@ -219,18 +162,22 @@ export default function FeaturedProjects() {
             className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 bg-white dark:bg-gray-800 rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow z-10"
             aria-label="Next project"
           >
-            <svg 
-              className="w-6 h-6 text-gray-700 dark:text-gray-300" 
-              fill="none" 
-              stroke="currentColor" 
+            <svg
+              className="w-6 h-6 text-gray-700 dark:text-gray-300"
+              fill="none"
+              stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
             </svg>
           </button>
         )}
 
-        {/* Dots Indicator */}
         <div className="flex justify-center gap-2 mt-6">
           {Array.from({ length: maxIndex + 1 }).map((_, index) => (
             <button
@@ -246,10 +193,10 @@ export default function FeaturedProjects() {
           ))}
         </div>
       </div>
-      
+
       <div className="text-center mt-8">
-        <Link 
-          href="/projects" 
+        <Link
+          href="/projects"
           className="inline-block px-6 py-3 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium rounded-lg border border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
         >
           View All Projects

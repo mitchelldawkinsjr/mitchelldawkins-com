@@ -4,6 +4,7 @@ date: "2026-05-29"
 excerpt: "A deep dive into building a self-hosted, multi-tenant WordPress platform — isolated Docker stacks, Git-driven deploys, WP-CLI automation, and a MainWP hub managed from a single FastAPI + React control plane."
 coverImage: "/images/blog/360-web-solutions-cloud.png"
 series: "Building AI with AI"
+updated: "2026-10-27"
 ---
 
 Managed WordPress hosting is convenient — until you're running a handful of sites and the per-site bill starts to sting. 360 Web Solutions Cloud is my answer: a self-hosted platform that runs an entire fleet of WordPress sites on a single VPS, each fully isolated, all managed from one dashboard.
@@ -160,6 +161,12 @@ The hosting and management core is working end-to-end. The roadmap is about poli
 - Built-in staging-to-production promotion
 - Per-site SSL status and expiry surfaced in the UI
 - Scheduled, windowed maintenance runs
+
+## Business applications
+
+The trade is one VPS I operate instead of a managed host for every site. Each site is its own Docker stack. Deploys come from Git. A database backup runs before core updates, and copies go to Backblaze. What that costs depends on how many sites you run and how much time the box takes.
+
+If the goal is to keep WordPress and stop clicking through a separate dashboard per site, the control plane is the product. Current build notes are on the [360 Web Solutions Cloud](/projects/360-web-solutions-cloud) project page. When the site can stay fully static, the cheaper end of this tradeoff is [Hosting a Full Analytics Site for $0](/blog/hosting-gh-film-review-free-github-pages).
 
 <HumanReflection>
 This project started from a simple frustration: I had a growing collection of WordPress sites and didn't want to pay a managed host per site, or spend my evenings logging into a dozen dashboards to click "update."

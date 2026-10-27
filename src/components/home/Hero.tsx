@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { site } from '@/lib/site';
 
 export default function Hero() {
   return (
@@ -7,27 +8,59 @@ export default function Hero() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="md:w-1/2 md:pr-10">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-              Code & Impact
+            <p className="text-sm font-medium uppercase tracking-wide text-blue-600 dark:text-blue-400 mb-3">
+              {site.shortName}
+            </p>
+            <h1 className="font-display text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
+              {site.brandLine}
             </h1>
             <p className="text-xl text-gray-700 dark:text-gray-300 mb-8">
-  Hi, I&apos;m Mitchell Dawkins, a Senior Software Engineer with 10+ years of experience building production software, including four years at Dropbox. I build full-stack applications, AI-powered systems, developer tools, and sports technology that solve real-world problems. This site is where I share what I&apos;m building, the engineering decisions behind it, and lessons learned along the way from AI-native development and self-hosted infrastructure to football technology and helping run a <a className="text-blue-800" href="https://dawkinsfamilyfoundation.org/">nonprofit</a>.
+              {site.tagline} Watch live builds on Twitch and YouTube, then follow the
+              architecture, mistakes, and lessons as they become projects, articles, and
+              open source. I also help lead the{' '}
+              <a
+                href={site.social.foundation}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 dark:text-blue-400 hover:underline"
+              >
+                Dawkins Family Foundation
+              </a>
+              .
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <Link href="/blog" className="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-lg text-center hover:bg-blue-700 transition-colors">
-                Read the Blog
+              <Link
+                href={site.ctas.watchLive.href}
+                className="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-lg text-center hover:bg-blue-700 transition-colors"
+              >
+                {site.ctas.watchLive.label}
               </Link>
-              <Link href="/about" className="inline-block px-6 py-3 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium rounded-lg text-center border border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors">
-                About Me
+              <Link
+                href={site.ctas.seeProjects.href}
+                className="inline-block px-6 py-3 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium rounded-lg text-center border border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
+              >
+                {site.ctas.seeProjects.label}
+              </Link>
+              <Link
+                href={site.ctas.readJournal.href}
+                className="inline-block px-6 py-3 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium rounded-lg text-center border border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
+              >
+                {site.ctas.readJournal.label}
               </Link>
             </div>
+            <p className="mt-4 text-sm text-gray-700 dark:text-gray-300">
+              <Link href={site.ctas.consulting.href} className="font-medium text-blue-600 dark:text-blue-400 hover:underline">
+                {site.ctas.consulting.label}
+              </Link>
+              {' '}is open for custom software, AI automation, and modernization.
+            </p>
           </div>
-          
+
           <div className="md:w-1/2 mt-10 md:mt-0">
             <div className="relative h-64 md:h-96 w-full rounded-xl overflow-hidden shadow-xl">
               <Image
                 src="/images/family.jpg"
-                alt="Mitchell Dawkins"
+                alt={site.shortName}
                 fill
                 style={{ objectFit: 'cover' }}
                 priority

@@ -5,8 +5,10 @@ import ProjectTechBadge from '@/components/ProjectTechBadge';
 import { Key } from 'react';
 
 export const metadata = {
-  title: 'Projects | Mitchell Dawkins II',
-  description: 'Explore my portfolio of projects and technical work.',
+  title: 'Projects',
+  description:
+    'Project stories from an AI software studio built in public — problems, architecture, live builds, and lessons.',
+  alternates: { canonical: '/projects' },
 };
 
 export default async function ProjectsPage() {
@@ -14,7 +16,11 @@ export default async function ProjectsPage() {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-8">Projects</h1>
+      <h1 className="text-4xl font-bold mb-2">What I&apos;m building</h1>
+      <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl">
+        Each project is a story: why it exists, how it&apos;s built, what streams cover, and what
+        we learned shipping it.
+      </p>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project: Project) => (

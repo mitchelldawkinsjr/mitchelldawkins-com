@@ -4,13 +4,14 @@ date: "2026-06-27"
 excerpt: "How I wired a two-stage GitHub Actions pipeline — OpenAI specs, Cursor cloud agents, and human gates — so AI engineers work in tandem on one issue at a time, with every step tracked and every change easy to roll back."
 coverImage: "/images/blog/cursor-agent-pipeline.png"
 series: "Building AI with AI"
+updated: "2026-10-27"
 ---
 
 For about 2 years I've been building software *with* AI — pairing with assistants in the editor, iterating in long chat threads, shipping features faster than I could alone. That worked. But it didn't scale. Context lived in conversations, not in the repo. Changes were bundled. Rollback meant archaeology.
 
 The next step wasn't a smarter prompt. It was **architecture**: treat AI agents like engineers on a team, give them a ticket queue, enforce small PRs, and keep humans at the merge gate.
 
-This post documents what I shipped on [Fasted](https://github.com/mitchelldawkinsjr/Fasted) — a two-stage GitHub issue automation pipeline ([issue #30](https://github.com/mitchelldawkinsjr/Fasted/issues/30)) — and what happened when I ran it in production for the first time.
+This post documents what I shipped on [Fasted](https://github.com/mitchelldawkinsjr/Fasted) — a two-stage GitHub issue automation pipeline ([issue #30](https://github.com/mitchelldawkinsjr/Fasted/issues/30)) — and what happened when I ran it in production for the first time. The follow-up, where one coding agent became a set of specialist roles, is [From One Agent to an OS](/blog/seos-software-engineering-agent-os).
 
 The pipeline is available as open source: **[issue-bench](https://github.com/mitchelldawkinsjr/issue-bench)** — use the template or run `npx issue-bench init` to add it to your repo.
 
@@ -170,6 +171,12 @@ The pipeline is live on `main`. Follow-ups I'm tracking:
 The longer vision: multiple agents on a queue, each producing small PRs, humans merging in priority order — a software team where the bottleneck moves from "typing code" to "deciding what to build next."
 
 That's the architecture I think we're heading toward. Not fewer humans. **Humans at the decision layer, agents at the execution layer, Git as the contract between them.**
+
+## Business applications
+
+A team that already tracks work in GitHub can reuse the shape without a new project tool. A person writes the issue. A spec lands as a comment. An agent opens one small pull request. A person still merges.
+
+The expensive part stays the decision. The reversible part is the diff. The production test above is the evidence I have: one issue, 183 lines, tests run, and the gaps written back into the repo checklist. The project write-up is [SEOS](/projects/seos).
 
 <HumanReflection>
 The moment this clicked wasn't when the agent opened PR #33. It was when I added `ready`, left my desk, and came back to a branch with passing e2e tests and a PR description better structured than half the ones I've written tired at midnight.

@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { trackEvent } from '@/lib/analytics';
 
 type LiveSiteButtonProps = {
   href: string;
@@ -12,6 +15,7 @@ export default function LiveSiteButton({ href, children = '🎬 View Live Site' 
         href={href}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => trackEvent('outbound_click', { destination: href, location: 'live_site_button' })}
         className="
           inline-block
           bg-gradient-to-r from-purple-600 to-purple-800

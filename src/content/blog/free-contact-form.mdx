@@ -4,6 +4,7 @@ date: "2025-05-01"
 excerpt: "A breakdown of how I used Google Apps Script, fetch, and IFTTT to create a cost-free, fully functional contact form."
 coverImage: "/images/blog/free-form.png"
 series: "Low to No Cost Solutions"
+updated: "2026-10-27"
 ---
 
 Setting up a contact form on your website doesn't have to cost anything. For my personal site, I built a fully working contact form using **Google Sheets**, **Google Apps Script**, **IFTTT**, and a little **JavaScript fetch** magic—all for free.
@@ -98,6 +99,12 @@ To keep contact form emails organized, I use a Gmail alias: [mitchell.dawkinsjr+
 
 I also created a custom **label with a unique color** in Gmail that catches any emails going to this address. This makes them easy to spot and separate from other email traffic.
 
+## Business applications
+
+A contact form is a small version of a pattern I use elsewhere: a person submits structured fields, a spreadsheet stores them, and an automation sends the notice. The form on this site's [contact page](/contact) posts JSON to an Apps Script web app. The sheet is the inbox.
+
+The same shape works for intake requests and internal checklists when a team is not ready to stand up a database. The coach-facing version, where the sheet stays the system of record, is [I Didn't Replace the Spreadsheet](/blog/building-around-coach-spreadsheets-live-csv).
+
 <HumanReflection>
 This contact form solution has been working flawlessly for months now. What surprised me most was how reliable Google's infrastructure is for this purpose. I initially thought I might need to move to a "real" form solution as my website traffic increased, but that hasn't been necessary.
 
@@ -112,4 +119,4 @@ Want to know more about using Gmail aliases like this for automation and inbox f
 
 This setup gave me a reliable, scalable contact form without any third-party form service or backend hosting costs. Just Google tools, a little code, and automation glue.
 
-Have you implemented a similar no-code solution for your website? What challenges did you face? Let me know in the comments below!
+If you want to talk through a similar setup, use the [contact page](/contact).

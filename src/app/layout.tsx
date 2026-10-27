@@ -1,37 +1,49 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { DM_Sans, Syne } from 'next/font/google';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
+import { site } from '@/lib/site';
 import '@/styles/globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+});
 
-// Define metadataBase URL
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 
-               (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
+const syne = Syne({
+  subsets: ['latin'],
+  variable: '--font-display',
+  display: 'swap',
+});
 
+const isPreview = process.env.VERCEL_ENV === 'preview';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(baseUrl),
+  metadataBase: new URL(site.url),
   title: {
-    default: 'Mitchell Dawkins II | Software Engineer',
-    template: '%s | Mitchell Dawkins II',
+    default: `${site.name} | Building AI Software in Public`,
+    template: `%s | ${site.name}`,
   },
-  description: 'Personal website and blog of Mitchell Dawkins, featuring the "Building AI with AI" series.',
-  keywords: ['AI Engineer', 'Machine Learning', 'Building AI with AI', 'Next.js', 'React'],
-  authors: [{ name: 'Mitchell Dawkins II' }],
-  creator: 'Mitchell Dawkins',
-  // Favicon and app icons
+  description: site.tagline,
+  keywords: [
+    'Senior Full Stack AI Engineer',
+    'build in public',
+    'AI software studio',
+    'live coding',
+    'AI-assisted development',
+    'open journal',
+  ],
+  authors: [{ name: site.name }],
+  creator: site.shortName,
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '32x32' },
       { url: '/images/logo/logo-stamp.png', sizes: 'any' },
     ],
-    apple: [
-      { url: '/images/logo/logo-stamp.png' },
-    ],
+    apple: [{ url: '/images/logo/logo-stamp.png' }],
     other: [
       {
         rel: 'apple-touch-icon',
@@ -42,46 +54,42 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://mitchelldawkins.com',
-    title: 'Mitchell Dawkins II | Software Engineer',
-    description: 'Personal website and blog of Mitchell Dawkins, featuring the "Building AI with AI" series.',
-    siteName: 'Mitchell Dawkins',
+    url: site.url,
+    title: `${site.name} | Building AI Software in Public`,
+    description: site.tagline,
+    siteName: site.shortName,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mitchell Dawkins II | Software Engineer',
-    description: 'Personal website and blog of Mitchell Dawkins, featuring the "Building AI with AI" series.',
-    creator: '@yourtwitterhandle',
+    title: `${site.name} | Building AI Software in Public`,
+    description: site.tagline,
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: isPreview
+    ? { index: false, follow: false }
+    : { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={`${dmSans.variable} ${syne.variable}`}>
       <head>
         <link rel="mask-icon" href="/images/logo/logo-stamp.png" color="#CA0000" />
         <meta name="msapplication-TileColor" content="#CA0000" />
         <meta name="theme-color" content="#ffffff" />
       </head>
-      <body className={`${inter.className} min-h-screen flex flex-col`}>
+      <body className={`${dmSans.className} min-h-screen flex flex-col`}>
         {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
           <GoogleAnalytics GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
         )}
-        <ThemeProvider 
-          attribute="class" 
-          defaultTheme="light" 
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
           enableSystem={false}
           storageKey="theme-light-default"
           disableTransitionOnChange
         >
           <Header />
-          <main className="flex-1">
-            {children}
-          </main>
+          <main className="flex-1">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

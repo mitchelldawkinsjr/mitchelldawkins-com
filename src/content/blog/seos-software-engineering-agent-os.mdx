@@ -5,6 +5,7 @@ excerpt: "How I evolved a single coding-agent pipeline into SEOS — a Software 
 coverImage: "/images/blog/seos-blog-cover.png"
 coverImageFit: contain
 series: "Building AI with AI"
+updated: "2026-10-27"
 ---
 
 Three weeks ago I wrote about [building a team of engineers from GitHub issues](/blog/team-of-engineers-cursor-agent-pipeline) — a two-stage pipeline where OpenAI writes specs and a Cursor cloud agent opens small, reversible PRs. It worked. I shipped real features with it.
@@ -211,6 +212,12 @@ SEOS is on `main` and running on real issues. Open items:
 The longer arc hasn't changed from the first post. Humans at the decision layer. Agents at the execution layer. Git as the contract between them.
 
 What's different is scope. It's not one agent pretending to be a team. It's an OS that composes a team from rules, manifests, and workflows — and gets better every time something breaks in production.
+
+## Business applications
+
+SEOS is the operating system on my own repos, not a hosted product. The part another engineering team can take is the middle of a change: a spec, a bounded implementation, a test note, and one fix pass, with a human still on the merge.
+
+The evidence is the shape of the work on Fasted — issues in, small pull requests out, and a lesson written back when a deploy check fails.
 
 <HumanReflection>
 The v1 pipeline felt like a breakthrough when PR #33 landed with passing e2e tests while I was writing another post. SEOS feels like admitting the truth: I was never going to scale "one smart agent" into a engineering org. I needed to build the org.

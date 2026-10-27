@@ -1,14 +1,15 @@
 'use client';
 
 import { useState } from 'react';
+import { trackEvent } from '@/lib/analytics';
 
-export default function ContactForm() {
+export default function ContactForm({ initialSubject = '' }: { initialSubject?: string }) {
   const GOOGLE_FORM_ACTION_URL = 'https://script.google.com/macros/s/AKfycbxPy3NIVylh-RsgImrNqRgVMgBLl8S97ROAjket4RJIzswazAeO09yvlsv-tP30pAEHfw/exec';
 
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
+    subject: initialSubject,
     message: '',
   });
   
@@ -39,6 +40,7 @@ export default function ContactForm() {
       // With no-cors mode, we can't read the response
       // We'll assume success if no error was thrown
       setSubmitStatus('success');
+      trackEvent('contact_form_submit', { status: 'dispatched' });
       setFormData({
         name: '',
         email: '',
@@ -47,6 +49,7 @@ export default function ContactForm() {
       });
     } catch (error) {
       console.error('Error submitting form:', error);
+      trackEvent('contact_form_submit', { status: 'error' });
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
