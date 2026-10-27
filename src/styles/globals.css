@@ -79,6 +79,26 @@ h3,
   scroll-margin-top: 6rem;
 }
 
+.prose :not(pre) > code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-weight: 500;
+  font-size: 0.875em;
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.375rem;
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.prose :not(pre) > code::before,
+.prose :not(pre) > code::after {
+  content: none;
+}
+
+.dark .prose :not(pre) > code {
+  background-color: #374151;
+  color: #f9fafb;
+}
+
 .prose pre {
   @apply border border-gray-200 dark:border-gray-800 rounded-lg;
   overflow-x: auto;
