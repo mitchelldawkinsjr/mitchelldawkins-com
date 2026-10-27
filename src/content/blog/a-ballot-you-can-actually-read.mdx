@@ -1,0 +1,54 @@
+---
+title: "A Ballot You Can Actually Read"
+date: "2026-10-27T16:30:00.000Z"
+excerpt: "A long November ballot is a stack of names and millage rates. I built a practice page that keeps one precinct’s contests on a single sheet and turns the tax questions into dollars."
+coverImage: "/images/blog/kent-ballot-cover.png"
+coverImageFit: contain
+series: "Low to No Cost Solutions"
+---
+
+The county list for November 3, 2026 is one PDF. Governor through school board, then four proposals, two of them millages written as a rate per thousand dollars of taxable value. I can read it. I cannot hold it. By the time I reach the jail millage I have forgotten who was on the university boards.
+
+So I built a **[practice ballot](https://ballot.360web.cloud)** for the Grand Rapids area. Pick the precinct. The page keeps the contests that precinct shares and lays them out like the paper ballot: three columns, a box to mark, a short note, and a link when I want the source. The build notes are on **[the project page](/projects/kent-ballot)**.
+
+<LiveSiteButton href="https://ballot.360web.cloud">Open the practice ballot</LiveSiteButton>
+
+## The product in one sentence
+
+One precinct, one sheet, and a dollar figure next to the millage before I decide yes or no.
+
+<img src="/images/projects/kent-ballot/header.png" alt="Grand Rapids area practice ballot for Gaines Charter Township Precinct 7, with a ZIP lookup and the November 3, 2026 contests in three columns" />
+
+It opens on Gaines Charter Township, Precinct 7, in the Byron Center schools. The catalog behind the menu is 132 precincts: Grand Rapids, Wyoming, Kentwood, Walker, Grandville, East Grand Rapids, Gaines, Byron, and Grand Rapids Charter Township. A ZIP code narrows that menu. It does not pick the precinct. A ZIP is bigger than a precinct, and the page says so.
+
+## What a long ballot hides
+
+Twenty-four contests sit in the county file. Eleven of them are statewide, so every precinct in this guide sees them. The rest depend on Congress, the state House and Senate, the court district, the community college, and the school board. Precinct 7 does not need Grand Rapids city wards. A Grand Rapids precinct does not need the Byron Center school board.
+
+The page stores each contest once, with a scope such as `statewide`, `congress-3`, or `school-byron`. A precinct is a list of those scopes. Changing precincts filters the same list. It does not load a second ballot.
+
+| What you do | What the page does |
+|-------------|--------------------|
+| Choose a precinct | Shows only contests whose scope that precinct includes |
+| Enter a ZIP | Shortens the menu, then waits for the precinct |
+| Mark a box | Saves the mark in this browser |
+| Open Learn more | Shows a short sourced note, the filing line, and the outbound links |
+| Type a taxable value | Prices the two Kent County millages on that number |
+
+Marks never leave the machine. Review and print are a practice record. The banner says so, and the Michigan Voter Information Center stays one click away for the ballot an address can actually cast.
+
+## Mills are a rate. The question is the bill.
+
+Two of the proposals are county millages. The corrections question asks for 0.98 mill through 2045, against a 0.7332 mill baseline. The zoo and museum question asks to renew 0.4086 mill through 2035, set next to the 2025 rate of 0.4134 mill.
+
+A mill is one dollar per thousand dollars of taxable value. The page takes the taxable value from the assessment notice, not the market price of the house, and writes the yes amount, the baseline amount, and the gap. For an increase, that gap is also shown per month. For a renewal, a no vote is the line ending, not a drop back to the old rate forever.
+
+<img src="/images/projects/kent-ballot/ballot.png" alt="The practice ballot in three columns, with statewide, legislative, judicial, school, and proposal contests, and a taxable-value box on the millages" />
+
+The other two proposals stay in words. One asks whether Michigan should call a constitutional convention. One is the campaign-finance initiated law. They do not need a calculator. They need the question on the same sheet as the names, so the measures are not a separate homework assignment after the offices.
+
+<HumanReflection>
+I did not want a voter guide that recommends a side. I wanted the long list to sit still: the people who are actually on this precinct’s ballot, a sentence on who they are with a link I can check, and the tax questions written as money. The marks stay in the browser because a practice ballot should not become a record of how someone voted.
+</HumanReflection>
+
+Practice sheet: **[ballot.360web.cloud](https://ballot.360web.cloud)** · Source: **[github.com/mitchelldawkinsjr/kent-elections](https://github.com/mitchelldawkinsjr/kent-elections)** · Build notes: **[/projects/kent-ballot](/projects/kent-ballot)**.
