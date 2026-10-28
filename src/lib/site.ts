@@ -12,7 +12,8 @@ export const site = {
     'Real products, honest lessons, live.',
   email: 'hello@mitchelldawkins.com',
   url: 'https://www.mitchelldawkins.com',
-  resumePath: '/documents/Mitchell-Dawkins-II-Resume-2026.pdf',
+  resumePath: '/documents/Mitchell-Dawkins-II-Resume.pdf',
+  resumeFileName: 'Mitchell-Dawkins-II-Resume.pdf',
 
   manifesto: `I believe the best way to learn is to build, the best way to teach is to share, and the best way to earn trust is to work in public. I use AI as a collaborator, not a shortcut, to create software that solves real problems. Every project, every deployment, every mistake, and every lesson becomes part of a public journey so others can learn alongside me. My goal isn't simply to ship software; it's to build products, knowledge, and a community that leave people better than I found them.`,
 

@@ -17,6 +17,20 @@ const nextConfig = {
   images: {
     domains: [],
   },
+  async redirects() {
+    return [
+      {
+        source: '/documents/Mitchell-Dawkins-II-Resume-2026.pdf',
+        destination: '/documents/Mitchell-Dawkins-II-Resume.pdf',
+        permanent: true,
+      },
+      {
+        source: '/documents/Mitchell-Dawkins-II-Resume-Forward-Deployed-2026.pdf',
+        destination: '/documents/Mitchell-Dawkins-II-Resume.pdf',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 module.exports = withMDX(nextConfig)
