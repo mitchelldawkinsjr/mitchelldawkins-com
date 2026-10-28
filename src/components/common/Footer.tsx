@@ -11,7 +11,6 @@ export default function Footer() {
     { href: '/projects', label: 'Projects' },
     { href: '/streams', label: 'Streams' },
     { href: '/blog', label: 'Blog' },
-    { href: '/extension', label: 'Extensions' },
     { href: '/consulting', label: 'Consulting' },
     { href: '/contact', label: 'Contact' },
   ].filter((link) => site.streams.published || link.href !== '/streams');
