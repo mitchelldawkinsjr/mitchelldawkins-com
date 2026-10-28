@@ -1,0 +1,8 @@
+{
+  "name": "Film Room Downloader",
+  "summary": "Saves video from your own Hudl tab for offline coaching review. Uses your existing login. No credentials are stored.",
+  "updated": "2026-10-28",
+  "category": "Sports",
+  "sourceUrl": "https://github.com/mitchelldawkinsjr/hudl-download",
+  "supportUrl": "https://github.com/mitchelldawkinsjr/hudl-download/issues"
+}
