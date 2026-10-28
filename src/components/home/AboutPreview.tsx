@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { site } from '@/lib/site';
 
 export default function AboutPreview() {
   return (
@@ -10,50 +11,63 @@ export default function AboutPreview() {
             <div className="relative h-64 w-64 rounded-full overflow-hidden mx-auto">
               <Image
                 src="/images/profile.jpg"
-                alt="Mitchell Dawkins II"
+                alt={site.name}
                 fill
                 style={{ objectFit: 'cover' }}
               />
             </div>
           </div>
-          
+
           <div className="md:w-2/3 md:pl-12">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              About Me
+            <h2 className="font-display text-3xl font-bold text-gray-900 dark:text-white mb-2 tracking-tight">
+              Builder.
             </h2>
-            
-            <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-              I&apos;m a Senior Full Stack Software Engineer focused on building practical software that solves real-world problems. With 10+ years of experience across full-stack development, AI systems, and cloud architecture, I'm always exploring better ways to build, automate, and create meaningful technology.
+            <p className="text-blue-600 dark:text-blue-400 font-medium mb-4">
+              {site.title}
             </p>
-            
-            <div className="flex flex-wrap items-stretch gap-4 mb-8">
-              <div className="flex-1 basis-full sm:basis-[calc(50%-0.5rem)] bg-blue-50 dark:bg-blue-900/20 px-4 py-3 rounded-lg">
-                <h3 className="font-medium text-gray-900 dark:text-white">Machine Learning</h3>
-                <p className="text-gray-600 dark:text-gray-300">Hugging Face, OpenAI, Ollama, RAG, Whisper, Scikit-learn</p>
-              </div>
-              
-              <div className="flex-1 basis-full sm:basis-[calc(50%-0.5rem)] bg-blue-50 dark:bg-blue-900/20 px-4 py-3 rounded-lg">
-                <h3 className="font-medium text-gray-900 dark:text-white">Web Development</h3>
-                <p className="text-gray-600 dark:text-gray-300">React, Next.js, TypeScript, FastAPI, Laravel</p>
-              </div>
-              
-              <div className="flex-1 basis-full sm:basis-[calc(50%-0.5rem)] bg-blue-50 dark:bg-blue-900/20 px-4 py-3 rounded-lg">
-                <h3 className="font-medium text-gray-900 dark:text-white">Cloud & DevOps</h3>
-                <p className="text-gray-600 dark:text-gray-300">AWS, Docker, CI/CD</p>
-              </div>
-              
-              <div className="flex-1 basis-full sm:basis-[calc(50%-0.5rem)] bg-blue-50 dark:bg-blue-900/20 px-4 py-3 rounded-lg">
-                <h3 className="font-medium text-gray-900 dark:text-white">Automation</h3>
-                <p className="text-gray-600 dark:text-gray-300">n8n, GitHub Actions, Playwright</p>
-              </div>
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
+              People follow how I think, not a single app. Engineer, founder, teacher, and
+              service provider: I build real products with AI, stream the process, and turn
+              every lesson into something others can learn from. I also help lead the{' '}
+              <a
+                href={site.social.foundation}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 dark:text-blue-400 hover:underline"
+              >
+                Dawkins Family Foundation
+              </a>
+              , continuing a family legacy of service. Full resume and background live on
+              About.
+            </p>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+              {site.roleLadder.map((item) => (
+                <div
+                  key={item.role}
+                  className="bg-blue-50 dark:bg-blue-900/20 px-3 py-3 rounded-lg text-center"
+                >
+                  <h3 className="font-medium text-gray-900 dark:text-white text-sm">
+                    {item.role}
+                  </h3>
+                </div>
+              ))}
             </div>
-            
-            <Link 
-              href="/about" 
-              className="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Read More About Me
-            </Link>
+
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href="/about"
+                className="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                About & resume
+              </Link>
+              <Link
+                href={site.ctas.workWithMe.href}
+                className="inline-block px-6 py-3 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium rounded-lg border border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
+              >
+                {site.ctas.workWithMe.label}
+              </Link>
+            </div>
           </div>
         </div>
       </div>
