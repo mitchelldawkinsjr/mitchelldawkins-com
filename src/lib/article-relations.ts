@@ -98,6 +98,15 @@ export const articleRelations: Record<string, ArticleRelation> = {
     project: 'kent-ballot',
     service: 'custom-software',
   },
+  'film-room-offline-review': {
+    related: [
+      'building-around-coach-spreadsheets-live-csv',
+      'tab-recorder-chrome-extension-demo-mp4',
+      'gh-film-hub-v2-year-two',
+    ],
+    project: 'film-room',
+    service: 'custom-software',
+  },
   'dawkins-family-foundation-legacy': {
     related: [],
     showCta: false,
