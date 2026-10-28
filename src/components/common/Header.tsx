@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
 import Logo from '@/components/Logo';
 import { SocialLinks } from './SocialIcons';
+import { site } from '@/lib/site';
 
 const navigationLinks = [
   { href: '/', label: 'Home' },
@@ -15,7 +16,7 @@ const navigationLinks = [
   { href: '/blog', label: 'Blog' },
   { href: '/consulting', label: 'Consulting' },
   { href: '/contact', label: 'Contact' },
-];
+].filter((link) => site.streams.published || link.href !== '/streams');
 
 export default function Header() {
   const pathname = usePathname();

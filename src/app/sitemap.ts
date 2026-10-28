@@ -8,7 +8,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getAllPosts();
   const projects = getAllProjects();
 
-  const staticPaths = ['', '/about', '/projects', '/blog', '/contact', '/consulting', '/streams', '/cv'];
+  const staticPaths = ['', '/about', '/projects', '/blog', '/contact', '/consulting', '/cv'].concat(
+    site.streams.published ? ['/streams'] : []
+  );
 
   const staticEntries: MetadataRoute.Sitemap = staticPaths.map((path) => ({
     url: `${site.url}${path || '/'}`,

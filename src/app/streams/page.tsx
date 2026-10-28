@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   description:
     'Follow Mitchell Dawkins on Twitch and YouTube. The channels are up; the first builds are not posted yet.',
   alternates: { canonical: '/streams' },
+  robots: site.streams.published ? undefined : { index: false, follow: false },
 };
 
 export default function StreamsPage() {

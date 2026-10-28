@@ -105,12 +105,14 @@ export default async function ProjectPage({ params }: { params: { slug: string }
                 </TrackedLink>
               );
             })}
-            <Link
-              href="/streams"
-              className="px-4 py-2 border border-blue-600 text-blue-600 dark:text-blue-400 rounded hover:bg-blue-50 dark:hover:bg-gray-800 transition"
-            >
-              Streams
-            </Link>
+            {site.streams.published && (
+              <Link
+                href="/streams"
+                className="px-4 py-2 border border-blue-600 text-blue-600 dark:text-blue-400 rounded hover:bg-blue-50 dark:hover:bg-gray-800 transition"
+              >
+                Streams
+              </Link>
+            )}
           </div>
         )}
 
@@ -142,27 +144,9 @@ export default async function ProjectPage({ params }: { params: { slug: string }
           {project.streamFocus && (
             <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl">
               <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
-                Stream focus
+                In the build
               </h2>
-              <p className="text-gray-700 dark:text-gray-300 mb-3">{project.streamFocus}</p>
-              <div className="flex flex-wrap gap-3 text-sm">
-                <a
-                  href={site.streams.twitch}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 dark:text-blue-400 hover:underline"
-                >
-                  Twitch
-                </a>
-                <a
-                  href={site.streams.youtube}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 dark:text-blue-400 hover:underline"
-                >
-                  YouTube
-                </a>
-              </div>
+              <p className="text-gray-700 dark:text-gray-300">{project.streamFocus}</p>
             </div>
           )}
         </div>

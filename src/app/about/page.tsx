@@ -423,9 +423,10 @@ export default function AboutPage() {
             </h3>
             
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              The record is the project stories and the journal. Twitch and YouTube are up for
-              when the builds start. Until then, follow the stories for Fasted, SEOS, Thinker,
-              and the rest of the studio.
+              The record is the project stories and the journal.
+              {site.streams.published
+                ? ' Twitch and YouTube are up for when the builds start.'
+                : ' Follow the stories for Fasted, SEOS, Thinker, and the rest of the studio.'}
             </p>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
               The same Serve ethos drives the{' '}
@@ -441,12 +442,14 @@ export default function AboutPage() {
             </p>
             
             <div className="flex flex-wrap gap-3">
-              <Link 
-                href="/streams" 
-                className="inline-block px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                Twitch and YouTube
-              </Link>
+              {site.streams.published && (
+                <Link
+                  href="/streams"
+                  className="inline-block px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Twitch and YouTube
+                </Link>
+              )}
               <Link 
                 href="/projects" 
                 className="inline-block px-4 py-2 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium rounded-lg border border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
