@@ -8,4 +8,4 @@ Open Film Room Review opens a local viewer for those saved files. You can play, 
 
 The extension uses your existing login. It never asks for your password. It only runs on hudl.com. Nothing is sent to the developer.
 
-The field story is [Offline Film Room](/blog/film-room-offline-review). How the player and the extension fit together is on the [Offline Film Room + Hudl Downloader](/projects/film-room) project page.
+The field story is [Film Room: Review When the Connection Drops](/blog/film-room-offline-review). How the player and the extension fit together is on the [Offline Film Room + Hudl Downloader](/projects/film-room) project page.
