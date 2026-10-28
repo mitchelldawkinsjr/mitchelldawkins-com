@@ -29,13 +29,13 @@ export const consultingServices: ConsultingService[] = [
     projects: [
       { slug: 'ghfb', label: 'GHFB Team Tools Hub' },
       { slug: 'gh-film-review-pipeline', label: 'GH Film Review Pipeline' },
-      { slug: 'film-room', label: 'Film Room' },
+      { slug: 'film-room', label: 'Offline Film Room + Hudl Downloader' },
       { slug: 'thinker', label: 'Thinker' },
       { slug: 'fasted', label: 'Fasted' },
     ],
     posts: [
       { slug: 'building-around-coach-spreadsheets-live-csv', label: 'I Didn’t Replace the Spreadsheet' },
-      { slug: 'film-room-offline-review', label: 'Film Room: Review When the Connection Drops' },
+      { slug: 'film-room-offline-review', label: 'Offline Film Room' },
       { slug: 'gh-film-hub-v2-year-two', label: 'GH Film Hub v2' },
     ],
     contactTopic: 'Custom software',
