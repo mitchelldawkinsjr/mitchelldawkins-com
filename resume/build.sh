@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Build the published one-page resume.
 # Source: resume/forward-deployed.html
-# Output: public/documents/Mitchell-Dawkins-II-Resume-2026.pdf
+# Output: public/documents/Mitchell-Dawkins-II-Resume.pdf
 # resume/resume.html is the longer record and is not published.
 set -euo pipefail
 
@@ -28,12 +28,30 @@ build_one() {
   echo "Wrote $out"
 }
 
-SITE_PDF="$REPO_ROOT/public/documents/Mitchell-Dawkins-II-Resume-2026.pdf"
-OPEN_PDF="$REPO_ROOT/public/documents/Mitchell-Dawkins-II-Resume-Forward-Deployed-2026.pdf"
+SITE_PDF="$REPO_ROOT/public/documents/Mitchell-Dawkins-II-Resume.pdf"
 
 build_one \
   "$REPO_ROOT/resume/forward-deployed.html" \
   "$SITE_PDF"
 
-cp "$SITE_PDF" "$OPEN_PDF"
-echo "Wrote $OPEN_PDF"
+python3 - "$SITE_PDF" << 'PY'
+import sys
+import pymupdf
+
+path = sys.argv[1]
+doc = pymupdf.open(path)
+doc.set_metadata({
+    "title": "Mitchell L. Dawkins II — Resume",
+    "author": "Mitchell L. Dawkins II",
+    "subject": "Resume",
+    "keywords": "",
+    "creator": "Mitchell L. Dawkins II",
+    "producer": "Mitchell L. Dawkins II",
+})
+tmp = path + ".tmp"
+doc.save(tmp, garbage=4, deflate=True)
+doc.close()
+import os
+os.replace(tmp, path)
+print(f"Set document title on {path}")
+PY
