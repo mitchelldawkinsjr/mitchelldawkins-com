@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { getAllExtensions } from '@/lib/extensions';
 import { getAllPosts } from '@/lib/mdx';
 import { getAllProjects } from '@/lib/project';
 import { site } from '@/lib/site';
@@ -34,5 +35,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: project.date,
   }));
 
-  return [...staticEntries, ...postEntries, ...seriesEntries, ...projectEntries];
+  const extensions = getAllExtensions();
+  const extensionEntries: MetadataRoute.Sitemap = [
+    { url: `${site.url}/extension` },
+    ...extensions.flatMap((extension) => [
+      {
+        url: `${site.url}/extension/${extension.slug}`,
+        lastModified: extension.updated,
+      },
+      {
+        url: `${site.url}/extension/${extension.slug}/privacy`,
+        lastModified: extension.updated,
+      },
+    ]),
+  ];
+
+  return [...staticEntries, ...postEntries, ...seriesEntries, ...projectEntries, ...extensionEntries];
 }
