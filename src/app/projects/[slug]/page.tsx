@@ -109,7 +109,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
               href="/streams"
               className="px-4 py-2 border border-blue-600 text-blue-600 dark:text-blue-400 rounded hover:bg-blue-50 dark:hover:bg-gray-800 transition"
             >
-              Watch live builds
+              Streams
             </Link>
           </div>
         )}

@@ -6,7 +6,7 @@ import { TwitchIcon, YouTubeIcon } from '@/components/common/SocialIcons';
 export const metadata: Metadata = {
   title: 'Streams',
   description:
-    'Watch Mitchell Dawkins build real AI products live on Twitch and YouTube — then follow the commits, articles, and lessons.',
+    'Follow Mitchell Dawkins on Twitch and YouTube. The channels are up; the first builds are not posted yet.',
   alternates: { canonical: '/streams' },
 };
 
@@ -15,11 +15,11 @@ export default function StreamsPage() {
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-          Build with me — live
+          Twitch and YouTube
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
-          Streams are the hinge of this journal. Not teaching for views — building real
-          products that solve real problems, while you watch the work happen.
+          The channels are up. The first builds are not posted yet. Follow here, and the
+          sessions will show up as commits, articles, and project stories.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 mb-12">
@@ -74,7 +74,7 @@ export default function StreamsPage() {
             One session → an ecosystem
           </h2>
           <p className="text-gray-700 dark:text-gray-300 mb-4">
-            A live build becomes YouTube VODs, blog articles, architecture write-ups, GitHub
+            A session becomes YouTube recordings, blog articles, architecture write-ups, GitHub
             commits, docs, and project stories on this site. Follow the work where it lives.
           </p>
           <ol className="list-decimal pl-6 space-y-2 text-gray-700 dark:text-gray-300">

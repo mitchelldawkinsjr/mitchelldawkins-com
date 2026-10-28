@@ -15,9 +15,9 @@ export default function Hero() {
               {site.brandLine}
             </h1>
             <p className="text-xl text-gray-700 dark:text-gray-300 mb-8">
-              {site.tagline} Watch live builds on Twitch and YouTube, then follow the
-              architecture, mistakes, and lessons as they become projects, articles, and
-              open source. I also help lead the{' '}
+              {site.tagline} The projects and journal are the record: architecture, mistakes,
+              and what shipped. Twitch and YouTube are up for when the builds start. I also
+              help lead the{' '}
               <a
                 href={site.social.foundation}
                 target="_blank"
@@ -30,14 +30,8 @@ export default function Hero() {
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
               <Link
-                href={site.ctas.watchLive.href}
-                className="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-lg text-center hover:bg-blue-700 transition-colors"
-              >
-                {site.ctas.watchLive.label}
-              </Link>
-              <Link
                 href={site.ctas.seeProjects.href}
-                className="inline-block px-6 py-3 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium rounded-lg text-center border border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
+                className="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-lg text-center hover:bg-blue-700 transition-colors"
               >
                 {site.ctas.seeProjects.label}
               </Link>
