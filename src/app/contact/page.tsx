@@ -34,14 +34,19 @@ export default function ContactPage({
           <Link href="/consulting" className="text-blue-600 dark:text-blue-400 hover:underline">
             consulting page
           </Link>
-          . Prefer to see the work first?{' '}
-          <Link href="/streams" className="text-blue-600 dark:text-blue-400 hover:underline">
-            Twitch and YouTube
-          </Link>{' '}
-          or browse{' '}
+          . Prefer to see the work first? Browse{' '}
           <Link href="/projects" className="text-blue-600 dark:text-blue-400 hover:underline">
             project stories
           </Link>
+          {site.streams.published && (
+            <>
+              {' '}
+              or follow{' '}
+              <Link href="/streams" className="text-blue-600 dark:text-blue-400 hover:underline">
+                Twitch and YouTube
+              </Link>
+            </>
+          )}
           .
         </p>
 
@@ -64,7 +69,9 @@ export default function ContactPage({
             </div>
 
             <div>
-              <h3 className="font-bold text-gray-900 dark:text-white mb-2">Social & streams</h3>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-2">
+                {site.streams.published ? 'Social & streams' : 'Social'}
+              </h3>
               <SocialLinks />
             </div>
           </div>

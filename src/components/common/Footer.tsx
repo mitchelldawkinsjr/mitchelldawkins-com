@@ -13,7 +13,7 @@ export default function Footer() {
     { href: '/blog', label: 'Blog' },
     { href: '/consulting', label: 'Consulting' },
     { href: '/contact', label: 'Contact' },
-  ];
+  ].filter((link) => site.streams.published || link.href !== '/streams');
 
   return (
     <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 py-8">

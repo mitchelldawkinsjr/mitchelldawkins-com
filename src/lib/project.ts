@@ -17,7 +17,7 @@ export interface ProjectFrontmatter {
   audience?: string[];
   /** Short problem/care statement for the project story */
   why?: string;
-  /** What gets built live for this project */
+  /** Engineering topics inside this project, shown as "In the build" */
   streamFocus?: string;
   lessons?: string[];
   roadmap?: string[];

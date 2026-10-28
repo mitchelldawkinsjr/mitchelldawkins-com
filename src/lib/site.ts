@@ -69,6 +69,8 @@ export const site = {
   },
 
   streams: {
+    /** Flip to true after the first video is posted. Hides stream nav and promos until then. */
+    published: false,
     twitch: 'https://www.twitch.tv/mitchelldawkinsii',
     youtube: 'https://www.youtube.com/@mitchelldawkinsii',
     schedule: null as string | null,

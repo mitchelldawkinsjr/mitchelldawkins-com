@@ -5,6 +5,7 @@ import AboutPreview from '@/components/home/AboutPreview';
 import BlogPreview from '@/components/home/BlogPreview';
 import { getFeaturedPosts } from '@/lib/mdx';
 import { getFeaturedProjectsForCarousel } from '@/lib/project';
+import { site } from '@/lib/site';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -18,7 +19,7 @@ export default async function HomePage() {
   return (
     <>
       <Hero />
-      <BuildLive />
+      {site.streams.published && <BuildLive />}
 
       <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4">

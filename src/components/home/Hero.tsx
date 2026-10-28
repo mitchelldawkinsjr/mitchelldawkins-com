@@ -16,8 +16,9 @@ export default function Hero() {
             </h1>
             <p className="text-xl text-gray-700 dark:text-gray-300 mb-8">
               {site.tagline} The projects and journal are the record: architecture, mistakes,
-              and what shipped. Twitch and YouTube are up for when the builds start. I also
-              help lead the{' '}
+              and what shipped.
+              {site.streams.published && ' Twitch and YouTube are up for when the builds start.'}{' '}
+              I also help lead the{' '}
               <a
                 href={site.social.foundation}
                 target="_blank"

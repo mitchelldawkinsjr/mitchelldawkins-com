@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import ProjectTechBadge from '@/components/ProjectTechBadge';
 import { Key } from 'react';
+import { site } from '@/lib/site';
 
 export const metadata = {
   title: 'Projects',
@@ -18,8 +19,8 @@ export default async function ProjectsPage() {
     <div className="container mx-auto px-4 py-12">
       <h1 className="text-4xl font-bold mb-2">What I&apos;m building</h1>
       <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl">
-        Each project is a story: why it exists, how it&apos;s built, what streams cover, and what
-        we learned shipping it.
+        Each project is a story: why it exists, how it&apos;s built
+        {site.streams.published ? ', what streams cover,' : ''} and what we learned shipping it.
       </p>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

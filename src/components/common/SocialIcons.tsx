@@ -48,7 +48,7 @@ type SocialLinksProps = {
 export function SocialLinks({
   className = 'flex space-x-3',
   linkClassName = 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white',
-  showStreams = true,
+  showStreams = site.streams.published,
   onLinkClick,
 }: SocialLinksProps) {
   return (
