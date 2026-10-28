@@ -35,7 +35,7 @@ export const consultingServices: ConsultingService[] = [
     ],
     posts: [
       { slug: 'building-around-coach-spreadsheets-live-csv', label: 'I Didn’t Replace the Spreadsheet' },
-      { slug: 'film-room-offline-review', label: 'Offline Film Room' },
+      { slug: 'film-room-offline-review', label: 'Film Room: Review When the Connection Drops' },
       { slug: 'gh-film-hub-v2-year-two', label: 'GH Film Hub v2' },
     ],
     contactTopic: 'Custom software',
