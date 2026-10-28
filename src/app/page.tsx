@@ -26,7 +26,7 @@ export default async function HomePage() {
             What I&apos;m building
           </h2>
           <p className="text-center text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-            Project stories covering problems, architecture, live builds, and lessons. Not
+            Project stories covering problems, architecture, and lessons. Not
             just finished screenshots.
           </p>
           <FeaturedProjects projects={featuredProjects} />

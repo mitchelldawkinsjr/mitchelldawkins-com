@@ -36,7 +36,7 @@ export default function ContactPage({
           </Link>
           . Prefer to see the work first?{' '}
           <Link href="/streams" className="text-blue-600 dark:text-blue-400 hover:underline">
-            Watch live builds
+            Twitch and YouTube
           </Link>{' '}
           or browse{' '}
           <Link href="/projects" className="text-blue-600 dark:text-blue-400 hover:underline">

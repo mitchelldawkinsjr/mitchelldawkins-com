@@ -6,11 +6,10 @@ export default function BuildLive() {
     <section className="py-16 bg-gray-900 text-white">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-10">
-          <h2 className="font-display text-3xl font-bold mb-4 tracking-tight">Build with me live</h2>
+          <h2 className="font-display text-3xl font-bold mb-4 tracking-tight">Twitch and YouTube</h2>
           <p className="text-lg text-gray-300">
-            Streams are the hinge of this journal. You&apos;ll see real products, real
-            debugging, architecture decisions, and honest failures. Not polished tutorials.
-            One session becomes commits, articles, docs, and the next ship.
+            The channels are up. The first builds are not posted yet. Follow now, and the
+            sessions will land as commits, articles, and project stories on this site.
           </p>
           {site.streams.schedule && (
             <p className="mt-4 text-blue-300">{site.streams.schedule}</p>
@@ -25,7 +24,7 @@ export default function BuildLive() {
             className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-medium transition-colors"
           >
             <TwitchIcon className="h-5 w-5" />
-            Watch on Twitch
+            Twitch
           </a>
           <a
             href={site.streams.youtube}
@@ -34,7 +33,7 @@ export default function BuildLive() {
             className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 rounded-lg font-medium transition-colors"
           >
             <YouTubeIcon className="h-5 w-5" />
-            Watch on YouTube
+            YouTube
           </a>
         </div>
 

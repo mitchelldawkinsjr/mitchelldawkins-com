@@ -33,8 +33,8 @@ export default function AboutPage() {
               Senior Software Engineer | AI Systems • Full Stack • Sports Technology
             </h2>
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-              {site.brandLine} This site is my journal of that work: live builds,
-              project stories, and honest lessons. I also help lead the{' '}
+              {site.brandLine} This site is my journal of that work: project stories
+              and honest lessons. I also help lead the{' '}
               <a
                 href={site.social.foundation}
                 target="_blank"
@@ -419,12 +419,13 @@ export default function AboutPage() {
           
           <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-xl">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Live builds → projects → lessons
+              Projects → lessons
             </h3>
             
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              Everything hinges on streaming real work. Watch live on Twitch and YouTube, then
-              follow the stories for Fasted, SEOS, Thinker, and the rest of the studio.
+              The record is the project stories and the journal. Twitch and YouTube are up for
+              when the builds start. Until then, follow the stories for Fasted, SEOS, Thinker,
+              and the rest of the studio.
             </p>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
               The same Serve ethos drives the{' '}
@@ -444,7 +445,7 @@ export default function AboutPage() {
                 href="/streams" 
                 className="inline-block px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
               >
-                Watch streams
+                Twitch and YouTube
               </Link>
               <Link 
                 href="/projects" 

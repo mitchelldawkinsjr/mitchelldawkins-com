@@ -7,7 +7,7 @@ import { Key } from 'react';
 export const metadata = {
   title: 'Projects',
   description:
-    'Project stories from an AI software studio built in public — problems, architecture, live builds, and lessons.',
+    'Project stories from an AI software studio built in public — problems, architecture, and lessons.',
   alternates: { canonical: '/projects' },
 };
 

@@ -75,7 +75,6 @@ export const site = {
   },
 
   ctas: {
-    watchLive: { label: 'Watch me build', href: '/streams' },
     readJournal: { label: 'Read the journal', href: '/blog' },
     seeProjects: { label: 'See projects', href: '/projects' },
     workWithMe: { label: 'Work with me', href: '/contact' },
