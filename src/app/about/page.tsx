@@ -120,13 +120,16 @@ export default function AboutPage() {
           </h2>
           <div className="prose dark:prose-invert prose-lg max-w-none">
             <p>
-              Full-stack engineer with 10+ years of experience building production software across enterprise and growth-stage environments, including four years at Dropbox. I specialize in scalable full-stack systems, AI-powered applications, and developer infrastructure, with a track record of delivering revenue-driving products and leading architecture for federal and enterprise clients. Today, I&apos;m focused on AI-native engineering, automation, and sports technology that solves real-world operational problems. I also bring lifelong involvement in football as a former Division I wide receiver at Eastern Michigan University and a six-year high school football coach, including software I designed for football operations, player development, practice planning, attendance, strength training, and film evaluation.
+              Full-stack engineer with 10+ years of experience building production software across enterprise and growth-stage environments, including four years at Dropbox. I specialize in scalable full-stack systems, AI-powered applications, and developer infrastructure, with a track record of delivering revenue-driving products and leading architecture for federal and enterprise clients. Today, I&apos;m focused on AI-native engineering, automation, and sports technology that solves real-world operational problems.
+            </p>
+            <p>
+              I spent six years inside a high school football program, learned how the staff already ran attendance, film, and lifting, and built software around those workflows so they could keep running it without me. That is how I consult: sit with the people doing the work, fit the process they already trust, and leave something they can run.
             </p>
             <p>
               I believe we&apos;re at a fascinating inflection point where AI can be used in tandem with experience and a good grasp of fundamentals to build better software, creating improvements that will dramatically change how we develop it.
             </p>
             <p>
-              When I&apos;m not coding or experimenting with AI tools, you&apos;ll find me coaching football, hanging out with family, or working with the{' '}
+              When I&apos;m not coding or experimenting with AI tools, you&apos;ll find me with family or working with the{' '}
               <a
                 href={site.social.foundation}
                 target="_blank"
