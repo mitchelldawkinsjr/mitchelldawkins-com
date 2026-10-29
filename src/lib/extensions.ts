@@ -11,6 +11,7 @@ export type ExtensionListing = {
   category?: string;
   supportUrl?: string;
   sourceUrl?: string;
+  storeUrl?: string;
   home: string;
   privacy: string;
 };
@@ -22,6 +23,7 @@ type ExtensionMeta = {
   category?: string;
   supportUrl?: string;
   sourceUrl?: string;
+  storeUrl?: string;
 };
 
 function readExtension(slug: string): ExtensionListing | null {
@@ -42,6 +44,7 @@ function readExtension(slug: string): ExtensionListing | null {
     category: meta.category,
     supportUrl: meta.supportUrl,
     sourceUrl: meta.sourceUrl,
+    storeUrl: meta.storeUrl,
     home: fs.readFileSync(homePath, 'utf8'),
     privacy: fs.readFileSync(privacyPath, 'utf8'),
   };
