@@ -3,6 +3,7 @@
   "summary": "Saves video from your own Hudl tab for offline coaching review. Uses your existing login. No credentials are stored.",
   "updated": "2026-10-28",
   "category": "Sports",
+  "storeUrl": "https://chromewebstore.google.com/detail/film-room-downloader/kjnadjpdehgoghbbflbbffnpeoonhkbe",
   "sourceUrl": "https://github.com/mitchelldawkinsjr/hudl-download",
   "supportUrl": "https://github.com/mitchelldawkinsjr/hudl-download/issues"
 }

@@ -1,4 +1,4 @@
-Film Room Downloader saves game video from your Hudl tab, using the login you already have, so you can review it offline.
+Film Room Downloader saves game video from your Hudl tab, using the login you already have, so you can review it offline. Install it from the [Chrome Web Store](https://chromewebstore.google.com/detail/film-room-downloader/kjnadjpdehgoghbbflbbffnpeoonhkbe).
 
 Open a video you have access to, agree to the one-time notice in the extension, then choose Download. Chrome saves the file into your Downloads folder. A small sidecar file stores the play labels shown on the page — play number, down, distance, formation, result, quarter, and similar — so you can tell the clips apart.
 

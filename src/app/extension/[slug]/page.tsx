@@ -31,6 +31,7 @@ export default async function ExtensionPage({ params }: { params: { slug: string
   if (!extension) notFound();
 
   const links = [
+    extension.storeUrl ? { href: extension.storeUrl, label: 'Chrome Web Store' } : null,
     { href: `/extension/${extension.slug}/privacy`, label: 'Privacy policy' },
     extension.supportUrl ? { href: extension.supportUrl, label: 'Support' } : null,
     extension.sourceUrl ? { href: extension.sourceUrl, label: 'Source' } : null,

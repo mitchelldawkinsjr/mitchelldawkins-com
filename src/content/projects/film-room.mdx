@@ -24,6 +24,8 @@ audience:
   - Engineers building local-first tools on top of a session the user already has
   - Forward-deployed builders who have to ship inside someone else's workflow
 links:
+  - title: "Chrome Web Store"
+    url: "https://chromewebstore.google.com/detail/film-room-downloader/kjnadjpdehgoghbbflbbffnpeoonhkbe"
   - title: "GitHub"
     url: "https://github.com/mitchelldawkinsjr/hudl-download"
   - title: "Blog: Review When the Connection Drops"
@@ -48,11 +50,11 @@ relatedPosts:
 
 **Film Room** is a local coaching-film player. Load a clip, slow it down, step a frame, and draw on the picture. The drawing is tied to the timestamp you paused on. Scrub away and it leaves. Scrub back and it is there, with the notes and the play data that were saved beside the file.
 
-The same repo ships a Manifest V3 extension, **Film Room Downloader**, scoped to `*.hudl.com`. It watches the logged-in tab for the video the page is already fetching and saves that file through Chrome's download manager. **Open Film Room Review…** opens the player from inside the extension package. No separate server.
+The same repo ships a Manifest V3 extension, **Film Room Downloader**, scoped to `*.hudl.com`. It watches the logged-in tab for the video the page is already fetching and saves that file through Chrome's download manager. **Open Film Room Review…** opens the player from inside the extension package. No separate server. The published build is **[Film Room Downloader on the Chrome Web Store](https://chromewebstore.google.com/detail/film-room-downloader/kjnadjpdehgoghbbflbbffnpeoonhkbe)**.
 
 Source: **[github.com/mitchelldawkinsjr/hudl-download](https://github.com/mitchelldawkinsjr/hudl-download)**. The field story is in [Review When the Connection Drops](/blog/film-room-offline-review).
 
-**Status: Active.** Web player, installable PWA, Electron app, and a load-unpacked extension.
+**Status: Active.** Web player, installable PWA, Electron app, and the extension on the [Chrome Web Store](https://chromewebstore.google.com/detail/film-room-downloader/kjnadjpdehgoghbbflbbffnpeoonhkbe).
 
 <img src="/images/projects/film-room/telestration-demo.gif" alt="Film Room on a game clip: a circle and arrow drawn while paused leave when you skip ahead and return when you jump back to that note" />
 
@@ -164,7 +166,9 @@ python3 -m http.server 8934
 
 Open `http://localhost:8934/web/index.html`. **Open Video Files…** or **Open Folder…**. Install from the browser once it is on `http://` if you want the shell available with no network. Bump `CACHE_NAME` in `sw.js` after editing `web/` or `shared/`.
 
-Extension, on a Chromium browser:
+Extension, from the Chrome Web Store: **[Film Room Downloader](https://chromewebstore.google.com/detail/film-room-downloader/kjnadjpdehgoghbbflbbffnpeoonhkbe)**.
+
+Extension, from this repo, on a Chromium browser:
 
 1. `chrome://extensions` → Developer mode → **Load unpacked** → `extension/`
 2. On Windows, if the symlinks came through as placeholder files, run `./extension/package.sh` and load the unzipped package, or enable Developer Mode and `git config core.symlinks true` before re-checking out `extension/web` and `extension/shared`
