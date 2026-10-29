@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
@@ -28,29 +29,33 @@ export default function Header() {
       setIsScrolled(window.scrollY > 10);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isMobileMenuOpen]);
 
   const isActive = (path: string) => pathname === path;
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-    if (!isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
+    setIsMobileMenuOpen((open) => !open);
   };
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
-    document.body.style.overflow = 'auto';
   };
 
   return (
     <header
-      className={`sticky top-0 z-40 w-full transition-all duration-200 ${
+      className={`sticky top-0 z-50 w-full transition-all duration-200 ${
         isScrolled
           ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm'
           : 'bg-white dark:bg-gray-900'
@@ -125,30 +130,32 @@ export default function Header() {
         </div>
       </div>
 
-      {isMobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-30 bg-white dark:bg-gray-900 pt-20">
-          <nav className="flex flex-col items-center space-y-6 text-lg">
-            {navigationLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`${
-                  isActive(link.href)
-                    ? 'text-blue-600 dark:text-blue-400 font-medium'
-                    : 'text-gray-600 dark:text-gray-300'
-                } hover:text-blue-600 dark:hover:text-blue-400 transition-colors`}
-                onClick={closeMobileMenu}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+      {isMobileMenuOpen &&
+        createPortal(
+          <div className="md:hidden fixed inset-0 z-40 bg-white dark:bg-gray-900 pt-24">
+            <nav className="flex flex-col items-center space-y-6 text-lg">
+              {navigationLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`${
+                    isActive(link.href)
+                      ? 'text-blue-600 dark:text-blue-400 font-medium'
+                      : 'text-gray-600 dark:text-gray-300'
+                  } hover:text-blue-600 dark:hover:text-blue-400 transition-colors`}
+                  onClick={closeMobileMenu}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
 
-          <div className="absolute bottom-12 inset-x-0 flex justify-center">
-            <SocialLinks onLinkClick={closeMobileMenu} />
-          </div>
-        </div>
-      )}
+            <div className="absolute bottom-12 inset-x-0 flex justify-center">
+              <SocialLinks onLinkClick={closeMobileMenu} />
+            </div>
+          </div>,
+          document.body
+        )}
     </header>
   );
 }
