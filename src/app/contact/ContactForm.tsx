@@ -2,10 +2,9 @@
 
 import { useState } from 'react';
 import { trackEvent } from '@/lib/analytics';
+import { submitContact } from '@/lib/contact-submit';
 
 export default function ContactForm({ initialSubject = '' }: { initialSubject?: string }) {
-  const GOOGLE_FORM_ACTION_URL = 'https://script.google.com/macros/s/AKfycbxPy3NIVylh-RsgImrNqRgVMgBLl8S97ROAjket4RJIzswazAeO09yvlsv-tP30pAEHfw/exec';
-
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -27,18 +26,7 @@ export default function ContactForm({ initialSubject = '' }: { initialSubject?: 
     setSubmitStatus(null);
     
     try {
-      // Send the form data as JSON
-      const response = await fetch(GOOGLE_FORM_ACTION_URL, {
-        method: 'POST',
-        mode: 'no-cors', // Required for cross-origin requests to Google Apps Script
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      // With no-cors mode, we can't read the response
-      // We'll assume success if no error was thrown
+      await submitContact(formData);
       setSubmitStatus('success');
       trackEvent('contact_form_submit', { status: 'dispatched' });
       setFormData({
