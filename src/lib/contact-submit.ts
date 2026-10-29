@@ -9,14 +9,18 @@ export type ContactPayload = {
 };
 
 /**
- * Posts to the Google Apps Script that emails contact submissions.
- * no-cors is required for that script; the response body cannot be read.
+ * Posts to the Apps Script that appends a spreadsheet row.
+ * text/plain is required: application/json is blocked by the browser, and the
+ * script only emails through IFTTT after that row exists.
  */
 export async function submitContact(payload: ContactPayload): Promise<void> {
-  await fetch(CONTACT_ENDPOINT, {
+  const response = await fetch(CONTACT_ENDPOINT, {
     method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
     body: JSON.stringify(payload),
   });
+  const text = await response.text();
+  if (!response.ok || !text.includes('"status":"success"')) {
+    throw new Error('Submission was not accepted');
+  }
 }
