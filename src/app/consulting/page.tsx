@@ -95,13 +95,23 @@ export default function ConsultingPage() {
                 ))}
               </ul>
 
-              <TrackedLink
-                href={`/contact?topic=${encodeURIComponent(service.contactTopic)}`}
-                ctaId={`consulting-${service.id}`}
-                className="inline-block px-5 py-2.5 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                Discuss a project
-              </TrackedLink>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <TrackedLink
+                  href={`/contact?topic=${encodeURIComponent(service.contactTopic)}`}
+                  ctaId={`consulting-${service.id}`}
+                  className="inline-block px-5 py-2.5 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors text-center"
+                >
+                  Discuss a project
+                </TrackedLink>
+                {service.id === 'ai-automation' && (
+                  <Link
+                    href="/consulting/ai-assistant"
+                    className="inline-block px-5 py-2.5 border border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400 font-medium rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 transition-colors text-center"
+                  >
+                    AI assistant questionnaire
+                  </Link>
+                )}
+              </div>
             </section>
           ))}
         </div>
