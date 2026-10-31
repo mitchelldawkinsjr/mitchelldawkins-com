@@ -1,0 +1,8 @@
+{
+  "name": "Sports Box",
+  "summary": "Multiview sports dashboard: watch multiple streams, per-panel mute, and Fill video crop.",
+  "updated": "2026-10-31",
+  "category": "Sports",
+  "sourceUrl": "https://github.com/mitchelldawkinsjr/sports-box",
+  "supportUrl": "https://github.com/mitchelldawkinsjr/sports-box/issues"
+}
