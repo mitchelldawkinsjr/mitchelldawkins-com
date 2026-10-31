@@ -1,4 +1,4 @@
-Sports Box is a browser extension that opens a multiview dashboard so you can watch stream pages you choose in one window. This policy describes what the extension does and does not do with your data.
+Video Grid is a browser extension that opens a multiview dashboard so you can watch stream pages you choose in one window. This policy describes what the extension does and does not do with your data.
 
 ## Data we collect
 
@@ -30,7 +30,7 @@ Information the extension reads from a stream page is used only to show, mute, a
 
 ## Third parties
 
-A stream site you load applies its own privacy policy to content played from its servers. Sports Box does not proxy or store those streams. ESPN, and CollegeFootballData only when you supply a key, receive the scoreboard requests described above.
+A stream site you load applies its own privacy policy to content played from its servers. Video Grid does not proxy or store those streams. ESPN, and CollegeFootballData only when you supply a key, receive the scoreboard requests described above.
 
 ## Children's privacy
 

@@ -1,6 +1,6 @@
 ---
-title: "Sports Box"
-description: "A Chrome extension that turns one window into a sports-bar wall: up to 16 streams, one audible channel, scorebugs, close-game alerts, and a same-Wi-Fi phone keypad."
+title: "Video Grid"
+description: "A video grid in one window: up to 16 streams, one audible channel, scorebugs, close-game alerts, and a same-Wi-Fi phone keypad."
 date: "2026-10-27T16:00:00.000Z"
 status: "Active"
 featured: true
@@ -32,7 +32,7 @@ links:
     url: "/extension/sports-box/privacy"
   - title: "Blog: A TV Wall in One Browser Window"
     url: "/blog/sports-box-tv-wall-in-one-window"
-why: "A pile of tabs gives you every announcer at once and hides the score in a tab you left. Sports Box keeps the slate in one window and lets one channel have the room."
+why: "A pile of tabs gives you every announcer at once and hides the score in a tab you left. Video Grid keeps the slate in one window and lets one channel have the room."
 streamFocus: "Frame-header stripping, page-world mute, per-panel Fill video, and the LAN remote hub."
 lessons:
   - "An isolated content script loses the mute fight. Patch play() in the page world, and scope it to one panel id."
@@ -48,11 +48,11 @@ relatedPosts:
 
 ## Introduction
 
-**Sports Box** is a multiview dashboard for a slate of live games. The UI is React. It ships inside a Manifest V3 extension, so game day does not depend on a local dev server. One to sixteen panels, four matrix presets, per-panel mute, Fill video, scorebugs, and a phone keypad on the same Wi-Fi.
+**Video Grid** is a multiview dashboard for a slate of live games. The UI is React. It ships inside a Manifest V3 extension, so game day does not depend on a local dev server. One to sixteen panels, four matrix presets, per-panel mute, Fill video, scorebugs, and a phone keypad on the same Wi-Fi.
 
 Source: **[github.com/mitchelldawkinsjr/sports-box](https://github.com/mitchelldawkinsjr/sports-box)**. Extension page: **[/extension/sports-box](/extension/sports-box)**. Privacy policy: **[/extension/sports-box/privacy](/extension/sports-box/privacy)**. The story is in [A TV Wall in One Browser Window](/blog/sports-box-tv-wall-in-one-window).
 
-![Sports Box demo: six panels in Wide, then 1+N with four, Solo, and Showtime](/images/projects/sports-box/demo.gif)
+![Video Grid demo: six panels in Wide, then 1+N with four, Solo, and Showtime](/images/projects/sports-box/demo.gif)
 
 **Status: Active** — v1.7.0. Load unpacked from `extension/` after `npm run build:ext`.
 
@@ -198,4 +198,4 @@ Phone keypad, same Wi-Fi, hub left running:
 npm run remote
 ```
 
-Open Sports Box → **Remote** → scan the QR. Optional TV networks: copy `.env.example` to `.env.local` and set `VITE_CFBD_API_KEY`, then rebuild the extension.
+Open Video Grid → **Remote** → scan the QR. Optional TV networks: copy `.env.example` to `.env.local` and set `VITE_CFBD_API_KEY`, then rebuild the extension.

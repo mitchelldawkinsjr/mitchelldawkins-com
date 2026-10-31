@@ -1,7 +1,7 @@
 ---
-title: "Sports Box: A TV Wall in One Browser Window"
+title: "Video Grid: A TV Wall in One Browser Window"
 date: "2026-09-26"
-excerpt: "I built Sports Box so a full slate fits in one Chrome window: multiple streams, one audible channel, scores on the panel that is showing that game, and a phone keypad on the same Wi-Fi."
+excerpt: "I built Video Grid so a full slate fits in one Chrome window: multiple streams, one audible channel, scores on the panel that is showing that game, and a phone keypad on the same Wi-Fi."
 coverImage: "/images/blog/sports-box-cover.jpg"
 coverImageFit: contain
 series: "Low to No Cost Solutions"
@@ -9,15 +9,15 @@ series: "Low to No Cost Solutions"
 
 A sports bar puts eight games on the wall and one announcer in the room. At home I had the opposite: a pile of tabs, every one of them trying to talk, and the score living in a tab I had already left.
 
-So I built **Sports Box** — a multiview dashboard that ships inside a Chrome extension. Up to 16 streams in one window, one channel audible, a scorebug on the panel you linked to that game. Source: **[github.com/mitchelldawkinsjr/sports-box](https://github.com/mitchelldawkinsjr/sports-box)**. Architecture notes: **[Sports Box project page](/projects/sports-box)**.
+So I built **Video Grid** — a multiview dashboard that ships inside a Chrome extension. Up to 16 streams in one window, one channel audible, a scorebug on the panel you linked to that game. Source: **[github.com/mitchelldawkinsjr/sports-box](https://github.com/mitchelldawkinsjr/sports-box)**. Architecture notes: **[Video Grid project page](/projects/sports-box)**.
 
 ## The product in one sentence
 
 Paste the games. Pick which one you can hear. Glance the slate without leaving the picture.
 
-<img src="/images/projects/sports-box/demo.gif" alt="Sports Box demo: six YouTube panels in Wide, then 1+N with four, Solo, and Showtime" />
+<img src="/images/projects/sports-box/demo.gif" alt="Video Grid demo: six YouTube panels in Wide, then 1+N with four, Solo, and Showtime" />
 
-<img src="/images/projects/sports-box/header.jpg" alt="Sports Box in watch mode: a three-column matrix, one channel marked on air, scorebugs, and a college football ticker" />
+<img src="/images/projects/sports-box/header.jpg" alt="Video Grid in watch mode: a three-column matrix, one channel marked on air, scorebugs, and a college football ticker" />
 
 ## A webpage cannot do this job alone
 
@@ -56,7 +56,7 @@ Docked windows stay separate. Sound stays on the source tab. The mirror `<video>
 
 A lot of these pages are a player under a header, a chat column, and ads. Fill video hides that chrome and pins the player to the frame.
 
-The dangerous version fills every iframe in the tab. Sports Box names each panel iframe `sb-${panelId}`. `webNavigation.getAllFrames` walks the parent chain from that frame, and `chrome.scripting` runs only on that tree. Nested players are included. The panel next door is not.
+The dangerous version fills every iframe in the tab. Video Grid names each panel iframe `sb-${panelId}`. `webNavigation.getAllFrames` walks the parent chain from that frame, and `chrome.scripting` runs only on that tree. Nested players are included. The panel next door is not.
 
 Inside the frame, the content script scores `<video>` nodes by whether they are playing, ready, and how much area they cover. Player iframes get a bonus. Ad frames get dropped. The winner is marked `sports-box-target`. `focus.css` hides everything else and fixes that node to the viewport.
 
@@ -64,7 +64,7 @@ Inside the frame, the content script scores `<video>` nodes by whether they are 
 
 The ticker reads ESPN's public scoreboard for the NFL, college football, the NBA, and the WNBA. Link a panel to a game and the scorebug sits on that picture. Hover a ticker row for the network. Click it to focus the panel already linked to that game.
 
-College football TV data is optional. A [CollegeFootballData](https://collegefootballdata.com) key can fill the network. The result is cached in `localStorage`, and Sports Box will not ask again for three hours. A soft cap at 800 calls leaves headroom under the free 1,000 a month. Live scores stay on ESPN either way. The paid CFBD scoreboard route is opt-in. A free key never polls it.
+College football TV data is optional. A [CollegeFootballData](https://collegefootballdata.com) key can fill the network. The result is cached in `localStorage`, and Video Grid will not ask again for three hours. A soft cap at 800 calls leaves headroom under the free 1,000 a month. Live scores stay on ESPN either way. The paid CFBD scoreboard route is opt-in. A free key never polls it.
 
 Close games raise a banner. Football qualifies within one score in the fourth or overtime, and within a possession late in the third. Basketball qualifies within eight in the fourth or overtime, and within five late in the third. If that game is linked to a panel, the banner names the channel.
 
@@ -94,7 +94,7 @@ Four matrix presets: an equal grid, a 1+N hero, a forced 3-column board, and a w
 No database. Layouts stay in the browser. The only process you leave running is the remote hub, and only while the phone is in your hand.
 
 <HumanReflection>
-I wanted the sports-bar wall without the sports-bar noise. Eight games up, one voice in the room, the close one tapping me when it gets late. Sports Box is that, in the browser I already had open.
+I wanted the sports-bar wall without the sports-bar noise. Eight games up, one voice in the room, the close one tapping me when it gets late. Video Grid is that, in the browser I already had open.
 </HumanReflection>
 
 Source: **[github.com/mitchelldawkinsjr/sports-box](https://github.com/mitchelldawkinsjr/sports-box)** · Build notes: **[/projects/sports-box](/projects/sports-box)**.
