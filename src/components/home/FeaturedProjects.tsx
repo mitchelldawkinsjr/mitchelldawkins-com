@@ -92,7 +92,9 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                       src={project.image}
                       alt={project.title}
                       fill
-                      style={{ objectFit: 'cover' }}
+                      unoptimized={project.image.endsWith('.gif')}
+                      className={project.image.endsWith('.gif') ? 'bg-[#0a1628]' : undefined}
+                      style={{ objectFit: project.image.endsWith('.gif') ? 'contain' : 'cover' }}
                     />
                   </div>
 

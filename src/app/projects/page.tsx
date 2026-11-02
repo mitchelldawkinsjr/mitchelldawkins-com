@@ -36,9 +36,10 @@ export default async function ProjectsPage() {
                   src={project.headerImage}
                   alt={project.title}
                   fill
-                  style={{ objectFit: 'cover' }}
+                  unoptimized={project.headerImage.endsWith('.gif')}
+                  style={{ objectFit: project.headerImage.endsWith('.gif') ? 'contain' : 'cover' }}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 384px, 384px"
-                  className="group-hover:scale-105 transition-transform duration-300"
+                  className={`bg-[#0a1628] ${project.headerImage.endsWith('.gif') ? '' : 'group-hover:scale-105'} transition-transform duration-300`}
                 />
               </div>
             )}

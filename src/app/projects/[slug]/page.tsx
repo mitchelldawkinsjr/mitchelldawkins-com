@@ -122,7 +122,9 @@ export default async function ProjectPage({ params }: { params: { slug: string }
               src={project.headerImage}
               alt={project.title}
               fill
-              style={{ objectFit: 'cover' }}
+              unoptimized={project.headerImage.endsWith('.gif')}
+              className={project.headerImage.endsWith('.gif') ? 'bg-[#0a1628]' : undefined}
+              style={{ objectFit: project.headerImage.endsWith('.gif') ? 'contain' : 'cover' }}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 768px, 1000px"
               priority
             />
