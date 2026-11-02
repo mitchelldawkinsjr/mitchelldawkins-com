@@ -35,7 +35,7 @@ export const articleRelations: Record<string, ArticleRelation> = {
       'building-around-coach-spreadsheets-live-csv',
     ],
     project: 'gh-film-review-pipeline',
-    service: 'custom-software',
+    service: 'business-automation',
   },
   'hosting-gh-film-review-free-github-pages': {
     related: [
@@ -58,7 +58,7 @@ export const articleRelations: Record<string, ArticleRelation> = {
       'gh-film-review-pipeline-deep-dive',
     ],
     project: 'ghfb',
-    service: 'custom-software',
+    service: 'business-automation',
   },
   'free-contact-form': {
     related: ['building-around-coach-spreadsheets-live-csv', 'hosting-gh-film-review-free-github-pages'],

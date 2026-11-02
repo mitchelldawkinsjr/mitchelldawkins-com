@@ -1,5 +1,6 @@
 export type ServiceId =
   | 'custom-software'
+  | 'business-automation'
   | 'ai-automation'
   | 'modernization'
   | 'discovery';
@@ -39,6 +40,28 @@ export const consultingServices: ConsultingService[] = [
       { slug: 'gh-film-hub-v2-year-two', label: 'GH Film Hub v2' },
     ],
     contactTopic: 'Custom software',
+  },
+  {
+    id: 'business-automation',
+    title: 'AI and Business Automation',
+    summary:
+      'Custom AI tools for teams buried in email, spreadsheets, manual reporting, and systems that do not share data. The sheet or inbox can stay. The weekly rebuild does not have to.',
+    details: [
+      'Business workflows built around the spreadsheets and inboxes a team already uses',
+      'Reporting that starts from a file drop or a sheet and publishes itself',
+      'Custom AI business tools for one job: draft, sort, extract, or generate',
+      'Connections between the tools a business already runs',
+    ],
+    projects: [
+      { slug: 'ghfb', label: 'GHFB Team Tools Hub' },
+      { slug: 'gh-film-review-pipeline', label: 'GH Film Review Pipeline' },
+      { slug: 'gh-lift', label: 'GH Lift' },
+    ],
+    posts: [
+      { slug: 'building-around-coach-spreadsheets-live-csv', label: 'I Didn’t Replace the Spreadsheet' },
+      { slug: 'gh-film-review-pipeline-deep-dive', label: 'From CSV to Professional Reports' },
+    ],
+    contactTopic: 'AI and business automation',
   },
   {
     id: 'ai-automation',

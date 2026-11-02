@@ -47,7 +47,7 @@ export default function Hero() {
               <Link href={site.ctas.consulting.href} className="font-medium text-blue-600 dark:text-blue-400 hover:underline">
                 {site.ctas.consulting.label}
               </Link>
-              {' '}is open for custom software, AI automation, and modernization.
+              {' '}is open for custom software, AI and business automation, and modernization.
             </p>
           </div>
 

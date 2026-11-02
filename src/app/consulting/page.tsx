@@ -7,7 +7,7 @@ import TrackedLink from '@/components/blog/TrackedLink';
 import JsonLd from '@/components/seo/JsonLd';
 
 const description =
-  'Software engineering consulting from Mitchell Dawkins II: custom software, AI automation, application modernization, and technical discovery.';
+  'Software engineering consulting from Mitchell Dawkins II: custom software, AI and business automation, application modernization, and technical discovery.';
 
 export const metadata: Metadata = {
   title: 'Consulting',
@@ -103,7 +103,7 @@ export default function ConsultingPage() {
                 >
                   Discuss a project
                 </TrackedLink>
-                {service.id === 'ai-automation' && (
+                {service.id === 'business-automation' && (
                   <Link
                     href="/consulting/ai-assistant"
                     className="inline-block px-5 py-2.5 border border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400 font-medium rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 transition-colors text-center"
