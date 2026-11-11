@@ -120,7 +120,7 @@ export default function AboutPage() {
           </h2>
           <div className="prose dark:prose-invert prose-lg max-w-none">
             <p>
-              Full-stack engineer with 10+ years of experience building production software across enterprise and growth-stage environments, including four years at Dropbox. I specialize in scalable full-stack systems, AI-powered applications, and developer infrastructure, with a track record of delivering revenue-driving products and leading architecture for federal and enterprise clients. Today, I&apos;m focused on AI-native engineering, automation, and sports technology that solves real-world operational problems.
+              Full-stack engineer with 10+ years of experience building production software across enterprise and growth-stage environments, including three and a half years at Dropbox. I specialize in scalable full-stack systems, AI-powered applications, and developer infrastructure, with a track record of delivering revenue-driving products and leading architecture for federal and enterprise clients. Today, I&apos;m focused on AI-native engineering, automation, and sports technology that solves real-world operational problems.
             </p>
             <p>
               I spent six years inside a high school football program, learned how the staff already ran attendance, film, and lifting, and built software around those workflows so they could keep running it without me. That is how I consult: sit with the people doing the work, fit the process they already trust, and leave something they can run.
@@ -272,7 +272,7 @@ export default function AboutPage() {
             <div className="border-l-4 border-blue-600 pl-4 py-1">
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white">Full Stack Engineer</h3>
-                <div className="text-gray-600 dark:text-gray-300">May 2021 – April 2025 · Remote</div>
+                <div className="text-gray-600 dark:text-gray-300">May 2021 – Nov 2024 · Remote</div>
             </div>
             <div className="text-lg text-blue-600 dark:text-blue-400 mb-2">Dropbox — San Francisco, CA</div>
             <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 space-y-1">
