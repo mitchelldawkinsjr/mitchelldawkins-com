@@ -88,8 +88,13 @@ export const articleRelations: Record<string, ArticleRelation> = {
     project: 'tab-recorder',
     service: 'custom-software',
   },
+  'little-sprouts-part-2-new-games': {
+    related: ['little-sprouts-play-and-learn', 'thinker-microlearning-pwa'],
+    project: 'little-sprouts',
+    service: 'custom-software',
+  },
   'little-sprouts-play-and-learn': {
-    related: ['thinker-microlearning-pwa'],
+    related: ['little-sprouts-part-2-new-games', 'thinker-microlearning-pwa'],
     project: 'little-sprouts',
     service: 'custom-software',
   },
