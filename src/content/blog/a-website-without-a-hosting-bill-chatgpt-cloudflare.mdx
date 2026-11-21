@@ -1,0 +1,139 @@
+---
+title: "A Website Without a Hosting Bill: Can ChatGPT Handle the Updates?"
+date: "2026-11-20"
+excerpt: "I tested a low-to-no-cost path from an existing website to GitHub, Cloudflare Pages, and AI-assisted updates. The hosting was free; the important part was what happened after launch."
+coverImage: "/images/blog/website-builder-manager-cover.svg"
+coverImageFit: contain
+series: "Low to No Cost Solutions"
+---
+
+A small business needs a website. Someone builds it, gets it online, and hands over the link. Six months later, the hours change, there is a new service to add, or the owner wants a different photo. Now the simple website has a maintenance problem: who can actually update it?
+
+I'm a software engineer, so Git, deployments, and pull requests are normal parts of my day. I wanted to see how much of that work I could put behind a conversation instead. **Could someone without a developer on call launch a website for $0 in hosting fees, then ask ChatGPT for updates and approve them before they go live?**
+
+I built a small pilot to find out. The result is a working GitHub-to-Cloudflare Pages pipeline, plus a few rough edges worth being direct about.
+
+## The idea: make the first setup the last technical setup
+
+The recurring workflow should be easy to explain to an owner:
+
+**Ask for a change → See a preview → Approve it → See it live.**
+
+<img src="/images/blog/website-builder-manager-approval-flow.svg" alt="Four stages: ask ChatGPT for a website update, review a GitHub pull request, approve the Cloudflare preview, and publish the verified site" />
+
+There are still accounts and permissions to connect once. But an owner should not need to learn Git commands or maintain a server just to change the text on a homepage.
+
+## The experiment
+
+I started with an existing small-business website for Brittney Michelle, already published on Netlify. The goal was not to rebuild it from scratch or replace the original site. I made a separate copy and put it in a GitHub repository.
+
+Then I connected that repository to a Cloudflare Pages project. Cloudflare has a Git integration: new branches can get preview deployments, and changes merged into the production branch can trigger a deployment. [Cloudflare documents this behavior](https://developers.cloudflare.com/pages/configuration/git-integration/).
+
+The pieces in this experiment were:
+
+| Piece | What it handled |
+|---|---|
+| ChatGPT | Understand the request, inspect the files, prepare changes, and guide the setup |
+| GitHub | Own the website files and track each proposed change |
+| GitHub pull requests | A review step before anything reaches the public site |
+| Cloudflare Pages | Host the static files and generate preview and production deployments |
+| The site owner | Connect their own accounts and make the final publishing decision |
+
+You can inspect the [Brittney-Site repository](https://github.com/mitchelldawkinsjr/Brittney-Site) and the [separate Cloudflare test site](https://elite-pipeline-brittney-michelle-test.pages.dev). The original Netlify site was left alone.
+
+## What actually worked
+
+First, the GitHub repository and Cloudflare Pages project were connected. Getting the Cloudflare GitHub app authorized was a one-time step that required the account owner to act in GitHub. Merely connecting a Cloudflare account to ChatGPT had not installed that GitHub app.
+
+Then I used a deliberately small test. I asked ChatGPT to change a release marker from **starter-v1** to **starter-v2** on a new branch and open a pull request.
+
+The GitHub checks passed. Cloudflare built a preview using the exact commit in the pull request. I reviewed that result, merged the PR, and Cloudflare received the new production event.
+
+Here is the part I would not leave out of the story: **the build queue did not run perfectly unattended.** A couple of Cloudflare deployments stayed queued until I retried them. After the retry, the production deployment succeeded. I opened the public release endpoint and verified it returned HTTP 200 with **starter-v2**.
+
+That final check matters. A GitHub merge is not the same thing as a website that has actually updated.
+
+<img src="/images/blog/website-builder-manager-ownership.svg" alt="Owner-controlled publishing diagram: ChatGPT proposes a change, GitHub stores the review, the owner approves, and Cloudflare serves the verified website" />
+
+## The $0 part, with the fine print
+
+The hosting side can genuinely cost nothing for a small static website. The setup I tested uses GitHub Free and Cloudflare Pages Free, with a Cloudflare-provided HTTPS address ending in **.pages.dev**.
+
+Cloudflare's [current Pages limits](https://developers.cloudflare.com/pages/platform/limits/) list **500 builds per month** on the Free plan. Its [Pages Functions pricing](https://developers.cloudflare.com/pages/functions/pricing/) distinguishes free static-asset requests from usage of server-side Functions.
+
+<img src="/images/blog/website-builder-manager-costs.svg" alt="Cost boundary for the static-site workflow: GitHub repository, Cloudflare Pages hosting, and pages.dev address can be free, while AI subscriptions, domain names, and advanced features may cost extra" />
+
+| Item | In this static-site setup |
+|---|---|
+| GitHub repository | Free tier is available |
+| Cloudflare Pages hosting | Free tier is available, subject to limits |
+| Cloudflare-provided site address and HTTPS | Included |
+| A custom domain name | Optional; buying or renewing one can cost money |
+| ChatGPT or other AI assistance | May have subscription or usage costs |
+| Email, payments, accounts, databases, advanced forms | May need additional services or paid usage |
+
+So **$0 hosting** is a fair description of this particular test. **$0 total cost for every business** would not be. Also, this works most simply for a static brochure, portfolio, landing page, or informational site. A storefront, booking system, or private customer dashboard adds moving parts.
+
+For another static-hosting approach, I wrote about [publishing a data-heavy site on GitHub Pages for $0](/blog/hosting-gh-film-review-free-github-pages). That version starts with generated files and GitHub Actions; this one centers on an owner speaking to an AI assistant and reviewing a preview.
+
+## What a business owner would actually do
+
+For someone who does not write code, the goal is to follow a short checklist once:
+
+1. **Get the site content together.** Use an existing website, a folder of files, or a description of the business, services, photos, and contact information. Anything public-facing still needs the owner's approval.
+2. **Create free GitHub and Cloudflare accounts.** The owner should keep control of both, not borrow an agency's account.
+3. **Ask ChatGPT to help create or import the site.** Give it the website files or an authorized repository. What it can do directly depends on which apps and tools are available in that chat.
+4. **Connect the GitHub repository to Cloudflare Pages.** Authorize the official GitHub integration and check the production branch and build output settings. Cloudflare's [static HTML guide](https://developers.cloudflare.com/pages/framework-guides/deploy-anything/) is useful for the simplest case.
+5. **Open the first live website and test it.** Check it on a phone and computer. Verify the contact information, images, and links.
+6. **For each later change, ask for a pull request.** Review the preview and only approve the merge when it looks right.
+
+The owner never has to type a Git command in that sequence. But they will need to click through account authorization, make decisions, and possibly troubleshoot an integration. That is **lower technical effort**, not zero responsibility.
+
+### A prompt to try
+
+In ChatGPT, with your website files or repo available, start with:
+
+~~~text
+I want to build or connect a small-business website using
+GitHub and Cloudflare Pages.
+
+I do not write code. Walk me through the setup one step at
+a time, using my own accounts. Start by asking whether I
+already have a website or need a new one.
+
+Use a free static-hosting option when it fits my needs.
+For each future change, make a GitHub pull request, show
+me a preview, and wait for my approval before merging.
+
+Never claim the site has updated until you verify the live
+URL. If a tool or connection is unavailable, give me the
+exact manual step instead.
+~~~
+
+You can use the same pattern for a later request: **"Update my homepage hours, open a PR, and show me a preview. Do not publish yet."**
+
+## What still needs work
+
+This pilot was run by someone who knows how to debug deployments: me. I have **not** demonstrated that an independent first-time owner can get through every step without help. That is what the next round of beta testing needs to measure.
+
+I also packaged the instructions as **Website Builder & Manager**, a portable guide and ChatGPT plugin prototype. The plugin is **not publicly published yet**. For now, a tester can upload the guide into ChatGPT and use the onboarding prompt; that is not the same as installing a plugin or gaining automatic access to GitHub and Cloudflare. Their accounts and permissions still need to be connected separately.
+
+The beta questions are simple: Where does someone hesitate? Which account screen needs better instructions? Can they tell the difference between a preview and the real site? And does the assistant stop and tell the truth when a deployment fails?
+
+## What I learned
+
+The hosting bill was already a solvable problem. Static files on a free edge host are not new. The bigger opportunity is **removing the dependency on a developer for every small content change without removing the owner's control**.
+
+The approval step is not friction I want to automate away. It is the point: AI can prepare a change, tests can catch obvious mistakes, the preview can show the result, but the business owner gets the last word.
+
+<HumanReflection>
+I went into this thinking about free hosting. I came out thinking about the person who owns the website. They should be able to say what they need changed without understanding Git, a build system, or a server.
+
+The pilot proved that the pieces can work together, not that the experience is finished. Cloudflare still needed a retry, and the first connection still required a few careful clicks. Those are exactly the things I want to make less confusing before calling this a no-developer solution.
+
+I like the idea that a neighborhood business could own its site, own its files, and change an afternoon special or a phone number without starting another paid project.
+</HumanReflection>
+
+The test code is in [Brittney-Site on GitHub](https://github.com/mitchelldawkinsjr/Brittney-Site). Related reading: [Free hosting with GitHub Pages](/blog/hosting-gh-film-review-free-github-pages) and [a contact form without a backend bill](/blog/free-contact-form).
+
+If you own a small-business site and would try an owner-controlled, AI-assisted update workflow, I'd be interested in what part of the setup feels hardest. You can reach me through the [contact page](/contact).

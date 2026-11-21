@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 430" role="img" aria-labelledby="title desc">
+<title id="title">Ask, preview, approve, live</title>
+<desc id="desc">Four-step website update pipeline showing a chat request, a GitHub pull request, owner's approval, and verified Cloudflare Pages deployment; failed checks return to editing.</desc>
+<defs>
+<linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f7fafc"/><stop offset="1" stop-color="#eaf4ff"/></linearGradient>
+<filter id="s"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#16456f" flood-opacity=".12"/></filter>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M1 1 L8 5 L1 9" stroke="#3986bb" stroke-width="2" fill="none"/></marker>
+</defs>
+<rect width="1100" height="430" rx="18" fill="url(#bg)"/>
+<text x="54" y="64" font-family="system-ui,sans-serif" font-size="29" font-weight="800" fill="#153354">One conversation. Four checkpoints.</text>
+<text x="55" y="92" font-family="system-ui,sans-serif" font-size="16" fill="#54718d">A request is not a deployment. Every stage has a separate check.</text>
+<g font-family="system-ui,sans-serif" filter="url(#s)">
+  <rect x="52" y="138" width="221" height="153" rx="17" fill="#ffffff" stroke="#bcd0df"/>
+  <circle cx="92" cy="176" r="23" fill="#d9edff"/>
+  <path d="M81 166 h22 v17 h-13 l-8 7 v-7 h-1z" fill="none" stroke="#2778ae" stroke-width="3" stroke-linejoin="round"/>
+  <text x="66" y="225" font-size="23" font-weight="800" fill="#133d66">1. Ask</text>
+  <text x="66" y="248" font-size="14" fill="#526c82">Tell ChatGPT what</text>
+  <text x="66" y="268" font-size="14" fill="#526c82">needs to change.</text>
+  <rect x="305" y="138" width="221" height="153" rx="17" fill="#ffffff" stroke="#bcd0df"/>
+  <circle cx="345" cy="176" r="23" fill="#e4e9ff"/>
+  <path d="M330 175 l11 -9 l11 9 l-11 9 z M341 184 v9 M341 193 h15" stroke="#5a69b6" stroke-width="3" stroke-linejoin="round" fill="none"/>
+  <text x="319" y="225" font-size="23" font-weight="800" fill="#133d66">2. Preview</text>
+  <text x="319" y="248" font-size="14" fill="#526c82">PR checks pass and</text>
+  <text x="319" y="268" font-size="14" fill="#526c82">a preview URL works.</text>
+  <rect x="558" y="138" width="221" height="153" rx="17" fill="#ffffff" stroke="#bcd0df"/>
+  <circle cx="598" cy="176" r="23" fill="#fef0d4"/>
+  <path d="M588 176 l8 9 l15 -18" stroke="#b78724" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <text x="572" y="225" font-size="23" font-weight="800" fill="#133d66">3. Approve</text>
+  <text x="572" y="248" font-size="14" fill="#526c82">The owner reviews</text>
+  <text x="572" y="268" font-size="14" fill="#526c82">and authorizes merge.</text>
+  <rect x="811" y="138" width="237" height="153" rx="17" fill="#e3faf1" stroke="#55bb97"/>
+  <circle cx="853" cy="176" r="23" fill="#b6ebd7"/>
+  <path d="M841 178 l9 8 l17 -19" stroke="#117d58" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <text x="827" y="225" font-size="23" font-weight="800" fill="#136347">4. Live</text>
+  <text x="827" y="248" font-size="14" fill="#327d62">Production succeeds;</text>
+  <text x="827" y="268" font-size="14" fill="#327d62">verify the public URL.</text>
+</g>
+<g stroke="#3986bb" stroke-width="3" marker-end="url(#arrow)">
+ <path d="M274 214 H299"/><path d="M527 214 H552"/><path d="M780 214 H805"/>
+</g>
+<path d="M421 299 v30 q0 14 -14 14 H155 q-14 0 -14 -14 v-27" fill="none" stroke="#b36b46" stroke-width="2.5" stroke-dasharray="7 5"/>
+<rect x="249" y="322" width="249" height="52" rx="12" fill="#fff1e7" stroke="#edb99f"/>
+<text x="373" y="343" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="#a15436">If a check fails</text>
+<text x="373" y="360" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#a15436">Fix the change and preview again</text>
+<text x="808" y="361" font-family="system-ui,sans-serif" font-size="14" fill="#4f6b83">GitHub + Cloudflare Pages</text>
+</svg>
