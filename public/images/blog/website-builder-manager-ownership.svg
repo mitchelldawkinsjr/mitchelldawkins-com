@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 475" role="img" aria-labelledby="title desc">
+<title id="title">The website owner stays in control</title>
+<desc id="desc">ChatGPT prepares a change, GitHub stores the proposed change, the website owner decides whether to merge, and Cloudflare Pages serves the verified production site.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#081d39"/><stop offset="1" stop-color="#16466a"/></linearGradient><linearGradient id="mint"><stop stop-color="#6ce4c7"/><stop offset="1" stop-color="#b3f5e4"/></linearGradient><marker id="arr" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M0 1 L8 5 L0 9" fill="none" stroke="#8ddde6" stroke-width="2"/></marker></defs>
+<rect width="1100" height="475" fill="url(#bg)" rx="18"/>
+<text x="55" y="65" font-family="system-ui,sans-serif" font-weight="800" font-size="29" fill="#f1f9ff">AI can do the work. The owner keeps the keys.</text>
+<text x="55" y="97" font-family="system-ui,sans-serif" font-size="16" fill="#adcce2">Accounts, approvals, and the final website stay under the owner's control.</text>
+<g font-family="system-ui,sans-serif">
+  <rect x="49" y="155" width="230" height="186" rx="18" fill="#18466b" stroke="#5484a4"/>
+  <circle cx="91" cy="195" r="23" fill="#57afd0"/>
+  <path d="M78 190 h27 v16 h-17 l-8 7 v-7 h-2 z" stroke="#ffffff" stroke-width="2.4" fill="none"/>
+  <text x="67" y="258" font-size="24" font-weight="800" fill="#ffffff">ChatGPT</text>
+  <text x="67" y="284" font-size="15" fill="#bddce8">Prepares requested edits</text>
+  <text x="67" y="307" font-size="15" fill="#bddce8">and tests the result</text>
+  <rect x="326" y="155" width="230" height="186" rx="18" fill="#18466b" stroke="#5484a4"/>
+  <circle cx="368" cy="195" r="23" fill="#837dda"/>
+  <path d="M352 193 l12 -10 l12 10 l-12 10 z M364 203 v14 M364 217 h11" stroke="#ffffff" stroke-width="3" fill="none"/>
+  <text x="344" y="258" font-size="24" font-weight="800" fill="#ffffff">GitHub</text>
+  <text x="344" y="284" font-size="15" fill="#bddce8">Stores files, PR, history,</text>
+  <text x="344" y="307" font-size="15" fill="#bddce8">and review evidence</text>
+  <rect x="603" y="147" width="230" height="202" rx="18" fill="#224b42" stroke="#7be7c0" stroke-width="2"/>
+  <circle cx="645" cy="190" r="23" fill="#7be7c0"/>
+  <path d="M633 190 l9 9 l17 -19" stroke="#0c5e49" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <text x="621" y="254" font-size="24" font-weight="800" fill="#ffffff">Site owner</text>
+  <text x="621" y="280" font-size="15" fill="#d3f5e5">Reviews the preview</text>
+  <text x="621" y="303" font-size="15" fill="#d3f5e5">and approves merge</text>
+  <text x="621" y="328" font-size="13" font-weight="700" fill="#99f2d2">HUMAN DECISION</text>
+  <rect x="880" y="155" width="174" height="186" rx="18" fill="#18466b" stroke="#5484a4"/>
+  <circle cx="920" cy="195" r="23" fill="#58bad1"/>
+  <path d="M905 199 q-10 -12 2 -17 q6 -18 21 -6 q14 0 14 14 q10 9 0 15 h-32" stroke="#ffffff" stroke-width="2.4" fill="none"/>
+  <text x="897" y="254" font-size="22" font-weight="800" fill="#ffffff">Cloudflare</text>
+  <text x="897" y="280" font-size="14" fill="#bddce8">Publishes the site</text>
+  <text x="897" y="303" font-size="14" fill="#bddce8">after approval</text>
+</g>
+<g stroke="#8ddde6" stroke-width="3" fill="none" marker-end="url(#arr)"><path d="M279 248 H319"/><path d="M556 248 H596"/><path d="M833 248 H872"/></g>
+<rect x="228" y="391" width="643" height="48" rx="13" fill="#0e2b44" stroke="#437a96"/>
+<text x="550" y="422" font-family="system-ui,sans-serif" font-size="17" text-anchor="middle" fill="#cbe8f6">No secrets in the repo. No unapproved DNS or production changes.</text>
+</svg>
