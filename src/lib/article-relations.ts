@@ -37,6 +37,10 @@ export const articleRelations: Record<string, ArticleRelation> = {
     project: 'gh-film-review-pipeline',
     service: 'business-automation',
   },
+  'a-website-without-a-hosting-bill-chatgpt-cloudflare': {
+    related: ['hosting-gh-film-review-free-github-pages', 'free-contact-form'],
+    service: 'ai-automation',
+  },
   'hosting-gh-film-review-free-github-pages': {
     related: [
       'gh-film-hub-v2-year-two',
