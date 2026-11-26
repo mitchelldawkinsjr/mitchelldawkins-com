@@ -69,6 +69,20 @@ h3,
   letter-spacing: -0.02em;
 }
 
+/* Long-form articles: body font for headings, comfortable rhythm */
+.prose.prose-article {
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.prose.prose-article :where(h1, h2, h3, h4) {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.dark .prose.prose-article :where(p:first-of-type) {
+  color: #9ca3af;
+}
+
 .prose a {
   @apply transition-colors;
 }

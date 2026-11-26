@@ -52,6 +52,82 @@ module.exports = {
               },
             },
           },
+          article: {
+            css: {
+              '--tw-prose-body': '#1f2937',
+              '--tw-prose-headings': '#111827',
+              '--tw-prose-bold': '#111827',
+              '--tw-prose-links': '#CA0000',
+              '--tw-prose-bullets': '#9ca3af',
+              '--tw-prose-counters': '#6b7280',
+              '--tw-prose-hr': '#e5e7eb',
+              fontSize: '1.125rem',
+              lineHeight: '1.8',
+              p: {
+                marginTop: '1.35em',
+                marginBottom: '1.35em',
+              },
+              'p:first-of-type': {
+                fontSize: '1.15em',
+                lineHeight: '1.75',
+                color: '#4b5563',
+              },
+              li: {
+                marginTop: '0.45em',
+                marginBottom: '0.45em',
+                paddingLeft: '0.15em',
+              },
+              'li > p': {
+                marginTop: '0.4em',
+                marginBottom: '0.4em',
+              },
+              ul: {
+                marginTop: '1.25em',
+                marginBottom: '1.25em',
+              },
+              ol: {
+                marginTop: '1.25em',
+                marginBottom: '1.25em',
+              },
+              h2: {
+                fontSize: '1.55em',
+                marginTop: '2.25em',
+                marginBottom: '0.65em',
+                lineHeight: '1.3',
+                fontWeight: '700',
+              },
+              h3: {
+                fontSize: '1.3em',
+                marginTop: '1.85em',
+                marginBottom: '0.55em',
+                lineHeight: '1.35',
+                fontWeight: '600',
+              },
+              h4: {
+                marginTop: '1.5em',
+                marginBottom: '0.4em',
+                fontWeight: '600',
+              },
+              hr: {
+                marginTop: '2.75em',
+                marginBottom: '2.75em',
+              },
+              blockquote: {
+                fontStyle: 'normal',
+                fontWeight: '400',
+                borderLeftWidth: '4px',
+                paddingLeft: '1.15em',
+              },
+              a: {
+                textDecoration: 'underline',
+                textUnderlineOffset: '3px',
+                fontWeight: '500',
+                '&:hover': {
+                  color: '#A00000',
+                },
+              },
+            },
+          },
           invert: {
             css: {
               color: '#d1d5db',

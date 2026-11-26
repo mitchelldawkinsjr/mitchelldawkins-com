@@ -8,7 +8,7 @@ type HumanReflectionProps = {
         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
           Human Reflections
         </h3>
-        <div className="prose dark:prose-invert prose-blue max-w-none">
+        <div className="prose prose-article dark:prose-invert prose-blue max-w-none text-pretty">
           {children}
         </div>
       </div>
