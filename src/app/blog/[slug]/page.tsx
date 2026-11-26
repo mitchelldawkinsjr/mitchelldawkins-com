@@ -148,9 +148,11 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           </div>
         )}
 
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">{post.title}</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight tracking-tight">
+          {post.title}
+        </h1>
 
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-8 text-gray-600 dark:text-gray-300">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-10 text-base text-gray-600 dark:text-gray-400">
           <AuthorSection />
           <span aria-hidden="true">•</span>
           <time dateTime={post.date}>{formatDate(post.date)}</time>
@@ -194,7 +196,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
         <TableOfContents headings={headings} />
 
-        <div className="prose dark:prose-invert prose-blue prose-lg max-w-none">
+        <div className="prose prose-lg prose-article dark:prose-invert prose-blue max-w-none text-pretty">
           <MDXRemote source={post.content} components={components} options={mdxRemoteOptions} />
         </div>
 
